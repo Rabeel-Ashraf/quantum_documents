@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  h2ogpt:
+  Quantum Documents:
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,7 +12,7 @@ services:
     volumes:
       - cache:/workspace/.cache
       - save:/workspace/save
-    command: ${H2OGPT_CPU_ARGS}
+    command: ${Quantum Documents_CPU_ARGS}
 
 volumes:
   cache:

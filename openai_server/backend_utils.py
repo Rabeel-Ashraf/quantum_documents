@@ -275,8 +275,8 @@ def structure_to_messages(instruction, system_message, history, image_files):
 
 def convert_gen_kwargs(gen_kwargs):
     gen_kwargs.update(dict(instruction=gen_kwargs['query']))
-    if os.getenv('GRADIO_H2OGPT_H2OGPT_KEY'):
-        gen_kwargs.update(dict(h2ogpt_key=os.getenv('GRADIO_H2OGPT_H2OGPT_KEY')))
+    if os.getenv('GRADIO_Quantum Documents_Quantum Documents_KEY'):
+        gen_kwargs.update(dict(Quantum Documents_key=os.getenv('GRADIO_Quantum Documents_Quantum Documents_KEY')))
 
     # max_tokens=16 for text completion by default
     gen_kwargs["max_new_tokens"] = gen_kwargs.pop(
@@ -314,7 +314,7 @@ def convert_gen_kwargs(gen_kwargs):
             gen_kwargs.get("repetition_penalty", 1) == 1
             and gen_kwargs.get("presence_penalty", 0.0) != 0.0
     ):
-        # then user using presence_penalty, convert to repetition_penalty for h2oGPT
+        # then user using presence_penalty, convert to repetition_penalty for Quantum Documents
         # presence_penalty=(repetition_penalty - 1.0) * 2.0 + 0.0,  # so good default
         gen_kwargs["repetition_penalty"] = (
                 0.5 * (gen_kwargs["presence_penalty"] - 0.0) + 1.0
@@ -324,14 +324,14 @@ def convert_gen_kwargs(gen_kwargs):
             gen_kwargs.get("response_format"), "type"
     ):
         # pydantic ensures type and key
-        # transcribe to h2oGPT way of just value
+        # transcribe to Quantum Documents way of just value
         gen_kwargs["response_format"] = gen_kwargs.get("response_format").type
 
     return gen_kwargs
 
 
 def get_user_dir(authorization):
-    base_path = os.getenv("H2OGPT_OPENAI_BASE_FILE_PATH", "./openai_files/")
+    base_path = os.getenv("Quantum Documents_OPENAI_BASE_FILE_PATH", "./openai_files/")
     user_dir = os.path.join(base_path, authorization.split(" ")[1])
     return user_dir
 

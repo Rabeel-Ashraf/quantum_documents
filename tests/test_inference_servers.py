@@ -12,24 +12,24 @@ from src.enums import PromptType, LangChainAction
 
 
 @pytest.mark.parametrize("base_model",
-                         ['h2oai/h2ogpt-oig-oasst1-512-6_9b',
-                          'h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v2',
+                         ['h2oai/Quantum Documents-oig-oasst1-512-6_9b',
+                          'h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-7b-v2',
                           'llama', 'gptj']
                          )
 @pytest.mark.parametrize("force_langchain_evaluate", [False, True])
 @pytest.mark.parametrize("do_langchain", [False, True])
-@pytest.mark.parametrize("enforce_h2ogpt_api_key", [False, True])
-@pytest.mark.parametrize("enforce_h2ogpt_ui_key", [False, True])
+@pytest.mark.parametrize("enforce_Quantum Documents_api_key", [False, True])
+@pytest.mark.parametrize("enforce_Quantum Documents_ui_key", [False, True])
 @wrap_test_forked
 def test_gradio_inference_server(base_model, force_langchain_evaluate, do_langchain,
-                                 enforce_h2ogpt_ui_key, enforce_h2ogpt_api_key,
+                                 enforce_Quantum Documents_ui_key, enforce_Quantum Documents_api_key,
                                  prompt='Who are you?', stream_output=False, max_new_tokens=256,
                                  langchain_mode='Disabled', langchain_action=LangChainAction.QUERY.value,
                                  langchain_agents=[],
                                  user_path=None,
                                  langchain_modes=['UserData', 'MyData', 'LLM', 'Disabled'],
                                  docs_ordering_type='reverse_sort'):
-    if enforce_h2ogpt_api_key and base_model != 'h2oai/h2ogpt-oig-oasst1-512-6_9b':
+    if enforce_Quantum Documents_api_key and base_model != 'h2oai/Quantum Documents-oig-oasst1-512-6_9b':
         # no need for so many cases
         return
     if force_langchain_evaluate:
@@ -42,9 +42,9 @@ def test_gradio_inference_server(base_model, force_langchain_evaluate, do_langch
         # get_some_dbs_from_hf()
 
     max_seq_len_client = None
-    if base_model in ['h2oai/h2ogpt-oig-oasst1-512-6_9b', 'h2oai/h2ogpt-oasst1-512-12b']:
+    if base_model in ['h2oai/Quantum Documents-oig-oasst1-512-6_9b', 'h2oai/Quantum Documents-oasst1-512-12b']:
         prompt_type = PromptType.human_bot.name
-    elif base_model in ['h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v2']:
+    elif base_model in ['h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-7b-v2']:
         prompt_type = PromptType.prompt_answer.name
     elif base_model in ['llama']:
         max_seq_len_client = 2048
@@ -80,10 +80,10 @@ def test_gradio_inference_server(base_model, force_langchain_evaluate, do_langch
     os.environ['GRADIO_SERVER_PORT'] = str(client_port)
     os.environ['HOST'] = "http://127.0.0.1:%s" % client_port
 
-    h2ogpt_key = 'foodoo#'
+    Quantum Documents_key = 'foodoo#'
     main_kwargs = main_kwargs.copy()
-    if enforce_h2ogpt_api_key:
-        main_kwargs.update(dict(enforce_h2ogpt_api_key=True, h2ogpt_api_keys=[h2ogpt_key]))
+    if enforce_Quantum Documents_api_key:
+        main_kwargs.update(dict(enforce_Quantum Documents_api_key=True, Quantum Documents_api_keys=[Quantum Documents_key]))
     main_kwargs.update(dict(max_seq_len=max_seq_len_client))
     main(**main_kwargs, inference_server=inference_server)
 
@@ -96,7 +96,7 @@ def test_gradio_inference_server(base_model, force_langchain_evaluate, do_langch
     assert res_dict['iinput'] == ''
 
     # will use HOST from above
-    if enforce_h2ogpt_api_key:
+    if enforce_Quantum Documents_api_key:
         # try without key first
         ret1, ret2, ret3, ret4, ret5, ret6, ret7 = run_client_many(prompt_type=None)
         assert 'Invalid Access Key' in ret1['response']
@@ -106,7 +106,7 @@ def test_gradio_inference_server(base_model, force_langchain_evaluate, do_langch
         assert 'Invalid Access Key' in ret5['response']
         assert 'Invalid Access Key' in ret6['response']
         assert 'Invalid Access Key' in ret7['response']
-        ret1, ret2, ret3, ret4, ret5, ret6, ret7 = run_client_many(prompt_type=None, h2ogpt_key='foo')
+        ret1, ret2, ret3, ret4, ret5, ret6, ret7 = run_client_many(prompt_type=None, Quantum Documents_key='foo')
         assert 'Invalid Access Key' in ret1['response']
         assert 'Invalid Access Key' in ret2['response']
         assert 'Invalid Access Key' in ret3['response']
@@ -117,16 +117,16 @@ def test_gradio_inference_server(base_model, force_langchain_evaluate, do_langch
 
     # try normal or with key if enforcing
     ret1, ret2, ret3, ret4, ret5, ret6, ret7 = run_client_many(prompt_type=None,
-                                                               h2ogpt_key=h2ogpt_key)  # client shouldn't have to specify
-    if base_model == 'h2oai/h2ogpt-oig-oasst1-512-6_9b':
-        assert 'h2oGPT' in ret1['response']
+                                                               Quantum Documents_key=Quantum Documents_key)  # client shouldn't have to specify
+    if base_model == 'h2oai/Quantum Documents-oig-oasst1-512-6_9b':
+        assert 'Quantum Documents' in ret1['response']
         assert 'birds' in ret2['response'].lower()
         assert 'birds' in ret3['response'].lower()
-        assert 'h2oGPT' in ret4['response']
-        assert 'h2oGPT' in ret5['response']
-        assert 'h2oGPT' in ret6['response']
-        assert 'h2oGPT' in ret7['response']
-    elif base_model == 'h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v2':
+        assert 'Quantum Documents' in ret4['response']
+        assert 'Quantum Documents' in ret5['response']
+        assert 'Quantum Documents' in ret6['response']
+        assert 'Quantum Documents' in ret7['response']
+    elif base_model == 'h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-7b-v2':
         assert 'I am a language model trained' in ret1['response'] or \
                'I am a helpful assistant' in ret1['response'] or \
                'I am a chatbot.' in ret1['response'] or \
@@ -253,7 +253,7 @@ def gpus_cmd():
 
 
 def run_vllm_docker(inf_port, base_model, tokenizer=None):
-    if base_model == 'h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v2':
+    if base_model == 'h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-7b-v2':
         # 7b has 71 heads, not divisible
         os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     os.system("docker pull vllm/vllm-openai")
@@ -285,8 +285,8 @@ def run_vllm_docker(inf_port, base_model, tokenizer=None):
               '-v' '%s/.triton:%s/.triton/' % (home_dir, home_dir),
         # '--network', 'host',
               'vllm/vllm-openai:v0.4.2',
-              # 'h2ogpt',  # use when built locally with vLLM just freshly added
-              # 'docker.io/library/h2ogpt',  # use when built locally with vLLM just freshly added
+              # 'Quantum Documents',  # use when built locally with vLLM just freshly added
+              # 'docker.io/library/Quantum Documents',  # use when built locally with vLLM just freshly added
               '--port=5000',
               '--host=0.0.0.0',
                     '--model=%s' % base_model,
@@ -320,10 +320,10 @@ def run_vllm_docker(inf_port, base_model, tokenizer=None):
     return docker_hash
 
 
-def run_h2ogpt_docker(port, base_model, inference_server=None, max_new_tokens=None):
-    os.system("docker pull gcr.io/vorvan/h2oai/h2ogpt-runtime:0.2.1")
+def run_Quantum Documents_docker(port, base_model, inference_server=None, max_new_tokens=None):
+    os.system("docker pull gcr.io/vorvan/h2oai/Quantum Documents-runtime:0.2.1")
     datetime_str = str(datetime.now()).replace(" ", "_").replace(":", "_")
-    msg = "Starting h2oGPT %s..." % datetime_str
+    msg = "Starting Quantum Documents %s..." % datetime_str
     print(msg, flush=True)
     home_dir = os.path.expanduser('~')
     makedirs(os.path.join(home_dir, '.cache/huggingface/hub'))
@@ -342,8 +342,8 @@ def run_h2ogpt_docker(port, base_model, inference_server=None, max_new_tokens=No
               '-u', '%s:%s' % (os.getuid(), os.getgid()),
               '-e', 'HUGGING_FACE_HUB_TOKEN=%s' % os.environ['HUGGING_FACE_HUB_TOKEN'],
               '--network', 'host',
-              'gcr.io/vorvan/h2oai/h2ogpt-runtime:0.2.1',
-              # 'h2ogpt',  # use when built locally with vLLM just freshly added
+              'gcr.io/vorvan/h2oai/Quantum Documents-runtime:0.2.1',
+              # 'Quantum Documents',  # use when built locally with vLLM just freshly added
               '/workspace/generate.py',
                     '--base_model=%s' % base_model,
               '--use_safetensors=True',
@@ -364,14 +364,14 @@ def run_h2ogpt_docker(port, base_model, inference_server=None, max_new_tokens=No
 
     print(cmd, flush=True)
     docker_hash = subprocess.check_output(cmd).decode().strip()
-    print("Done starting h2oGPT server: %s" % docker_hash, flush=True)
+    print("Done starting Quantum Documents server: %s" % docker_hash, flush=True)
     return docker_hash
 
 
 @pytest.mark.parametrize("base_model",
                          # FIXME: Can't get 6.9 or 12b (quantized or not) to work on home system, so do falcon only for now
-                         # ['h2oai/h2ogpt-oig-oasst1-512-6_9b', 'h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v2']
-                         ['h2oai/h2ogpt-gm-7b-mistral-chat-sft-dpo-rag-v1']
+                         # ['h2oai/Quantum Documents-oig-oasst1-512-6_9b', 'h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-7b-v2']
+                         ['h2oai/Quantum Documents-gm-7b-mistral-chat-sft-dpo-rag-v1']
                          )
 @pytest.mark.parametrize("force_langchain_evaluate", [False, True])
 @pytest.mark.parametrize("do_langchain", [False, True])
@@ -401,7 +401,7 @@ def test_hf_inference_server(base_model, force_langchain_evaluate, do_langchain,
         # from src.gpt_langchain import get_some_dbs_from_hf
         # get_some_dbs_from_hf()
 
-    if base_model in ['h2oai/h2ogpt-oig-oasst1-512-6_9b', 'h2oai/h2ogpt-oasst1-512-12b']:
+    if base_model in ['h2oai/Quantum Documents-oig-oasst1-512-6_9b', 'h2oai/Quantum Documents-oasst1-512-12b']:
         prompt_type = PromptType.human_bot.name
     else:
         prompt_type = PromptType.prompt_answer.name
@@ -482,14 +482,14 @@ def test_hf_inference_server(base_model, force_langchain_evaluate, do_langchain,
                    ret7['response'] or 'year old' in ret7['response'] or 'I am an AI language model' in ret7[
                        'response'] or \
                    'who has been living' in ret7['response']
-        elif base_model == 'h2oai/h2ogpt-oig-oasst1-512-6_9b':
-            assert 'h2oGPT' in ret1['response']
+        elif base_model == 'h2oai/Quantum Documents-oig-oasst1-512-6_9b':
+            assert 'Quantum Documents' in ret1['response']
             assert 'Birds' in ret2['response']
             assert 'Birds' in ret3['response']
-            assert 'h2oGPT' in ret4['response']
-            assert 'h2oGPT' in ret5['response']
-            assert 'h2oGPT' in ret6['response']
-            assert 'h2oGPT' in ret7['response']
+            assert 'Quantum Documents' in ret4['response']
+            assert 'Quantum Documents' in ret5['response']
+            assert 'Quantum Documents' in ret6['response']
+            assert 'Quantum Documents' in ret7['response']
         else:
             assert 'artificial intelligence language model' in ret1['response'] or 'I am a helpful assistant' in \
                    ret1['response'] or 'a chat-based assistant' in ret1['response'] or 'am a student' in ret1[
@@ -542,8 +542,8 @@ def test_openai_inference_server(inference_server, force_langchain_evaluate, cha
         langchain_mode = 'MyData'
     if inference_server == 'openai_azure_chat':
         # need at least deployment name added:
-        deployment_name = 'h2ogpt'
-        inference_server += ':%s:%s' % (deployment_name, 'h2ogpt.openai.azure.com/')
+        deployment_name = 'Quantum Documents'
+        inference_server += ':%s:%s' % (deployment_name, 'Quantum Documents.openai.azure.com/')
     if 'azure' in inference_server:
         assert 'OPENAI_AZURE_KEY' in os.environ, "Missing 'OPENAI_AZURE_KEY'"
         os.environ['OPENAI_API_KEY'] = os.environ['OPENAI_AZURE_KEY']
@@ -623,7 +623,7 @@ def test_openai_inference_server(inference_server, force_langchain_evaluate, cha
 
 
 @pytest.mark.parametrize("base_model",
-                         ['h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v2', 'meta-llama/Llama-2-7b-chat-hf']
+                         ['h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-7b-v2', 'meta-llama/Llama-2-7b-chat-hf']
                          )
 @wrap_test_forked
 def test_gradio_tgi_docker(base_model):
@@ -634,8 +634,8 @@ def test_gradio_tgi_docker(base_model):
     docker_hash1 = run_docker(inf_port, base_model, low_mem_mode=True, do_shared=False)
     os.system('docker logs %s | tail -10' % docker_hash1)
 
-    # h2oGPT server
-    docker_hash2 = run_h2ogpt_docker(gradio_port, base_model, inference_server=inference_server)
+    # Quantum Documents server
+    docker_hash2 = run_Quantum Documents_docker(gradio_port, base_model, inference_server=inference_server)
     time.sleep(90)  # assumes image already downloaded, else need more time
     os.system('docker logs %s | tail -10' % docker_hash2)
 
@@ -688,8 +688,8 @@ def test_gradio_tgi_docker(base_model):
 
 @pytest.mark.parametrize("base_model",
                          [
-                             'h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v2',
-                             'h2oai/h2ogpt-4096-llama2-7b-chat']  # avoid meta to avoid hassle of key
+                             'h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-7b-v2',
+                             'h2oai/Quantum Documents-4096-llama2-7b-chat']  # avoid meta to avoid hassle of key
                          )
 @wrap_test_forked
 def test_gradio_vllm_docker(base_model):
@@ -705,8 +705,8 @@ def test_gradio_vllm_docker(base_model):
     docker_hash1 = run_vllm_docker(inf_port, base_model, tokenizer)
     os.system('docker logs %s | tail -10' % docker_hash1)
 
-    # h2oGPT server
-    docker_hash2 = run_h2ogpt_docker(gradio_port, base_model, inference_server=inference_server)
+    # Quantum Documents server
+    docker_hash2 = run_Quantum Documents_docker(gradio_port, base_model, inference_server=inference_server)
     time.sleep(90)  # assumes image already downloaded, else need more time
     os.system('docker logs %s | tail -10' % docker_hash2)
 
@@ -766,7 +766,7 @@ def test_replicate_inference_server(force_langchain_evaluate,
                                     system_prompt,
                                     prompt='Who are you?', stream_output=False,
                                     max_new_tokens=128,  # limit cost
-                                    base_model='h2oai/h2ogpt-4096-llama2-7b-chat',
+                                    base_model='h2oai/Quantum Documents-4096-llama2-7b-chat',
                                     langchain_mode='Disabled',
                                     langchain_action=LangChainAction.QUERY.value,
                                     langchain_agents=[],

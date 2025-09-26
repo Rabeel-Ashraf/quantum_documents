@@ -1,8 +1,8 @@
-# h2oGPT
+# Quantum Documents
 
 Turn ★ into ⭐ (top-right corner) if you like the project!
 
-Query and summarize your documents or just chat with local private GPT LLMs using h2oGPT, an Apache V2 open-source project.
+Query and summarize your documents or just chat with local private GPT LLMs using Quantum Documents, an Apache V2 open-source project.
 
 Check out a long CoT Open-o1 open 🍓strawberry🍓 project: https://github.com/pseudotensor/open-strawberry
 
@@ -14,7 +14,7 @@ Check out a long CoT Open-o1 open 🍓strawberry🍓 project: https://github.com
 
 ## Video Demo
 
-https://github.com/h2oai/h2ogpt/assets/2249614/2f805035-2c85-42fb-807f-fd0bca79abc6
+https://github.com/h2oai/Quantum Documents/assets/2249614/2f805035-2c85-42fb-807f-fd0bca79abc6
 
 [![img-small.png](docs/img-small.png) YouTube 4K Video](https://www.youtube.com/watch?v=_iktbj4obAI)
 
@@ -36,15 +36,15 @@ https://github.com/h2oai/h2ogpt/assets/2249614/2f805035-2c85-42fb-807f-fd0bca79a
   - **Voice STT** using Whisper with streaming audio conversion
   - **Voice TTS** using MIT-Licensed Microsoft Speech T5 with multiple voices and Streaming audio conversion
   - **Voice TTS** using MPL2-Licensed TTS including Voice Cloning and Streaming audio conversion
-  - **AI Assistant Voice Control Mode** for hands-free control of h2oGPT chat
+  - **AI Assistant Voice Control Mode** for hands-free control of Quantum Documents chat
   - **Bake-off** UI mode against many models at the same time
   - **Easy Download** of model artifacts and control over models like LLaMa.cpp through the UI
   - **Authentication** in the UI by user/password via Native or Google OAuth
   - **State Preservation** in the UI by user/password
-- **Open Web UI** with h2oGPT as backend via OpenAI Proxy
+- **Open Web UI** with Quantum Documents as backend via OpenAI Proxy
   - See [Start-up Docs](docs/FAQ.md#open-web-ui).
   - Chat completion with streaming
-  - Document Q/A using h2oGPT ingestion with advanced OCR from DocTR
+  - Document Q/A using Quantum Documents ingestion with advanced OCR from DocTR
   - Vision models
   - Audio Transcription (STT)
   - Audio Generation (TTS)
@@ -54,7 +54,7 @@ https://github.com/h2oai/h2ogpt/assets/2249614/2f805035-2c85-42fb-807f-fd0bca79a
 - **Linux, Docker, macOS, and Windows** support
 - **Inference Servers** [support](docs/README_InferenceServers.md) for oLLaMa, HF TGI server, vLLM, Gradio, ExLLaMa, Replicate, Together.ai, OpenAI, Azure OpenAI, Anthropic, MistralAI, Google, and Groq
 - **OpenAI compliant**
-  - Server Proxy [API](docs/README_CLIENT.md) (h2oGPT acts as drop-in-replacement to OpenAI server)
+  - Server Proxy [API](docs/README_CLIENT.md) (Quantum Documents acts as drop-in-replacement to OpenAI server)
   - Chat and Text Completions (streaming and non-streaming)
   - Audio Transcription (STT)
   - Audio Generation (TTS)
@@ -78,12 +78,12 @@ https://github.com/h2oai/h2ogpt/assets/2249614/2f805035-2c85-42fb-807f-fd0bca79a
 ## Get Started
 
 [![GitHub license](https://img.shields.io/github/license/NVIDIA/nvidia-docker?style=flat-square)](LICENSE)
-[![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)](https://github.com/h2oai/h2ogpt/blob/main/docs/README_LINUX.md)
-[![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)](https://github.com/h2oai/h2ogpt/blob/main/docs/README_MACOS.md)
-[![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/h2oai/h2ogpt/blob/main/docs/README_WINDOWS.md)
-[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://github.com/h2oai/h2ogpt/blob/main/docs/README_DOCKER.md)
+[![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)](https://github.com/h2oai/Quantum Documents/blob/main/docs/README_LINUX.md)
+[![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)](https://github.com/h2oai/Quantum Documents/blob/main/docs/README_MACOS.md)
+[![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/h2oai/Quantum Documents/blob/main/docs/README_WINDOWS.md)
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://github.com/h2oai/Quantum Documents/blob/main/docs/README_DOCKER.md)
 
-### Install h2oGPT
+### Install Quantum Documents
 
 Docker is recommended for Linux, Windows, and MAC for full capabilities.  Linux Script also has full capability, while Windows and MAC scripts have less capabilities than using Docker.
 
@@ -96,8 +96,8 @@ Docker is recommended for Linux, Windows, and MAC for full capabilities.  Linux 
 ---
 
 ### Collab Demos
-- [![](https://colab.research.google.com/assets/colab-badge.svg) h2oGPT CPU](https://colab.research.google.com/drive/13RiBdAFZ6xqDwDKfW6BG_-tXfXiqPNQe?usp=sharing)
-- [![](https://colab.research.google.com/assets/colab-badge.svg) h2oGPT GPU](https://colab.research.google.com/drive/143-KFHs2iCqXTQLI2pFCDiR69z0dR8iE?usp=sharing)
+- [![](https://colab.research.google.com/assets/colab-badge.svg) Quantum Documents CPU](https://colab.research.google.com/drive/13RiBdAFZ6xqDwDKfW6BG_-tXfXiqPNQe?usp=sharing)
+- [![](https://colab.research.google.com/assets/colab-badge.svg) Quantum Documents GPU](https://colab.research.google.com/drive/143-KFHs2iCqXTQLI2pFCDiR69z0dR8iE?usp=sharing)
 
 ### Resources
 - [FAQs](docs/FAQ.md)
@@ -126,7 +126,7 @@ Docker is recommended for Linux, Windows, and MAC for full capabilities.  Linux 
    * [Low Memory](docs/FAQ.md#low-memory-mode)
    * [Docker](docs/README_DOCKER.md)
 * [LangChain Document Support](docs/README_LangChain.md)
-* [Compare to PrivateGPT et al.](docs/README_LangChain.md#what-is-h2ogpts-langchain-integration-like)
+* [Compare to PrivateGPT et al.](docs/README_LangChain.md#what-is-Quantum Documentss-langchain-integration-like)
 * [Roadmap](#roadmap)
 * [Development](#development)
 * [Help](#help)
@@ -140,7 +140,7 @@ Docker is recommended for Linux, Windows, and MAC for full capabilities.  Linux 
      * [In-Context Learning](docs/FAQ.md#in-context-learning-via-prompt-engineering)
      * [Multiple GPUs](docs/FAQ.md#multiple-gpus)
      * [Low-Memory Usage](docs/FAQ.md#low-memory-mode)
-     * [Environment Variables](docs/FAQ.md#what-envs-can-i-pass-to-control-h2ogpt)
+     * [Environment Variables](docs/FAQ.md#what-envs-can-i-pass-to-control-Quantum Documents)
      * [HTTPS access for server and client](docs/FAQ.md#https-access-for-server-and-client)
    * [Useful Links](docs/LINKS.md)
    * [Fine-Tuning](docs/FINETUNE.md)
@@ -154,7 +154,7 @@ Docker is recommended for Linux, Windows, and MAC for full capabilities.  Linux 
 
 - To create a development environment for training and generation, follow the [installation instructions](docs/INSTALL.md).
 - To fine-tune any LLM models on your data, follow the [fine-tuning instructions](docs/FINETUNE.md).
-- To run h2oGPT tests:
+- To run Quantum Documents tests:
     ```bash
     pip install requirements-parser pytest-instafail pytest-random-order playsound==1.3.0
     conda install -c conda-forge gst-python -y
@@ -210,4 +210,4 @@ By using the large language model provided in this repository, you agree to acce
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=h2oai/h2ogpt&type=Timeline)](https://star-history.com/#h2oai/h2ogpt&Timeline)
+[![Star History Chart](https://api.star-history.com/svg?repos=h2oai/Quantum Documents&type=Timeline)](https://star-history.com/#h2oai/Quantum Documents&Timeline)

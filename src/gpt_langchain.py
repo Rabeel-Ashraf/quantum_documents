@@ -959,7 +959,7 @@ class GradioInference(AGenerateStreamFirst, H2Oagenerate, LLM):
 
     system_prompt: Any = None
     visible_models: Any = None
-    h2ogpt_key: Any = None
+    Quantum Documents_key: Any = None
 
     image_file: Any = None
     image_control: Any = None
@@ -1112,7 +1112,7 @@ class GradioInference(AGenerateStreamFirst, H2Oagenerate, LLM):
                              extract_frames=10,
                              llava_prompt=None,
                              visible_models=self.visible_models,
-                             h2ogpt_key=self.h2ogpt_key,
+                             Quantum Documents_key=self.Quantum Documents_key,
                              add_search_to_context=client_add_search_to_context,
                              chat_conversation=client_chat_conversation,
                              text_context_list=None,
@@ -1587,7 +1587,7 @@ class SGlangInference(AGenerateStreamFirst, H2Oagenerate, LLM):
 
     system_prompt: Any = None
     visible_models: Any = None
-    h2ogpt_key: Any = None
+    Quantum Documents_key: Any = None
 
     image_file: Any = None
     image_control: Any = None
@@ -1623,7 +1623,7 @@ class SGlangInference(AGenerateStreamFirst, H2Oagenerate, LLM):
         except ImportError:
             raise ImportError(
                 "Could not import llava python package. "
-                "Please install it with `pip install https://h2o-release.s3.amazonaws.com/h2ogpt/llava-1.7.0.dev0-py3-none-any.whl`."
+                "Please install it with `pip install https://h2o-release.s3.amazonaws.com/Quantum Documents/llava-1.7.0.dev0-py3-none-any.whl`."
             )
         return values
 
@@ -1639,7 +1639,7 @@ class SGlangInference(AGenerateStreamFirst, H2Oagenerate, LLM):
 
     @staticmethod
     def get_conv_template(conv_template_name):
-        # /home/jon/miniconda3/envs/h2ogpt/lib/python3.10/site-packages/llava/conversation.py
+        # /home/jon/miniconda3/envs/Quantum Documents/lib/python3.10/site-packages/llava/conversation.py
         conversation_module = importlib.import_module("llava.conversation")
         conv_template = copy.deepcopy(getattr(conversation_module, conv_template_name))
         return conv_template
@@ -3101,7 +3101,7 @@ def get_llm(use_openai_model=False,
             system_prompt='',
             allow_chat_system_prompt=True,
             visible_models=0,
-            h2ogpt_key=None,
+            Quantum Documents_key=None,
             min_max_new_tokens=None,
             max_input_tokens=None,
             max_total_input_tokens=None,
@@ -3212,7 +3212,7 @@ def get_llm(use_openai_model=False,
         if system_prompt:
             gen_kwargs.update(dict(system_prompt=system_prompt))
 
-        # replicate handles prompting if no conversation, but in general has no chat API, so do all handling of prompting in h2oGPT
+        # replicate handles prompting if no conversation, but in general has no chat API, so do all handling of prompting in Quantum Documents
         if stream_output:
             callbacks = [streaming_callback]
             streamer = callbacks[0] if stream_output else None
@@ -3349,7 +3349,7 @@ def get_llm(use_openai_model=False,
                     else:
                         # for vllm 0.6.3+
                         kwargs_extra.update(dict(response_format=dict(type='text')))
-                # async_output = False  # https://github.com/h2oai/h2ogpt/issues/928
+                # async_output = False  # https://github.com/h2oai/Quantum Documents/issues/928
                 # async_sem = asyncio.Semaphore(num_async) if async_output else NullContext()
                 kwargs_extra.update(dict(openai_api_key=api_key,
                                          # batch_size=1,
@@ -3871,7 +3871,7 @@ def get_llm(use_openai_model=False,
                 add_chat_history_to_context=add_chat_history_to_context,
                 # visible_models=visible_models,
                 visible_models=model_name,
-                h2ogpt_key=h2ogpt_key,
+                Quantum Documents_key=Quantum Documents_key,
                 min_max_new_tokens=min_max_new_tokens,
                 max_input_tokens=max_input_tokens,
                 max_total_input_tokens=max_total_input_tokens,
@@ -3925,7 +3925,7 @@ def get_llm(use_openai_model=False,
                 chat_conversation=chat_conversation,
                 add_chat_history_to_context=add_chat_history_to_context,
                 visible_models=visible_models,
-                h2ogpt_key=h2ogpt_key,
+                Quantum Documents_key=Quantum Documents_key,
                 min_max_new_tokens=min_max_new_tokens,
                 max_input_tokens=max_input_tokens,
                 max_total_input_tokens=max_total_input_tokens,
@@ -4094,9 +4094,9 @@ def get_llm(use_openai_model=False,
             assert tokenizer is None or isinstance(tokenizer, FakeTokenizer)
             prompt_type = 'human_bot'
             if model_name is None:
-                # model_name = 'h2oai/h2ogpt-oasst1-512-12b'
-                # model_name = 'h2oai/h2ogpt-oig-oasst1-512-6_9b'
-                # model_name = 'h2oai/h2ogpt-oasst1-512-20b'
+                # model_name = 'h2oai/Quantum Documents-oasst1-512-12b'
+                # model_name = 'h2oai/Quantum Documents-oig-oasst1-512-6_9b'
+                # model_name = 'h2oai/Quantum Documents-oasst1-512-20b'
                 model_name = 'meta-llama/Meta-Llama-3-8B-Instruct'
                 load_4bit = False
             else:
@@ -4895,7 +4895,7 @@ def file_to_doc(file,
             docs1 = Docx2txtLoader(file_path=file).load()
             docs1 = [x for x in docs1 if x.page_content]
             add_meta(docs1, file, parser='Docx2txtLoader')
-        if os.getenv('H2OGPT_DOCX_EXTRACT_IMAGES', '1') == '1':
+        if os.getenv('Quantum Documents_DOCX_EXTRACT_IMAGES', '1') == '1':
             try:
                 # maybe images
                 import docx2txt
@@ -5128,8 +5128,8 @@ def file_to_doc(file,
                     print("BEGIN: OpenAI docAI", flush=True)
                 try:
                     from openai import OpenAI
-                    openai_client = OpenAI(base_url=os.getenv('H2OGPT_OPENAI_BASE_URL', 'https://api.openai.com'),
-                                           api_key=os.getenv('H2OGPT_OPENAI_API_KEY', 'EMPTY'), timeout=60)
+                    openai_client = OpenAI(base_url=os.getenv('Quantum Documents_OPENAI_BASE_URL', 'https://api.openai.com'),
+                                           api_key=os.getenv('Quantum Documents_OPENAI_API_KEY', 'EMPTY'), timeout=60)
                     if llava_prompt in ['auto', None]:
                         llava_prompt = "Describe the image and what does the image say?"
                     from vision.utils_vision import img_to_base64
@@ -6353,7 +6353,7 @@ def load_embed(db=None, persist_directory=None, use_openai_embedding=False):
                 try:
                     use_openai_embedding, hf_embedding_model = pickle.load(f)
                     if not isinstance(hf_embedding_model, str):
-                        # work-around bug introduced here: https://github.com/h2oai/h2ogpt/commit/54c4414f1ce3b5b7c938def651c0f6af081c66de
+                        # work-around bug introduced here: https://github.com/h2oai/Quantum Documents/commit/54c4414f1ce3b5b7c938def651c0f6af081c66de
                         hf_embedding_model = 'BAAI/bge-large-en-v1.5'
                         # fix file
                         save_embed(db, use_openai_embedding, hf_embedding_model)
@@ -6547,9 +6547,9 @@ def _make_db(use_openai_embedding=False,
             sources1 = get_wiki_sources(first_para=first_para, text_limit=text_limit)
             sources1 = chunk_sources(sources1, chunk=chunk)
             sources.extend(sources1)
-        elif langchain_mode in ['github h2oGPT']:
+        elif langchain_mode in ['github Quantum Documents']:
             # sources = get_github_docs("dagster-io", "dagster")
-            sources1 = get_github_docs("h2oai", "h2ogpt")
+            sources1 = get_github_docs("h2oai", "Quantum Documents")
             # FIXME: always chunk for now
             sources1 = chunk_sources(sources1)
             sources.extend(sources1)
@@ -7092,7 +7092,7 @@ def _run_qa_db(query=None,
                json_code2_post_prompt_reminder=None,
 
                visible_models=None,
-               h2ogpt_key=None,
+               Quantum Documents_key=None,
                docs_ordering_type=docs_ordering_types_default,
                min_max_new_tokens=512,
                max_input_tokens=-1,
@@ -7328,7 +7328,7 @@ Respond to prompt of Final Answer with your final well-structured%s answer to th
                       chat_conversation=chat_conversation,
                       add_chat_history_to_context=add_chat_history_to_context,
                       visible_models=visible_models,
-                      h2ogpt_key=h2ogpt_key,
+                      Quantum Documents_key=Quantum Documents_key,
                       min_max_new_tokens=min_max_new_tokens,
                       max_input_tokens=max_input_tokens,
                       max_total_input_tokens=max_total_input_tokens,
@@ -9083,7 +9083,7 @@ def get_chain(query=None,
         # not relevant for summarization, including in chunk mode, so process docs in order for summarization or extraction
         # put most relevant chunks closest to question,
         # esp. if truncation occurs will be "oldest" or "farthest from response" text that is truncated
-        # BUT: for small models, e.g. 6_9 pythia, if sees some stuff related to h2oGPT first, it can connect that and not listen to rest
+        # BUT: for small models, e.g. 6_9 pythia, if sees some stuff related to Quantum Documents first, it can connect that and not listen to rest
         if docs_ordering_type in ['best_first']:
             pass
         elif docs_ordering_type in ['best_near_prompt', 'reverse_sort']:
@@ -10480,7 +10480,7 @@ def get_db_from_hf(dest=".", db_dir='db_dir_DriverlessAI_docs.zip'):
 # Note dir has space in some cases, while zip does not
 some_db_zips = [['db_dir_DriverlessAI_docs.zip', 'db_dir_DriverlessAI docs', 'CC-BY-NC license'],
                 ['db_dir_UserData.zip', 'db_dir_UserData', 'CC-BY license for ArXiv'],
-                ['db_dir_github_h2oGPT.zip', 'db_dir_github h2oGPT', 'ApacheV2 license'],
+                ['db_dir_github_Quantum Documents.zip', 'db_dir_github Quantum Documents', 'ApacheV2 license'],
                 ['db_dir_wiki.zip', 'db_dir_wiki', 'CC-BY-SA Wikipedia license'],
                 # ['db_dir_wiki_full.zip', 'db_dir_wiki_full.zip', '23GB, 05/04/2023 CC-BY-SA Wiki license'],
                 ]

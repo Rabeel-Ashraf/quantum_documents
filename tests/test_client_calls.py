@@ -25,14 +25,14 @@ def test_client1():
     sys.modules.pop('langchain', None)
 
     from src.gen import main
-    main(base_model='h2oai/h2ogpt-oig-oasst1-512-6_9b', prompt_type='human_bot', chat=False,
+    main(base_model='h2oai/Quantum Documents-oig-oasst1-512-6_9b', prompt_type='human_bot', chat=False,
          stream_output=False, gradio=True, num_beams=1, block_gradio_exit=False)
 
     from src.client_test import test_client_basic
     res_dict, _ = test_client_basic()
     assert res_dict['prompt'] == 'Who are you?'
     assert res_dict['iinput'] == ''
-    assert 'I am h2oGPT' in res_dict['response'] or "I'm h2oGPT" in res_dict['response'] or 'I’m h2oGPT' in res_dict[
+    assert 'I am Quantum Documents' in res_dict['response'] or "I'm Quantum Documents" in res_dict['response'] or 'I’m Quantum Documents' in res_dict[
         'response']
 
 
@@ -43,7 +43,7 @@ def test_client1_lock_choose_model():
     sys.modules.pop('langchain', None)
 
     from src.gen import main
-    base1 = 'h2oai/h2ogpt-oig-oasst1-512-6_9b'
+    base1 = 'h2oai/Quantum Documents-oig-oasst1-512-6_9b'
     base2 = 'h2oai/h2o-danube-1.8b-chat'
     model_lock = [dict(base_model=base1, prompt_type='human_bot'),
                   dict(base_model=base2, prompt_type=noop_prompt_type)]
@@ -59,7 +59,7 @@ def test_client1_lock_choose_model():
                                             prompt_type=prompt_type)
             assert res_dict['prompt'] == prompt
             assert res_dict['iinput'] == ''
-            assert 'I am h2oGPT' in res_dict['response'] or "I'm h2oGPT" in res_dict['response'] or 'I’m h2oGPT' in \
+            assert 'I am Quantum Documents' in res_dict['response'] or "I'm Quantum Documents" in res_dict['response'] or 'I’m Quantum Documents' in \
                    res_dict[
                        'response']
 
@@ -77,7 +77,7 @@ def test_client1_lock_choose_model():
 
 
 @pytest.mark.parametrize("base_model", [
-    # 'h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v2',  # can't handle
+    # 'h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-7b-v2',  # can't handle
     'llama',
 ])
 @wrap_test_forked
@@ -95,7 +95,7 @@ def test_client1_context(base_model):
 
     # string of dict for input
     prompt = 'Who are you?'
-    if base_model == 'h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v2':
+    if base_model == 'h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-7b-v2':
         context = """<|answer|>I am a pixie filled with fairy dust<|endoftext|><|prompt|>What kind of pixie are you?<|endoftext|><|answer|>Magical<|endoftext|>"""
     else:
         # FYI llama70b even works with falcon prompt_answer context
@@ -117,14 +117,14 @@ def test_client1api():
     sys.modules.pop('langchain', None)
 
     from src.gen import main
-    main(base_model='h2oai/h2ogpt-oig-oasst1-512-6_9b', prompt_type='human_bot', chat=False,
+    main(base_model='h2oai/Quantum Documents-oig-oasst1-512-6_9b', prompt_type='human_bot', chat=False,
          stream_output=False, gradio=True, num_beams=1, block_gradio_exit=False)
 
     from src.client_test import test_client_basic_api
     res_dict, _ = test_client_basic_api()
     assert res_dict['prompt'] == 'Who are you?'
     assert res_dict['iinput'] == ''
-    assert 'I am h2oGPT' in res_dict['response'] or "I'm h2oGPT" in res_dict['response'] or 'I’m h2oGPT' in res_dict[
+    assert 'I am Quantum Documents' in res_dict['response'] or "I'm Quantum Documents" in res_dict['response'] or 'I’m Quantum Documents' in res_dict[
         'response']
 
 
@@ -133,7 +133,7 @@ def test_client1api():
 @wrap_test_forked
 def test_client1api_lean(save_dir, admin_pass):
     from src.gen import main
-    base_model = 'h2oai/h2ogpt-oig-oasst1-512-6_9b'
+    base_model = 'h2oai/Quantum Documents-oig-oasst1-512-6_9b'
     os.environ['ADMIN_PASS'] = admin_pass
     main(base_model=base_model, prompt_type='human_bot', chat=False,
          stream_output=False, gradio=True, num_beams=1, block_gradio_exit=False,
@@ -164,7 +164,7 @@ def test_client1api_lean(save_dir, admin_pass):
         print("Raw client result: %s" % res, flush=True)
         response = res['response']
 
-        assert 'I am h2oGPT' in response or "I'm h2oGPT" in response or 'I’m h2oGPT' in response
+        assert 'I am Quantum Documents' in response or "I'm Quantum Documents" in response or 'I’m Quantum Documents' in response
 
         api_name = '/system_info_dict'
         # pass string of dict.  All entries are optional, but expect at least instruction_nochat to be filled
@@ -194,7 +194,7 @@ def test_client1api_lean(save_dir, admin_pass):
 @wrap_test_forked
 def test_client1api_lean_lock_choose_model():
     from src.gen import main
-    base1 = 'h2oai/h2ogpt-oig-oasst1-512-6_9b'
+    base1 = 'h2oai/Quantum Documents-oig-oasst1-512-6_9b'
     base2 = 'distilgpt2'
     model_lock = [dict(base_model=base1, prompt_type='human_bot'),
                   dict(base_model=base2, prompt_type=noop_prompt_type)]
@@ -234,7 +234,7 @@ def test_client1api_lean_lock_choose_model():
             response = res['response']
 
             if base_model == base1:
-                assert 'I am h2oGPT' in response or "I'm h2oGPT" in response or 'I’m h2oGPT' in response
+                assert 'I am Quantum Documents' in response or "I'm Quantum Documents" in response or 'I’m Quantum Documents' in response
             else:
                 assert 'the limit of time' in response or 'the limit' in response or 'I am a man of the night' in response
 
@@ -242,7 +242,7 @@ def test_client1api_lean_lock_choose_model():
     res = client.predict(api_name=api_name)
     res = ast.literal_eval(res)
     assert [x['base_model'] for x in res] == [base1, base2]
-    assert res == [{'base_model': 'h2oai/h2ogpt-oig-oasst1-512-6_9b', 'prompt_type': 'human_bot', 'prompt_dict': None,
+    assert res == [{'base_model': 'h2oai/Quantum Documents-oig-oasst1-512-6_9b', 'prompt_type': 'human_bot', 'prompt_dict': None,
                     'load_8bit': False, 'load_4bit': False, 'low_bit_mode': 1, 'load_half': True,
                     'use_flash_attention_2': False, 'load_gptq': '', 'load_awq': '', 'load_exllama': False,
                     'use_safetensors': False, 'revision': None, 'use_gpu_id': True, 'gpu_id': 0, 'compile_model': None,
@@ -267,7 +267,7 @@ def test_client1api_lean_lock_choose_model():
 @wrap_test_forked
 def test_client1api_lean_chat_server():
     from src.gen import main
-    main(base_model='h2oai/h2ogpt-oig-oasst1-512-6_9b', prompt_type='human_bot', chat=True,
+    main(base_model='h2oai/Quantum Documents-oig-oasst1-512-6_9b', prompt_type='human_bot', chat=True,
          stream_output=True, gradio=True, num_beams=1, block_gradio_exit=False)
 
     api_name = '/submit_nochat_api'  # NOTE: like submit_nochat but stable API for string dict passing
@@ -281,13 +281,13 @@ def test_client1api_lean_chat_server():
     print("Raw client result: %s" % res, flush=True)
     response = ast.literal_eval(res)['response']
 
-    assert 'I am h2oGPT' in response or "I'm h2oGPT" in response or 'I’m h2oGPT' in response
+    assert 'I am Quantum Documents' in response or "I'm Quantum Documents" in response or 'I’m Quantum Documents' in response
 
 
 @wrap_test_forked
 def test_client_chat_nostream():
     res_dict, client = run_client_chat_with_server(stream_output=False)
-    assert 'I am h2oGPT' in res_dict['response'] or "I'm h2oGPT" in res_dict['response'] or 'I’m h2oGPT' in res_dict[
+    assert 'I am Quantum Documents' in res_dict['response'] or "I'm Quantum Documents" in res_dict['response'] or 'I’m Quantum Documents' in res_dict[
         'response']
 
 
@@ -1261,7 +1261,7 @@ Summarize"""
     if model_num == 1:
         base_model = 'llama'
     else:
-        base_model = 'h2oai/h2ogpt-4096-llama2-7b-chat'
+        base_model = 'h2oai/Quantum Documents-4096-llama2-7b-chat'
     model_path_llama = 'https://huggingface.co/TheBloke/Llama-2-7b-Chat-GGUF/resolve/main/llama-2-7b-chat.Q6_K.gguf?download=true'
     # model_path_llama = 'https://huggingface.co/TheBloke/Llama-2-7b-Chat-GGUF/resolve/main/llama-2-7b-chat.Q8_0.gguf?download=true'
     res_dict, client = run_client_chat_with_server(prompt=prompt,
@@ -1276,7 +1276,7 @@ Summarize"""
 
 
 def run_client_chat_with_server(prompt='Who are you?', stream_output=False, max_new_tokens=256,
-                                base_model='h2oai/h2ogpt-oig-oasst1-512-6_9b', prompt_type='human_bot',
+                                base_model='h2oai/Quantum Documents-oig-oasst1-512-6_9b', prompt_type='human_bot',
                                 langchain_mode='Disabled',
                                 langchain_action=LangChainAction.QUERY.value,
                                 langchain_agents=[],
@@ -1319,7 +1319,7 @@ def test_client_chat_stream():
 
 
 def run_client_nochat_with_server(prompt='Who are you?', stream_output=False, max_new_tokens=256,
-                                  base_model='h2oai/h2ogpt-oig-oasst1-512-6_9b', prompt_type='human_bot',
+                                  base_model='h2oai/Quantum Documents-oig-oasst1-512-6_9b', prompt_type='human_bot',
                                   langchain_mode='Disabled', langchain_action=LangChainAction.QUERY.value,
                                   langchain_agents=[],
                                   user_path=None,
@@ -1367,7 +1367,7 @@ def test_client_nochat_stream(gradio_ui_stream_chunk_size, gradio_ui_stream_chun
 @wrap_test_forked
 def test_client_chat_stream_langchain():
     user_path = make_user_path_test()
-    prompt = "What is h2oGPT?"
+    prompt = "What is Quantum Documents?"
     res_dict, client = run_client_chat_with_server(prompt=prompt, stream_output=True, langchain_mode="UserData",
                                                    user_path=user_path,
                                                    langchain_modes=['UserData', 'MyData', 'Disabled', 'LLM'],
@@ -1377,12 +1377,12 @@ def test_client_chat_stream_langchain():
     # raw LLM tends to ramble about H2O.ai and what it does regardless of question.
     # bad answer about h2o.ai is just becomes dumb model, why flipped context above,
     # but not stable over different systems
-    assert 'h2oGPT is a large language model' in res_dict['response'] or \
+    assert 'Quantum Documents is a large language model' in res_dict['response'] or \
            'H2O.ai is a technology company' in res_dict['response'] or \
            'an open-source project' in res_dict['response'] or \
-           'h2oGPT is a project that allows' in res_dict['response'] or \
-           'h2oGPT is a language model trained' in res_dict['response'] or \
-           'h2oGPT is a large-scale' in res_dict['response'] or \
+           'Quantum Documents is a project that allows' in res_dict['response'] or \
+           'Quantum Documents is a language model trained' in res_dict['response'] or \
+           'Quantum Documents is a large-scale' in res_dict['response'] or \
            'is a free and open-source' in res_dict['response']
 
 
@@ -1394,7 +1394,7 @@ def test_client_chat_stream_langchain_steps(max_new_tokens, top_k_docs):
     user_path = make_user_path_test()
 
     stream_output = True
-    base_model = 'h2oai/h2ogpt-4096-llama2-7b-chat'  # 'h2oai/h2ogpt-oig-oasst1-512-6_9b'
+    base_model = 'h2oai/Quantum Documents-4096-llama2-7b-chat'  # 'h2oai/Quantum Documents-oig-oasst1-512-6_9b'
     prompt_type = 'llama2'  # 'human_bot'
     langchain_mode = 'UserData'
     langchain_modes = ['UserData', 'MyData', 'LLM', 'Disabled', 'LLM']
@@ -1413,7 +1413,7 @@ def test_client_chat_stream_langchain_steps(max_new_tokens, top_k_docs):
     client = get_client(serialize=False)
 
     # QUERY1
-    prompt = "What is h2oGPT?"
+    prompt = "What is Quantum Documents?"
     langchain_mode = 'UserData'
     kwargs, args = get_args(prompt, prompt_type, chat=True, stream_output=stream_output,
                             max_new_tokens=max_new_tokens,
@@ -1432,10 +1432,10 @@ def test_client_chat_stream_langchain_steps(max_new_tokens, top_k_docs):
             'H2O.ai is a technology company' in res_dict['response'] or
             'an open-source project' in res_dict['response'] or
             'is a company that provides' in res_dict['response'] or
-            'h2oGPT is a project that' in res_dict['response'] or
+            'Quantum Documents is a project that' in res_dict['response'] or
             'for querying and summarizing documents' in res_dict['response'] or
             'Python-based platform for training' in res_dict['response'] or
-            'h2oGPT is an open-source' in res_dict['response'] or
+            'Quantum Documents is an open-source' in res_dict['response'] or
             'language model' in res_dict['response'] or
             'Whisper is an open-source' in res_dict['response']
             ) \
@@ -1454,7 +1454,7 @@ def test_client_chat_stream_langchain_steps(max_new_tokens, top_k_docs):
     assert ('A secure chatbot that uses a large language' in res_dict['response'] or
             'Whisper is a chatbot' in res_dict['response'] or
             'Whisper is a privacy-focused chatbot platform' in res_dict['response'] or
-            'h2oGPT' in res_dict['response'] or
+            'Quantum Documents' in res_dict['response'] or
             'A secure, private, and anonymous chat platform' in res_dict['response'] or
             'Whisper is a privacy-preserving' in res_dict['response'] or
             'A chatbot that uses a large language model' in res_dict['response'] or
@@ -1476,7 +1476,7 @@ def test_client_chat_stream_langchain_steps(max_new_tokens, top_k_docs):
            and ('FAQ.md' in res_dict['response'] or 'README.md' in res_dict['response'])
 
     # QUERY2
-    prompt = "What is h2oGPT?"
+    prompt = "What is Quantum Documents?"
     langchain_mode = 'LLM'
     kwargs, args = get_args(prompt, prompt_type, chat=True, stream_output=stream_output,
                             max_new_tokens=max_new_tokens,
@@ -1485,7 +1485,7 @@ def test_client_chat_stream_langchain_steps(max_new_tokens, top_k_docs):
 
     res_dict, client = run_client(client, prompt, args, kwargs)
     # i.e. answers wrongly without data, dumb model, but also no docs at all since cutoff entirely
-    assert 'h2oGPT is a variant' in res_dict['response'] and '.md' not in res_dict['response']
+    assert 'Quantum Documents is a variant' in res_dict['response'] and '.md' not in res_dict['response']
 
     # QUERY3
     prompt = "What is whisper?"
@@ -1497,7 +1497,7 @@ def test_client_chat_stream_langchain_steps(max_new_tokens, top_k_docs):
 
     res_dict, client = run_client(client, prompt, args, kwargs)
     # odd answer since no whisper docs, but still shows some docs at very low score
-    assert ('h2oGPT' in res_dict['response'] or
+    assert ('Quantum Documents' in res_dict['response'] or
             'A chatbot that can whisper to you' in res_dict['response'] or
             'whisper is a simple' in res_dict['response'] or
             'Whisper is a tool for generating text from a model' in res_dict['response'] or
@@ -1535,7 +1535,7 @@ def test_client_chat_stream_langchain_steps(max_new_tokens, top_k_docs):
 @wrap_test_forked
 def test_client_system_prompts(system_prompt, chat_conversation):
     stream_output = True
-    base_model = 'h2oai/h2ogpt-4096-llama2-7b-chat'  # 'h2oai/h2ogpt-oig-oasst1-512-6_9b'
+    base_model = 'h2oai/Quantum Documents-4096-llama2-7b-chat'  # 'h2oai/Quantum Documents-oig-oasst1-512-6_9b'
     prompt_type = 'llama2'  # 'human_bot'
 
     from src.gen import main
@@ -2410,7 +2410,7 @@ long_resopnse = """Based on the information provided in the given context, there
 def test_client_long_chat():
     from src.gen import main
     os.environ['GPT_H2O_AI'] = '1'
-    main(model_lock=os.getenv('GPT35'), block_gradio_exit=False, h2ogpt_api_keys=['foo'])
+    main(model_lock=os.getenv('GPT35'), block_gradio_exit=False, Quantum Documents_api_keys=['foo'])
 
     from src.client_test import get_client, get_args, run_client
     client = get_client(serialize=False)
@@ -2420,7 +2420,7 @@ def test_client_long_chat():
     prompt = "Tell a very long kid's story about birds."
     api_name = '/submit_nochat_api'  # NOTE: like submit_nochat but stable API for string dict passing
     kwargs = dict(instruction_nochat=prompt,
-                  h2ogpt_key='foo',
+                  Quantum Documents_key='foo',
                   # system_prompt=system_prompt,
                   chat_conversation=chat_conversation)
     # pass string of dict.  All entries are optional, but expect at least instruction_nochat to be filled
@@ -2444,10 +2444,10 @@ def test_client_chat_stream_langchain_steps2(max_new_tokens, top_k_docs):
 
     stream_output = True
     max_new_tokens = 256
-    base_model = 'h2oai/h2ogpt-4096-llama2-7b-chat'  # 'h2oai/h2ogpt-oig-oasst1-512-6_9b'
+    base_model = 'h2oai/Quantum Documents-4096-llama2-7b-chat'  # 'h2oai/Quantum Documents-oig-oasst1-512-6_9b'
     prompt_type = 'llama2'  # 'human_bot'
     langchain_mode = 'UserData'
-    langchain_modes = ['UserData', 'MyData', 'github h2oGPT', 'LLM', 'Disabled']
+    langchain_modes = ['UserData', 'MyData', 'github Quantum Documents', 'LLM', 'Disabled']
 
     from src.gen import main
     main(base_model=base_model, prompt_type=prompt_type, chat=True,
@@ -2483,20 +2483,20 @@ def test_client_chat_stream_langchain_steps2(max_new_tokens, top_k_docs):
     assert res1 or res2, "%s" % res_dict['response']
 
     # QUERY3
-    prompt = "What is h2oGPT"
-    langchain_mode = 'github h2oGPT'
+    prompt = "What is Quantum Documents"
+    langchain_mode = 'github Quantum Documents'
     kwargs, args = get_args(prompt, prompt_type, chat=True, stream_output=stream_output,
                             max_new_tokens=max_new_tokens, langchain_mode=langchain_mode)
 
     res_dict, client = run_client(client, prompt, args, kwargs)
-    assert ('h2oGPT is an open-source, fully permissive, commercially usable, and fully trained language model' in
+    assert ('Quantum Documents is an open-source, fully permissive, commercially usable, and fully trained language model' in
             res_dict['response'] or
             'A new open-source language model that is fully permissive' in res_dict['response'] or
-            'h2oGPT is an open-source' in res_dict['response'] or
-            'h2oGPT is an open-source, fully permissive, commercially usable' in res_dict['response'] or
-            'Based on the information provided in the context, h2oGPT appears to be an open-source' in res_dict[
+            'Quantum Documents is an open-source' in res_dict['response'] or
+            'Quantum Documents is an open-source, fully permissive, commercially usable' in res_dict['response'] or
+            'Based on the information provided in the context, Quantum Documents appears to be an open-source' in res_dict[
                 'response'] or
-            'h2oGPT is a variant of the' in res_dict['response']
+            'Quantum Documents is a variant of the' in res_dict['response']
             ) and \
            'README.md' in res_dict['response']
 
@@ -2646,11 +2646,11 @@ def check_langchain():
     chunk_size = 512
     langchain_mode = 'MyData'
     loaders = tuple([None, None, None, None, None, None])
-    h2ogpt_key = ''
+    Quantum Documents_key = ''
     res = client.predict(test_file_server,
                          langchain_mode, chunk, chunk_size, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_file_api')
     assert res[0] is None
     assert res[1] == langchain_mode
@@ -2846,14 +2846,14 @@ def test_fast_up_auth2():
                          [None,
                           [0, 1],
                           "[0,1]",
-                          "['h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v3','gpt-3.5-turbo']",
-                          ['h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v3', 'gpt-3.5-turbo']
+                          "['h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-7b-v3','gpt-3.5-turbo']",
+                          ['h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-7b-v3', 'gpt-3.5-turbo']
                           ])
 @wrap_test_forked
 def test_lock_up(visible_models):
     from src.gen import main
     main(gradio=True,
-         model_lock=[{'base_model': 'h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v3'},
+         model_lock=[{'base_model': 'h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-7b-v3'},
                      {'base_model': 'distilgpt2'},
                      {'inference_server': 'openai_chat', 'base_model': 'gpt-3.5-turbo'}],
          visible_models=visible_models,
@@ -2874,7 +2874,7 @@ def test_client_stress(repeat):
     # pip install pytest-repeat  # license issues, don't put with requirements
     # pip install pytest-timeout  # license issues, don't put with requirements
     #
-    # CUDA_VISIBLE_DEVICES=0 SCORE_MODEL=None python generate.py --base_model=h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v2 --langchain_mode=UserData --user_path=user_path --debug=True --concurrency_count=8
+    # CUDA_VISIBLE_DEVICES=0 SCORE_MODEL=None python generate.py --base_model=h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-7b-v2 --langchain_mode=UserData --user_path=user_path --debug=True --concurrency_count=8
     #
     # timeout to mimic client disconnecting and generation still going, else too clean and doesn't fail STRESS=1
     # pytest -s -v -n 8 --timeout=30 tests/test_client_calls.py::test_client_stress 2> stress1.log
@@ -2930,7 +2930,7 @@ def test_text_generation_inference_server1():
     """
     e.g.
     SERVER on 192.168.1.46
-    (alpaca) jon@gpu:/data/jon/h2o-llm$ CUDA_VISIBLE_DEVICES=0,1 docker run --gpus all --shm-size 2g -e NCCL_SHM_DISABLE=1 -p 6112:80 -v $HOME/.cache/huggingface/hub/:/data  ghcr.io/huggingface/text-generation-inference:latest --model-id h2oai/h2ogpt-oasst1-512-12b --max-input-length 2048 --max-total-tokens 4096 --sharded=true --num-shard=2 --disable-custom-kernels --quantize bitsandbytes --trust-remote-code --max-stop-sequences=6
+    (alpaca) jon@gpu:/data/jon/h2o-llm$ CUDA_VISIBLE_DEVICES=0,1 docker run --gpus all --shm-size 2g -e NCCL_SHM_DISABLE=1 -p 6112:80 -v $HOME/.cache/huggingface/hub/:/data  ghcr.io/huggingface/text-generation-inference:latest --model-id h2oai/Quantum Documents-oasst1-512-12b --max-input-length 2048 --max-total-tokens 4096 --sharded=true --num-shard=2 --disable-custom-kernels --quantize bitsandbytes --trust-remote-code --max-stop-sequences=6
 
     CLIENT on separate system
     HOST=http://192.168.1.46:6112 SERVER=1 pytest -s -v tests/test_client_calls.py::test_text_generation_inference_server1
@@ -2965,26 +2965,26 @@ def test_text_generation_inference_server1():
 
 def kill_function_server():
     os.system('pkill -f server_start.py --signal 9')
-    os.system('pkill -f "h2ogpt/bin/python -c from multiprocessing" --signal 9')
+    os.system('pkill -f "Quantum Documents/bin/python -c from multiprocessing" --signal 9')
 
 
 @pytest.mark.need_tokens
 @pytest.mark.parametrize("function_server_workers", [2, 1])
 @pytest.mark.parametrize("function_server", [False, True])
-@pytest.mark.parametrize("enforce_h2ogpt_api_key", [False, True])
+@pytest.mark.parametrize("enforce_Quantum Documents_api_key", [False, True])
 @pytest.mark.parametrize("loaders", ['all', None])
 @wrap_test_forked
-def test_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, function_server,
+def test_client_chat_stream_langchain_steps3(loaders, enforce_Quantum Documents_api_key, function_server,
                                              function_server_workers):
     kill_function_server()
     try:
-        run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, function_server,
+        run_client_chat_stream_langchain_steps3(loaders, enforce_Quantum Documents_api_key, function_server,
                                                 function_server_workers)
     finally:
         kill_function_server()
 
 
-def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, function_server,
+def run_client_chat_stream_langchain_steps3(loaders, enforce_Quantum Documents_api_key, function_server,
                                             function_server_workers):
     if not function_server and function_server_workers > 1:
         # no-op
@@ -3029,16 +3029,16 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
 
     stream_output = True
     max_new_tokens = 256
-    base_model = 'h2oai/h2ogpt-4096-llama2-7b-chat'  # 'h2oai/h2ogpt-oig-oasst1-512-6_9b'
+    base_model = 'h2oai/Quantum Documents-4096-llama2-7b-chat'  # 'h2oai/Quantum Documents-oig-oasst1-512-6_9b'
     prompt_type = 'llama2'  # 'human_bot'
     langchain_mode = 'UserData'
-    langchain_modes = ['UserData', 'MyData', 'github h2oGPT', 'LLM', 'Disabled']
+    langchain_modes = ['UserData', 'MyData', 'github Quantum Documents', 'LLM', 'Disabled']
 
     from src.gen import main
     main_kwargs = {}
-    h2ogpt_key = 'foodoo#'
-    if enforce_h2ogpt_api_key:
-        main_kwargs.update(dict(enforce_h2ogpt_api_key=True, h2ogpt_api_keys=[h2ogpt_key]))
+    Quantum Documents_key = 'foodoo#'
+    if enforce_Quantum Documents_api_key:
+        main_kwargs.update(dict(enforce_Quantum Documents_api_key=True, Quantum Documents_api_keys=[Quantum Documents_key]))
     main(base_model=base_model, prompt_type=prompt_type, chat=True,
          stream_output=stream_output, gradio=True, num_beams=1, block_gradio_exit=False,
          max_new_tokens=max_new_tokens,
@@ -3059,13 +3059,13 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     # serialize=False would lead to returning dict for some objects or files for get_sources
     client = get_client(serialize=False)
 
-    url = 'https://h2o-release.s3.amazonaws.com/h2ogpt/sample.pdf'
+    url = 'https://h2o-release.s3.amazonaws.com/Quantum Documents/sample.pdf'
     test_file1 = os.path.join('/tmp/', 'sample1.pdf')
     download_simple(url, dest=test_file1)
     res = client.predict(test_file1,
                          langchain_mode, True, 512, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_file_api')
     assert res[0] is None
     assert res[1] == langchain_mode
@@ -3079,7 +3079,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     remove(user_path2)
     remove('db_dir_%s' % langchain_mode2)
     new_langchain_mode_text = '%s, %s, %s' % (langchain_mode2, 'shared', user_path2)
-    res = client.predict(langchain_mode, new_langchain_mode_text, h2ogpt_key, api_name='/new_langchain_mode_text')
+    res = client.predict(langchain_mode, new_langchain_mode_text, Quantum Documents_key, api_name='/new_langchain_mode_text')
     assert res[0]['value'] == langchain_mode2
     # odd gradio change
     res0_choices = [x[0] for x in res[0]['choices']]
@@ -3088,7 +3088,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     assert res[2]['headers'] == ['Collection', 'Type', 'Path', 'Directory', 'Embedding', 'DB']
     res[2]['data'] = [[x[0], x[1], x[2]] for x in res[2]['data']]  # ignore persist_directory
     assert res[2]['data'] == [['UserData', 'shared', user_path],
-                              ['github h2oGPT', 'shared', ''],
+                              ['github Quantum Documents', 'shared', ''],
                               ['MyData', 'personal', ''],
                               [langchain_mode2, 'shared', user_path2]]
 
@@ -3098,7 +3098,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     shutil.copy('tests/pdf-sample.pdf', test_file1)
     res = client.predict(test_file1, langchain_mode2, True, 512, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_file_api')
     assert res[0] is None
     assert res[1] == langchain_mode2
@@ -3110,7 +3110,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     prompt = "Is more text boring?"
     kwargs, args = get_args(prompt, prompt_type, chat=True, stream_output=stream_output,
                             max_new_tokens=max_new_tokens, langchain_mode=langchain_mode,
-                            h2ogpt_key=h2ogpt_key)
+                            Quantum Documents_key=Quantum Documents_key)
 
     res_dict, client = run_client(client, prompt, args, kwargs)
     assert ('more text can be boring' in res_dict['response'] or
@@ -3132,13 +3132,13 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     prompt = "What is a universal file format?"
     kwargs, args = get_args(prompt, prompt_type, chat=True, stream_output=stream_output,
                             max_new_tokens=max_new_tokens, langchain_mode=langchain_mode2,
-                            h2ogpt_key=h2ogpt_key)
+                            Quantum Documents_key=Quantum Documents_key)
 
     res_dict, client = run_client(client, prompt, args, kwargs)
     assert 'PDF' in res_dict['response'] and 'pdf-sample.pdf' in res_dict['response']
 
     # check sources, and do after so would detect leakage
-    res = client.predict(langchain_mode, h2ogpt_key, api_name='/get_sources')
+    res = client.predict(langchain_mode, Quantum Documents_key, api_name='/get_sources')
     # is not actual data!
     assert isinstance(res[1], str)
     res = res[0]
@@ -3154,7 +3154,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     ]
     assert all(file in sources for file in sources_expected), "Sources do not match the expected list."
 
-    res = client.predict(langchain_mode2, h2ogpt_key, api_name='/get_sources')
+    res = client.predict(langchain_mode2, Quantum Documents_key, api_name='/get_sources')
     assert isinstance(res[1], str)
     res = res[0]
     if not is_gradio_version4:
@@ -3165,7 +3165,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     assert all(file in sources for file in sources_expected.split('\n')), "Sources do not match the expected list."
 
     # check sources, and do after so would detect leakage
-    res = client.predict(langchain_mode, h2ogpt_key, api_name='/get_viewable_sources')
+    res = client.predict(langchain_mode, Quantum Documents_key, api_name='/get_viewable_sources')
     assert isinstance(res[1], str)
     res = res[0]
     # is not actual data!
@@ -3176,7 +3176,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     sources_expected = f'{user_path}/FAQ.md\n{user_path}/README.md\n{user_path}/pexels-evg-kowalievska-1170986_small.jpg\n{user_path}/sample1.pdf'
     assert all(file in sources for file in sources_expected.split('\n')), "Sources do not match the expected list."
 
-    res = client.predict(langchain_mode2, h2ogpt_key, api_name='/get_viewable_sources')
+    res = client.predict(langchain_mode2, Quantum Documents_key, api_name='/get_viewable_sources')
     assert isinstance(res[1], str)
     res = res[0]
     if not is_gradio_version4:
@@ -3189,12 +3189,12 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     # refresh
     shutil.copy('tests/next.txt', user_path)
     sources = client.predict(langchain_mode, True, 512,
-                             *loaders, h2ogpt_key,
+                             *loaders, Quantum Documents_key,
                              api_name='/refresh_sources').replace('\\', '/').replace('\r', '').split('\n')
     sources_expected = 'file/%s/next.txt' % user_path
     assert sources_expected in str(sources)
 
-    res = client.predict(langchain_mode, h2ogpt_key, api_name='/get_sources')
+    res = client.predict(langchain_mode, Quantum Documents_key, api_name='/get_sources')
     assert isinstance(res[1], str)
     res = res[0]
     # is not actual data!
@@ -3206,7 +3206,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     assert all(file in sources for file in sources_expected.split('\n')), "Sources do not match the expected list."
 
     # check sources, and do after so would detect leakage
-    sources = ast.literal_eval(client.predict(langchain_mode, h2ogpt_key, api_name='/get_sources_api'))
+    sources = ast.literal_eval(client.predict(langchain_mode, Quantum Documents_key, api_name='/get_sources_api'))
     assert isinstance(sources, list)
     sources_expected = ['user_path_test/FAQ.md', 'user_path_test/README.md', 'user_path_test/next.txt',
                         'user_path_test/pexels-evg-kowalievska-1170986_small.jpg',
@@ -3220,7 +3220,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     text_context_list = None
     pdf_height = 1000
     source_dict = ast.literal_eval(
-        client.predict(langchain_mode, file_to_get, view_raw_text, text_context_list, pdf_height, h2ogpt_key,
+        client.predict(langchain_mode, file_to_get, view_raw_text, text_context_list, pdf_height, Quantum Documents_key,
                        api_name='/get_document_api'))
     assert len(source_dict['contents']) == 1
     assert len(source_dict['metadatas']) == 1
@@ -3231,7 +3231,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
 
     view_raw_text = True  # dict of metadatas stays dict instead of string
     source_dict = ast.literal_eval(
-        client.predict(langchain_mode, file_to_get, view_raw_text, text_context_list, pdf_height, h2ogpt_key,
+        client.predict(langchain_mode, file_to_get, view_raw_text, text_context_list, pdf_height, Quantum Documents_key,
                        api_name='/get_document_api'))
     assert len(source_dict['contents']) == 2  # chunk_id=0 (query) and -1 (summarization)
     assert len(source_dict['metadatas']) == 2  # chunk_id=0 (query) and -1 (summarization)
@@ -3241,14 +3241,14 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     assert sources_expected[3] == source_dict['metadatas'][0]['source']
 
     # even normal langchain_mode  passed to this should get the other langchain_mode2
-    res = client.predict(langchain_mode, h2ogpt_key, api_name='/load_langchain')
+    res = client.predict(langchain_mode, Quantum Documents_key, api_name='/load_langchain')
     res0_choices = [x[0] for x in res[0]['choices']]
-    assert res0_choices == [langchain_mode, 'MyData', 'github h2oGPT', 'LLM', langchain_mode2]
+    assert res0_choices == [langchain_mode, 'MyData', 'github Quantum Documents', 'LLM', langchain_mode2]
     assert res[0]['value'] == langchain_mode
     assert res[1]['headers'] == ['Collection', 'Type', 'Path', 'Directory', 'Embedding', 'DB']
     res[1]['data'] = [[x[0], x[1], x[2]] for x in res[1]['data']]  # ignore persist_directory
     assert res[1]['data'] == [['UserData', 'shared', user_path],
-                              ['github h2oGPT', 'shared', ''],
+                              ['github Quantum Documents', 'shared', ''],
                               ['MyData', 'personal', ''],
                               [langchain_mode2, 'shared', user_path2]]
 
@@ -3259,7 +3259,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     url = 'https://services.google.com/fh/files/misc/e_conomy_sea_2021_report.pdf'
     res = client.predict(url, langchain_mode, True, 512, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_url')
     assert res[0] is None
     assert res[1] == langchain_mode
@@ -3269,7 +3269,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     text = "Yufuu is a wonderful place and you should really visit because there is lots of sun."
     res = client.predict(text, langchain_mode, True, 512, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_text')
     assert res[0] is None
     assert res[1] == langchain_mode
@@ -3282,12 +3282,12 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     assert res[3] == ''
 
     langchain_mode_my = LangChainMode.MY_DATA.value
-    url = 'https://h2o-release.s3.amazonaws.com/h2ogpt/sample.pdf'
+    url = 'https://h2o-release.s3.amazonaws.com/Quantum Documents/sample.pdf'
     test_file1 = os.path.join('/tmp/', 'sample1.pdf')
     download_simple(url, dest=test_file1)
     res = client.predict(test_file1, langchain_mode_my, True, 512, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_file_api')
     assert res[0] is None
     assert res[1] == langchain_mode_my
@@ -3302,7 +3302,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     user_path2b = ''
     langchain_mode2 = 'MyData2'
     new_langchain_mode_text = '%s, %s, %s' % (langchain_mode2, 'personal', user_path2b)
-    res = client.predict(langchain_mode2, new_langchain_mode_text, h2ogpt_key, api_name='/new_langchain_mode_text')
+    res = client.predict(langchain_mode2, new_langchain_mode_text, Quantum Documents_key, api_name='/new_langchain_mode_text')
     assert res[0]['value'] == langchain_mode2
     res0_choices = [x[0] for x in res[0]['choices']]
     assert langchain_mode2 in res0_choices
@@ -3310,7 +3310,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     assert res[2]['headers'] == ['Collection', 'Type', 'Path', 'Directory', 'Embedding', 'DB']
     res[2]['data'] = [[x[0], x[1], x[2]] for x in res[2]['data']]  # ignore persist_directory
     assert res[2]['data'] == [['UserData', 'shared', user_path],
-                              ['github h2oGPT', 'shared', ''],
+                              ['github Quantum Documents', 'shared', ''],
                               ['MyData', 'personal', ''],
                               ['UserData2', 'shared', user_path2],
                               [langchain_mode2, 'personal', '']]
@@ -3321,7 +3321,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     shutil.copy('tests/pdf-sample.pdf', test_file1)
     res = client.predict(test_file1, langchain_mode2, True, 512, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_file_api')
     assert res[0] is None
     assert res[1] == langchain_mode2
@@ -3334,7 +3334,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
 
     urls = ['https://h2o.ai/company/team/leadership-team/',
             'https://arxiv.org/abs/1706.03762',
-            'https://github.com/h2oai/h2ogpt',
+            'https://github.com/h2oai/Quantum Documents',
             'https://h2o.ai'
             ]
     with tempfile.TemporaryDirectory() as tmp_user_path:
@@ -3343,7 +3343,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
             f.write('\n'.join(urls))
         res = client.predict(urls_file, langchain_mode2, True, 512, True,
                              *loaders,
-                             h2ogpt_key,
+                             Quantum Documents_key,
                              api_name='/add_file_api')
         assert res[0] is None
         assert res[1] == langchain_mode2
@@ -3353,7 +3353,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     langchain_mode3 = 'MyData3'
     user_path3 = ''
     new_langchain_mode_text = '%s, %s, %s' % (langchain_mode3, 'personal', user_path3)
-    res = client.predict(langchain_mode3, new_langchain_mode_text, h2ogpt_key, api_name='/new_langchain_mode_text')
+    res = client.predict(langchain_mode3, new_langchain_mode_text, Quantum Documents_key, api_name='/new_langchain_mode_text')
     assert res[0]['value'] == langchain_mode3
     res0_choices = [x[0] for x in res[0]['choices']]
     assert langchain_mode3 in res0_choices
@@ -3361,7 +3361,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     assert res[2]['headers'] == ['Collection', 'Type', 'Path', 'Directory', 'Embedding', 'DB']
     res[2]['data'] = [[x[0], x[1], x[2]] for x in res[2]['data']]  # ignore persist_directory
     assert res[2]['data'] == [['UserData', 'shared', user_path],
-                              ['github h2oGPT', 'shared', ''],
+                              ['github Quantum Documents', 'shared', ''],
                               ['MyData', 'personal', ''],
                               ['UserData2', 'shared', user_path2],
                               [langchain_mode2, 'personal', ''],
@@ -3371,7 +3371,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     with tempfile.TemporaryDirectory() as tmp_user_path:
         res = client.predict(urls, langchain_mode3, True, 512, True,
                              *loaders,
-                             h2ogpt_key,
+                             Quantum Documents_key,
                              api_name='/add_url')
         print(res)
         assert res[0] is None
@@ -3379,28 +3379,28 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
         assert [x in res[2] or x.replace('https', 'http') in res[2] for x in urls]
         assert res[3] == ''
 
-    sources_text = client.predict(langchain_mode3, h2ogpt_key, api_name='/show_sources')
+    sources_text = client.predict(langchain_mode3, Quantum Documents_key, api_name='/show_sources')
     assert isinstance(sources_text, str)
     assert [x in sources_text or x.replace('https', 'http') in sources_text for x in urls]
 
-    source_list = ast.literal_eval(client.predict(langchain_mode3, h2ogpt_key, api_name='/get_sources_api'))
+    source_list = ast.literal_eval(client.predict(langchain_mode3, Quantum Documents_key, api_name='/get_sources_api'))
     source_list_assert = [x.replace('v1', '').replace('v7', '') for x in source_list]  # for arxiv for asserts
     assert isinstance(source_list, list)
     assert [x in source_list_assert or x.replace('https', 'http') in source_list_assert for x in urls]
 
-    sources_text_after_delete = client.predict(source_list[0], langchain_mode3, h2ogpt_key, api_name='/delete_sources')
+    sources_text_after_delete = client.predict(source_list[0], langchain_mode3, Quantum Documents_key, api_name='/delete_sources')
     source_list_assert = [x.replace('v1', '').replace('v7', '') for x in source_list]  # for arxiv for asserts
     assert source_list_assert[0] not in sources_text_after_delete
 
     sources_state_after_delete = ast.literal_eval(
-        client.predict(langchain_mode3, h2ogpt_key, api_name='/get_sources_api'))
+        client.predict(langchain_mode3, Quantum Documents_key, api_name='/get_sources_api'))
     sources_state_after_delete = [x.replace('v1', '').replace('v7', '') for x in
                                   sources_state_after_delete]  # for arxiv for asserts
     assert isinstance(sources_state_after_delete, list)
     source_list_assert = [x.replace('v1', '').replace('v7', '') for x in source_list]  # for arxiv for asserts
     assert source_list_assert[0] not in sources_state_after_delete
 
-    res = client.predict(langchain_mode3, langchain_mode3, h2ogpt_key, api_name='/remove_langchain_mode_text')
+    res = client.predict(langchain_mode3, langchain_mode3, Quantum Documents_key, api_name='/remove_langchain_mode_text')
     assert res[0]['value'] == langchain_mode3
     res0_choices = [x[0] for x in res[0]['choices']]
     assert langchain_mode2 in res0_choices
@@ -3408,13 +3408,13 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     assert res[2]['headers'] == ['Collection', 'Type', 'Path', 'Directory', 'Embedding', 'DB']
     res[2]['data'] = [[x[0], x[1], x[2]] for x in res[2]['data']]  # ignore persist_directory
     assert res[2]['data'] == [['UserData', 'shared', user_path],
-                              ['github h2oGPT', 'shared', ''],
+                              ['github Quantum Documents', 'shared', ''],
                               ['MyData', 'personal', ''],
                               ['UserData2', 'shared', user_path2],
                               [langchain_mode2, 'personal', '']]
 
     assert os.path.isdir("db_dir_%s" % langchain_mode)
-    res = client.predict(langchain_mode, langchain_mode, h2ogpt_key, api_name='/purge_langchain_mode_text')
+    res = client.predict(langchain_mode, langchain_mode, Quantum Documents_key, api_name='/purge_langchain_mode_text')
     assert not os.path.isdir("db_dir_%s" % langchain_mode)
     assert res[0]['value'] == langchain_mode
     res0_choices = [x[0] for x in res[0]['choices']]
@@ -3422,7 +3422,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
     assert res[1] == ''
     assert res[2]['headers'] == ['Collection', 'Type', 'Path', 'Directory', 'Embedding', 'DB']
     res[2]['data'] = [[x[0], x[1], x[2]] for x in res[2]['data']]  # ignore persist_directory
-    assert res[2]['data'] == [['github h2oGPT', 'shared', ''],
+    assert res[2]['data'] == [['github Quantum Documents', 'shared', ''],
                               ['MyData', 'personal', ''],
                               ['UserData2', 'shared', 'user_path2'],
                               ['MyData2', 'personal', ''],
@@ -3430,7 +3430,7 @@ def run_client_chat_stream_langchain_steps3(loaders, enforce_h2ogpt_api_key, fun
 
 
 @pytest.mark.need_tokens
-@pytest.mark.parametrize("model_choice", ['h2oai/h2ogpt-oig-oasst1-512-6_9b'] + model_names_curated)
+@pytest.mark.parametrize("model_choice", ['h2oai/Quantum Documents-oig-oasst1-512-6_9b'] + model_names_curated)
 @wrap_test_forked
 def test_client_load_unload_models(model_choice):
     if model_choice in model_names_curated_big:
@@ -3443,7 +3443,7 @@ def test_client_load_unload_models(model_choice):
     base_model = ''
     prompt_type = 'human_bot'
     langchain_mode = 'UserData'
-    langchain_modes = ['UserData', 'MyData', 'github h2oGPT', 'LLM', 'Disabled']
+    langchain_modes = ['UserData', 'MyData', 'github Quantum Documents', 'LLM', 'Disabled']
 
     from src.gen import main
     main(base_model=base_model, prompt_type=prompt_type, chat=True,
@@ -3473,7 +3473,7 @@ def test_client_load_unload_models(model_choice):
     model_revision = ''
     model_use_gpu_id_checkbox = True
     model_gpu_id = 0
-    if model_choice == 'h2oai/h2ogpt-oig-oasst1-512-6_9b':
+    if model_choice == 'h2oai/Quantum Documents-oig-oasst1-512-6_9b':
         max_seq_len = 2048
     else:
         max_seq_len = -1
@@ -3520,7 +3520,7 @@ def test_client_load_unload_models(model_choice):
     model_path_llama_ex = 'https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/resolve/main/llama-2-7b-chat.Q5_K_M.gguf?download=true' if model_choice == 'llama' else ''
 
     chat_template_ex = ''
-    if model_choice == 'h2oai/h2ogpt-oig-oasst1-512-6_9b':
+    if model_choice == 'h2oai/Quantum Documents-oig-oasst1-512-6_9b':
         prompt_type_ex = 'human_bot'
         chat_template_ex = """{% for message in messages %}{{ message.content }}{{ eos_token }}{% \n"'endfor %}"""
         max_seq_len_ex = 2048.0
@@ -3588,7 +3588,7 @@ def test_client_load_unload_models(model_choice):
 
 @pytest.mark.need_tokens
 @pytest.mark.parametrize("stream_output", [True, False])
-@pytest.mark.parametrize("base_model", ['h2oai/h2ogpt-oig-oasst1-512-6_9b'] +
+@pytest.mark.parametrize("base_model", ['h2oai/Quantum Documents-oig-oasst1-512-6_9b'] +
                          model_names_curated +
                          ['zephyr-7b-beta.Q5_K_M.gguf'] +
                          [
@@ -3637,7 +3637,7 @@ def test_client_chat_stream_langchain_openai_embeddings():
     base_model = 'distilgpt2'
     prompt_type = 'human_bot'
     langchain_mode = 'UserData'
-    langchain_modes = ['UserData', 'MyData', 'github h2oGPT', 'LLM', 'Disabled']
+    langchain_modes = ['UserData', 'MyData', 'github Quantum Documents', 'LLM', 'Disabled']
 
     from src.gen import main
     main(base_model=base_model, prompt_type=prompt_type, chat=True,
@@ -3652,14 +3652,14 @@ def test_client_chat_stream_langchain_openai_embeddings():
     # serialize=False would lead to returning dict for some objects or files for get_sources
     client = get_client(serialize=False)
 
-    url = 'https://h2o-release.s3.amazonaws.com/h2ogpt/sample.pdf'
+    url = 'https://h2o-release.s3.amazonaws.com/Quantum Documents/sample.pdf'
     test_file1 = os.path.join('/tmp/', 'sample1.pdf')
     download_simple(url, dest=test_file1)
     loaders = tuple([None, None, None, None, None, None])
-    h2ogpt_key = ''
+    Quantum Documents_key = ''
     res = client.predict(test_file1, langchain_mode, True, 512, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_file_api')
     assert res[0] is None
     assert res[1] == langchain_mode
@@ -3678,7 +3678,7 @@ def test_client_chat_stream_langchain_openai_embeddings():
 @pytest.mark.need_tokens
 @wrap_test_forked
 def test_client_clone(stream_output):
-    base_model = 'h2oai/h2ogpt-4096-llama2-7b-chat'
+    base_model = 'h2oai/Quantum Documents-4096-llama2-7b-chat'
     from src.gen import main
     main(base_model=base_model, block_gradio_exit=False, verbose=True)
 
@@ -3702,7 +3702,7 @@ def test_client_clone(stream_output):
 @pytest.mark.need_tokens
 @wrap_test_forked
 def test_client_timeout(stream_output, max_time):
-    base_model = 'h2oai/h2ogpt-4096-llama2-7b-chat'
+    base_model = 'h2oai/Quantum Documents-4096-llama2-7b-chat'
     from src.gen import main
     main(base_model=base_model, block_gradio_exit=False, verbose=True)
 
@@ -3736,11 +3736,11 @@ def test_client_timeout(stream_output, max_time):
     chunk_size = 512
     langchain_mode = 'MyData'
     loaders = tuple([None, None, None, None, None, None])
-    h2ogpt_key = ''
+    Quantum Documents_key = ''
     res = client.predict(test_file_server,
                          langchain_mode, chunk, chunk_size, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_file_api')
     assert res[0] is None
     assert res[1] == langchain_mode
@@ -3779,7 +3779,7 @@ def test_client_timeout(stream_output, max_time):
 @wrap_test_forked
 def test_client_chat_stream_langchain_fake_embeddings_stress(repeat):
     data_kind = 'helium3'
-    base_model = 'h2oai/h2ogpt-4096-llama2-7b-chat'  # presumes remote server is llama-2 chat based
+    base_model = 'h2oai/Quantum Documents-4096-llama2-7b-chat'  # presumes remote server is llama-2 chat based
     local_server = False
     inference_server = None
     # inference_server = 'http://localhost:7860'
@@ -3793,7 +3793,7 @@ def test_client_chat_stream_langchain_fake_embeddings_stress(repeat):
 @wrap_test_forked
 def test_client_upload_simple(repeat):
     data_kind = 'helium3'
-    base_model = 'h2oai/h2ogpt-4096-llama2-7b-chat'  # fake, just for tokenizer
+    base_model = 'h2oai/Quantum Documents-4096-llama2-7b-chat'  # fake, just for tokenizer
     local_server = False
     inference_server = None
     # used with go_upload_gradio (say on remote machine) to test add_text
@@ -3808,7 +3808,7 @@ def test_client_upload_simple(repeat):
 @wrap_test_forked
 def test_client_chat_stream_langchain_fake_embeddings_stress_no_llm(repeat):
     data_kind = 'helium3'
-    base_model = 'h2oai/h2ogpt-4096-llama2-7b-chat'  # presumes remote server is llama-2 chat based
+    base_model = 'h2oai/Quantum Documents-4096-llama2-7b-chat'  # presumes remote server is llama-2 chat based
     local_server = False
     chat = False
     inference_server = None
@@ -3871,11 +3871,11 @@ def go_upload_gradio():
 @pytest.mark.parametrize("inference_server", [None, 'openai', 'openai_chat', 'openai_azure_chat', 'replicate'])
 # local_server=True
 # @pytest.mark.parametrize("base_model",
-#                         ['h2oai/h2ogpt-4096-llama2-13b-chat'])
+#                         ['h2oai/Quantum Documents-4096-llama2-13b-chat'])
 # local_server=False or True if inference_server used
-# @pytest.mark.parametrize("base_model", ['h2oai/h2ogpt-4096-llama2-70b-chat'])
+# @pytest.mark.parametrize("base_model", ['h2oai/Quantum Documents-4096-llama2-70b-chat'])
 @pytest.mark.parametrize("base_model",
-                         ['h2oai/h2ogpt-oig-oasst1-512-6_9b', 'h2oai/h2ogpt-4096-llama2-7b-chat', 'gpt-3.5-turbo'])
+                         ['h2oai/Quantum Documents-oig-oasst1-512-6_9b', 'h2oai/Quantum Documents-4096-llama2-7b-chat', 'gpt-3.5-turbo'])
 @pytest.mark.parametrize("data_kind", [
     'simple',
     'helium1',
@@ -4030,19 +4030,19 @@ def run_client_chat_stream_langchain_fake_embeddings(data_kind, base_model, loca
     stream_output = True
     max_new_tokens = 256
     # base_model = 'distilgpt2'
-    if base_model == 'h2oai/h2ogpt-oig-oasst1-512-6_9b':
+    if base_model == 'h2oai/Quantum Documents-oig-oasst1-512-6_9b':
         prompt_type = 'human_bot'
-    elif base_model == 'h2oai/h2ogpt-4096-llama2-7b-chat':
+    elif base_model == 'h2oai/Quantum Documents-4096-llama2-7b-chat':
         prompt_type = 'llama2'
     else:
         prompt_type = ''
     langchain_mode = 'UserData'
-    langchain_modes = ['UserData', 'MyData', 'github h2oGPT', 'LLM', 'Disabled']
+    langchain_modes = ['UserData', 'MyData', 'github Quantum Documents', 'LLM', 'Disabled']
 
     if inference_server == 'replicate':
         model_string = "meta/llama-2-7b-chat:8e6975e5ed6174911a6ff3d60540dfd4844201974602551e10e9e87ab143d81e"
         inference_server = 'replicate:%s' % model_string
-        base_model0 = 'h2oai/h2ogpt-4096-llama2-7b-chat'
+        base_model0 = 'h2oai/Quantum Documents-4096-llama2-7b-chat'
         if base_model != base_model0:
             return
     elif inference_server and inference_server.startswith('openai'):
@@ -4052,8 +4052,8 @@ def run_client_chat_stream_langchain_fake_embeddings(data_kind, base_model, loca
 
         if inference_server == 'openai_azure_chat':
             # need at least deployment name added:
-            deployment_name = 'h2ogpt'
-            inference_server += ':%s:%s' % (deployment_name, 'h2ogpt.openai.azure.com/')
+            deployment_name = 'Quantum Documents'
+            inference_server += ':%s:%s' % (deployment_name, 'Quantum Documents.openai.azure.com/')
             if 'azure' in inference_server:
                 assert 'OPENAI_AZURE_KEY' in os.environ, "Missing 'OPENAI_AZURE_KEY'"
                 inference_server += ':None:%s' % os.environ['OPENAI_AZURE_KEY']
@@ -4104,7 +4104,7 @@ def run_client_chat_stream_langchain_fake_embeddings(data_kind, base_model, loca
         prompt_when_texts = 'Documents'
     elif data_kind == 'helium1':
         texts = texts_helium1
-        if base_model == 'h2oai/h2ogpt-oig-oasst1-512-6_9b':
+        if base_model == 'h2oai/Quantum Documents-oig-oasst1-512-6_9b':
             expected_return_number = 10
             expected_return_number2 = expected_return_number
             tokens_expected = 1500
@@ -4129,7 +4129,7 @@ def run_client_chat_stream_langchain_fake_embeddings(data_kind, base_model, loca
         prompt_when_texts = 'Documents'
     elif data_kind == 'helium2':
         texts = texts_helium2
-        if base_model == 'h2oai/h2ogpt-oig-oasst1-512-6_9b':
+        if base_model == 'h2oai/Quantum Documents-oig-oasst1-512-6_9b':
             expected_return_number = 10
             tokens_expected = 1500
             expected_return_number2 = expected_return_number
@@ -4156,7 +4156,7 @@ def run_client_chat_stream_langchain_fake_embeddings(data_kind, base_model, loca
         prompt_when_texts = 'Documents'
     elif data_kind == 'helium3':
         texts = texts_helium3
-        if base_model == 'h2oai/h2ogpt-oig-oasst1-512-6_9b':
+        if base_model == 'h2oai/Quantum Documents-oig-oasst1-512-6_9b':
             expected_return_number = 6
             tokens_expected = 1500
             expected_return_number2 = expected_return_number
@@ -4183,7 +4183,7 @@ def run_client_chat_stream_langchain_fake_embeddings(data_kind, base_model, loca
         prompt_when_texts = 'Documents'
     elif data_kind == 'helium4':
         texts = texts_helium4
-        if base_model == 'h2oai/h2ogpt-oig-oasst1-512-6_9b':
+        if base_model == 'h2oai/Quantum Documents-oig-oasst1-512-6_9b':
             expected_return_number = 5
             expected_return_number2 = 7
             expect_response = False  # fails to respond even though docs are present
@@ -4245,7 +4245,7 @@ Rating: 3 (neutral)"
 Rating: 5 (most positive)"""
     elif data_kind == 'helium5':
         texts = texts_helium5
-        if base_model == 'h2oai/h2ogpt-oig-oasst1-512-6_9b':
+        if base_model == 'h2oai/Quantum Documents-oig-oasst1-512-6_9b':
             expected_return_number = 1
             expected_return_number2 = 1
             expect_response = False  # fails to respond even though docs are present
@@ -4284,7 +4284,7 @@ Rating: 5 (most positive)"""
     chunk = False
     chunk_size = 512
     loaders = tuple([None, None, None, None, None, None])
-    h2ogpt_key = ''
+    Quantum Documents_key = ''
     api_name = '/submit_nochat_api'  # NOTE: like submit_nochat but stable API for string dict passing
     print("TIME prep: %s %s %s" % (data_kind, base_model, time.time() - t0), flush=True, file=sys.stderr)
     t0 = time.time()
@@ -4328,7 +4328,7 @@ Rating: 5 (most positive)"""
     texts_out = [x for _, x in sorted(zip(orig_indices, texts_out))]
     texts_expected = texts[:expected_return_number]
     assert len(texts_expected) == len(texts_out), "%s vs. %s" % (len(texts_expected), len(texts_out))
-    if data_kind == 'helium5' and base_model == 'h2oai/h2ogpt-oig-oasst1-512-6_9b':
+    if data_kind == 'helium5' and base_model == 'h2oai/Quantum Documents-oig-oasst1-512-6_9b':
         assert len(texts_out) == 1
         assert len(texts_expected[0]) >= len(texts_out[0])
     else:
@@ -4339,7 +4339,7 @@ Rating: 5 (most positive)"""
     res = client.predict(texts,
                          langchain_mode, chunk, chunk_size, embed,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_text')
     assert res[0] is None
     assert res[1] == langchain_mode
@@ -4354,7 +4354,7 @@ Rating: 5 (most positive)"""
         from src.gpt_langchain import load_embed
 
         # even normal langchain_mode  passed to this should get the other langchain_mode2
-        res = client.predict(langchain_mode, h2ogpt_key, api_name='/load_langchain')
+        res = client.predict(langchain_mode, Quantum Documents_key, api_name='/load_langchain')
         persist_directory = res[1]['data'][2][3]
         if langchain_mode == 'UserData':
             persist_directory_check = 'db_dir_%s' % langchain_mode
@@ -4404,7 +4404,7 @@ Rating: 5 (most positive)"""
     texts_out = [x for _, x in sorted(zip(orig_indices, texts_out))]
     texts_expected = texts[:expected_return_number2]
     assert len(texts_expected) == len(texts_out), "%s vs. %s" % (len(texts_expected), len(texts_out))
-    if data_kind == 'helium5' and base_model != 'h2oai/h2ogpt-4096-llama2-7b-chat':
+    if data_kind == 'helium5' and base_model != 'h2oai/Quantum Documents-4096-llama2-7b-chat':
         pass
     else:
         assert texts_expected == texts_out
@@ -4432,7 +4432,7 @@ def test_client_summarization(prompt_summary, inference_server, top_k_docs, stre
     num_async = 10
     if local_server:
         if not inference_server:
-            base_model = 'h2oai/h2ogpt-4096-llama2-7b-chat'
+            base_model = 'h2oai/Quantum Documents-4096-llama2-7b-chat'
         elif inference_server == 'https://gpt.h2o.ai':
             base_model = 'mistralai/Mistral-7B-Instruct-v0.3'
         else:
@@ -4440,8 +4440,8 @@ def test_client_summarization(prompt_summary, inference_server, top_k_docs, stre
 
         if inference_server == 'openai_azure_chat':
             # need at least deployment name added:
-            deployment_name = 'h2ogpt'
-            inference_server += ':%s:%s' % (deployment_name, 'h2ogpt.openai.azure.com/')
+            deployment_name = 'Quantum Documents'
+            inference_server += ':%s:%s' % (deployment_name, 'Quantum Documents.openai.azure.com/')
             if 'azure' in inference_server:
                 assert 'OPENAI_AZURE_KEY' in os.environ, "Missing 'OPENAI_AZURE_KEY'"
                 os.environ['OPENAI_API_KEY'] = os.environ['OPENAI_AZURE_KEY']
@@ -4450,7 +4450,7 @@ def test_client_summarization(prompt_summary, inference_server, top_k_docs, stre
             model_lock = [
                 dict(inference_server=inference_server + ":guest:guest", base_model=base_model,
                      visible_models=base_model,
-                     h2ogpt_key=os.getenv('H2OGPT_API_KEY'))]
+                     Quantum Documents_key=os.getenv('Quantum Documents_API_KEY'))]
             base_model = inference_server = None
         else:
             model_lock = None
@@ -4463,7 +4463,7 @@ def test_client_summarization(prompt_summary, inference_server, top_k_docs, stre
              num_async=num_async,
              model_lock=model_lock,
              db_type=db_type,
-             h2ogpt_key=os.getenv('H2OGPT_KEY') or os.getenv('H2OGPT_H2OGPT_KEY'),
+             Quantum Documents_key=os.getenv('Quantum Documents_KEY') or os.getenv('Quantum Documents_Quantum Documents_KEY'),
              )
         check_hashes = True
     else:
@@ -4503,11 +4503,11 @@ def test_client_summarization(prompt_summary, inference_server, top_k_docs, stre
     chunk_size = 512
     langchain_mode = 'MyData'
     loaders = tuple([None, None, None, None, None, None])
-    h2ogpt_key = ''
+    Quantum Documents_key = ''
     res = client.predict(test_file_server,
                          langchain_mode, chunk, chunk_size, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_file_api')
     assert res[0] is None
     assert res[1] == langchain_mode
@@ -4607,11 +4607,11 @@ def test_client_summarization_from_text():
     chunk_size = 512
     langchain_mode = 'MyData'
     loaders = tuple([None, None, None, None, None, None])
-    h2ogpt_key = ''
+    Quantum Documents_key = ''
     res = client.predict(all_text_contents,
                          langchain_mode, chunk, chunk_size, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_text')
     assert res[0] is None
     assert res[1] == langchain_mode
@@ -4644,7 +4644,7 @@ def test_client_summarization_from_text():
     assert 'llm_answers' in res
 
 
-@pytest.mark.parametrize("url", ['https://cdn.openai.com/papers/whisper.pdf', 'https://github.com/h2oai/h2ogpt'])
+@pytest.mark.parametrize("url", ['https://cdn.openai.com/papers/whisper.pdf', 'https://github.com/h2oai/Quantum Documents'])
 @pytest.mark.parametrize("top_k_docs", [4, -1])
 @pytest.mark.need_tokens
 @wrap_test_forked
@@ -4663,11 +4663,11 @@ def test_client_summarization_from_url(url, top_k_docs):
     chunk_size = 512
     langchain_mode = 'MyData'
     loaders = tuple([None, None, None, None, None, None])
-    h2ogpt_key = ''
+    Quantum Documents_key = ''
     res = client.predict(url,
                          langchain_mode, chunk, chunk_size, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_url')
     assert res[0] is None
     assert res[1] == langchain_mode
@@ -4696,21 +4696,21 @@ def test_client_summarization_from_url(url, top_k_docs):
                'robust speech recognition system' in summary or \
                'speech recognition' in summary
         assert 'Robust Speech Recognition' in [x['content'] for x in sources][0]
-    if 'h2ogpt' in url:
+    if 'Quantum Documents' in url:
         assert 'Accurate embeddings for private offline databases' in summary \
                or 'private offline database' in summary \
-               or 'H2OGPT is an open-source project' in summary \
+               or 'Quantum Documents is an open-source project' in summary \
                or 'H2O GPT is an open-source project' in summary \
                or 'is an open-source project for document Q/A' in summary \
-               or 'h2oGPT is an open-source project' in summary \
-               or 'h2oGPT model' in summary \
+               or 'Quantum Documents is an open-source project' in summary \
+               or 'Quantum Documents model' in summary \
                or 'released an open-source version' in summary \
                or 'Summarizes the main features' in summary \
                or 'open-source, community-driven' in summary \
                or 'is a chatbot that uses' in summary \
-               or 'h2oGPT' in summary \
-               or ('key results based on the provided document' in summary and 'h2oGPT' in summary)
-        assert 'h2oGPT' in [x['content'] for x in sources][0]
+               or 'Quantum Documents' in summary \
+               or ('key results based on the provided document' in summary and 'Quantum Documents' in summary)
+        assert 'Quantum Documents' in [x['content'] for x in sources][0]
     assert url in [x['source'] for x in sources][0]
 
 
@@ -4761,11 +4761,11 @@ def test_fastsys(stream_output, bits, prompt_type):
     chunk_size = 512
     langchain_mode = 'MyData'
     loaders = tuple([None, None, None, None, None, None])
-    h2ogpt_key = ''
+    Quantum Documents_key = ''
     res = client.predict(test_file_server,
                          langchain_mode, chunk, chunk_size, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_file_api')
     assert res[0] is None
     assert res[1] == langchain_mode
@@ -4803,7 +4803,7 @@ def test_fastsys(stream_output, bits, prompt_type):
 @pytest.mark.need_tokens
 @wrap_test_forked
 def test_hyde(stream_output, hyde_level, hyde_template):
-    base_model = 'h2oai/h2ogpt-4096-llama2-7b-chat'
+    base_model = 'h2oai/Quantum Documents-4096-llama2-7b-chat'
     from src.gen import main
     main(base_model=base_model,
          chat=True, gradio=True, num_beams=1, block_gradio_exit=False, verbose=True,
@@ -4827,12 +4827,12 @@ def test_hyde(stream_output, hyde_level, hyde_template):
     chunk_size = 512
     langchain_mode = 'MyData'
     loaders = tuple([None, None, None, None, None, None])
-    h2ogpt_key = ''
+    Quantum Documents_key = ''
     embed = True
     res = client.predict(test_file_server,
                          langchain_mode, chunk, chunk_size, embed,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_file_api')
     assert res[0] is None
     assert res[1] == langchain_mode
@@ -5006,7 +5006,7 @@ def check_final_res(res, base_model='llama'):
         assert res['save_dict']['base_model'] == 'mistralai/Mistral-7B-Instruct-v0.3'
     assert res['save_dict']['where_from']
     assert res['save_dict']['valid_key'] == 'not enforced'
-    assert res['save_dict']['h2ogpt_key'] in [None, '']
+    assert res['save_dict']['Quantum Documents_key'] in [None, '']
 
     assert res['save_dict']['extra_dict']
     if base_model == 'llama':
@@ -5051,21 +5051,21 @@ def check_curl_plain_api():
     assert 'str_plain_api' == res_dict['save_dict']['which_api']
 
 
-@pytest.mark.parametrize("h2ogpt_key", ['', 'Foo#21525'])
+@pytest.mark.parametrize("Quantum Documents_key", ['', 'Foo#21525'])
 @pytest.mark.parametrize("stream_output", [True, False])
 @pytest.mark.parametrize("tts_model", [
     'microsoft/speecht5_tts',
     'tts_models/multilingual/multi-dataset/xtts_v2'
 ])
 @wrap_test_forked
-def test_client1_tts_api(tts_model, stream_output, h2ogpt_key):
+def test_client1_tts_api(tts_model, stream_output, Quantum Documents_key):
     from src.gen import main
     main(base_model='llama',
          tts_model=tts_model,
          stream_output=True, gradio=True, num_beams=1, block_gradio_exit=False,
-         enforce_h2ogpt_api_key=True if h2ogpt_key else False,
-         enforce_h2ogpt_ui_key=False,
-         h2ogpt_api_keys=[h2ogpt_key] if h2ogpt_key else [],
+         enforce_Quantum Documents_api_key=True if Quantum Documents_key else False,
+         enforce_Quantum Documents_ui_key=False,
+         Quantum Documents_api_keys=[Quantum Documents_key] if Quantum Documents_key else [],
          enable_tts=True,
          )
 
@@ -5076,7 +5076,7 @@ def test_client1_tts_api(tts_model, stream_output, h2ogpt_key):
     prompt = 'I am a robot.  I like to eat cookies, cakes, and donuts.  Please feed me every day.'
     inputs = dict(chatbot_role="Female AI Assistant", speaker="SLT (female)", tts_language='autodetect', tts_speed=1.0,
                   prompt=prompt, stream_output=stream_output,
-                  h2ogpt_key=h2ogpt_key)
+                  Quantum Documents_key=Quantum Documents_key)
     if stream_output:
         job = client.submit(*tuple(list(inputs.values())), api_name='/speak_text_api')
 
@@ -5165,7 +5165,7 @@ def test_pure_client_test():
                   tts_speed=1.0,
                   prompt=prompt,
                   stream_output=True,
-                  h2ogpt_key='',  # set if required, always needs to be passed
+                  Quantum Documents_key='',  # set if required, always needs to be passed
                   )
     job = client.submit(*tuple(list(inputs.values())), api_name='/speak_text_api')
 
@@ -5182,7 +5182,7 @@ def test_pure_client_test():
 @wrap_test_forked
 def test_client_upload_to_user_not_allowed():
     remove('db_dir_UserData')
-    base_model = 'h2oai/h2ogpt-4096-llama2-7b-chat'
+    base_model = 'h2oai/Quantum Documents-4096-llama2-7b-chat'
     from src.gen import main
     main(base_model=base_model, block_gradio_exit=False, verbose=True, allow_upload_to_user_data=False,
          add_disk_models_to_ui=False)
@@ -5203,11 +5203,11 @@ def test_client_upload_to_user_not_allowed():
     chunk_size = 512
     langchain_mode = 'MyData'
     loaders = tuple([None, None, None, None, None, None])
-    h2ogpt_key = ''
+    Quantum Documents_key = ''
     res = client.predict(test_file_server,
                          langchain_mode, chunk, chunk_size, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_file_api')
     assert res[0] is None
     assert res[1] == langchain_mode
@@ -5218,7 +5218,7 @@ def test_client_upload_to_user_not_allowed():
     res = client.predict(test_file_server,
                          langchain_mode, chunk, chunk_size, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_file_api')
     assert res[0] is None
     assert res[1] == langchain_mode
@@ -5228,7 +5228,7 @@ def test_client_upload_to_user_not_allowed():
 
 @wrap_test_forked
 def test_client_upload_to_my_not_allowed():
-    base_model = 'h2oai/h2ogpt-4096-llama2-7b-chat'
+    base_model = 'h2oai/Quantum Documents-4096-llama2-7b-chat'
     from src.gen import main
     main(base_model=base_model, block_gradio_exit=False, verbose=True, allow_upload_to_my_data=False,
          add_disk_models_to_ui=False, langchain_mode='UserData')
@@ -5249,11 +5249,11 @@ def test_client_upload_to_my_not_allowed():
     chunk_size = 512
     langchain_mode = 'UserData'
     loaders = tuple([None, None, None, None, None, None])
-    h2ogpt_key = ''
+    Quantum Documents_key = ''
     res = client.predict(test_file_server,
                          langchain_mode, chunk, chunk_size, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_file_api')
     assert res[0] is None
     assert res[1] == langchain_mode
@@ -5264,7 +5264,7 @@ def test_client_upload_to_my_not_allowed():
     res = client.predict(test_file_server,
                          langchain_mode, chunk, chunk_size, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_file_api')
     assert res[0] is None
     assert res[1] == langchain_mode
@@ -5275,7 +5275,7 @@ def test_client_upload_to_my_not_allowed():
 
 @wrap_test_forked
 def test_client_upload_to_user_or_my_not_allowed():
-    base_model = 'h2oai/h2ogpt-4096-llama2-7b-chat'
+    base_model = 'h2oai/Quantum Documents-4096-llama2-7b-chat'
     from src.gen import main
     main(base_model=base_model, block_gradio_exit=False, verbose=True,
          allow_upload_to_my_data=False,
@@ -5308,8 +5308,8 @@ def test_client1_image_qa_original():
     sys.modules.pop('langchain', None)
 
     from src.gen import main
-    assert os.getenv('H2OGPT_VISION_MODEL'), "Missing env"
-    vision_model = os.getenv('H2OGPT_VISION_MODEL')
+    assert os.getenv('Quantum Documents_VISION_MODEL'), "Missing env"
+    vision_model = os.getenv('Quantum Documents_VISION_MODEL')
     vision_model = ast.literal_eval(vision_model)
     vision_model = vision_model[0]
     main(
@@ -5344,7 +5344,7 @@ def test_client_chat_stream_langchain_metadata(metadata_in_context):
     user_path = make_user_path_test()
 
     stream_output = True
-    base_model = 'h2oai/h2ogpt-4096-llama2-7b-chat'  # 'h2oai/h2ogpt-oig-oasst1-512-6_9b'
+    base_model = 'h2oai/Quantum Documents-4096-llama2-7b-chat'  # 'h2oai/Quantum Documents-oig-oasst1-512-6_9b'
     prompt_type = 'llama2'  # 'human_bot'
     langchain_mode = 'UserData'
     langchain_modes = ['UserData', 'MyData', 'LLM', 'Disabled', 'LLM']
@@ -5380,7 +5380,7 @@ def test_client_openai_langchain(auth_access, guest_name, do_auth):
     user_path = make_user_path_test()
 
     stream_output = True
-    base_model = 'h2oai/h2ogpt-4096-llama2-7b-chat'
+    base_model = 'h2oai/Quantum Documents-4096-llama2-7b-chat'
     prompt_type = 'llama2'  # 'human_bot'
     langchain_mode = 'UserData'
     langchain_modes = ['UserData', 'MyData', 'LLM', 'Disabled', 'LLM']
@@ -5397,7 +5397,7 @@ def test_client_openai_langchain(auth_access, guest_name, do_auth):
          stream_output=stream_output, gradio=True, num_beams=1, block_gradio_exit=False,
          langchain_mode=langchain_mode, user_path=user_path,
          langchain_modes=langchain_modes,
-         h2ogpt_api_keys=[api_key],
+         Quantum Documents_api_keys=[api_key],
          auth_filename=auth_filename,
          auth=[(username, password)] if do_auth else None,
          add_disk_models_to_ui=False,
@@ -5430,7 +5430,7 @@ def test_client_openai_langchain(auth_access, guest_name, do_auth):
     responses = client.create(**client_kwargs)
     text = responses.choices[0].message.content
     print(text)
-    assert 'h2oGPT project' in text or \
+    assert 'Quantum Documents project' in text or \
            'natural language' in text or \
            'Summarize' in text or \
            'summarizing' in text or \
@@ -5448,7 +5448,7 @@ def test_client_openai_langchain(auth_access, guest_name, do_auth):
     # login regardless of auth, so can access collection
     num_model_lock = gr_client.predict(api_name='/num_model_lock')
     chatbots = [None] * (2 + num_model_lock)
-    h2ogpt_key = ''
+    Quantum Documents_key = ''
     visible_models = []
 
     side_bar_text = ''
@@ -5467,7 +5467,7 @@ def test_client_openai_langchain(auth_access, guest_name, do_auth):
     hosts_tab_text = ''
 
     gr_client.predict(None,
-                      h2ogpt_key, visible_models,
+                      Quantum Documents_key, visible_models,
 
                       side_bar_text, doc_count_text, submit_buttons_text, visible_models_text,
                       chat_tab_text, doc_selection_tab_text, doc_view_tab_text, chat_history_tab_text,
@@ -5484,11 +5484,11 @@ def test_client_openai_langchain(auth_access, guest_name, do_auth):
     chunk_size = 512
     langchain_mode = 'MyData'
     loaders = tuple([None, None, None, None, None, None])
-    h2ogpt_key = api_key
+    Quantum Documents_key = api_key
     res = gr_client.predict(test_file_server,
                             langchain_mode, chunk, chunk_size, True,
                             *loaders,
-                            h2ogpt_key,
+                            Quantum Documents_key,
                             api_name='/add_file_api')
     assert res[0] is None
     assert res[1] == langchain_mode
@@ -5564,7 +5564,7 @@ def test_client_openai_langchain(auth_access, guest_name, do_auth):
             return text
 
     # Run the client function
-    final_text = asyncio.run(stream_audio_transcription("/home/jon/h2ogpt/tests/test_speech.wav"))
+    final_text = asyncio.run(stream_audio_transcription("/home/jon/Quantum Documents/tests/test_speech.wav"))
     print(final_text)
     test1 = final_text == 'Based on the document provided chirpy, a young bird, embarked on a journey to find a legendary bird known for its beautiful song.'
     test2 = final_text == 'Based on the document provided chirpy, a young bird embarked on a journey to find a legendary bird known for its beautiful song.'
@@ -5728,7 +5728,7 @@ def run_sound_test3(client):
 
 
 @pytest.mark.parametrize("base_model", [
-    'h2oai/h2ogpt-4096-llama2-7b-chat',
+    'h2oai/Quantum Documents-4096-llama2-7b-chat',
     'h2oai/h2o-danube-1.8b-chat'
 ])
 @wrap_test_forked
@@ -5816,7 +5816,7 @@ def test_client_openai_chat_history(base_model):
 
 # can run some server locally (e.g. in pycharm) with bunch of models
 # then run:
-# (h2ogpt) jon@pseudotensor:~/h2ogpt$ GRADIO_SERVER_PORT=7862 H2OGPT_OPENAI_PORT=6001 TEST_SERVER=http://localhost:7860 pytest -s -v tests/test_client_calls.py::test_max_new_tokens &> doit16.log
+# (Quantum Documents) jon@pseudotensor:~/Quantum Documents$ GRADIO_SERVER_PORT=7862 Quantum Documents_OPENAI_PORT=6001 TEST_SERVER=http://localhost:7860 pytest -s -v tests/test_client_calls.py::test_max_new_tokens &> doit16.log
 
 # add rest once 25 passes
 # @pytest.mark.parametrize("max_new_tokens", [25, 64, 128, 256, 512, 768, 1024, 1500, 2048])
@@ -5830,19 +5830,19 @@ def test_max_new_tokens(max_new_tokens, temperature):
 
     from src.model_utils import get_inf_models
     base_models = get_inf_models(inference_server)
-    h2ogpt_key = os.environ.get('H2OGPT_H2OGPT_KEY', 'EMPTY')
+    Quantum Documents_key = os.environ.get('Quantum Documents_Quantum Documents_KEY', 'EMPTY')
     model_lock = []
     model_lock.append(dict(base_model='mistralai/Mistral-7B-Instruct-v0.2', max_seq_len=4096))
     valid_base_models = []
     for base_model in base_models:
         # if base_model not in ['meta-llama/Llama-3-70b-chat-hf']:
         #    continue
-        if base_model in ['h2oai/h2ogpt-gm-7b-mistral-chat-sft-dpo-v1', 'Qwen/Qwen1.5-72B-Chat']:
+        if base_model in ['h2oai/Quantum Documents-gm-7b-mistral-chat-sft-dpo-v1', 'Qwen/Qwen1.5-72B-Chat']:
             continue
         # if base_model not in ['meta-llama/Llama-3-70b-chat-hf']:
         #    continue
         model_lock.append(dict(
-            h2ogpt_key=h2ogpt_key,
+            Quantum Documents_key=Quantum Documents_key,
             inference_server=inference_server,
             base_model=base_model,
             visible_models=base_model,
@@ -5932,11 +5932,11 @@ def test_max_new_tokens(max_new_tokens, temperature):
             chunk_size = 512
             langchain_mode = 'MyData'
             loaders = tuple([None, None, None, None, None, None])
-            h2ogpt_key = ''
+            Quantum Documents_key = ''
             res = client.predict(test_file_server,
                                  langchain_mode, chunk, chunk_size, True,
                                  *loaders,
-                                 h2ogpt_key,
+                                 Quantum Documents_key,
                                  api_name='/add_file_api')
             assert res[0] is None
             assert res[1] == langchain_mode
@@ -6024,7 +6024,7 @@ def test_client1_image_qa(langchain_action, langchain_mode, base_model):
         return
 
     client, base_models = get_test_server_client(base_model)
-    h2ogpt_key = os.environ['H2OGPT_H2OGPT_KEY']
+    Quantum Documents_key = os.environ['Quantum Documents_Quantum Documents_KEY']
 
     # string of dict for input
     prompt = 'What do you see?'
@@ -6039,7 +6039,7 @@ def test_client1_image_qa(langchain_action, langchain_mode, base_model):
                   stream_output=False,
                   langchain_mode=langchain_mode,
                   langchain_action=langchain_action,
-                  h2ogpt_key=h2ogpt_key)
+                  Quantum Documents_key=Quantum Documents_key)
     try:
         res = client.predict(str(dict(kwargs)), api_name='/submit_nochat_api')
     except Exception as e:
@@ -6104,7 +6104,7 @@ def test_client1_image_qa(langchain_action, langchain_mode, base_model):
         from openai import OpenAI
         model = base_model
         client_args = dict(base_url=base_url,
-                           api_key=kwargs.get('h2ogpt_key', 'EMPTY'))
+                           api_key=kwargs.get('Quantum Documents_key', 'EMPTY'))
         openai_client = OpenAI(**client_args)
 
         if client.auth:
@@ -6133,7 +6133,7 @@ def get_creation_date(file_path):
     return stat.st_ctime
 
 
-# (h2ogpt) jon@pseudotensor:~/h2ogpt$ TEST_SERVER="http://localhost:7860" pytest -s -v -k "LLM and llava and vicuna and Query" tests/test_client_calls.py::test_client1_images_qa
+# (Quantum Documents) jon@pseudotensor:~/Quantum Documents$ TEST_SERVER="http://localhost:7860" pytest -s -v -k "LLM and llava and vicuna and Query" tests/test_client_calls.py::test_client1_images_qa
 @wrap_test_forked
 @pytest.mark.parametrize("images_num_max", [-2, 1])
 @pytest.mark.parametrize("base_model", vision_models)
@@ -6152,7 +6152,7 @@ def test_client1_images_qa(langchain_action, langchain_mode, base_model, images_
     pdf_images.sort(key=get_creation_date)
 
     client, base_models = get_test_server_client(base_model)
-    h2ogpt_key = os.environ['H2OGPT_H2OGPT_KEY']
+    Quantum Documents_key = os.environ['Quantum Documents_Quantum Documents_KEY']
 
     prompt = 'What is used to optimize the likelihoods of the rationales?'
 
@@ -6175,7 +6175,7 @@ def test_client1_images_qa(langchain_action, langchain_mode, base_model, images_
                   stream_output=False,
                   langchain_mode=langchain_mode,
                   langchain_action=langchain_action,
-                  h2ogpt_key=h2ogpt_key)
+                  Quantum Documents_key=Quantum Documents_key)
     res_dict = client.predict(str(dict(kwargs)), api_name='/submit_nochat_api')
     res_dict = ast.literal_eval(res_dict)
     response = res_dict['response']
@@ -6373,7 +6373,7 @@ def test_guided_json(langchain_action, langchain_mode, response_format, base_mod
     from gradio_utils.grclient import GradioClient
     if isinstance(client, GradioClient):
         client.setup()
-    h2ogpt_key = os.environ['H2OGPT_H2OGPT_KEY']
+    Quantum Documents_key = os.environ['Quantum Documents_Quantum Documents_KEY']
 
     # string of dict for input
     prompt = "Give an example employee profile."
@@ -6390,7 +6390,7 @@ def test_guided_json(langchain_action, langchain_mode, response_format, base_mod
                   stream_output=stream_output,
                   langchain_mode=langchain_mode,
                   langchain_action=langchain_action,
-                  h2ogpt_key=h2ogpt_key,
+                  Quantum Documents_key=Quantum Documents_key,
                   response_format=response_format,
                   guided_json=guided_json,
                   guided_whitespace_pattern=None,
@@ -6451,7 +6451,7 @@ def openai_guided_json(gradio_client, base_model, kwargs, use_instruction):
     import openai
     client = openai.OpenAI(
         base_url=base_url,
-        api_key=kwargs.get('h2ogpt_key', 'EMPTY'),
+        api_key=kwargs.get('Quantum Documents_key', 'EMPTY'),
     )
 
     # constructing messages depends upon if Query or Summarize/Extract
@@ -6488,7 +6488,7 @@ def openai_guided_json(gradio_client, base_model, kwargs, use_instruction):
                                        text_context_list=kwargs.get('text_context_list'),
                                        langchain_mode=kwargs.get('langchain_mode'),
                                        langchain_action=kwargs.get('langchain_action'),
-                                       h2ogpt_key=kwargs.get('h2ogpt_key'),
+                                       Quantum Documents_key=kwargs.get('Quantum Documents_key'),
                                        )
                        )
     try:
@@ -6583,7 +6583,7 @@ def test_client1_image_text_qa(langchain_action, langchain_mode, base_model):
         return
 
     client, base_models = get_test_server_client(base_model)
-    h2ogpt_key = os.environ['H2OGPT_H2OGPT_KEY']
+    Quantum Documents_key = os.environ['Quantum Documents_Quantum Documents_KEY']
 
     # string of dict for input
     # system_prompt = "You are an expert document question-answer system, and you are authorized to extract test from images, but do not identify any faces."
@@ -6606,7 +6606,7 @@ def test_client1_image_text_qa(langchain_action, langchain_mode, base_model):
                   text_context_list=text_context_list,
                   # prompt_query="According to the information in chat history, images, or documents, ",
                   # system_prompt=system_prompt,
-                  h2ogpt_key=h2ogpt_key)
+                  Quantum Documents_key=Quantum Documents_key)
     try:
         res = client.predict(str(dict(kwargs)), api_name='/submit_nochat_api')
     except Exception as e:
@@ -6659,7 +6659,7 @@ def test_client1_image_text_qa(langchain_action, langchain_mode, base_model):
     from openai import OpenAI
     model = base_model
     client_args = dict(base_url=base_url,
-                       api_key=kwargs.get('h2ogpt_key', 'EMPTY'))
+                       api_key=kwargs.get('Quantum Documents_key', 'EMPTY'))
     openai_client = OpenAI(**client_args)
 
     if client.auth:
@@ -6793,11 +6793,11 @@ def test_max_new_tokens_vs_min_max_new_tokens():
     chunk_size = 512
     langchain_mode = 'MyData'
     loaders = tuple([None, None, None, None, None, None])
-    h2ogpt_key = ''
+    Quantum Documents_key = ''
     res = client.predict(test_file_server,
                          langchain_mode, chunk, chunk_size, True,
                          *loaders,
-                         h2ogpt_key,
+                         Quantum Documents_key,
                          api_name='/add_file_api')
     assert res[0] is None
     assert res[1] == langchain_mode

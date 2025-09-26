@@ -15,11 +15,11 @@ from tts_sentence_parsing import init_sentence_state, get_sentence
 from tts_utils import prepare_speech, get_no_audio, chunk_speed_change, combine_audios
 
 speaker_embeddings = {
-    "BDL": resource_filename('h2ogpt', "spkemb/cmu_us_bdl_arctic-wav-arctic_a0009.npy"),
-    "CLB": resource_filename('h2ogpt', "spkemb/cmu_us_clb_arctic-wav-arctic_a0144.npy"),
-    "KSP": resource_filename('h2ogpt', "spkemb/cmu_us_ksp_arctic-wav-arctic_b0087.npy"),
-    "RMS": resource_filename('h2ogpt', "spkemb/cmu_us_rms_arctic-wav-arctic_b0353.npy"),
-    "SLT": resource_filename('h2ogpt', "spkemb/cmu_us_slt_arctic-wav-arctic_a0508.npy"),
+    "BDL": resource_filename('Quantum Documents', "spkemb/cmu_us_bdl_arctic-wav-arctic_a0009.npy"),
+    "CLB": resource_filename('Quantum Documents', "spkemb/cmu_us_clb_arctic-wav-arctic_a0144.npy"),
+    "KSP": resource_filename('Quantum Documents', "spkemb/cmu_us_ksp_arctic-wav-arctic_b0087.npy"),
+    "RMS": resource_filename('Quantum Documents', "spkemb/cmu_us_rms_arctic-wav-arctic_b0353.npy"),
+    "SLT": resource_filename('Quantum Documents', "spkemb/cmu_us_slt_arctic-wav-arctic_a0508.npy"),
 }
 
 

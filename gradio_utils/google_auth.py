@@ -2,7 +2,7 @@ from enums import split_google
 from utils import sanitize_filename
 
 
-def setup_app(name_login='google_login', name_app='h2ogpt', verbose=False):
+def setup_app(name_login='google_login', name_app='Quantum Documents', verbose=False):
     from authlib.integrations.starlette_client import OAuth, OAuthError
     from fastapi import FastAPI, Depends, Request
     from starlette.config import Config
@@ -122,7 +122,7 @@ def login_gradio(**kwargs):
     import gradio as gr
     login_demo = gr.Blocks()
     with login_demo:
-        if kwargs['visible_h2ogpt_logo']:
+        if kwargs['visible_Quantum Documents_logo']:
             gr.Markdown(kwargs['markdown_logo'])
         with gr.Row():
             with gr.Column(scale=1):

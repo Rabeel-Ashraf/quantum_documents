@@ -277,10 +277,10 @@ def main(
         auth_message: str = None,
         google_auth: bool = False,
         guest_name: str = None,
-        enforce_h2ogpt_api_key: bool = None,
-        enforce_h2ogpt_ui_key: bool = None,
-        h2ogpt_api_keys: Union[list, str] = [],
-        h2ogpt_key: str = None,
+        enforce_Quantum Documents_api_key: bool = None,
+        enforce_Quantum Documents_ui_key: bool = None,
+        Quantum Documents_api_keys: Union[list, str] = [],
+        Quantum Documents_key: str = None,
         extra_allowed_paths: list = [],
         blocked_paths: list = [],
 
@@ -314,9 +314,9 @@ def main(
         visible_langchain_purge: bool = True,
 
         chat_tabless: bool = False,
-        visible_h2ogpt_links: bool = True,
-        visible_h2ogpt_qrcode: bool = True,
-        visible_h2ogpt_logo: bool = True,
+        visible_Quantum Documents_links: bool = True,
+        visible_Quantum Documents_qrcode: bool = True,
+        visible_Quantum Documents_logo: bool = True,
         visible_chatbot_label: bool = True,
         visible_all_prompter_models: bool = False,
         visible_curated_models: bool = True,
@@ -327,8 +327,8 @@ def main(
         pdf_height: int = 800,
         avatars: bool = True,
         add_disk_models_to_ui: bool = True,
-        page_title: str = "h2oGPT",
-        model_label_prefix: str = "h2oGPT",
+        page_title: str = "Quantum Documents",
+        model_label_prefix: str = "Quantum Documents",
         favicon_path: str = None,
         visible_ratings: bool = False,
         reviews_file: str = None,
@@ -790,8 +790,8 @@ def main(
     :param prepare_offline_level:
            Whether to just prepare for offline use, do not go into cli, eval, or gradio run modes
            0 : no prep
-           1: prepare just h2oGPT with exact same setup as passed to CLI and ensure all artifacts for h2oGPT alone added to ~/.cache/
-           2: prepare h2oGPT + all inference servers so h2oGPT+inference servers can use the ~/.cache/
+           1: prepare just Quantum Documents with exact same setup as passed to CLI and ensure all artifacts for Quantum Documents alone added to ~/.cache/
+           2: prepare Quantum Documents + all inference servers so Quantum Documents+inference servers can use the ~/.cache/
     :param cli: whether to use CLI (non-gradio) interface.
     :param eval: whether to run evals
     :param cli_loop: whether to loop for CLI (False usually only for testing)
@@ -920,10 +920,10 @@ def main(
            If '', then no guest allowed even if open access, then all databases for each user always persisted
            If None, then set to 'guest' for open access, or '' for closed access
            For open or closed access, if guest_name is set, that forms prefix of actual internal userID apart from authentication and can serve as way to access UI or API freshly via auth with fixed password with no document persistence beyond that single session.
-    :param enforce_h2ogpt_api_key: Whether to enforce h2oGPT token usage for API
-    :param enforce_h2ogpt_ui_key: Whether to enforce h2oGPT token usage for UI (same keys as API assumed)
-    :param h2ogpt_api_keys: list of tokens allowed for API access or file accessed on demand for json of list of keys
-    :param h2ogpt_key: E.g. can be set when accessing gradio h2oGPT server from local gradio h2oGPT server that acts as client to that inference server
+    :param enforce_Quantum Documents_api_key: Whether to enforce Quantum Documents token usage for API
+    :param enforce_Quantum Documents_ui_key: Whether to enforce Quantum Documents token usage for UI (same keys as API assumed)
+    :param Quantum Documents_api_keys: list of tokens allowed for API access or file accessed on demand for json of list of keys
+    :param Quantum Documents_key: E.g. can be set when accessing gradio Quantum Documents server from local gradio Quantum Documents server that acts as client to that inference server
                        Only applied for API at runtime when API accesses using gradio inference_server are made
     :param extra_allowed_paths: List of strings for extra allowed paths users could access for file viewing/downloading.  '.' can be used but be careful what that exposes.
            Note by default all paths in langchain_mode_paths given at startup are allowed
@@ -961,7 +961,7 @@ def main(
            For nochat API, this is single item within a list for model by name or by index in model_lock
                                 If None, then just use first model in model_lock list
                                 If model_lock not set, use model selected by CLI --base_model etc.
-           Note that unlike h2ogpt_key, this visible_models only applies to this running h2oGPT server,
+           Note that unlike Quantum Documents_key, this visible_models only applies to this running Quantum Documents server,
               and the value is not used to access the inference server.
               If need a visible_models for an inference server, then use --model_lock and group together.
     :param max_visible_models: maximum visible models to allow to select in UI
@@ -990,9 +990,9 @@ def main(
     :param visible_langchain_purge: for purge option
 
     :param chat_tabless: Just show Chat as block without tab (useful if want only chat view)
-    :param visible_h2ogpt_links: Whether github stars, URL are visible
-    :param visible_h2ogpt_qrcode: Whether QR code is visible
-    :param visible_h2ogpt_logo: Whether central logo is visible
+    :param visible_Quantum Documents_links: Whether github stars, URL are visible
+    :param visible_Quantum Documents_qrcode: Whether QR code is visible
+    :param visible_Quantum Documents_logo: Whether central logo is visible
     :param visible_chatbot_label: Whether to show label in chatbot (e.g. if only one model for own purpose, then can set to False)
     :param visible_all_prompter_models: Whether to show all prompt_type_to_model_name items or just curated ones
     :param visible_curated_models: Whether to show curated models (useful to see few good options)
@@ -1005,8 +1005,8 @@ def main(
     :param pdf_height: Height of PDF viewer in UI
     :param avatars: Whether to show avatars in chatbot
     :param add_disk_models_to_ui: Whether to add HF cache models and llama.cpp models to UI
-    :param page_title: Title of the web page, default is h2oGPT
-    :param favicon_path: Path to favicon, default is h2oGPT favicon
+    :param page_title: Title of the web page, default is Quantum Documents
+    :param favicon_path: Path to favicon, default is Quantum Documents favicon
     :param visible_ratings: Whether full review is visible, else just likable chatbots
     :param reviews_file: File to store reviews, set to `reviews.csv` if visible_ratings=True if this isn't set
 
@@ -1038,7 +1038,7 @@ def main(
     :param user_path: user path to glob from to generate db for vector search, for 'UserData' langchain mode.
            If already have db, any new/changed files are added automatically if path set, does not have to be same path used for prior db sources
     :param langchain_modes: dbs to generate at launch to be ready for LLM
-           Apart from additional user-defined collections, can include ['wiki', 'wiki_full', 'UserData', 'MyData', 'github h2oGPT', 'DriverlessAI docs']
+           Apart from additional user-defined collections, can include ['wiki', 'wiki_full', 'UserData', 'MyData', 'github Quantum Documents', 'DriverlessAI docs']
              But wiki_full is expensive and requires preparation
            To allow personal space only live in session, add 'MyData' to list
            Default: If only want to consume local files, e.g. prepared by make_db.py, only include ['UserData']
@@ -1115,7 +1115,7 @@ def main(
            If web search is enabled, then this is modified to be max(top_k_docs_max_show, number of links used in search)
     :param show_link_in_sources: Whether to show URL link to source document in references
     :param langchain_instruct_mode: Whether to have langchain operate in instruct mode (True) or few-shot mode (False)
-           Normally this might be decidable from --prompt_type=plain, but in some cases (like vllm_chat) we want inference server to handle all prompting, so need to tell h2oGPT to use plain prompting, but don't want to change langchain behavior
+           Normally this might be decidable from --prompt_type=plain, but in some cases (like vllm_chat) we want inference server to handle all prompting, so need to tell Quantum Documents to use plain prompting, but don't want to change langchain behavior
 
     :param pre_prompt_query: prompt before documents to query, if None then use internal defaults
     :param prompt_query: prompt after documents to query, if None then use internal defaults
@@ -1343,13 +1343,13 @@ def main(
     :param tts_coquiai_roles: role dictionary mapping name (key) to wave file (value)
            If None, then just use default from get_role_to_wave_map()
 
-    :param chatbot_role: Default role for coqui models.  If 'None', then don't by default speak when launching h2oGPT for coqui model choice.
-    :param speaker: Default speaker for microsoft models  If 'None', then don't by default speak when launching h2oGPT for microsoft model choice.
+    :param chatbot_role: Default role for coqui models.  If 'None', then don't by default speak when launching Quantum Documents for coqui model choice.
+    :param speaker: Default speaker for microsoft models  If 'None', then don't by default speak when launching Quantum Documents for microsoft model choice.
     :param tts_language: Default language for coqui models
     :param tts_speed: Default speed of TTS, < 1.0 (needs rubberband) for slower than normal, > 1.0 for faster.  Tries to keep fixed pitch.
     :param tts_action_phrases: Phrases or words to use as action word to trigger click of Submit hands-free assistant style
            Set to None or empty list to avoid any special action words
-    :param tts_stop_phrases:  Like tts_action_phrases but to stop h2oGPT from speaking and generating
+    :param tts_stop_phrases:  Like tts_action_phrases but to stop Quantum Documents from speaking and generating
 
             NOTE: Action/Stop phrases should be rare but easy (phonetic) words for Whisper to recognize.
                   E.g. asking GPT-4 a couple good ones are ['Nimbus'] and ['Yonder'],
@@ -1531,23 +1531,23 @@ def main(
     is_hf = bool(int(os.getenv("HUGGINGFACE_SPACES", '0')))
     is_gpth2oai = bool(int(os.getenv("GPT_H2O_AI", '0')))
     is_public = is_hf or is_gpth2oai  # multi-user case with fixed model and disclaimer
-    if enforce_h2ogpt_ui_key is None:
+    if enforce_Quantum Documents_ui_key is None:
         # nominally allow UI access public or not
-        enforce_h2ogpt_ui_key = False
+        enforce_Quantum Documents_ui_key = False
     if is_public:
         if max_visible_models is None and (gradio or function):
             is_gradio_h2oai = get_is_gradio_h2oai()
             max_visible_models = 4 if is_gradio_h2oai else None
         visible_hosts_tab = False
         visible_tos_tab = True
-        if enforce_h2ogpt_api_key is None:
-            enforce_h2ogpt_api_key = True
+        if enforce_Quantum Documents_api_key is None:
+            enforce_Quantum Documents_api_key = True
     else:
-        if enforce_h2ogpt_api_key is None:
-            enforce_h2ogpt_api_key = False
-    if isinstance(h2ogpt_api_keys, str) and not os.path.isfile(h2ogpt_api_keys):
-        h2ogpt_api_keys = str_to_list(h2ogpt_api_keys)
-    os.environ['H2OGPT_H2OGPT_API_KEYS'] = str(h2ogpt_api_keys)
+        if enforce_Quantum Documents_api_key is None:
+            enforce_Quantum Documents_api_key = False
+    if isinstance(Quantum Documents_api_keys, str) and not os.path.isfile(Quantum Documents_api_keys):
+        Quantum Documents_api_keys = str_to_list(Quantum Documents_api_keys)
+    os.environ['Quantum Documents_Quantum Documents_API_KEYS'] = str(Quantum Documents_api_keys)
     if isinstance(extra_allowed_paths, str):
         extra_allowed_paths = str_to_list(extra_allowed_paths)
     if memory_restriction_level is None:
@@ -1588,7 +1588,7 @@ def main(
         elif auth_access == 'open':
             guest_name = "guest"
 
-    h2ogpt_pid = os.getpid() if close_button and not is_public else None
+    Quantum Documents_pid = os.getpid() if close_button and not is_public else None
 
     # allow set token directly
     if not use_auth_token:
@@ -1617,7 +1617,7 @@ def main(
     # update
     langchain_mode_paths = str_to_dict(langchain_mode_paths)
     langchain_mode_types = str_to_dict(langchain_mode_types)
-    for lmode in [LangChainMode.GITHUB_H2OGPT.value,
+    for lmode in [LangChainMode.GITHUB_Quantum Documents.value,
                   LangChainMode.H2O_DAI_DOCS.value,
                   LangChainMode.WIKI.value,
                   LangChainMode.WIKI_FULL.value,
@@ -1704,7 +1704,7 @@ def main(
 
         if memory_restriction_level == 2:
             if not base_model and not inference_server and not model_lock:
-                base_model = 'h2oai/h2ogpt-oasst1-512-12b'
+                base_model = 'h2oai/Quantum Documents-oasst1-512-12b'
                 # don't set load_8bit if passed base_model, doesn't always work so can't just override
                 load_8bit = True
                 load_4bit = False  # FIXME - consider using 4-bit instead of 8-bit
@@ -1824,7 +1824,7 @@ def main(
         if is_public and not inference_server and not model_lock:
             # 12B uses ~94GB
             # 6.9B uses ~47GB
-            base_model = 'h2oai/h2ogpt-oig-oasst1-512-6_9b' if not base_model else base_model
+            base_model = 'h2oai/Quantum Documents-oig-oasst1-512-6_9b' if not base_model else base_model
         if hf_embedding_model is None:
             # if no GPUs, use simpler embedding model to avoid cost in time
             hf_embedding_model = "sentence-transformers/all-MiniLM-L6-v2"
@@ -2261,7 +2261,7 @@ def main(
     score_model_state0 = dict(model=None, tokenizer=None, device=None,
                               base_model=None, display_name=None, tokenizer_base_model='', lora_weights='',
                               inference_server='', prompt_type='', prompt_dict='', chat_template=None,
-                              visible_models=None, h2ogpt_key=None,
+                              visible_models=None, Quantum Documents_key=None,
                               reward_model=None)
     if score_model:
         all_kwargs = locals().copy()
@@ -2281,7 +2281,7 @@ def main(
                           inference_server=verifier_inference_server,
                           prompt_type=noop_prompt_type, prompt_dict={},
                           chat_template=None,
-                          visible_models=None, h2ogpt_key=None)
+                          visible_models=None, Quantum Documents_key=None)
         smodel, stokenizer, sdevice = get_model_retry(reward_type=False,
                                                       **get_kwargs(get_model, exclude_names=['reward_type'],
                                                                    **all_kwargs))
@@ -2452,7 +2452,7 @@ def evaluate_fake(*args, **kwargs):
     return
 
 
-# keep in sync with H2oGPTParams
+# keep in sync with Quantum DocumentsParams
 def evaluate(
         model_state,
         my_db_state,
@@ -2533,7 +2533,7 @@ def evaluate(
         image_quality,
         image_guidance_scale,
         image_num_inference_steps,
-        h2ogpt_key,
+        Quantum Documents_key,
         add_search_to_context,
 
         chat_conversation,
@@ -2831,8 +2831,8 @@ def evaluate(
     is_vision_model1 = chosen_model_state['is_vision_model']
     is_actually_vision_model1 = chosen_model_state['is_actually_vision_model']
     # use overall key if have, so key for this gradio and any inner gradio
-    if chosen_model_state['h2ogpt_key'] is not None:
-        h2ogpt_key = chosen_model_state['h2ogpt_key']
+    if chosen_model_state['Quantum Documents_key'] is not None:
+        Quantum Documents_key = chosen_model_state['Quantum Documents_key']
     # prefer use input from API over model state
     prompt_type = prompt_type or chosen_model_state['prompt_type']
     prompt_dict = prompt_dict or chosen_model_state['prompt_dict']
@@ -2919,7 +2919,7 @@ def evaluate(
 
     max_input_tokens = int(max_input_tokens) if max_input_tokens is not None else -1
     max_total_input_tokens = int(max_total_input_tokens) if max_total_input_tokens is not None else -1
-    # FIXME: https://github.com/h2oai/h2ogpt/issues/106
+    # FIXME: https://github.com/h2oai/Quantum Documents/issues/106
     num_beams = 1 if stream_output else num_beams  # See max_beams in gradio_runner
     if model_lower == 'distilgpt2':
         # always truncate for certain models that totally fail otherwise
@@ -2989,7 +2989,7 @@ def evaluate(
     from gradio_client import Client
     gradio_server = inference_server.startswith('http') and (
             isinstance(model, GradioClient) or isinstance(model, Client))
-    h2ogpt_gradio_server = gradio_server and not is_gradio_vision_model(base_model)
+    Quantum Documents_gradio_server = gradio_server and not is_gradio_vision_model(base_model)
 
     if image_file and hasattr(tokenizer, 'chat_template') and isinstance(tokenizer.chat_template,
                                                                          str) and tokenizer.chat_template:
@@ -3019,7 +3019,7 @@ def evaluate(
     # don't repeat prompting if doing gradio server since inner prompting will handle
     json_vllm = chosen_model_state['json_vllm']  # for guided_choice etc. needs to be outside below conditional block
     json_schema_type = None
-    if not h2ogpt_gradio_server and \
+    if not Quantum Documents_gradio_server and \
             response_format in ['json_object', 'json_code']:
 
         json_object_prompt = json_object_prompt or json_object_prompt0
@@ -3374,7 +3374,7 @@ def evaluate(
                 text_context_list=text_context_list,
                 chat_conversation=chat_conversation,
                 visible_models=visible_models,
-                h2ogpt_key=h2ogpt_key,
+                Quantum Documents_key=Quantum Documents_key,
                 docs_ordering_type=docs_ordering_type,
                 min_max_new_tokens=min_max_new_tokens,
                 max_input_tokens=max_input_tokens,
@@ -3825,7 +3825,7 @@ def evaluate(
                                    response_no_refs=response, sources_str='', prompt_raw='')
             else:
                 if gr_client is not None:
-                    # Note: h2oGPT gradio server could handle input token size issues for prompt,
+                    # Note: Quantum Documents gradio server could handle input token size issues for prompt,
                     # but best to handle here so send less data to server
 
                     chat_client = chat
@@ -3953,7 +3953,7 @@ def evaluate(
                                          image_quality=image_quality,
                                          image_guidance_scale=image_guidance_scale,
                                          image_num_inference_steps=image_num_inference_steps,
-                                         h2ogpt_key=h2ogpt_key,
+                                         Quantum Documents_key=Quantum Documents_key,
                                          add_search_to_context=client_add_search_to_context,
                                          docs_ordering_type=docs_ordering_type,
                                          min_max_new_tokens=min_max_new_tokens,
@@ -4265,7 +4265,7 @@ def evaluate(
         with context_class_cast(device):
             # protection for gradio not keeping track of closed users,
             # else hit bitsandbytes lack of thread safety:
-            # https://github.com/h2oai/h2ogpt/issues/104
+            # https://github.com/h2oai/Quantum Documents/issues/104
             # but only makes sense if concurrency_count == 1
             context_class = NullContext  # if concurrency_count > 1 else filelock.FileLock
             if verbose:
@@ -4815,7 +4815,7 @@ y = np.random.randint(0, 1, 100)
                     image_quality_choices[0],  # image_quality
                     3.0,  # image_guidance_scale
                     30,  # image_num_inference_steps
-                    None,  # h2ogpt_key
+                    None,  # Quantum Documents_key
                     False,  # add_search_to_context
                     None,  # chat_conversation
                     None,  # text_context_list
@@ -5621,7 +5621,7 @@ def entrypoint_main():
     can also pass --prompt_type='human_bot' and model can somewhat handle instructions without being instruct tuned
     python generate.py --base_model=decapoda-research/llama-65b-hf --load_8bit=False --use_gpu_id=False --prompt_type='human_bot'
 
-    python generate.py --base_model=h2oai/h2ogpt-oig-oasst1-512-6_9b
+    python generate.py --base_model=h2oai/Quantum Documents-oig-oasst1-512-6_9b
     """
     H2O_Fire(main)
 

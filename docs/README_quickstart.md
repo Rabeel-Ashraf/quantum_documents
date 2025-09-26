@@ -2,7 +2,7 @@
 
 ## Install
 
-To quickly try out h2oGPT with limited document Q/A capability, create a fresh Python 3.10 environment and run:
+To quickly try out Quantum Documents with limited document Q/A capability, create a fresh Python 3.10 environment and run:
 * CPU or MAC (M1/M2):
    ```bash
    # for windows/mac use "set" or relevant environment setting mechanism
@@ -36,13 +36,13 @@ export FORCE_CMAKE=1
 ```
 Run PyPI install:
 ```bash
-pip install h2ogpt
+pip install Quantum Documents
 ```
 or manually install
 ```bash
    ```bash
-   git clone https://github.com/h2oai/h2ogpt.git
-   cd h2ogpt
+   git clone https://github.com/h2oai/Quantum Documents.git
+   cd Quantum Documents
    pip install -r requirements.txt
    pip install -r reqs_optional/requirements_optional_langchain.txt
 
@@ -54,7 +54,7 @@ or manually install
    pip install -r reqs_optional/requirements_optional_langchain.gpllike.txt
 ```
 
-## Chat with h2oGPT
+## Chat with Quantum Documents
 
 ```bash
    # choose up to 32768 if have enough GPU memory:
@@ -74,7 +74,7 @@ python generate.py  --tokenizer_base_model=microsoft/Phi-3-mini-4k-instruct --ba
 ```
 the `--llama_cpp_path` could be a local path as well if you already downloaded it, or we will also check the `llamacpp_path` for the file.
 
-See [Offline](docs/README_offline.md#tldr) for how to run h2oGPT offline.
+See [Offline](docs/README_offline.md#tldr) for how to run Quantum Documents offline.
 
 ---
 

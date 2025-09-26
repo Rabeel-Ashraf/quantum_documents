@@ -1,10 +1,10 @@
-Terms of Service for H2O.ai's hosted running versions of h2oGPT, e.g. on Hugging Face Spaces, AWS, Google Colab, Kaggle, or other servers that run the software.  This document does not apply to the code, models, or data related to the project h2oGPT that reside on GitHub, Hugging Face Model Cards, or Hugging Face Data Cards or to the code that resides at Hugging Face Spaces.
+Terms of Service for H2O.ai's hosted running versions of Quantum Documents, e.g. on Hugging Face Spaces, AWS, Google Colab, Kaggle, or other servers that run the software.  This document does not apply to the code, models, or data related to the project Quantum Documents that reside on GitHub, Hugging Face Model Cards, or Hugging Face Data Cards or to the code that resides at Hugging Face Spaces.
 
 1
 Scope of Application, Amendments
 
 1.1
-H2O.ai 2307 Leghorn St, Mountain View, CA 94043 (hereinafter referred to as: "H2O.ai") runs h2oGPT software on internet platforms that use machine learning models.
+H2O.ai 2307 Leghorn St, Mountain View, CA 94043 (hereinafter referred to as: "H2O.ai") runs Quantum Documents software on internet platforms that use machine learning models.
 
 1.2
 These terms of use govern the relationship between the users of the chatbot and H2O.ai.

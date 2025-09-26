@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
 sudo systemctl daemon-reload
-sudo systemctl enable h2ogpt_nginx.service
+sudo systemctl enable Quantum Documents_nginx.service
 sudo systemctl enable vllm.service
-sudo systemctl enable h2ogpt.service
+sudo systemctl enable Quantum Documents.service
 
 cd "$HOME"
 # sudo rm -rf "$HOME"/.cache/huggingface/hub/

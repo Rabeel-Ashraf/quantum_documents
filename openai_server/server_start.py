@@ -27,7 +27,7 @@ def run_server(host: str = '0.0.0.0',
                gradio_prefix: str = None,
                gradio_host: str = None,
                gradio_port: str = None,
-               h2ogpt_key: str = None,
+               Quantum Documents_key: str = None,
                auth: Union[typing.List[typing.Tuple[str, str]], str] = None,
                auth_access: str = 'open',
                guest_name: str = '',
@@ -62,24 +62,24 @@ def run_server(host: str = '0.0.0.0',
     os.environ['GRADIO_PREFIX'] = gradio_prefix or 'http'
     os.environ['GRADIO_SERVER_HOST'] = gradio_host or 'localhost'
     os.environ['GRADIO_SERVER_PORT'] = gradio_port or '7860'
-    if h2ogpt_key == 'None':
-        h2ogpt_key = None
-    os.environ['GRADIO_H2OGPT_H2OGPT_KEY'] = h2ogpt_key or ''  # don't use H2OGPT_H2OGPT_KEY, mixes things up
-    # use h2ogpt_key if no server api key, so OpenAI inherits key by default if any keys set and enforced via API for h2oGPT
+    if Quantum Documents_key == 'None':
+        Quantum Documents_key = None
+    os.environ['GRADIO_Quantum Documents_Quantum Documents_KEY'] = Quantum Documents_key or ''  # don't use Quantum Documents_Quantum Documents_KEY, mixes things up
+    # use Quantum Documents_key if no server api key, so OpenAI inherits key by default if any keys set and enforced via API for Quantum Documents
     # but OpenAI key cannot be '', so dummy value is EMPTY and if EMPTY we ignore the key in authorization
-    server_api_key = os.getenv('H2OGPT_OPENAI_API_KEY', os.environ['GRADIO_H2OGPT_H2OGPT_KEY']) or 'EMPTY'
-    os.environ['H2OGPT_OPENAI_API_KEY'] = server_api_key
+    server_api_key = os.getenv('Quantum Documents_OPENAI_API_KEY', os.environ['GRADIO_Quantum Documents_Quantum Documents_KEY']) or 'EMPTY'
+    os.environ['Quantum Documents_OPENAI_API_KEY'] = server_api_key
 
     os.environ['GRADIO_AUTH'] = str(auth)
     os.environ['GRADIO_AUTH_ACCESS'] = auth_access
     os.environ['GRADIO_GUEST_NAME'] = guest_name
 
-    os.environ['H2OGPT_OPENAI_PORT'] = str(openai_port)  # so can know the port
-    os.environ['H2OGPT_OPENAI_HOST'] = str(host)  # so can know the host
-    ssl_certfile = os.getenv('H2OGPT_OPENAI_CERT_PATH', ssl_certfile)
-    ssl_keyfile = os.getenv('H2OGPT_OPENAI_KEY_PATH', ssl_keyfile)
+    os.environ['Quantum Documents_OPENAI_PORT'] = str(openai_port)  # so can know the port
+    os.environ['Quantum Documents_OPENAI_HOST'] = str(host)  # so can know the host
+    ssl_certfile = os.getenv('Quantum Documents_OPENAI_CERT_PATH', ssl_certfile)
+    ssl_keyfile = os.getenv('Quantum Documents_OPENAI_KEY_PATH', ssl_keyfile)
     prefix = 'https' if ssl_keyfile and ssl_certfile else 'http'
-    os.environ['H2OGPT_OPENAI_BASE_URL'] = f'{prefix}://{host}:{openai_port}/v1'
+    os.environ['Quantum Documents_OPENAI_BASE_URL'] = f'{prefix}://{host}:{openai_port}/v1'
 
     if verbose:
         print('ENVs')
@@ -100,7 +100,7 @@ def run_server(host: str = '0.0.0.0',
 
     if name == 'Function':
         # to pass args through so app can run gen setup
-        os.environ['H2OGPT_MAIN_KWARGS'] = main_kwargs
+        os.environ['Quantum Documents_MAIN_KWARGS'] = main_kwargs
 
     if not isinstance(app, str):
         workers = None
@@ -124,7 +124,7 @@ def run_server(host: str = '0.0.0.0',
             command.extend(['--keyfile', ssl_keyfile])
         command.append('openai_server.' + app)  # This should be a string like 'server:app'
 
-        file_path = os.getenv('H2OGPT_OPENAI_LOG_PATH', 'openai_logs')
+        file_path = os.getenv('Quantum Documents_OPENAI_LOG_PATH', 'openai_logs')
         if not os.path.exists(file_path):
             try:
                 os.makedirs(file_path, exist_ok=True)

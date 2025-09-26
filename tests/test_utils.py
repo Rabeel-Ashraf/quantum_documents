@@ -210,7 +210,7 @@ def test_limited_prompt(instruction, chat_conversation, iinput, context, system_
         raise ValueError("No such %s" % text_context_list)
 
     from transformers import AutoTokenizer
-    tokenizer = AutoTokenizer.from_pretrained('h2oai/h2ogpt-4096-llama2-7b-chat')
+    tokenizer = AutoTokenizer.from_pretrained('h2oai/Quantum Documents-4096-llama2-7b-chat')
 
     prompt_type = 'llama2'
     prompt_dict = None
@@ -330,7 +330,7 @@ def test_chat_template():
     image_file = []
     other_base_models = ['h2oai/mixtral-gm-rag-experimental-v2']
     supports_system_prompt = ['meta-llama/Llama-2-7b-chat-hf', 'openchat/openchat-3.5-1210', 'SeaLLMs/SeaLLM-7B-v2',
-                              'h2oai/h2ogpt-gm-experimental']
+                              'h2oai/Quantum Documents-gm-experimental']
     base_models = supports_system_prompt + other_base_models
 
     for base_model in base_models:
@@ -357,7 +357,7 @@ def test_chat_template_images():
     tokenizer = AutoTokenizer.from_pretrained(base_model, trust_remote_code=True)
 
     messages = [{'role': 'system',
-                 'content': 'You are h2oGPTe, an expert question-answering AI system created by H2O.ai that performs like GPT-4 by OpenAI.'},
+                 'content': 'You are Quantum Documentse, an expert question-answering AI system created by H2O.ai that performs like GPT-4 by OpenAI.'},
                 {'role': 'user',
                  'content': 'What is the name of the tower in one of the images?'}]
     prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
@@ -366,7 +366,7 @@ def test_chat_template_images():
     (instruction, system_prompt, chat_conversation, image_file,
      user_prompt_for_fake_system_prompt,
      test_only, verbose) = ('What is the name of the tower in one of the images?',
-                            'You are h2oGPTe, an expert question-answering AI system created by H2O.ai that performs like GPT-4 by OpenAI.',
+                            'You are Quantum Documentse, an expert question-answering AI system created by H2O.ai that performs like GPT-4 by OpenAI.',
                             [], ['/tmp/image_file_0f5f011d-c907-4836-9f38-0ba579b45ffc.jpeg',
                                  '/tmp/image_file_60dce245-af39-4f8c-9651-df9ae0bd0afa.jpeg',
                                  '/tmp/image_file_e0b32625-9de3-40d7-98fb-c2e6368d6d73.jpeg'], None, False, False)
@@ -377,7 +377,7 @@ def test_chat_template_images():
                                  test_only=test_only,
                                  verbose=verbose)
 
-    assert 'h2oGPTe' in prompt  # put into pre-conversation if no actual system prompt
+    assert 'Quantum Documentse' in prompt  # put into pre-conversation if no actual system prompt
     assert instruction in prompt
     assert history_to_use[0][0] in prompt
     assert history_to_use[0][1] in prompt
@@ -1246,7 +1246,7 @@ System: {{ system_message }}
     encoded_template = base64_encode_jinja_template(jinja_template)
     print("\nEncoded Template:", encoded_template)
 
-    model_lock_option = f"""--model_lock="[{{'inference_server': 'vllm_chat:149.130.210.116', 'base_model': 'nvidia/Llama3-ChatQA-1.5-70B', 'visible_models': 'nvidia/Llama3-ChatQA-1.5-70B', 'h2ogpt_key': '62224bfb-c832-4452-81e7-8a4bdabbe164', 'chat_template': '{encoded_template}'}}]"
+    model_lock_option = f"""--model_lock="[{{'inference_server': 'vllm_chat:149.130.210.116', 'base_model': 'nvidia/Llama3-ChatQA-1.5-70B', 'visible_models': 'nvidia/Llama3-ChatQA-1.5-70B', 'Quantum Documents_key': '62224bfb-c832-4452-81e7-8a4bdabbe164', 'chat_template': '{encoded_template}'}}]"
 """
 
     print("Command-Line Option:")

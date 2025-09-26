@@ -182,7 +182,7 @@ def make_db_main(use_openai_embedding: bool = False,
 
     # once db is made, can use in generate.py like:
 
-    python generate.py --base_model=h2oai/h2ogpt-oig-oasst1-512-6_9b --langchain_mode=UserData
+    python generate.py --base_model=h2oai/Quantum Documents-oig-oasst1-512-6_9b --langchain_mode=UserData
 
     or zip-up the db_dir_UserData and share:
 
@@ -247,7 +247,7 @@ def make_db_main(use_openai_embedding: bool = False,
                     'qdrant' for a Qdrant server or an in-memory instance
     :param selected_file_types: File types (by extension) to include if passing user_path
        For a list of possible values, see:
-       https://github.com/h2oai/h2ogpt/blob/main/docs/README_LangChain.md#shoosing-document-types
+       https://github.com/h2oai/Quantum Documents/blob/main/docs/README_LangChain.md#shoosing-document-types
        e.g. --selected_file_types="['pdf', 'html', 'htm']"
     :return: None
     """

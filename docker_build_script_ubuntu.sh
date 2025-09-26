@@ -3,7 +3,7 @@ set -o pipefail
 set -ex
 
 export DEBIAN_FRONTEND=noninteractive
-export PATH=/h2ogpt_conda/bin:$PATH
+export PATH=/Quantum Documents_conda/bin:$PATH
 export HOME=/workspace
 export CUDA_HOME=/usr/local/cuda-12.1
 export PIP_EXTRA_INDEX_URL="https://download.pytorch.org/whl/cu121 https://huggingface.github.io/autogptq-index/whl/cu121"
@@ -56,14 +56,14 @@ apt-get upgrade -y
 
 # Install conda
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
-    mkdir -p /h2ogpt_conda && \
-    bash ./Miniconda3-latest-Linux-x86_64.sh -b -u -p /h2ogpt_conda && \
+    mkdir -p /Quantum Documents_conda && \
+    bash ./Miniconda3-latest-Linux-x86_64.sh -b -u -p /Quantum Documents_conda && \
     conda update -n base conda && \
-    source /h2ogpt_conda/etc/profile.d/conda.sh && \
-    conda create -n h2ogpt -y && \
-    conda activate h2ogpt && \
+    source /Quantum Documents_conda/etc/profile.d/conda.sh && \
+    conda create -n Quantum Documents -y && \
+    conda activate Quantum Documents && \
     conda install python=3.10 pygobject weasyprint -c conda-forge -y && \
-    echo "h2oGPT conda env: $CONDA_DEFAULT_ENV"
+    echo "Quantum Documents conda env: $CONDA_DEFAULT_ENV"
 
 # if building for CPU, would remove CMAKE_ARGS and avoid GPU image as base image
 # Choose llama_cpp_python ARGS for your system according to [llama_cpp_python backend documentation](https://github.com/abetlen/llama-cpp-python?tab=readme-ov-file#supported-backends), e.g. for CUDA:
@@ -75,7 +75,7 @@ export FORCE_CMAKE=1
 export GPLOK=1
 bash docs/linux_install.sh
 
-chmod -R a+rwx /h2ogpt_conda
+chmod -R a+rwx /Quantum Documents_conda
 
 # setup tiktoken cache
 export TIKTOKEN_CACHE_DIR=/workspace/tiktoken_cache
@@ -114,13 +114,13 @@ print('Done!')
 
 # Open Web UI
 conda create -n open-webui -y
-source /h2ogpt_conda/etc/profile.d/conda.sh
+source /Quantum Documents_conda/etc/profile.d/conda.sh
 conda activate open-webui
 conda install python=3.11 -y
 echo "open-webui conda env: $CONDA_DEFAULT_ENV"
 
-chmod -R a+rwx /h2ogpt_conda
-pip install https://h2o-release.s3.amazonaws.com/h2ogpt/open_webui-0.3.8-py3-none-any.whl
+chmod -R a+rwx /Quantum Documents_conda
+pip install https://h2o-release.s3.amazonaws.com/Quantum Documents/open_webui-0.3.8-py3-none-any.whl
 
 # Track build info
 cp /workspace/build_info.txt /build_info.txt
@@ -131,7 +131,7 @@ chmod -R a+rwx /workspace/save
 # Cleanup
 rm -rf /workspace/Miniconda3-py310_23.1.0-1-Linux-x86_64.sh
 rm -rf /workspace/.cache/pip
-rm -rf /h2ogpt_conda/pkgs
+rm -rf /Quantum Documents_conda/pkgs
 rm -rf /workspace/spaces
 rm -rf /workspace/benchmarks
 rm -rf /workspace/data
@@ -142,12 +142,12 @@ rm -rf /workspace/notebooks
 rm -rf /workspace/papers
 
 # Hotswap vulnerable dependencies
-wget https://s3.amazonaws.com/artifacts.h2o.ai/deps/h2ogpt/ubuntu20.04/apparmor_4.0.0~alpha2-0ubuntu5_amd64.deb
-wget https://s3.amazonaws.com/artifacts.h2o.ai/deps/h2ogpt/ubuntu20.04/libapparmor1_4.0.0~alpha2-0ubuntu5_amd64.deb
+wget https://s3.amazonaws.com/artifacts.h2o.ai/deps/Quantum Documents/ubuntu20.04/apparmor_4.0.0~alpha2-0ubuntu5_amd64.deb
+wget https://s3.amazonaws.com/artifacts.h2o.ai/deps/Quantum Documents/ubuntu20.04/libapparmor1_4.0.0~alpha2-0ubuntu5_amd64.deb
 dpkg -i libapparmor1_4.0.0~alpha2-0ubuntu5_amd64.deb
 dpkg -i apparmor_4.0.0~alpha2-0ubuntu5_amd64.deb
 rm -rf libapparmor1_4*.deb apparmor_4*.deb
 
-wget https://s3.amazonaws.com/artifacts.h2o.ai/deps/h2ogpt/ubuntu20.04/libarchive13_3.6.2-1ubuntu1_amd64.deb
+wget https://s3.amazonaws.com/artifacts.h2o.ai/deps/Quantum Documents/ubuntu20.04/libarchive13_3.6.2-1ubuntu1_amd64.deb
 dpkg -i libarchive13_3.6.2-1ubuntu1_amd64.deb
 rm -rf libarchive13_3.6.2-1ubuntu1_amd64.deb

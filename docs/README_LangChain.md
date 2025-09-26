@@ -1,4 +1,4 @@
-## h2oGPT integration with LangChain and Chroma/FAISS/Qdrant/Weaviate for Vector DB
+## Quantum Documents integration with LangChain and Chroma/FAISS/Qdrant/Weaviate for Vector DB
 
 Our goal is to make it easy to have private offline document question-answer using LLMs.
 
@@ -149,7 +149,7 @@ Please upload the zip separately for now.
    - `ScrapeWithHttp` : Async Web Scraping using aiohttp (slower than PlayWright)
 
 * Timing
-  * Typical page like passing `https://github.com/h2oai/h2ogpt` takes about 300 seconds to process at a default depth of 1 with about 140 pages.
+  * Typical page like passing `https://github.com/h2oai/Quantum Documents` takes about 300 seconds to process at a default depth of 1 with about 140 pages.
   * No good progress indicators from these packages, so just have to wait.
 * Depth:
   * Set env `CRAWL_DEPTH=<depth>` to control depth for some integer `<depth>`, where 0 means only the actual page, 1 means that page + all links on that page, etc.  `CRAWL_DEPTH=1` by default to avoid excessive crawling.
@@ -169,7 +169,7 @@ Please upload the zip separately for now.
 
 ### Adding new file types
 
-The function `file_to_doc` controls the ingestion, with [allowed ones listed](https://github.com/h2oai/h2ogpt/blob/1184f057088743599e2d5241329551b8f7f5320d/src/gpt_langchain.py#L1021-L1035).   If one wants to add a new file type, add it to the list `file_types`, and then add an entry in `file_to_doc()` function.
+The function `file_to_doc` controls the ingestion, with [allowed ones listed](https://github.com/h2oai/Quantum Documents/blob/1184f057088743599e2d5241329551b8f7f5320d/src/gpt_langchain.py#L1021-L1035).   If one wants to add a new file type, add it to the list `file_types`, and then add an entry in `file_to_doc()` function.
 
 Metadata is added using `add_meta` function, and other metadata, like chunk_id, is added after chunking.  One could add a new step to add metadata to `page_content` to each langchain `Document`.
 
@@ -178,25 +178,25 @@ Metadata is added using `add_meta` function, and other metadata, like chunk_id, 
 To use some example databases (will overwrite UserData make above unless change options) and run generate after, do:
 ```bash
 python src/make_db.py --download_some=True
-python generate.py --base_model=HuggingFaceH4/zephyr-7b-beta --langchain_mode=UserData --langchain_modes="['UserData', 'wiki', 'MyData', 'github h2oGPT', 'DriverlessAI docs']"
+python generate.py --base_model=HuggingFaceH4/zephyr-7b-beta --langchain_mode=UserData --langchain_modes="['UserData', 'wiki', 'MyData', 'github Quantum Documents', 'DriverlessAI docs']"
 ```
 which downloads example databases.  This obtains files from some [pre-generated databases](https://huggingface.co/datasets/h2oai/db_dirs).  A large Wikipedia database is also available.
 
 To build the database first outside chatbot, then run generate after, do:
 ```bash
 python src/make_db.py
-python generate.py --base_model=h2oai/h2ogpt-oig-oasst1-512-6_9b --langchain_mode=UserData
+python generate.py --base_model=h2oai/Quantum Documents-oig-oasst1-512-6_9b --langchain_mode=UserData
 ```
 
 To add data to the existing database, then run generate after, do:
 ```bash
 python src/make_db.py --add_if_exists=True
-python generate.py --base_model=h2oai/h2ogpt-oig-oasst1-512-6_9b --langchain_mode=UserData
+python generate.py --base_model=h2oai/Quantum Documents-oig-oasst1-512-6_9b --langchain_mode=UserData
 ```
 
 By default, `generate.py` will load an existing UserData database and add any documents added to user_path or change any files that have changed.  To avoid detecting any new files, just avoid passing --user_path=user_path, which sets it to None, i.e.:
 ```bash
-python generate.py --base_model=h2oai/h2ogpt-oig-oasst1-512-6_9b --langchain_mode=UserData
+python generate.py --base_model=h2oai/Quantum Documents-oig-oasst1-512-6_9b --langchain_mode=UserData
 ```
 which will avoid using `user_path` since it is no longer passed.  Otherwise, when passed, any new files will be added or changed (by hash) files will be updated (delete old sources and add new sources).
 
@@ -232,7 +232,7 @@ docker run \
        -v "${HOME}"/save:/workspace/save \
        -v "${HOME}"/user_path:/workspace/user_path \
        -v "${HOME}"/db_dir_UserData:/workspace/db_dir_UserData \
-       gcr.io/vorvan/h2oai/h2ogpt-runtime:0.2.1 /workspace/src/make_db.py --verbose --use_unstructured_pdf=False --enable_pdf_ocr=False --hf_embedding_model=BAAI/bge-small-en-v1.5 --cut_distance=10000
+       gcr.io/vorvan/h2oai/Quantum Documents-runtime:0.2.1 /workspace/src/make_db.py --verbose --use_unstructured_pdf=False --enable_pdf_ocr=False --hf_embedding_model=BAAI/bge-small-en-v1.5 --cut_distance=10000
 ```
 This will consume about 100 PDFs per minute on average, and embedding part takes about 5 minutes for 300 PDFs.  For multilingual, use `BAAI/bge-m3` that uses more memory, so you may need to set ENV `CHROMA_MAX_BATCH_SIZE=1` or similar values to avoid GPU OOM.
 
@@ -255,11 +255,11 @@ or choose 13B.  And watch out for the use of whitespace.  For `langchain_mode_pa
 
 ### Per-User DataBase
 
-See discussion [here](https://github.com/h2oai/h2ogpt/issues/1550#issuecomment-2059793978).
+See discussion [here](https://github.com/h2oai/Quantum Documents/issues/1550#issuecomment-2059793978).
 
 E.g. a folder might already have some databases, like for user *jon* be:
 ```text
-(h2ogpt) jon@pseudotensor:~/h2ogpt$ ls -alrt users/jon/
+(Quantum Documents) jon@pseudotensor:~/Quantum Documents$ ls -alrt users/jon/
 total 84
 drwx------   2 jon jon  4096 Apr  8 01:49 db_dir_yuppy/
 drwx------   2 jon jon  4096 Apr  8 01:49 db_dir_xxx/
@@ -283,7 +283,7 @@ python src/make_db.py --user_path=user_path_jon --collection_name=JonData --lang
 
 Then you'll have:
 ```text
-(h2ogpt) jon@pseudotensor:~/h2ogpt$ ls -alrt users/jon/db_dir_JonData/
+(Quantum Documents) jon@pseudotensor:~/Quantum Documents$ ls -alrt users/jon/db_dir_JonData/
 total 264
 drwx------ 13 jon jon   4096 Apr 16 12:28 ../
 drwx------  2 jon jon   4096 Apr 16 12:28 d7ccacb6-93fe-4380-9340-b7f5edffb655/
@@ -366,7 +366,7 @@ The default embedding for GPU is `instructor-large` since most accurate, however
 
 ### Note about FAISS
 
-FAISS filtering is not supported in h2oGPT yet, ask if this is desired to be added.  So subset by document does not function for FAISS.
+FAISS filtering is not supported in Quantum Documents yet, ask if this is desired to be added.  So subset by document does not function for FAISS.
 
 ### Using Weaviate
 
@@ -443,7 +443,7 @@ curl -o docker-compose.yml "https://configuration.weaviate.io/v2/docker-compose/
 Simply pass the `--db_type=weaviate` argument. For example:
 ```bash
 python src/make_db.py --db_type=weaviate
-python generate.py --base_model=h2oai/h2ogpt-oig-oasst1-512-6_9b \
+python generate.py --base_model=h2oai/Quantum Documents-oig-oasst1-512-6_9b \
    --langchain_mode=UserData \
    --db_type=weaviate
 ```
@@ -452,7 +452,7 @@ will use an embedded Weaviate instance.
 If you have a Weaviate instance hosted at say http://localhost:8080, then you need to define the `WEAVIATE_URL` environment variable before running the scripts:
 ```
 WEAVIATE_URL=http://localhost:8080 python src/make_db.py --db_type=weaviate
-WEAVIATE_URL=http://localhost:8080 python generate.py --base_model=h2oai/h2ogpt-oig-oasst1-512-6_9b \
+WEAVIATE_URL=http://localhost:8080 python generate.py --base_model=h2oai/Quantum Documents-oig-oasst1-512-6_9b \
    --langchain_mode=UserData \
    --db_type=weaviate
 ```
@@ -464,9 +464,9 @@ Similarly, if you had set up your Weaviate instance with a username and password
 
 Notes:
 
-* Since h2oGPT is focused on privacy, connecting to Weaviate via WCS is not supported as that will expose your data to a 3rd party
+* Since Quantum Documents is focused on privacy, connecting to Weaviate via WCS is not supported as that will expose your data to a 3rd party
 * Weaviate doesn't know about persistent directories throughout code and maintains locations based on the collection name
-* Weaviate doesn't support query of all metadata except via similarity search up to 10k documents, so a full list of sources is not possible in h2oGPT UI for `Update UI with Document(s) from DB` or `Show Sources from DB`
+* Weaviate doesn't support query of all metadata except via similarity search up to 10k documents, so a full list of sources is not possible in Quantum Documents UI for `Update UI with Document(s) from DB` or `Show Sources from DB`
 
 ### Using Qdrant
 
@@ -481,18 +481,18 @@ Set the `db_type` option value to `qdrant`:
 
 ```bash
 python src/make_db.py --db_type=qdrant
-python generate.py --base_model=h2oai/h2ogpt-oig-oasst1-512-6_9b \
+python generate.py --base_model=h2oai/Quantum Documents-oig-oasst1-512-6_9b \
    --langchain_mode=UserData \
    --db_type=qdrant
 ```
 
-Qdrant's Python client also supports in-memory instances for prototyping, which is the default in H2OGPT.
+Qdrant's Python client also supports in-memory instances for prototyping, which is the default in Quantum Documents.
 
 You can use environment variables to configure your Qdrant connection. For example:
 
 ```
 QDRANT_URL=http://localhost:8080 QDRANT_API_KEY="<YOUR_KEY>" python src/make_db.py --db_type=qdrant
-QDRANT_URL=http://localhost:8080 QDRANT_API_KEY="<YOUR_KEY>" python generate.py --base_model=h2oai/h2ogpt-oig-oasst1-512-6_9b \
+QDRANT_URL=http://localhost:8080 QDRANT_API_KEY="<YOUR_KEY>" python generate.py --base_model=h2oai/Quantum Documents-oig-oasst1-512-6_9b \
    --langchain_mode=UserData \
    --db_type=qdrant
 ```
@@ -528,9 +528,9 @@ It's a work in progress to add other persistent databases and to have MyData per
 For links to direct to the document and download to your local machine, the source documents must still be present on the host system where the database was created, e.g. `user_path` for `UserData` by default.  If the database alone is copied somewhere else, that host won't have access to the documents.  URL links like Wikipedia will still work normally on any host.
 
 
-#### What is h2oGPT's LangChain integration like?
+#### What is Quantum Documents's LangChain integration like?
 
-* [PrivateGPT](https://github.com/imartinez/privateGPT) .  By comparison, h2oGPT has:
+* [PrivateGPT](https://github.com/imartinez/privateGPT) .  By comparison, Quantum Documents has:
   * UI with chats export, import, selection, regeneration, and undo
   * UI and document Q/A, upload, download, and list
   * Parallel ingest of documents, using GPUs if present for vector embeddings, with progress bar in stdout
@@ -544,7 +544,7 @@ For links to direct to the document and download to your local machine, the sour
   * UI with side-by-side model comparisons against two models at a time with independent chat streams
   * Fine-tuning framework with QLORA 4-bit, 8-bit, 16-bit GPU fine-tuning or CPU fine-tuning
 
-* [localGPT](https://github.com/PromtEngineer/localGPT).  By comparison, h2oGPT has similar benefits as compared to localGPT.  Both h2oGPT and localGPT can use GPUs for LLMs and embeddings, including the latest Vicuna or WizardLM models.
+* [localGPT](https://github.com/PromtEngineer/localGPT).  By comparison, Quantum Documents has similar benefits as compared to localGPT.  Both Quantum Documents and localGPT can use GPUs for LLMs and embeddings, including the latest Vicuna or WizardLM models.
 
 * [Quiver](https://github.com/StanGirard/quivr). By comparison, Quiver requires docker but also supports audio and video and currently only supports OpenAI models and embeddings.
 
@@ -554,9 +554,9 @@ For links to direct to the document and download to your local machine, the sour
 
 * [GPT4-PDF-Chatbot-LangChain](https://github.com/mayooear/gpt4-pdf-chatbot-langchain).  Uses OpenAI, pinecone, etc. No longer maintained.
 
-* [Vault-AI](https://github.com/pashpashpash/vault-ai) but h2oGPT is fully private and open-source by not using OpenAI or [pinecone](https://www.pinecone.io/).
+* [Vault-AI](https://github.com/pashpashpash/vault-ai) but Quantum Documents is fully private and open-source by not using OpenAI or [pinecone](https://www.pinecone.io/).
 
-* [DB-GPT](https://github.com/csunny/DB-GPT) but h2oGPT is fully commercially viable by not using [Vicuna](https://lmsys.org/blog/2023-03-30-vicuna/) (LLaMa based with GPT3.5 training data).
+* [DB-GPT](https://github.com/csunny/DB-GPT) but Quantum Documents is fully commercially viable by not using [Vicuna](https://lmsys.org/blog/2023-03-30-vicuna/) (LLaMa based with GPT3.5 training data).
 
 * [ChatBox](https://github.com/Bin-Huang/chatbox) has ability to collaborate.
 
@@ -568,7 +568,7 @@ For links to direct to the document and download to your local machine, the sour
 
 * [KhoJ](https://github.com/khoj-ai/khoj) but also access from emacs or Obsidian.
 
-* [ChatPDF](https://www.chatpdf.com/) but h2oGPT is open-source and private and many more data types.
+* [ChatPDF](https://www.chatpdf.com/) but Quantum Documents is open-source and private and many more data types.
 
 * [TryGloo](https://www.trygloo.com/) Semantic Search and Classification.
 
@@ -576,43 +576,43 @@ For links to direct to the document and download to your local machine, the sour
 
 * [RFPBot](https://www.datarobot.com/platform/generative-ai/).  Confidence score, slack integration.
 
-* [Sharly](https://www.sharly.ai/) but h2oGPT is open-source and private and many more data types.  Sharly and h2oGPT both allow sharing work through UserData shared collection.
+* [Sharly](https://www.sharly.ai/) but Quantum Documents is open-source and private and many more data types.  Sharly and Quantum Documents both allow sharing work through UserData shared collection.
 
-* [ChatDoc](https://chatdoc.com/) but h2oGPT is open-source and private. ChatDoc shows a nice side-by-side view with the doc on one side and chat on the other.  Select a specific doc or text in the doc for question/summary.
+* [ChatDoc](https://chatdoc.com/) but Quantum Documents is open-source and private. ChatDoc shows a nice side-by-side view with the doc on one side and chat on the other.  Select a specific doc or text in the doc for question/summary.
 
 * [Casalioy](https://github.com/su77ungr/casalioy) with a focus on air-gap with docker, otherwise like older privateGPT.
 
-* [Perplexity](https://www.perplexity.ai/) but h2oGPT is open-source and private, with similar control over sources.
+* [Perplexity](https://www.perplexity.ai/) but Quantum Documents is open-source and private, with similar control over sources.
 
-* [HayStack](https://github.com/deepset-ai/haystack) but h2oGPT is open-source and private.  Haystack is pivoted to LLMs from NLP tasks, so well-developed documentation etc.  But mostly LangChain clones.
+* [HayStack](https://github.com/deepset-ai/haystack) but Quantum Documents is open-source and private.  Haystack is pivoted to LLMs from NLP tasks, so well-developed documentation etc.  But mostly LangChain clones.
 
-* [Empler](https://www.empler.ai/) but h2oGPT is open-source and private.  Empler has nice AI and content control and focuses on use cases like marketing.
+* [Empler](https://www.empler.ai/) but Quantum Documents is open-source and private.  Empler has nice AI and content control and focuses on use cases like marketing.
 
-* [Writesonic](https://writesonic.com/) but h2oGPT is open-source and private.  Writesonic has better image/video control.
+* [Writesonic](https://writesonic.com/) but Quantum Documents is open-source and private.  Writesonic has better image/video control.
 
 * [HuggingChat](https://huggingface.co/chat/) Not for commercial use, uses LLaMa and GPT3.5 training data, so violates ToS.
 
-* [Bard](https://bard.google.com/) but h2oGPT is open-source and private.  Bard has better automatic link and image use.
+* [Bard](https://bard.google.com/) but Quantum Documents is open-source and private.  Bard has better automatic link and image use.
 
-* [ChatGPT](https://chat.openai.com/) but h2oGPT is open-source and private.  ChatGPT code interpreter has better image, video, etc. handling.
+* [ChatGPT](https://chat.openai.com/) but Quantum Documents is open-source and private.  ChatGPT code interpreter has better image, video, etc. handling.
 
 * [ChatGPT-Next-Web](https://github.com/Yidadaa/ChatGPT-Next-Web) like local ChatGPT.
 
-* [Bing](https://www.bing.com/) but h2oGPT is open-source and private.  Bing has excellent search queries and handling of results.
+* [Bing](https://www.bing.com/) but Quantum Documents is open-source and private.  Bing has excellent search queries and handling of results.
 
-* [Bearly](https://bearly.ai/) but h2oGPT is open-source and private.  Bearly focuses on creative content creation.
+* [Bearly](https://bearly.ai/) but Quantum Documents is open-source and private.  Bearly focuses on creative content creation.
 
-* [Poe](https://poe.com/) but h2oGPT is open-source and private.  Poe also has an immediate info wall requiring a phone number.
+* [Poe](https://poe.com/) but Quantum Documents is open-source and private.  Poe also has an immediate info wall requiring a phone number.
 
-* [WiseOne](https://wiseone.io/) but h2oGPT is open-source and private.  WiseOne is a reading helper.
+* [WiseOne](https://wiseone.io/) but Quantum Documents is open-source and private.  WiseOne is a reading helper.
 
-* [Poet.ly or Aify](https://aify.co/) but h2oGPT is open-source and private.  Poet.ly focuses on writing articles.
+* [Poet.ly or Aify](https://aify.co/) but Quantum Documents is open-source and private.  Poet.ly focuses on writing articles.
 
-* [PDFGPT.ai](https://pdfgpt.io/) but h2oGPT is open-source and private.  Only PDF and on the expensive side.
+* [PDFGPT.ai](https://pdfgpt.io/) but Quantum Documents is open-source and private.  Only PDF and on the expensive side.
 
-* [BratGPT](https://bratgpt.com/) but h2oGPT is open-source and private.  Focuses on uncensored chat.
+* [BratGPT](https://bratgpt.com/) but Quantum Documents is open-source and private.  Focuses on uncensored chat.
 
-* [Halist](https://halist.ai/) but h2oGPT is open-source and private.  Uses ChatGPT but does not store chats, but can already do that now with ChatGPT.
+* [Halist](https://halist.ai/) but Quantum Documents is open-source and private.  Uses ChatGPT but does not store chats, but can already do that now with ChatGPT.
 
 * [UltimateGPT Toolkit](https://play.google.com/store/apps/details?id=com.neuralminds.ultimategptoolkit&ref=producthunt&pli=1) Android plugin for ChatGPT.
 
@@ -620,34 +620,34 @@ For links to direct to the document and download to your local machine, the sour
 
 * [GPTMana](https://play.google.com/store/apps/details?id=com.chatgpt.gptmana) Android Plugin.
 
-* [Genie](https://www.genieai.co/) but h2oGPT is open-source and private.  Focuses on legal assistant.
+* [Genie](https://www.genieai.co/) but Quantum Documents is open-source and private.  Focuses on legal assistant.
 
-* [ResearchAI](https://research-ai.io/) but h2oGPT is open-source and private.  Focuses on research helper with tools.
+* [ResearchAI](https://research-ai.io/) but Quantum Documents is open-source and private.  Focuses on research helper with tools.
 
-* [ChatOn](https://apps.apple.com/us/app/chaton) but h2oGPT is open-source and private.  ChatOn focuses on mobile, iPhone app.
+* [ChatOn](https://apps.apple.com/us/app/chaton) but Quantum Documents is open-source and private.  ChatOn focuses on mobile, iPhone app.
 
-* [Ask](https://iask.ai/) but h2oGPT is open-source and private.  Similar content control.
+* [Ask](https://iask.ai/) but Quantum Documents is open-source and private.  Similar content control.
 
-* [Petey](https://apps.apple.com/us/app/petey-ai-assistant/id6446047813) but h2oGPT is open-source and private.  Apple Watch.
+* [Petey](https://apps.apple.com/us/app/petey-ai-assistant/id6446047813) but Quantum Documents is open-source and private.  Apple Watch.
 
-* [QuickGPT](https://www.quickgpt.io/) but h2oGPT is open-source and private.  QuickGPT is ChatGPT for Whatsapp.
+* [QuickGPT](https://www.quickgpt.io/) but Quantum Documents is open-source and private.  QuickGPT is ChatGPT for Whatsapp.
 
-* [Raitoai](https://www.raitoai.com/) but h2oGPT is open-source and private.  Raito.ai focuses on helping writers.
+* [Raitoai](https://www.raitoai.com/) but Quantum Documents is open-source and private.  Raito.ai focuses on helping writers.
 
-* [AIChat](https://deepai.org/chat) but h2oGPT is open-source and private.  Heavy on ads, avoid.
+* [AIChat](https://deepai.org/chat) but Quantum Documents is open-source and private.  Heavy on ads, avoid.
 
-* [AnonChatGPT](https://anonchatgpt.com/) but h2oGPT is open-source and private.  Anonymous use of ChatGPT, i.e. no account required.
+* [AnonChatGPT](https://anonchatgpt.com/) but Quantum Documents is open-source and private.  Anonymous use of ChatGPT, i.e. no account required.
 
-* [GPTPro](https://play.google.com/store/apps/details?id=com.dfmv.gptpro&hl=en_US&gl=US) but h2oGPT is open-source and private.  GPTPro focuses on Android.
+* [GPTPro](https://play.google.com/store/apps/details?id=com.dfmv.gptpro&hl=en_US&gl=US) but Quantum Documents is open-source and private.  GPTPro focuses on Android.
 
-* [Rio](https://www.oziku.tech/rio-openai-chatgpt-assistant) but h2oGPT is open-source and private.  Browser-based assistant.
+* [Rio](https://www.oziku.tech/rio-openai-chatgpt-assistant) but Quantum Documents is open-source and private.  Browser-based assistant.
 
-* [CommanderGPT](https://www.commandergpt.app/) but h2oGPT is open-source and private.  CommanderGPT focuses on MAC with a few tasks like image generation, translation, YouTube query, etc.
+* [CommanderGPT](https://www.commandergpt.app/) but Quantum Documents is open-source and private.  CommanderGPT focuses on MAC with a few tasks like image generation, translation, YouTube query, etc.
 
-* [ThreeSigma](https://www.threesigma.ai/) but h2oGPT is open-source and private.  Focuses on research tools, and nice page linking.
+* [ThreeSigma](https://www.threesigma.ai/) but Quantum Documents is open-source and private.  Focuses on research tools, and nice page linking.
 
-* [LocalAI](https://github.com/go-skynet/LocalAI) but h2oGPT has document question/answer.  LocalAI has audio transcription, image generation, and a variety of models.
+* [LocalAI](https://github.com/go-skynet/LocalAI) but Quantum Documents has document question/answer.  LocalAI has audio transcription, image generation, and a variety of models.
 
-* [LocalLLaMa](https://github.com/jlonge4/local_llama) but h2oGPT has UI and GPU support. LocalLLaMa is command-line focused.  Like privateGPT.
+* [LocalLLaMa](https://github.com/jlonge4/local_llama) but Quantum Documents has UI and GPU support. LocalLLaMa is command-line focused.  Like privateGPT.
 
 * [ChartGPT](https://www.chartgpt.dev/) Focus on drawing charts.

@@ -46,7 +46,7 @@ def process_file(file_path):
 
 
 def main():
-    default_max_time = int(os.getenv('H2OGPT_AGENT_OPENAI_TIMEOUT', "120"))
+    default_max_time = int(os.getenv('Quantum Documents_AGENT_OPENAI_TIMEOUT', "120"))
 
     parser = argparse.ArgumentParser(description="OpenAI Vision API Script")
     parser.add_argument("--timeout", type=int, default=60, help="Timeout for API calls")
@@ -70,13 +70,13 @@ def main():
     args = parser.parse_args()
 
     if not args.model:
-        args.model = os.getenv('H2OGPT_OPENAI_VISION_MODEL')
+        args.model = os.getenv('Quantum Documents_OPENAI_VISION_MODEL')
     if not args.model:
-        raise ValueError("Model name must be provided via --model or H2OGPT_OPENAI_VISION_MODEL environment variable")
+        raise ValueError("Model name must be provided via --model or Quantum Documents_OPENAI_VISION_MODEL environment variable")
 
-    base_url = os.getenv('H2OGPT_OPENAI_BASE_URL')
-    assert base_url is not None, "H2OGPT_OPENAI_BASE_URL environment variable is not set"
-    server_api_key = os.getenv('H2OGPT_OPENAI_API_KEY', 'EMPTY')
+    base_url = os.getenv('Quantum Documents_OPENAI_BASE_URL')
+    assert base_url is not None, "Quantum Documents_OPENAI_BASE_URL environment variable is not set"
+    server_api_key = os.getenv('Quantum Documents_OPENAI_API_KEY', 'EMPTY')
 
     from openai import OpenAI
     client = OpenAI(base_url=base_url, api_key=server_api_key, timeout=args.timeout)

@@ -57,7 +57,7 @@ def run_tokenizer1(prompt):
     from transformers import AutoTokenizer
 
     t = AutoTokenizer.from_pretrained("distilgpt2")
-    llm_tokenizer = AutoTokenizer.from_pretrained('h2oai/h2ogpt-oig-oasst1-512-6_9b')
+    llm_tokenizer = AutoTokenizer.from_pretrained('h2oai/Quantum Documents-oig-oasst1-512-6_9b')
 
     from InstructorEmbedding import INSTRUCTOR
     emb = INSTRUCTOR('BAAI/bge-large-en-v1.5')

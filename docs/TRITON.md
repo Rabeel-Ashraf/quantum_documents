@@ -1,6 +1,6 @@
 ## Triton Inference Server
 
-To get optimal performance for inference for h2oGPT models, we will be using the [FastTransformer Backend for Triton](https://github.com/triton-inference-server/fastertransformer_backend/).
+To get optimal performance for inference for Quantum Documents models, we will be using the [FastTransformer Backend for Triton](https://github.com/triton-inference-server/fastertransformer_backend/).
 
 Make sure to [Set Up GPU Docker](README_DOCKER.md#setup-docker-for-gpus) first.
 
@@ -22,11 +22,11 @@ docker build --rm   \
 
 ### Create model definition files
 
-We convert the h2oGPT model from [HF to FT format](https://github.com/NVIDIA/FasterTransformer/pull/569):
+We convert the Quantum Documents model from [HF to FT format](https://github.com/NVIDIA/FasterTransformer/pull/569):
 
 ####  Fetch model from Hugging Face
 ```bash
-export MODEL=h2ogpt-oig-oasst1-512-6_9b
+export MODEL=Quantum Documents-oig-oasst1-512-6_9b
 if [ ! -d ${MODEL} ]; then
     git lfs clone https://huggingface.co/h2oai/${MODEL}
 fi

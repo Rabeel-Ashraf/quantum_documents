@@ -2,15 +2,15 @@ nameOverride: ""
 fullnameOverride: ""
 namespaceOverride: ""
 
-h2ogpt:
+Quantum Documents:
   enabled: true
   stack:
-    # -- Run h2oGPT and vLLM on same pod.
+    # -- Run Quantum Documents and vLLM on same pod.
     enabled: false 
   replicaCount: 1
   imagePullSecrets: 
   image:
-    repository: gcr.io/vorvan/h2oai/h2ogpt-runtime
+    repository: gcr.io/vorvan/h2oai/Quantum Documents-runtime
     tag: 
     pullPolicy: IfNotPresent
   initImage:
@@ -56,7 +56,7 @@ h2ogpt:
 
 # -- Example configs to use when not using Model Lock and External LLM
   # overrideConfig:
-  #   base_model: h2oai/h2ogpt-4096-llama2-7b-chat
+  #   base_model: h2oai/Quantum Documents-4096-llama2-7b-chat
   #   use_safetensors: True
   #   prompt_type: llama2
   #   save_dir: /workspace/save/
@@ -86,10 +86,10 @@ h2ogpt:
     hf_embedding_model: "fake"
     openai_server: True
     share: False
-    enforce_h2ogpt_api_key: True
-    enforce_h2ogpt_ui_key: False
+    enforce_Quantum Documents_api_key: True
+    enforce_Quantum Documents_ui_key: False
     # change to something secure for ui access to backend
-    #h2ogpt_api_keys: "['api_key_change_me']"
+    #Quantum Documents_api_keys: "['api_key_change_me']"
     metadata_in_context: ""
     # change or remove if using model hub
     #use_auth_token: "hf_xxxxx"
@@ -203,7 +203,7 @@ vllm:
 
   containerArgs:
     - "--model"
-    - h2oai/h2ogpt-4096-llama2-7b-chat
+    - h2oai/Quantum Documents-4096-llama2-7b-chat
     - "--tokenizer"
     - hf-internal-testing/llama-tokenizer
     - "--tensor-parallel-size"
@@ -252,7 +252,7 @@ lmdeploy:
   replicaCount: 1
 
   image:
-    repository: gcr.io/vorvan/h2oai/h2oai-h2ogpt-lmdeploy
+    repository: gcr.io/vorvan/h2oai/h2oai-Quantum Documents-lmdeploy
     tag:
     pullPolicy: IfNotPresent
 

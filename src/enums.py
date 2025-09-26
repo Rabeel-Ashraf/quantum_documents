@@ -105,7 +105,7 @@ class LangChainMode(Enum):
     WIKI_FULL = "wiki_full"
     USER_DATA = "UserData"
     MY_DATA = "MyData"
-    GITHUB_H2OGPT = "github h2oGPT"
+    GITHUB_Quantum Documents = "github Quantum Documents"
     H2O_DAI_DOCS = "DriverlessAI docs"
 
 
@@ -169,7 +169,7 @@ class LangChainAgent(Enum):
 no_server_str = no_lora_str = no_model_str = '[]'
 
 # from:
-# /home/jon/miniconda3/envs/h2ogpt/lib/python3.10/site-packages/langchain_community/llms/openai.py
+# /home/jon/miniconda3/envs/Quantum Documents/lib/python3.10/site-packages/langchain_community/llms/openai.py
 # but needed since ChatOpenAI doesn't have this information
 gpt_token_mapping = {
     "gpt-4": 8192,
@@ -908,7 +908,7 @@ other_model_state_defaults0 = dict(load_8bit=None, load_4bit=None, low_bit_mode=
 model_state_none0 = dict(model=None, tokenizer=None, device=None,
                          base_model=None, base_model0=None, tokenizer_base_model=None, lora_weights=None,
                          inference_server='', prompt_type='unknown', prompt_dict=None, chat_template=None,
-                         visible_models=None, h2ogpt_key=None,
+                         visible_models=None, Quantum Documents_key=None,
                          json_vllm=None,
                          is_vision_model=None,
                          is_actually_vision_model=None,

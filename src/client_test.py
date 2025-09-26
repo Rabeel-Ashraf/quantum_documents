@@ -3,7 +3,7 @@ Client test.
 
 Run server:
 
-python generate.py  --base_model=h2oai/h2ogpt-oig-oasst1-512-6_9b
+python generate.py  --base_model=h2oai/Quantum Documents-oig-oasst1-512-6_9b
 
 NOTE: For private models, add --use-auth_token=True
 
@@ -18,12 +18,12 @@ python src/client_test.py
 
 For HF spaces:
 
-HOST="https://h2oai-h2ogpt-chatbot.hf.space" python src/client_test.py
+HOST="https://h2oai-Quantum Documents-chatbot.hf.space" python src/client_test.py
 
 Result:
 
-Loaded as API: https://h2oai-h2ogpt-chatbot.hf.space ✔
-{'instruction_nochat': 'Who are you?', 'iinput_nochat': '', 'response': 'I am h2oGPT, a large language model developed by LAION.', 'sources': ''}
+Loaded as API: https://h2oai-Quantum Documents-chatbot.hf.space ✔
+{'instruction_nochat': 'Who are you?', 'iinput_nochat': '', 'response': 'I am Quantum Documents, a large language model developed by LAION.', 'sources': ''}
 
 
 For demo:
@@ -33,11 +33,11 @@ HOST="https://gpt.h2o.ai" python src/client_test.py
 Result:
 
 Loaded as API: https://gpt.h2o.ai ✔
-{'instruction_nochat': 'Who are you?', 'iinput_nochat': '', 'response': 'I am h2oGPT, a chatbot created by LAION.', 'sources': ''}
+{'instruction_nochat': 'Who are you?', 'iinput_nochat': '', 'response': 'I am Quantum Documents, a chatbot created by LAION.', 'sources': ''}
 
 NOTE: Raw output from API for nochat case is a string of a python dict and will remain so if other entries are added to dict:
 
-{'response': "I'm h2oGPT, a large language model by H2O.ai, the visionary leader in democratizing AI.", 'sources': ''}
+{'response': "I'm Quantum Documents, a large language model by H2O.ai, the visionary leader in democratizing AI.", 'sources': ''}
 
 
 """
@@ -83,7 +83,7 @@ def get_args(prompt, prompt_type=None, chat=False,
              prompt_dict=None,
              chat_template=None,
              version=None,
-             h2ogpt_key=None,
+             Quantum Documents_key=None,
              visible_models=None,
              visible_image_models=None,
              image_size=None,
@@ -177,7 +177,7 @@ def get_args(prompt, prompt_type=None, chat=False,
                          image_quality=image_quality,
                          image_guidance_scale=image_guidance_scale,
                          image_num_inference_steps=image_num_inference_steps,
-                         h2ogpt_key=h2ogpt_key,
+                         Quantum Documents_key=Quantum Documents_key,
                          add_search_to_context=add_search_to_context,
                          chat_conversation=chat_conversation,
                          text_context_list=text_context_list,
@@ -234,9 +234,9 @@ def get_args(prompt, prompt_type=None, chat=False,
 
 @pytest.mark.skip(reason="For manual use against some server, no server launched")
 def test_client_basic(prompt_type='human_bot', version=None, visible_models=None, prompt='Who are you?',
-                      h2ogpt_key=None):
+                      Quantum Documents_key=None):
     return run_client_nochat(prompt=prompt, prompt_type=prompt_type, max_new_tokens=50, version=version,
-                             visible_models=visible_models, h2ogpt_key=h2ogpt_key)
+                             visible_models=visible_models, Quantum Documents_key=Quantum Documents_key)
 
 
 """
@@ -249,19 +249,19 @@ time HOST=https://gpt-internal.h2o.ai PYTHONPATH=. pytest -n 20 src/client_test.
 @pytest.mark.parametrize("id", range(20))
 def test_client_basic_benchmark(id, prompt_type='human_bot', version=None):
     return run_client_nochat(prompt="""
-/nfs4/llm/h2ogpt/h2ogpt/bin/python /home/arno/pycharm-2022.2.2/plugins/python/helpers/pycharm/_jb_pytest_runner.py --target src/client_test.py::test_client_basic
+/nfs4/llm/Quantum Documents/Quantum Documents/bin/python /home/arno/pycharm-2022.2.2/plugins/python/helpers/pycharm/_jb_pytest_runner.py --target src/client_test.py::test_client_basic
 Testing started at 8:41 AM ...
-Launching pytest with arguments src/client_test.py::test_client_basic --no-header --no-summary -q in /nfs4/llm/h2ogpt
+Launching pytest with arguments src/client_test.py::test_client_basic --no-header --no-summary -q in /nfs4/llm/Quantum Documents
 
 ============================= test session starts ==============================
 collecting ...
 src/client_test.py:None (src/client_test.py)
-ImportError while importing test module '/nfs4/llm/h2ogpt/src/client_test.py'.
+ImportError while importing test module '/nfs4/llm/Quantum Documents/src/client_test.py'.
 Hint: make sure your test modules/packages have valid Python names.
 Traceback:
-h2ogpt/lib/python3.10/site-packages/_pytest/python.py:618: in _importtestmodule
+Quantum Documents/lib/python3.10/site-packages/_pytest/python.py:618: in _importtestmodule
     mod = import_path(self.path, mode=importmode, root=self.config.rootpath)
-h2ogpt/lib/python3.10/site-packages/_pytest/pathlib.py:533: in import_path
+Quantum Documents/lib/python3.10/site-packages/_pytest/pathlib.py:533: in import_path
     importlib.import_module(module_name)
 /usr/lib/python3.10/importlib/__init__.py:126: in import_module
     return _bootstrap._gcd_import(name[level:], package, level)
@@ -273,7 +273,7 @@ h2ogpt/lib/python3.10/site-packages/_pytest/pathlib.py:533: in import_path
     ???
 <frozen importlib._bootstrap>:688: in _load_unlocked
     ???
-h2ogpt/lib/python3.10/site-packages/_pytest/assertion/rewrite.py:168: in exec_module
+Quantum Documents/lib/python3.10/site-packages/_pytest/assertion/rewrite.py:168: in exec_module
     exec(co, module.__dict__)
 src/client_test.py:51: in <module>
     from enums import DocumentSubset, LangChainAction
@@ -283,8 +283,8 @@ E   ModuleNotFoundError: No module named 'enums'
 collected 0 items / 1 error
 
 =============================== 1 error in 0.14s ===============================
-ERROR: not found: /nfs4/llm/h2ogpt/src/client_test.py::test_client_basic
-(no name '/nfs4/llm/h2ogpt/src/client_test.py::test_client_basic' in any of [<Module client_test.py>])
+ERROR: not found: /nfs4/llm/Quantum Documents/src/client_test.py::test_client_basic
+(no name '/nfs4/llm/Quantum Documents/src/client_test.py::test_client_basic' in any of [<Module client_test.py>])
 
 
 Process finished with exit code 4
@@ -293,9 +293,9 @@ What happened?
 """, prompt_type=prompt_type, max_new_tokens=100, version=version)
 
 
-def run_client_nochat(prompt, prompt_type, max_new_tokens, version=None, h2ogpt_key=None, visible_models=None):
+def run_client_nochat(prompt, prompt_type, max_new_tokens, version=None, Quantum Documents_key=None, visible_models=None):
     kwargs, args = get_args(prompt, prompt_type, chat=False, max_new_tokens=max_new_tokens, version=version,
-                            visible_models=visible_models, h2ogpt_key=h2ogpt_key)
+                            visible_models=visible_models, Quantum Documents_key=Quantum Documents_key)
 
     api_name = '/submit_nochat'
     client = get_client(serialize=not is_gradio_version4)
@@ -311,14 +311,14 @@ def run_client_nochat(prompt, prompt_type, max_new_tokens, version=None, h2ogpt_
 
 
 @pytest.mark.skip(reason="For manual use against some server, no server launched")
-def test_client_basic_api(prompt_type='human_bot', version=None, h2ogpt_key=None):
+def test_client_basic_api(prompt_type='human_bot', version=None, Quantum Documents_key=None):
     return run_client_nochat_api(prompt='Who are you?', prompt_type=prompt_type, max_new_tokens=50, version=version,
-                                 h2ogpt_key=h2ogpt_key)
+                                 Quantum Documents_key=Quantum Documents_key)
 
 
-def run_client_nochat_api(prompt, prompt_type, max_new_tokens, version=None, h2ogpt_key=None):
+def run_client_nochat_api(prompt, prompt_type, max_new_tokens, version=None, Quantum Documents_key=None):
     kwargs, args = get_args(prompt, prompt_type, chat=False, max_new_tokens=max_new_tokens, version=version,
-                            h2ogpt_key=h2ogpt_key)
+                            Quantum Documents_key=Quantum Documents_key)
 
     api_name = '/submit_nochat_api'  # NOTE: like submit_nochat but stable API for string dict passing
     client = get_client(serialize=not is_gradio_version4)
@@ -335,17 +335,17 @@ def run_client_nochat_api(prompt, prompt_type, max_new_tokens, version=None, h2o
 
 
 @pytest.mark.skip(reason="For manual use against some server, no server launched")
-def test_client_basic_api_lean(prompt='Who are you?', prompt_type='human_bot', version=None, h2ogpt_key=None,
+def test_client_basic_api_lean(prompt='Who are you?', prompt_type='human_bot', version=None, Quantum Documents_key=None,
                                chat_conversation=None, system_prompt=''):
     return run_client_nochat_api_lean(prompt=prompt, prompt_type=prompt_type, max_new_tokens=50,
-                                      version=version, h2ogpt_key=h2ogpt_key,
+                                      version=version, Quantum Documents_key=Quantum Documents_key,
                                       chat_conversation=chat_conversation,
                                       system_prompt=system_prompt)
 
 
-def run_client_nochat_api_lean(prompt, prompt_type, max_new_tokens, version=None, h2ogpt_key=None,
+def run_client_nochat_api_lean(prompt, prompt_type, max_new_tokens, version=None, Quantum Documents_key=None,
                                chat_conversation=None, system_prompt=''):
-    kwargs = dict(instruction_nochat=prompt, h2ogpt_key=h2ogpt_key, chat_conversation=chat_conversation,
+    kwargs = dict(instruction_nochat=prompt, Quantum Documents_key=Quantum Documents_key, chat_conversation=chat_conversation,
                   system_prompt=system_prompt)
 
     api_name = '/submit_nochat_api'  # NOTE: like submit_nochat but stable API for string dict passing
@@ -358,19 +358,19 @@ def run_client_nochat_api_lean(prompt, prompt_type, max_new_tokens, version=None
     res_dict = dict(prompt=kwargs['instruction_nochat'],
                     response=md_to_text(ast.literal_eval(res)['response']),
                     sources=ast.literal_eval(res)['sources'],
-                    h2ogpt_key=h2ogpt_key)
+                    Quantum Documents_key=Quantum Documents_key)
     print(res_dict)
     return res_dict, client
 
 
 @pytest.mark.skip(reason="For manual use against some server, no server launched")
-def test_client_basic_api_lean_morestuff(prompt_type='human_bot', version=None, h2ogpt_key=None):
+def test_client_basic_api_lean_morestuff(prompt_type='human_bot', version=None, Quantum Documents_key=None):
     return run_client_nochat_api_lean_morestuff(prompt='Who are you?', prompt_type=prompt_type, max_new_tokens=50,
-                                                version=version, h2ogpt_key=h2ogpt_key)
+                                                version=version, Quantum Documents_key=Quantum Documents_key)
 
 
 def run_client_nochat_api_lean_morestuff(prompt, prompt_type='human_bot', max_new_tokens=512, version=None,
-                                         h2ogpt_key=None):
+                                         Quantum Documents_key=None):
     kwargs = dict(
         instruction='',
         iinput='',
@@ -404,7 +404,7 @@ def run_client_nochat_api_lean_morestuff(prompt, prompt_type='human_bot', max_ne
         document_source_substrings_op='and',
         document_content_substrings=[],
         document_content_substrings_op='and',
-        h2ogpt_key=h2ogpt_key,
+        Quantum Documents_key=Quantum Documents_key,
         add_search_to_context=False,
     )
 
@@ -418,30 +418,30 @@ def run_client_nochat_api_lean_morestuff(prompt, prompt_type='human_bot', max_ne
     res_dict = dict(prompt=kwargs['instruction_nochat'],
                     response=md_to_text(ast.literal_eval(res)['response']),
                     sources=ast.literal_eval(res)['sources'],
-                    h2ogpt_key=h2ogpt_key)
+                    Quantum Documents_key=Quantum Documents_key)
     print(res_dict)
     return res_dict, client
 
 
 @pytest.mark.skip(reason="For manual use against some server, no server launched")
-def test_client_chat(prompt_type='human_bot', version=None, h2ogpt_key=None):
+def test_client_chat(prompt_type='human_bot', version=None, Quantum Documents_key=None):
     return run_client_chat(prompt='Who are you?', prompt_type=prompt_type, stream_output=False, max_new_tokens=50,
                            langchain_mode='Disabled',
                            langchain_action=LangChainAction.QUERY.value,
                            langchain_agents=[],
                            version=version,
-                           h2ogpt_key=h2ogpt_key)
+                           Quantum Documents_key=Quantum Documents_key)
 
 
 @pytest.mark.skip(reason="For manual use against some server, no server launched")
-def test_client_chat_stream(prompt_type='human_bot', version=None, h2ogpt_key=None):
+def test_client_chat_stream(prompt_type='human_bot', version=None, Quantum Documents_key=None):
     return run_client_chat(prompt="Tell a very long kid's story about birds.", prompt_type=prompt_type,
                            stream_output=True, max_new_tokens=512,
                            langchain_mode='Disabled',
                            langchain_action=LangChainAction.QUERY.value,
                            langchain_agents=[],
                            version=version,
-                           h2ogpt_key=h2ogpt_key)
+                           Quantum Documents_key=Quantum Documents_key)
 
 
 def run_client_chat(prompt='',
@@ -452,7 +452,7 @@ def run_client_chat(prompt='',
                     langchain_agents=[],
                     prompt_type=None, prompt_dict=None, chat_template=None,
                     version=None,
-                    h2ogpt_key=None,
+                    Quantum Documents_key=None,
                     chat_conversation=None,
                     system_prompt='',
                     document_choice=[],
@@ -476,7 +476,7 @@ def run_client_chat(prompt='',
                             prompt_dict=prompt_dict,
                             chat_template=chat_template,
                             version=version,
-                            h2ogpt_key=h2ogpt_key,
+                            Quantum Documents_key=Quantum Documents_key,
                             chat_conversation=chat_conversation,
                             system_prompt=system_prompt,
                             document_choice=document_choice,
@@ -540,25 +540,25 @@ def run_client(client, prompt, args, kwargs, do_md_to_text=True, verbose=False):
 
 
 @pytest.mark.skip(reason="For manual use against some server, no server launched")
-def test_client_nochat_stream(prompt_type='human_bot', version=None, h2ogpt_key=None):
+def test_client_nochat_stream(prompt_type='human_bot', version=None, Quantum Documents_key=None):
     return run_client_nochat_gen(prompt="Tell a very long kid's story about birds.", prompt_type=prompt_type,
                                  stream_output=True, max_new_tokens=512,
                                  langchain_mode='Disabled',
                                  langchain_action=LangChainAction.QUERY.value,
                                  langchain_agents=[],
                                  version=version,
-                                 h2ogpt_key=h2ogpt_key)
+                                 Quantum Documents_key=Quantum Documents_key)
 
 
 def run_client_nochat_gen(prompt, prompt_type, stream_output, max_new_tokens,
                           langchain_mode, langchain_action, langchain_agents, version=None,
-                          h2ogpt_key=None):
+                          Quantum Documents_key=None):
     client = get_client(serialize=False)
 
     kwargs, args = get_args(prompt, prompt_type, chat=False, stream_output=stream_output,
                             max_new_tokens=max_new_tokens, langchain_mode=langchain_mode,
                             langchain_action=langchain_action, langchain_agents=langchain_agents,
-                            version=version, h2ogpt_key=h2ogpt_key)
+                            version=version, Quantum Documents_key=Quantum Documents_key)
     return run_client_gen(client, kwargs)
 
 
@@ -598,8 +598,8 @@ def md_to_text(md, do_md_to_text=True):
     return soup.get_text()
 
 
-def run_client_many(prompt_type='human_bot', version=None, h2ogpt_key=None):
-    kwargs = dict(prompt_type=prompt_type, version=version, h2ogpt_key=h2ogpt_key)
+def run_client_many(prompt_type='human_bot', version=None, Quantum Documents_key=None):
+    kwargs = dict(prompt_type=prompt_type, version=version, Quantum Documents_key=Quantum Documents_key)
     ret1, _ = test_client_chat(**kwargs)
     ret2, _ = test_client_chat_stream(**kwargs)
     ret3, _ = test_client_nochat_stream(**kwargs)

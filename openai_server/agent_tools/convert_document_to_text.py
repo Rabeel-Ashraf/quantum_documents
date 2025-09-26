@@ -5,7 +5,7 @@ import uuid
 if 'src' not in sys.path:
     sys.path.append('src')
 
-from src.function_client import get_data_h2ogpt
+from src.function_client import get_data_Quantum Documents
 
 
 def has_gpu():
@@ -138,7 +138,7 @@ def process_files(files, urls):
                 xls_file = filename
             convert_to_csv(xls_file)
 
-        sources1, known_type = get_data_h2ogpt(filename,
+        sources1, known_type = get_data_Quantum Documents(filename,
                                                is_url=filename in urls,
                                                verbose=False,
                                                use_pymupdf=use_pymupdf,
@@ -161,7 +161,7 @@ def process_files(files, urls):
             else:
                 use_pymupdf = 'on'
                 use_pypdf = 'off'
-            sources2, known_type = get_data_h2ogpt(filename,
+            sources2, known_type = get_data_Quantum Documents(filename,
                                                    is_url=filename in urls,
                                                    verbose=False,
                                                    use_pymupdf=use_pymupdf,
@@ -248,7 +248,7 @@ if __name__ == "__main__":
 Examples:
 
 wget https://aiindex.stanford.edu/wp-content/uploads/2024/04/HAI_2024_AI-Index-Report.pdf
-python /home/jon/h2ogpt/openai_server/agent_tools/convert_document_to_text.py --urls http://www.cnn.com
-python /home/jon/h2ogpt/openai_server/agent_tools/convert_document_to_text.py --files HAI_2024_AI-Index-Report.pdf
-python /home/jon/h2ogpt/openai_server/agent_tools/convert_document_to_text.py --urls https://aiindex.stanford.edu/wp-content/uploads/2024/04/HAI_2024_AI-Index-Report.pdf
+python /home/jon/Quantum Documents/openai_server/agent_tools/convert_document_to_text.py --urls http://www.cnn.com
+python /home/jon/Quantum Documents/openai_server/agent_tools/convert_document_to_text.py --files HAI_2024_AI-Index-Report.pdf
+python /home/jon/Quantum Documents/openai_server/agent_tools/convert_document_to_text.py --urls https://aiindex.stanford.edu/wp-content/uploads/2024/04/HAI_2024_AI-Index-Report.pdf
 """

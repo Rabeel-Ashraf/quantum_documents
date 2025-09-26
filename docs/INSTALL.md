@@ -1,4 +1,4 @@
-## h2oGPT Installation Help
+## Quantum Documents Installation Help
 
 The following sections describe how to get a working Python environment on a Linux system.
 

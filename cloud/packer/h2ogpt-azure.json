@@ -5,9 +5,9 @@
         "subscription_id": "92429150-401a-431f-8955-e69c0c119e68",
         "tenant_id": "840229f2-c911-49e6-a73d-5b3a4311835a",
         "managed_image_resource_group_name": "H2OIMAGES",
-        "h2ogpt_version": "010",
+        "Quantum Documents_version": "010",
         "branch_tag": "main",
-        "base_model": "h2oai-h2ogpt-4096-llama2-13b-chat"
+        "base_model": "h2oai-Quantum Documents-4096-llama2-13b-chat"
     },
     "builders": [
         {
@@ -17,9 +17,9 @@
             "subscription_id": "{{user `subscription_id`}}",
             "tenant_id": "{{user `tenant_id`}}",
             "capture_container_name": "h2ovhdimages",
-            "capture_name_prefix": "h2ogpt-{{user `h2ogpt_version`}}",
+            "capture_name_prefix": "Quantum Documents-{{user `Quantum Documents_version`}}",
             "resource_group_name": "{{user `managed_image_resource_group_name`}}",
-            "temp_resource_group_name": "Engineering_DevOps_h2oGPT-Ubuntu",
+            "temp_resource_group_name": "Engineering_DevOps_Quantum Documents-Ubuntu",
             "storage_account": "h2ovhdimages",
             "os_type": "Linux",
             "image_publisher": "Canonical",
@@ -29,7 +29,7 @@
             "azure_tags": {
                 "dept": "Engineering",
                 "task": "Image deployment",
-                "Name": "H2OGPT-CLOUD-IMAGES",
+                "Name": "Quantum Documents-CLOUD-IMAGES",
                 "Owner": "ops@h2o.ai",
                 "Project": "DevOps",
                 "Department": "Engineering",
@@ -48,7 +48,7 @@
             "strip_path": true,
             "custom_data": {
                 "base_image": "AZURE Ubuntu 20.04",
-                "h2ogpt_version": "{{user `h2ogpt_version`}}"
+                "Quantum Documents_version": "{{user `Quantum Documents_version`}}"
             }
         }
     ],
@@ -68,7 +68,7 @@
       {
         "type": "shell",
         "environment_vars": ["BRANCH_TAG={{user `branch_tag`}}"],
-        "script": "install_h2ogpt.sh",
+        "script": "install_Quantum Documents.sh",
         "pause_after": "10s"
       },
       {
@@ -91,13 +91,13 @@
       },
       {
         "type":  "file",
-        "source": "./startup-scripts/run_h2ogpt.sh",
-        "destination": "/workspace/run_h2ogpt.sh"
+        "source": "./startup-scripts/run_Quantum Documents.sh",
+        "destination": "/workspace/run_Quantum Documents.sh"
       },
       {
         "type":  "file",
-        "source": "./startup-scripts/h2ogpt_nginx.service",
-        "destination": "/etc/systemd/system/h2ogpt_nginx.service"
+        "source": "./startup-scripts/Quantum Documents_nginx.service",
+        "destination": "/etc/systemd/system/Quantum Documents_nginx.service"
       },
       {
         "type":  "file",
@@ -106,8 +106,8 @@
       },
       {
         "type":  "file",
-        "source": "./startup-scripts/h2ogpt.service",
-        "destination": "/etc/systemd/system/h2ogpt.service"
+        "source": "./startup-scripts/Quantum Documents.service",
+        "destination": "/etc/systemd/system/Quantum Documents.service"
       },
       {
         "type":  "file",

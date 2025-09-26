@@ -1,9 +1,9 @@
 # Backend: transformers
 
-For [Interactive visualization of the results](https://raw.githubusercontent.com/h2oai/h2ogpt/blob/main/benchmarks/llm_gpu_benchmark_transformers.html), save the linked file as html on your machine and open it in a browser.
+For [Interactive visualization of the results](https://raw.githubusercontent.com/h2oai/Quantum Documents/blob/main/benchmarks/llm_gpu_benchmark_transformers.html), save the linked file as html on your machine and open it in a browser.
 
 
-## Model: h2oai/h2ogpt-4096-llama2-7b-chat (transformers)
+## Model: h2oai/Quantum Documents-4096-llama2-7b-chat (transformers)
 ### Number of GPUs: 0
 |   bits | gpus   |   summarization time [sec] |   generation speed [tokens/sec] | exception   |
 |-------:|:-------|---------------------------:|--------------------------------:|:------------|
@@ -58,7 +58,7 @@ For [Interactive visualization of the results](https://raw.githubusercontent.com
 |     16 | 8 x NVIDIA A100-SXM4-80GB (81920 MiB) |                    40.4986 |                        30.5489  |             |
 |      8 | 8 x NVIDIA A100-SXM4-80GB (81920 MiB) |                   186.713  |                         7.23498 |             |
 |      4 | 8 x NVIDIA A100-SXM4-80GB (81920 MiB) |                    60.1828 |                        21.9172  |             |
-## Model: h2oai/h2ogpt-4096-llama2-13b-chat (transformers)
+## Model: h2oai/Quantum Documents-4096-llama2-13b-chat (transformers)
 ### Number of GPUs: 1
 |   bits | gpus                                           |   summarization time [sec] |   generation speed [tokens/sec] | exception   |
 |-------:|:-----------------------------------------------|---------------------------:|--------------------------------:|:------------|
@@ -107,7 +107,7 @@ For [Interactive visualization of the results](https://raw.githubusercontent.com
 |     16 | 8 x NVIDIA A100-SXM4-80GB (81920 MiB) |                    55.3965 |                        22.302   |             |
 |      8 | 8 x NVIDIA A100-SXM4-80GB (81920 MiB) |                   185.328  |                         5.38647 |             |
 |      4 | 8 x NVIDIA A100-SXM4-80GB (81920 MiB) |                    83.0479 |                        13.969   |             |
-## Model: h2oai/h2ogpt-4096-llama2-70b-chat (transformers)
+## Model: h2oai/Quantum Documents-4096-llama2-70b-chat (transformers)
 ### Number of GPUs: 1
 |   bits | gpus                                           |   summarization time [sec] |   generation speed [tokens/sec] | exception   |
 |-------:|:-----------------------------------------------|---------------------------:|--------------------------------:|:------------|
@@ -137,10 +137,10 @@ For [Interactive visualization of the results](https://raw.githubusercontent.com
 |      4 | 4 x NVIDIA RTX A6000 (46068 MiB) |                    175.491 |                         6.5798  |             |
 # Backend: text-generation-inference
 
-For [Interactive visualization of the results](https://raw.githubusercontent.com/h2oai/h2ogpt/blob/main/benchmarks/llm_gpu_benchmark_text-generation-inference.html), save the linked file as html on your machine and open it in a browser.
+For [Interactive visualization of the results](https://raw.githubusercontent.com/h2oai/Quantum Documents/blob/main/benchmarks/llm_gpu_benchmark_text-generation-inference.html), save the linked file as html on your machine and open it in a browser.
 
 
-## Model: h2oai/h2ogpt-4096-llama2-7b-chat (text-generation-inference)
+## Model: h2oai/Quantum Documents-4096-llama2-7b-chat (text-generation-inference)
 ### Number of GPUs: 1
 |   bits | gpus                                           |   summarization time [sec] |   generation speed [tokens/sec] | exception   |
 |-------:|:-----------------------------------------------|---------------------------:|--------------------------------:|:------------|
@@ -164,7 +164,7 @@ For [Interactive visualization of the results](https://raw.githubusercontent.com
 |   bits | gpus                                  |   summarization time [sec] |   generation speed [tokens/sec] | exception   |
 |-------:|:--------------------------------------|---------------------------:|--------------------------------:|:------------|
 |     16 | 8 x NVIDIA A100-SXM4-80GB (81920 MiB) |                    42.8594 |                         27.8644 |             |
-## Model: h2oai/h2ogpt-4096-llama2-13b-chat (text-generation-inference)
+## Model: h2oai/Quantum Documents-4096-llama2-13b-chat (text-generation-inference)
 ### Number of GPUs: 1
 |   bits | gpus                                           |   summarization time [sec] |   generation speed [tokens/sec] | exception   |
 |-------:|:-----------------------------------------------|---------------------------:|--------------------------------:|:------------|
@@ -188,7 +188,7 @@ For [Interactive visualization of the results](https://raw.githubusercontent.com
 |   bits | gpus                                  |   summarization time [sec] |   generation speed [tokens/sec] | exception   |
 |-------:|:--------------------------------------|---------------------------:|--------------------------------:|:------------|
 |     16 | 8 x NVIDIA A100-SXM4-80GB (81920 MiB) |                    56.3847 |                         20.3764 |             |
-## Model: h2oai/h2ogpt-4096-llama2-70b-chat (text-generation-inference)
+## Model: h2oai/Quantum Documents-4096-llama2-70b-chat (text-generation-inference)
 ### Number of GPUs: 4
 |   bits | gpus                                  |   summarization time [sec] |   generation speed [tokens/sec] | exception   |
 |-------:|:--------------------------------------|---------------------------:|--------------------------------:|:------------|

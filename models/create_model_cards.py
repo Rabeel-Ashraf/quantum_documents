@@ -11,29 +11,29 @@ from transformers import AutoModelForCausalLM
     "model_name, base_model, dataset, training_logs, eval",
     [
         (
-                "h2ogpt-research-oasst1-llama-65b",
+                "Quantum Documents-research-oasst1-llama-65b",
                 "decapoda-research/llama-65b-hf",
                 [
-                    "h2oai/openassistant_oasst1_h2ogpt_graded",
+                    "h2oai/openassistant_oasst1_Quantum Documents_graded",
                 ],
                 [
-                    "https://huggingface.co/h2oai/h2ogpt-research-oasst1-llama-65b/blob/main/llama-65b-hf.h2oaiopenassistant_oasst1_h2ogpt_graded.1_epochs.113510499324f0f007cbec9d9f1f8091441f2469.3.zip",
+                    "https://huggingface.co/h2oai/Quantum Documents-research-oasst1-llama-65b/blob/main/llama-65b-hf.h2oaiopenassistant_oasst1_Quantum Documents_graded.1_epochs.113510499324f0f007cbec9d9f1f8091441f2469.3.zip",
                 ],
                 """
 TBD
 """
         ),
         (
-                "h2ogpt-oig-oasst1-falcon-40b",
+                "Quantum Documents-oig-oasst1-falcon-40b",
                 "tiiuae/falcon-40b",
                 [
-                    "h2oai/h2ogpt-oig-oasst1-instruct-cleaned-v3",
+                    "h2oai/Quantum Documents-oig-oasst1-instruct-cleaned-v3",
                 ],
                 [
-                    "https://huggingface.co/h2oai/h2ogpt-oig-oasst1-falcon-40b/blob/main/falcon-40b.h2oaih2ogpt-oig-oasst1-instruct-cleaned-v3.3_epochs.2e023709e9a36283986d136e66cb94e0bd7e6452.10.zip",
+                    "https://huggingface.co/h2oai/Quantum Documents-oig-oasst1-falcon-40b/blob/main/falcon-40b.h2oaiQuantum Documents-oig-oasst1-instruct-cleaned-v3.3_epochs.2e023709e9a36283986d136e66cb94e0bd7e6452.10.zip",
                 ],
                 """
-[eval source code](https://github.com/h2oai/h2ogpt/issues/216#issuecomment-1579573101)
+[eval source code](https://github.com/h2oai/Quantum Documents/issues/216#issuecomment-1579573101)
 
 |    Task     |Version| Metric |Value |   |Stderr|
 |-------------|------:|--------|-----:|---|-----:|
@@ -52,16 +52,16 @@ TBD
 """
         ),
         (
-                "h2ogpt-oasst1-falcon-40b",
+                "Quantum Documents-oasst1-falcon-40b",
                 "tiiuae/falcon-40b",
                 [
-                    "h2oai/openassistant_oasst1_h2ogpt_graded",
+                    "h2oai/openassistant_oasst1_Quantum Documents_graded",
                 ],
                 [
-                    "https://huggingface.co/h2oai/h2ogpt-oasst1-falcon-40b/blob/main/falcon-40b.h2oaiopenassistant_oasst1_h2ogpt_graded.3_epochs.2e023709e9a36283986d136e66cb94e0bd7e6452.8.zip",
+                    "https://huggingface.co/h2oai/Quantum Documents-oasst1-falcon-40b/blob/main/falcon-40b.h2oaiopenassistant_oasst1_Quantum Documents_graded.3_epochs.2e023709e9a36283986d136e66cb94e0bd7e6452.8.zip",
                 ],
                 """
-[eval source code](https://github.com/h2oai/h2ogpt/issues/216#issuecomment-1579573101)
+[eval source code](https://github.com/h2oai/Quantum Documents/issues/216#issuecomment-1579573101)
 
 |    Task     |Version| Metric |Value |   |Stderr|
 |-------------|------:|--------|-----:|---|-----:|
@@ -80,19 +80,19 @@ TBD
 """
         ),
         (
-                "h2ogpt-oasst1-512-20b",
+                "Quantum Documents-oasst1-512-20b",
                 "EleutherAI/gpt-neox-20b",
                 [
                     "h2oai/openassistant_oasst1",
-                    "h2oai/openassistant_oasst1_h2ogpt",
+                    "h2oai/openassistant_oasst1_Quantum Documents",
                 ],
                 [
-                    "https://huggingface.co/h2oai/h2ogpt-oasst1-512-20b/blob/main/gpt-neox-20b.openassistant_oasst1.json.6.0_epochs.5a14ea8b3794c0d60476fc262d0a297f98dd712d.1013.zip",
-                    "https://huggingface.co/h2oai/h2ogpt-oasst1-512-20b/blob/main/h2ogpt-oasst1-512-20b.h2oaiopenassistant_oasst1_h2ogpt.2_epochs.fcaae7ef70600de8c97c9b38cb3f0075467cdad1.3.zip",
+                    "https://huggingface.co/h2oai/Quantum Documents-oasst1-512-20b/blob/main/gpt-neox-20b.openassistant_oasst1.json.6.0_epochs.5a14ea8b3794c0d60476fc262d0a297f98dd712d.1013.zip",
+                    "https://huggingface.co/h2oai/Quantum Documents-oasst1-512-20b/blob/main/Quantum Documents-oasst1-512-20b.h2oaiopenassistant_oasst1_Quantum Documents.2_epochs.fcaae7ef70600de8c97c9b38cb3f0075467cdad1.3.zip",
                 ],
 """
 
-[eval source code](https://github.com/h2oai/h2ogpt/issues/35#issuecomment-1521119301)
+[eval source code](https://github.com/h2oai/Quantum Documents/issues/35#issuecomment-1521119301)
 
 |    Task     |Version| Metric |Value |   |Stderr|
 |-------------|------:|--------|-----:|---|-----:|
@@ -111,23 +111,23 @@ TBD
 """
         ),
         # (
-        #         "h2ogpt-oasst1-256-20b",
+        #         "Quantum Documents-oasst1-256-20b",
         #         "EleutherAI/gpt-neox-20b",
         #         "h2oai/openassistant_oasst1",
-        #         "https://huggingface.co/h2oai/h2ogpt-oasst1-256-20b/blob/main/gpt-neox-20b.openassistant_oasst1.json.1_epochs.5fc91911bc2bfaaf3b6c2de577c4b0ae45a07a4a.18.zip",
+        #         "https://huggingface.co/h2oai/Quantum Documents-oasst1-256-20b/blob/main/gpt-neox-20b.openassistant_oasst1.json.1_epochs.5fc91911bc2bfaaf3b6c2de577c4b0ae45a07a4a.18.zip",
         # ),
         (
-                "h2ogpt-oig-oasst1-512-12b",
-                "h2ogpt-oasst1-512-12b",
+                "Quantum Documents-oig-oasst1-512-12b",
+                "Quantum Documents-oasst1-512-12b",
                 [
-                    "h2oai/h2ogpt-fortune2000-personalized",
-                    "h2oai/h2ogpt-oig-oasst1-instruct-cleaned-v3",
+                    "h2oai/Quantum Documents-fortune2000-personalized",
+                    "h2oai/Quantum Documents-oig-oasst1-instruct-cleaned-v3",
                 ],
                 [
-                    "https://huggingface.co/h2oai/h2ogpt-oig-oasst1-512-12b/blob/main/h2ogpt-oasst1-512-12b.h2oaih2ogpt-oig-oasst1-instruct-cleaned-v3.1_epochs.805b8e8eff369207340a5a6f90f3c833f9731254.2.zip",
+                    "https://huggingface.co/h2oai/Quantum Documents-oig-oasst1-512-12b/blob/main/Quantum Documents-oasst1-512-12b.h2oaiQuantum Documents-oig-oasst1-instruct-cleaned-v3.1_epochs.805b8e8eff369207340a5a6f90f3c833f9731254.2.zip",
                 ],
 """
-[eval source code](https://github.com/h2oai/h2ogpt/issues/125#issuecomment-1540521131)
+[eval source code](https://github.com/h2oai/Quantum Documents/issues/125#issuecomment-1540521131)
                 
 |    Task     |Version| Metric |Value |   |Stderr|
 |-------------|------:|--------|-----:|---|-----:|
@@ -147,16 +147,16 @@ TBD
                 """
         ),
         (
-                "h2ogpt-oasst1-512-12b",
+                "Quantum Documents-oasst1-512-12b",
                 "EleutherAI/pythia-12b",
                 [
-                    "h2oai/openassistant_oasst1_h2ogpt_graded",
+                    "h2oai/openassistant_oasst1_Quantum Documents_graded",
                 ],
                 [
-                    "https://huggingface.co/h2oai/h2ogpt-oasst1-512-12b/blob/main/pythia-12b-deduped.h2oaiopenassistant_oasst1_h2ogpt_graded.3_epochs.2ccf687ea3f3f3775a501838e81c1a0066430455.4.zip",
+                    "https://huggingface.co/h2oai/Quantum Documents-oasst1-512-12b/blob/main/pythia-12b-deduped.h2oaiopenassistant_oasst1_Quantum Documents_graded.3_epochs.2ccf687ea3f3f3775a501838e81c1a0066430455.4.zip",
                 ],
 """
-[eval source code](https://github.com/h2oai/h2ogpt/issues/125#issuecomment-1548239108)
+[eval source code](https://github.com/h2oai/Quantum Documents/issues/125#issuecomment-1548239108)
 
 |    Task     |Version| Metric |Value |   |Stderr|
 |-------------|------:|--------|-----:|---|-----:|
@@ -175,27 +175,27 @@ TBD
 """
         ),
         # (
-        #         "h2ogpt-oig-oasst1-256-12b",
+        #         "Quantum Documents-oig-oasst1-256-12b",
         #         "EleutherAI/pythia-12b-deduped",
-        #         "h2oai/h2ogpt-oig-oasst1-instruct-cleaned-v1",
-        #         "https://huggingface.co/h2oai/h2ogpt-oig-oasst1-256-12b/blob/main/pythia-12b-deduped.h2ogpt-oig-oasst1-instruct-cleaned-v1.json.1_epochs.5fc91911bc2bfaaf3b6c2de577c4b0ae45a07a4a.17.zip",
+        #         "h2oai/Quantum Documents-oig-oasst1-instruct-cleaned-v1",
+        #         "https://huggingface.co/h2oai/Quantum Documents-oig-oasst1-256-12b/blob/main/pythia-12b-deduped.Quantum Documents-oig-oasst1-instruct-cleaned-v1.json.1_epochs.5fc91911bc2bfaaf3b6c2de577c4b0ae45a07a4a.17.zip",
         # ),
         (
-                "h2ogpt-oig-oasst1-512-6.9b",
+                "Quantum Documents-oig-oasst1-512-6.9b",
                 "EleutherAI/pythia-6.9b",
                 [
-                    "h2oai/h2ogpt-oig-oasst1-instruct-cleaned-v1",
-                    "h2oai/openassistant_oasst1_h2ogpt",
-                    "h2oai/h2ogpt-fortune2000-personalized",
-                    "h2oai/h2ogpt-oig-oasst1-instruct-cleaned-v3",
+                    "h2oai/Quantum Documents-oig-oasst1-instruct-cleaned-v1",
+                    "h2oai/openassistant_oasst1_Quantum Documents",
+                    "h2oai/Quantum Documents-fortune2000-personalized",
+                    "h2oai/Quantum Documents-oig-oasst1-instruct-cleaned-v3",
                 ],
                 [
-                    "https://huggingface.co/h2oai/h2ogpt-oig-oasst1-512-6.9b/blob/main/pythia-6.9b.h2ogpt-oig-oasst1-instruct-cleaned-v1.json.1_epochs.5fc91911bc2bfaaf3b6c2de577c4b0ae45a07a4a.7.zip",
-                    "https://huggingface.co/h2oai/h2ogpt-oig-oasst1-512-6.9b/blob/main/h2ogpt-oig-oasst1-512-6.9b.h2oaiopenassistant_oasst1_h2ogpt.2_epochs.e35e2e06e0af2f7dceac2e16e3646c90ccce4ec0.1.zip",
-                    "https://huggingface.co/h2oai/h2ogpt-oig-oasst1-512-6.9b/blob/main/h2ogpt-oig-oasst1-512-6.9b.h2oaih2ogpt-oig-oasst1-instruct-cleaned-v3.1_epochs.e48f9debb0d2bd8d866fa5668bbbb51c317c553c.1.zip",
+                    "https://huggingface.co/h2oai/Quantum Documents-oig-oasst1-512-6.9b/blob/main/pythia-6.9b.Quantum Documents-oig-oasst1-instruct-cleaned-v1.json.1_epochs.5fc91911bc2bfaaf3b6c2de577c4b0ae45a07a4a.7.zip",
+                    "https://huggingface.co/h2oai/Quantum Documents-oig-oasst1-512-6.9b/blob/main/Quantum Documents-oig-oasst1-512-6.9b.h2oaiopenassistant_oasst1_Quantum Documents.2_epochs.e35e2e06e0af2f7dceac2e16e3646c90ccce4ec0.1.zip",
+                    "https://huggingface.co/h2oai/Quantum Documents-oig-oasst1-512-6.9b/blob/main/Quantum Documents-oig-oasst1-512-6.9b.h2oaiQuantum Documents-oig-oasst1-instruct-cleaned-v3.1_epochs.e48f9debb0d2bd8d866fa5668bbbb51c317c553c.1.zip",
                 ],
 """
-[eval source code](https://github.com/h2oai/h2ogpt/issues/125#issue-1702311702)
+[eval source code](https://github.com/h2oai/Quantum Documents/issues/125#issue-1702311702)
 
 |    Task     |Version| Metric |Value |   |Stderr|
 |-------------|------:|--------|-----:|---|-----:|
@@ -214,16 +214,16 @@ TBD
 """
         ),
         # (
-        #         "h2ogpt-oig-oasst1-256-20b",
+        #         "Quantum Documents-oig-oasst1-256-20b",
         #         "EleutherAI/gpt-neox-20b",
-        #         "h2oai/h2ogpt-oig-oasst1-instruct-cleaned-v1",
-        #         "https://huggingface.co/h2oai/h2ogpt-oig-oasst1-256-20b/blob/main/gpt-neox-20b.h2ogpt-oig-oasst1-instruct-cleaned-v1.json.1_epochs.5fc91911bc2bfaaf3b6c2de577c4b0ae45a07a4a.19.zip",
+        #         "h2oai/Quantum Documents-oig-oasst1-instruct-cleaned-v1",
+        #         "https://huggingface.co/h2oai/Quantum Documents-oig-oasst1-256-20b/blob/main/gpt-neox-20b.Quantum Documents-oig-oasst1-instruct-cleaned-v1.json.1_epochs.5fc91911bc2bfaaf3b6c2de577c4b0ae45a07a4a.19.zip",
         # ),
     ],
 )
 def test_create_model_cards(model_name, base_model, dataset, training_logs, eval):
     if model_name not in [
-        "h2ogpt-research-oasst1-llama-65b",
+        "Quantum Documents-research-oasst1-llama-65b",
     ]:
         return
     model_size = model_name.split("-")[-1].upper()

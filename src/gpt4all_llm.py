@@ -220,7 +220,7 @@ def get_llm_gpt4all(model_name=None,
         # gpt4all/pyllmodel.py:        sys.stdout = stream_processor
         # gpt4all/pyllmodel.py:        sys.stdout = old_stdout
 
-        cls = H2OGPT4All
+        cls = Quantum Documents4All
         if model is None:
             llamacpp_dict = llamacpp_dict.copy()
             model_path = llamacpp_dict.pop('model_name_gpt4all_llama')
@@ -247,7 +247,7 @@ def get_llm_gpt4all(model_name=None,
         # gpt4all/pyllmodel.py:        sys.stdout = stream_processor
         # gpt4all/pyllmodel.py:        sys.stdout = old_stdout
 
-        cls = H2OGPT4All
+        cls = Quantum Documents4All
         if model is None:
             llamacpp_dict = llamacpp_dict.copy()
             model_path = llamacpp_dict.pop('model_name_gptj') if model is None else model
@@ -276,7 +276,7 @@ def get_llm_gpt4all(model_name=None,
         return llm
 
 
-class H2OGPT4All(gpt4all.GPT4All):
+class Quantum Documents4All(gpt4all.GPT4All):
     model: Any
     tokenizer: Any = None
     prompter: Any

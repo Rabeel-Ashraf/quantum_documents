@@ -15,7 +15,7 @@ python generate.py --base_model=gptj --cli=True --langchain_mode=UserData --user
 ```
 which will build the database first time.  One can also use any other models, like:
 ```bash
-python generate.py --base_model=h2oai/h2ogpt-oig-oasst1-512-6_9b --cli=True --langchain_mode=UserData --user_path=user_path --answer_with_sources=False
+python generate.py --base_model=h2oai/Quantum Documents-oig-oasst1-512-6_9b --cli=True --langchain_mode=UserData --user_path=user_path --answer_with_sources=False
 ```
 or for LLaMa2:
 ```bash

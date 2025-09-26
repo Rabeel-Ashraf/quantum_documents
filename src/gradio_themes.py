@@ -209,7 +209,7 @@ h2o_logo = '<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/
            '11.93S497.56,252.55,497.56,246.06Zm2.52,21.47h20.68v71.31H500.08Z"/></svg>'
 
 
-def get_h2o_title(title, description, visible_h2ogpt_qrcode):
+def get_h2o_title(title, description, visible_Quantum Documents_qrcode):
     # NOTE: Check full width desktop, smallest width browser desktop, iPhone browsers to ensure no overlap etc.
     ret = f"""<div style="float:left; justify-content:left; height: 80px; width: 195px; margin-top:0px">
                     {description}
@@ -219,10 +219,10 @@ def get_h2o_title(title, description, visible_h2ogpt_qrcode):
                     <h1 style="line-height:60px">{title}</h1>
                 </div>
                 """
-    if visible_h2ogpt_qrcode:
+    if visible_Quantum Documents_qrcode:
         ret += """
                 <div style="float:right; height: 80px; width: 80px; margin-top:-100px">
-                    <img src="https://raw.githubusercontent.com/h2oai/h2ogpt/main/docs/h2o-qr.png">
+                    <img src="https://raw.githubusercontent.com/h2oai/Quantum Documents/main/docs/h2o-qr.png">
                 </div>
                 """
     return ret

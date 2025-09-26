@@ -1,4 +1,4 @@
-# Run or Build h2oGPT Docker
+# Run or Build Quantum Documents Docker
 
 * Install Docker for [Linux](https://docs.docker.com/engine/install/ubuntu/)
 * Install Docker for [Windows](https://docs.docker.com/desktop/install/windows-install/)
@@ -51,11 +51,11 @@ If running on A100's, might require [Installing Fabric Manager](INSTALL.md#insta
 
 ## Prebuild Docker for Windows/Linux x86
 
-All available public h2oGPT docker images can be found in [Google Container Registry](https://console.cloud.google.com/gcr/images/vorvan/global/h2oai/h2ogpt-runtime).  These require cuda drivers that handle CUDA 12.1 or higher.
+All available public Quantum Documents docker images can be found in [Google Container Registry](https://console.cloud.google.com/gcr/images/vorvan/global/h2oai/Quantum Documents-runtime).  These require cuda drivers that handle CUDA 12.1 or higher.
 
 Ensure image is up-to-date by running:
 ```bash
-docker pull gcr.io/vorvan/h2oai/h2ogpt-runtime:0.2.1
+docker pull gcr.io/vorvan/h2oai/Quantum Documents-runtime:0.2.1
 ```
 
 ## Build Docker
@@ -82,13 +82,13 @@ To build the docker image after any local changes (to support Metal for GGUF fil
 ```bash
 # build image
 touch build_info.txt
-docker build -t h2ogpt .
+docker build -t Quantum Documents .
 ```
-then to run this version of the docker image, just replace `gcr.io/vorvan/h2oai/h2ogpt-runtime:0.2.1` with `h2ogpt:latest` in any docker run commands.
+then to run this version of the docker image, just replace `gcr.io/vorvan/h2oai/Quantum Documents-runtime:0.2.1` with `Quantum Documents:latest` in any docker run commands.
 
-## Linux: Run h2oGPT using Docker
+## Linux: Run Quantum Documents using Docker
 
-An example running h2oGPT via docker using Zephyr 7B Beta model is:
+An example running Quantum Documents via docker using Zephyr 7B Beta model is:
 ```bash
 mkdir -p ~/.cache/huggingface/hub/
 mkdir -p ~/.triton/cache/
@@ -100,8 +100,8 @@ mkdir -p ~/db_dir_UserData
 mkdir -p ~/users
 mkdir -p ~/db_nonusers
 mkdir -p ~/llamacpp_path
-mkdir -p ~/h2ogpt_auth
-echo '["key1","key2"]' > ~/h2ogpt_auth/h2ogpt_api_keys.json
+mkdir -p ~/Quantum Documents_auth
+echo '["key1","key2"]' > ~/Quantum Documents_auth/Quantum Documents_api_keys.json
 export GRADIO_SERVER_PORT=7860
 export OPENAI_SERVER_PORT=5000
 docker run \
@@ -124,16 +124,16 @@ docker run \
        -v "${HOME}"/users:/workspace/users \
        -v "${HOME}"/db_nonusers:/workspace/db_nonusers \
        -v "${HOME}"/llamacpp_path:/workspace/llamacpp_path \
-       -v "${HOME}"/h2ogpt_auth:/workspace/h2ogpt_auth \
+       -v "${HOME}"/Quantum Documents_auth:/workspace/Quantum Documents_auth \
        -e GRADIO_SERVER_PORT=$GRADIO_SERVER_PORT \
-       gcr.io/vorvan/h2oai/h2ogpt-runtime:0.2.1 /workspace/generate.py \
+       gcr.io/vorvan/h2oai/Quantum Documents-runtime:0.2.1 /workspace/generate.py \
           --base_model=HuggingFaceH4/zephyr-7b-beta \
           --use_safetensors=True \
           --prompt_type=zephyr \
           --save_dir='/workspace/save/' \
-          --auth_filename='/workspace/h2ogpt_auth/auth.db' \
-          --h2ogpt_api_keys='/workspace/h2ogpt_auth/h2ogpt_api_keys.json' \
-          --auth='/workspace/h2ogpt_auth/h2ogpt_api_keys.json' \
+          --auth_filename='/workspace/Quantum Documents_auth/auth.db' \
+          --Quantum Documents_api_keys='/workspace/Quantum Documents_auth/Quantum Documents_api_keys.json' \
+          --auth='/workspace/Quantum Documents_auth/Quantum Documents_api_keys.json' \
           --use_gpu_id=False \
           --user_path=/workspace/user_path \
           --langchain_mode="LLM" \
@@ -144,15 +144,15 @@ docker run \
           --use_auth_token="${HUGGING_FACE_HUB_TOKEN}" \
           --openai_port=$OPENAI_SERVER_PORT
 ```
-Use `docker run -d` to run in detached background. Then go to http://localhost:7860/ or http://127.0.0.1:7860/.  For authentication, if use `--auth=/workspace/h2ogpt_auth/auth.json` instead, then do not need to use `--auth_filename`.  For keyed access, change key1 and key2 for `h2ogpt_api_keys` or for open-access remove `--h2ogpt_api_keys` line.
+Use `docker run -d` to run in detached background. Then go to http://localhost:7860/ or http://127.0.0.1:7860/.  For authentication, if use `--auth=/workspace/Quantum Documents_auth/auth.json` instead, then do not need to use `--auth_filename`.  For keyed access, change key1 and key2 for `Quantum Documents_api_keys` or for open-access remove `--Quantum Documents_api_keys` line.
 
-If one does not need access to private repo, can remove `--use_auth_token` line, else set env `HUGGING_FACE_HUB_TOKEN` so h2oGPT gets the token.
+If one does not need access to private repo, can remove `--use_auth_token` line, else set env `HUGGING_FACE_HUB_TOKEN` so Quantum Documents gets the token.
 
 For single GPU use `--gpus '"device=0"'` or for 2 GPUs use `--gpus '"device=0,1"'` instead of `--gpus all`.
 
 See [README_GPU](README_GPU.md) for more details about what to run.
 
-## Linux: Run h2oGPT in docker offline:
+## Linux: Run Quantum Documents in docker offline:
 
 Ensure $HOME/users and $HOME/db_nonusers are writeable by user running docker, then run:
 ```bash
@@ -185,7 +185,7 @@ docker run --gpus all \
 -v "${HOME}"/db_nonusers:/workspace/db_nonusers \
 -v "${HOME}"/llamacpp_path:/workspace/llamacpp_path \
 -e GRADIO_SERVER_PORT=$GRADIO_SERVER_PORT \
- gcr.io/vorvan/h2oai/h2ogpt-runtime:0.2.1 \
+ gcr.io/vorvan/h2oai/Quantum Documents-runtime:0.2.1 \
  /workspace/generate.py \
  --base_model=mistralai/Mistral-7B-Instruct-v0.2 \
  --use_safetensors=False \
@@ -213,11 +213,11 @@ You can also specify the cache location:
  ```
 
 
-## Run h2oGPT +  vLLM or vLLM using Docker
+## Run Quantum Documents +  vLLM or vLLM using Docker
 
-One can run an inference server in one docker and h2oGPT in another docker.
+One can run an inference server in one docker and Quantum Documents in another docker.
 
-For the vLLM server running on 2 GPUs using h2oai/h2ogpt-4096-llama2-7b-chat model, run:
+For the vLLM server running on 2 GPUs using h2oai/Quantum Documents-4096-llama2-7b-chat model, run:
 ```bash
 unset CUDA_VISIBLE_DEVICES
 mkdir -p $HOME/.cache/huggingface/hub
@@ -244,7 +244,7 @@ docker run \
     vllm/vllm-openai:latest \
         --port=5000 \
         --host=0.0.0.0 \
-        --model=h2oai/h2ogpt-4096-llama2-7b-chat \
+        --model=h2oai/Quantum Documents-4096-llama2-7b-chat \
         --tokenizer=hf-internal-testing/llama-tokenizer \
         --tensor-parallel-size=2 \
         --seed 1234 \
@@ -287,7 +287,7 @@ docker run -d \
     vllm/vllm-openai:latest \
         --port=5000 \
         --host=0.0.0.0 \
-        --model=h2oai/h2ogpt-4096-llama2-70b-chat-4bit \
+        --model=h2oai/Quantum Documents-4096-llama2-70b-chat-4bit \
         --tensor-parallel-size=2 \
         --seed 1234 \
         --trust-remote-code \
@@ -325,7 +325,7 @@ docker run -d \
     vllm/vllm-openai:latest \
         --port=5000 \
         --host=0.0.0.0 \
-        --model=h2oai/h2ogpt-4096-llama2-70b-chat-4bit \
+        --model=h2oai/Quantum Documents-4096-llama2-70b-chat-4bit \
         --tensor-parallel-size=4 \
         --seed 1234 \
         --trust-remote-code \
@@ -345,7 +345,7 @@ One can also verify the endpoint by running following curl command.
 curl http://localhost:5000/v1/completions \
     -H "Content-Type: application/json" \
     -d '{
-    "model": "h2oai/h2ogpt-4096-llama2-7b-chat",
+    "model": "h2oai/Quantum Documents-4096-llama2-7b-chat",
     "prompt": "San Francisco is a",
     "max_tokens": 7,
     "temperature": 0
@@ -358,7 +358,7 @@ If one sees similar output to below, then endpoint it up & running.
     "id": "cmpl-4b9584f743ff4dc590f0c168f82b063b",
     "object": "text_completion",
     "created": 1692796549,
-    "model": "h2oai/h2ogpt-4096-llama2-7b-chat",
+    "model": "h2oai/Quantum Documents-4096-llama2-7b-chat",
     "choices": [
         {
             "index": 0,
@@ -377,24 +377,24 @@ If one sees similar output to below, then endpoint it up & running.
 
 If one needs to only setup vLLM one can stop here.
 
-### Run h2oGPT
+### Run Quantum Documents
 Just add to the above docker run command:
 ```bash
         --inference_server="vllm:0.0.0.0:5000"
 ```
-where `--base_model` should match for how ran vLLM and h2oGPT. Make sure to set `--inference_server` argument to the correct vllm endpoint.
+where `--base_model` should match for how ran vLLM and Quantum Documents. Make sure to set `--inference_server` argument to the correct vllm endpoint.
 
 When one is done with the docker instance, run `docker ps` and find the container ID's hash, then run `docker stop <hash>`.
 
 Follow [README_InferenceServers.md](README_InferenceServers.md) for more information on how to setup vLLM.
 
-## Run h2oGPT and TGI using Docker
+## Run Quantum Documents and TGI using Docker
 
-One can run an inference server in one docker and h2oGPT in another docker.
+One can run an inference server in one docker and Quantum Documents in another docker.
 
 For the TGI server run (e.g. to run on GPU 0)
 ```bash
-export MODEL=h2oai/h2ogpt-4096-llama2-7b-chat
+export MODEL=h2oai/Quantum Documents-4096-llama2-7b-chat
 docker run -d --gpus '"device=0"' \
        --shm-size 1g \
        --network host \
@@ -411,7 +411,7 @@ One a low-memory GPU system can add other options to limit batching, e.g.:
 ```bash
 mkdir -p $HOME/.cache/huggingface/hub/
 mkdir -p $HOME/.cache/huggingface/modules/
-export MODEL=h2oai/h2ogpt-4096-llama2-7b-chat
+export MODEL=h2oai/Quantum Documents-4096-llama2-7b-chat
 docker run -d --gpus '"device=0"' \
         --shm-size 1g \
         -p 6112:80 \
@@ -424,11 +424,11 @@ docker run -d --gpus '"device=0"' \
         --max-stop-sequences 6 &>> logs.infserver.txt
 ```
 
-Then wait till it comes up (e.g. check docker logs for detached container hash in logs.infserver.txt), about 30 seconds for 7B LLaMa2 on 1 GPU.  Then for h2oGPT, just run one of the commands like the above, but add to the docker run line:
+Then wait till it comes up (e.g. check docker logs for detached container hash in logs.infserver.txt), about 30 seconds for 7B LLaMa2 on 1 GPU.  Then for Quantum Documents, just run one of the commands like the above, but add to the docker run line:
 ```bash
     --inference_server=http://localhost:6112
 ````
-Note the h2oGPT container has `--network host` with same port inside and outside so the other container on same host can see it.  Otherwise use actual IP addersses if on separate hosts.
+Note the Quantum Documents container has `--network host` with same port inside and outside so the other container on same host can see it.  Otherwise use actual IP addersses if on separate hosts.
 
 Change `max_max_new_tokens` to `2048` for low-memory case.
 
@@ -463,7 +463,7 @@ docker run \
        -v "${HOME}"/save:/workspace/save \
        -v "${HOME}"/user_path:/workspace/user_path \
        -v "${HOME}"/db_dir_UserData:/workspace/db_dir_UserData \
-       gcr.io/vorvan/h2oai/h2ogpt-runtime:0.2.1 /workspace/src/make_db.py
+       gcr.io/vorvan/h2oai/Quantum Documents-runtime:0.2.1 /workspace/src/make_db.py
 ```
 
 Once db is made, can use in generate.py like:
@@ -492,8 +492,8 @@ docker run \
        -v "${HOME}"/users:/workspace/users \
        -v "${HOME}"/db_nonusers:/workspace/db_nonusers \
        -v "${HOME}"/llamacpp_path:/workspace/llamacpp_path \
-       gcr.io/vorvan/h2oai/h2ogpt-runtime:0.2.1 /workspace/generate.py \
-          --base_model=h2oai/h2ogpt-4096-llama2-7b-chat \
+       gcr.io/vorvan/h2oai/Quantum Documents-runtime:0.2.1 /workspace/generate.py \
+          --base_model=h2oai/Quantum Documents-4096-llama2-7b-chat \
           --use_safetensors=True \
           --prompt_type=llama2 \
           --save_dir='/workspace/save/' \
@@ -504,7 +504,7 @@ docker run \
           --langchain_mode=LLM
 ```
 
-For a more detailed description of other parameters of the make_db script, checkout the definition in this file: https://github.com/h2oai/h2ogpt/blob/main/src/make_db.py
+For a more detailed description of other parameters of the make_db script, checkout the definition in this file: https://github.com/h2oai/Quantum Documents/blob/main/src/make_db.py
 
 
 

@@ -164,7 +164,7 @@ def test_qa_github_db_chunk_openai():
     from src.gpt_langchain import _run_qa_db
     # don't need 256, just seeing how compares to hf
     query = "what is a software defined asset"
-    langchain_mode = 'github h2oGPT'
+    langchain_mode = 'github Quantum Documents'
     ret = _run_qa_db(query=query, use_openai_model=True, use_openai_embedding=True, text_limit=256, chunk=True,
                      chunk_size=256,
                      hf_embedding_model="sentence-transformers/all-MiniLM-L6-v2",
@@ -232,7 +232,7 @@ def test_qa_daidocs_db_chunk_hf_dbs(db_type, top_k_docs):
     # chunk_size is chars for each of k=4 chunks
     if top_k_docs == -1:
         # else OOMs on generation immediately when generation starts, even though only 1600 tokens and 256 new tokens
-        model_name = 'h2oai/h2ogpt-oig-oasst1-512-6_9b'
+        model_name = 'h2oai/Quantum Documents-oig-oasst1-512-6_9b'
     else:
         model_name = None
     ret = _run_qa_db(query=query, use_openai_model=False, use_openai_embedding=False, text_limit=None, chunk=True,
@@ -250,7 +250,7 @@ def test_qa_daidocs_db_chunk_hf_dbs(db_type, top_k_docs):
     kill_weaviate(db_type)
 
 
-def get_test_model(base_model='h2oai/h2ogpt-oig-oasst1-512-6_9b',
+def get_test_model(base_model='h2oai/Quantum Documents-oig-oasst1-512-6_9b',
                    tokenizer_base_model='',
                    prompt_type='human_bot',
                    inference_server='',
@@ -722,7 +722,7 @@ def test_urls_add(db_type):
     with tempfile.TemporaryDirectory() as tmp_persist_directory:
         urls = ['https://h2o.ai/company/team/leadership-team/',
                 'https://arxiv.org/abs/1706.03762',
-                'https://github.com/h2oai/h2ogpt',
+                'https://github.com/h2oai/Quantum Documents',
                 'https://h2o.ai'
                 ]
 
@@ -747,7 +747,7 @@ def test_urls_file_add(db_type):
         with tempfile.TemporaryDirectory() as tmp_user_path:
             urls = ['https://h2o.ai/company/team/leadership-team/',
                     'https://arxiv.org/abs/1706.03762',
-                    'https://github.com/h2oai/h2ogpt',
+                    'https://github.com/h2oai/Quantum Documents',
                     'https://h2o.ai'
                     ]
             with open(os.path.join(tmp_user_path, 'list.urls'), 'wt') as f:
@@ -831,7 +831,7 @@ def test_docx_add2(db_type):
             test_file1 = os.path.join(tmp_user_path, 'demo.docx')
             db, collection_name = make_db_main(persist_directory=tmp_persist_directory, user_path=tmp_user_path,
                                                fail_any_exception=True, db_type=db_type,
-                                               llava_model=os.getenv('H2OGPT_LLAVA_MODEL'),
+                                               llava_model=os.getenv('Quantum Documents_LLAVA_MODEL'),
                                                enable_doctr=True,
                                                )
             assert db is not None
@@ -881,7 +881,7 @@ def test_md_add(db_type):
             db, collection_name = make_db_main(persist_directory=tmp_persist_directory, user_path=tmp_user_path,
                                                fail_any_exception=True, db_type=db_type)
             assert db is not None
-            docs = db.similarity_search("What is h2oGPT?")
+            docs = db.similarity_search("What is Quantum Documents?")
             assert len(docs) >= 1
             assert 'Query and summarize your documents' in docs[1].page_content or 'document Q/A' in docs[
                 1].page_content or 'go to your browser by visiting' in docs[1].page_content
@@ -1496,7 +1496,7 @@ def test_caption_add(image_file, db_type):
                                                fail_any_exception=True, db_type=db_type,
                                                add_if_exists=False,
                                                enable_llava=True,
-                                               llava_model=os.getenv('H2OGPT_LLAVA_MODEL'),
+                                               llava_model=os.getenv('Quantum Documents_LLAVA_MODEL'),
                                                llava_prompt=None,
                                                enable_doctr=False,
                                                enable_captions=False,
@@ -1676,7 +1676,7 @@ def test_url_more_subunit():
     assert len(docs1) > 0
 
     # Playwright and Selenium fails on cnn url
-    url_easy = 'https://github.com/h2oai/h2ogpt'
+    url_easy = 'https://github.com/h2oai/Quantum Documents'
 
     from langchain.document_loaders import PlaywrightURLLoader
     docs1 = PlaywrightURLLoader(urls=[url_easy]).load()
@@ -1771,7 +1771,7 @@ def test_mp4_add(db_type):
     from src.make_db import make_db_main
     with tempfile.TemporaryDirectory() as tmp_persist_directory:
         with tempfile.TemporaryDirectory() as tmp_user_path:
-            url = 'https://h2o-release.s3.amazonaws.com/h2ogpt/iG_jeMeUPBnUO6sx.mp4'
+            url = 'https://h2o-release.s3.amazonaws.com/Quantum Documents/iG_jeMeUPBnUO6sx.mp4'
             test_file1 = os.path.join(tmp_user_path, 'demo.mp4')
             download_simple(url, dest=test_file1)
             db, collection_name = make_db_main(persist_directory=tmp_persist_directory, user_path=tmp_user_path,
@@ -1819,8 +1819,8 @@ def test_chroma_filtering():
                         max_raw_chunks=max_raw_chunks,
                         api=api,
                         n_jobs=n_jobs,
-                        enforce_h2ogpt_api_key=False,
-                        enforce_h2ogpt_ui_key=False,
+                        enforce_Quantum Documents_api_key=False,
+                        enforce_Quantum Documents_ui_key=False,
                         )
     mydata_mode1 = LangChainMode.MY_DATA.value
     from src.make_db import make_db_main
@@ -1836,7 +1836,7 @@ def test_chroma_filtering():
 
             hf_embedding_model = 'hkunlp/instructor-xl'
             langchain_mode1 = collection_name
-            query = 'What is h2oGPT?'
+            query = 'What is Quantum Documents?'
         else:
             raise RuntimeError("Migration no longer supported")
 
@@ -1905,14 +1905,14 @@ def test_chroma_filtering():
                         if chroma_new:
                             if answer_with_sources == -1:
                                 assert len(rets1) >= 7 and (
-                                        'h2oGPT' in rets1['response'] or 'H2O GPT' in rets1['response'] or 'H2O.ai' in
+                                        'Quantum Documents' in rets1['response'] or 'H2O GPT' in rets1['response'] or 'H2O.ai' in
                                         rets1['response'])
                             else:
                                 assert len(rets1) >= 7 and (
-                                        'h2oGPT' in rets1['response'] or 'H2O GPT' in rets1['response'] or 'H2O.ai' in
+                                        'Quantum Documents' in rets1['response'] or 'H2O GPT' in rets1['response'] or 'H2O.ai' in
                                         rets1['response'])
                                 if document_subset == DocumentSubset.Relevant.name:
-                                    assert 'h2oGPT' in str(rets1['sources'])
+                                    assert 'Quantum Documents' in str(rets1['sources'])
                         else:
                             if answer_with_sources == -1:
                                 assert len(rets1) >= 7 and (
@@ -1968,7 +1968,7 @@ def test_chroma_filtering():
         single_document_choice1 = [x['source'] for x in db.get()['metadatas']][0]
         text_context_list1 = []
         pdf_height = 800
-        h2ogpt_key1 = ''
+        Quantum Documents_key1 = ''
         for view_raw_text_checkbox1 in [True, False]:
             print("view_raw_text_checkbox1: %s" % view_raw_text_checkbox1, flush=True)
             from src.gradio_runner import show_doc
@@ -1978,7 +1978,7 @@ def test_chroma_filtering():
                                 view_raw_text_checkbox1,
                                 text_context_list1,
                                 pdf_height,
-                                h2ogpt_key1,
+                                Quantum Documents_key1,
                                 dbs1=dbs1,
                                 hf_embedding_model1=hf_embedding_model,
                                 **other_kwargs
@@ -1986,7 +1986,7 @@ def test_chroma_filtering():
             assert len(show_ret) == 8
             if chroma_new:
                 assert1 = show_ret[4]['value'] is not None and 'README.md' in show_ret[4]['value']
-                assert2 = show_ret[3]['value'] is not None and 'h2oGPT' in show_ret[3]['value']
+                assert2 = show_ret[3]['value'] is not None and 'Quantum Documents' in show_ret[3]['value']
                 assert assert1 or assert2
             else:
                 assert1 = show_ret[4]['value'] is not None and single_document_choice1 in show_ret[4]['value']
@@ -2109,8 +2109,8 @@ def test_split_and_merge():
 @wrap_test_forked
 def test_crawl():
     from src.gpt_langchain import Crawler
-    final_urls = Crawler(urls=['https://github.com/h2oai/h2ogpt'], verbose=True).run()
-    assert 'https://github.com/h2oai/h2ogpt/blob/main/docs/README_GPU.md' in final_urls
+    final_urls = Crawler(urls=['https://github.com/h2oai/Quantum Documents'], verbose=True).run()
+    assert 'https://github.com/h2oai/Quantum Documents/blob/main/docs/README_GPU.md' in final_urls
     print(final_urls)
 
 

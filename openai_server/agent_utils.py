@@ -213,7 +213,7 @@ def get_ret_dict_and_handle_files(chat_result, chat_result_planning,
     file_list.sort(key=lambda x: os.path.getctime(x), reverse=True)
 
     # 10MB limit to avoid long conversions
-    file_size_bytes_limit = int(os.getenv('H2OGPT_AGENT_FILE_SIZE_LIMIT', 10 * 1024 * 1024))
+    file_size_bytes_limit = int(os.getenv('Quantum Documents_AGENT_FILE_SIZE_LIMIT', 10 * 1024 * 1024))
     file_list = [
         f for f in file_list if os.path.getsize(f) <= file_size_bytes_limit
     ]
@@ -409,9 +409,9 @@ def extract_agent_tool(input_string):
 
 def get_openai_client(max_time=120):
     # Set up OpenAI-like client
-    base_url = os.getenv('H2OGPT_OPENAI_BASE_URL')
-    assert base_url is not None, "H2OGPT_OPENAI_BASE_URL environment variable is not set"
-    server_api_key = os.getenv('H2OGPT_OPENAI_API_KEY', 'EMPTY')
+    base_url = os.getenv('Quantum Documents_OPENAI_BASE_URL')
+    assert base_url is not None, "Quantum Documents_OPENAI_BASE_URL environment variable is not set"
+    server_api_key = os.getenv('Quantum Documents_OPENAI_API_KEY', 'EMPTY')
     from openai import OpenAI
     client = OpenAI(base_url=base_url, api_key=server_api_key, timeout=max_time)
     return client

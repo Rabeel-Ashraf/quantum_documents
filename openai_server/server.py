@@ -33,7 +33,7 @@ from slowapi.middleware import SlowAPIMiddleware
 sys.path.append('openai_server')
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s: %(message)s')
 
-# https://github.com/h2oai/h2ogpt/issues/1132
+# https://github.com/h2oai/Quantum Documents/issues/1132
 # https://github.com/jquesnelle/transformers-openai-api
 # https://community.openai.com/t/trying-to-turn-this-into-an-automatic-web-search-engine/306383
 
@@ -53,7 +53,7 @@ class ResponseFormat(BaseModel):
 
 
 # https://github.com/vllm-project/vllm/blob/a3c226e7eb19b976a937e745f3867eb05f809278/vllm/entrypoints/openai/protocol.py#L62
-class H2oGPTParams(BaseModel):
+class Quantum DocumentsParams(BaseModel):
     # keep in sync with evaluate()
     # handled by extra_body passed to OpenAI API
     enable_caching: bool | None = None
@@ -111,7 +111,7 @@ class H2oGPTParams(BaseModel):
     extract_frames: int | None = 10
     llava_prompt: str | None = 'auto'
     # visible_models
-    # h2ogpt_key,
+    # Quantum Documents_key,
     add_search_to_context: bool | None = False
 
     chat_conversation: List | None = []
@@ -200,7 +200,7 @@ class AgentParams(BaseModel):
     agent_files: list | None = []
 
 
-class Params(H2oGPTParams, AgentParams):
+class Params(Quantum DocumentsParams, AgentParams):
     # https://platform.openai.com/docs/api-reference/completions/create
     user: str | None = Field(default=None, description="Track user")
     model: str | None = Field(default=None, description="Choose model")
@@ -272,35 +272,35 @@ class ModelListResponse(BaseModel):
 
 
 def verify_api_key(authorization: str = Header(None)) -> None:
-    server_api_key = os.getenv('H2OGPT_OPENAI_API_KEY', 'EMPTY')
+    server_api_key = os.getenv('Quantum Documents_OPENAI_API_KEY', 'EMPTY')
     if server_api_key:
-        h2ogpt_api_keys = [server_api_key]
+        Quantum Documents_api_keys = [server_api_key]
     else:
-        h2ogpt_api_keys = []
+        Quantum Documents_api_keys = []
 
     if server_api_key == 'EMPTY':
         # dummy case since '' cannot be handled
         # disables all auth
         return
 
-    # assume if set file, shared keys for h2oGPT and OpenAI uses
-    server_api_key_file = os.getenv('H2OGPT_H2OGPT_API_KEYS')
+    # assume if set file, shared keys for Quantum Documents and OpenAI uses
+    server_api_key_file = os.getenv('Quantum Documents_Quantum Documents_API_KEYS')
 
     # string of list case
     if isinstance(server_api_key_file, str) and not os.path.isfile(server_api_key_file):
-        h2ogpt_api_keys.extend(ast.literal_eval(server_api_key_file))
+        Quantum Documents_api_keys.extend(ast.literal_eval(server_api_key_file))
 
     # file case
     if isinstance(server_api_key_file, str) and os.path.isfile(server_api_key_file):
         with filelock.FileLock(server_api_key_file + '.lock'):
             with open(server_api_key_file, 'rt') as f:
-                h2ogpt_api_keys.extend(json.load(f))
+                Quantum Documents_api_keys.extend(json.load(f))
 
     # no keys case
-    if len(h2ogpt_api_keys) == 0:
+    if len(Quantum Documents_api_keys) == 0:
         return
 
-    if any([authorization is not None and authorization == f"Bearer {x}" for x in h2ogpt_api_keys]):
+    if any([authorization is not None and authorization == f"Bearer {x}" for x in Quantum Documents_api_keys]):
         return
 
     raise HTTPException(status_code=401, detail="Unauthorized")
@@ -363,24 +363,24 @@ class InvalidRequestError(Exception):
     pass
 
 
-status_limiter_global = os.getenv('H2OGPT_STATUS_LIMITER_GLOBAL', '100/second')
-status_limiter_user = os.getenv('H2OGPT_STATUS_LIMITER_USER', '3/second')
+status_limiter_global = os.getenv('Quantum Documents_STATUS_LIMITER_GLOBAL', '100/second')
+status_limiter_user = os.getenv('Quantum Documents_STATUS_LIMITER_USER', '3/second')
 
-completion_limiter_global = os.getenv('H2OGPT_COMPLETION_LIMITER_GLOBAL', '30/second')
-completion_limiter_user = os.getenv('H2OGPT_STATUS_LIMITER_USER', '5/second')
-completion_limiter_model = os.getenv('H2OGPT_STATUS_LIMITER_MODEL', '1/second')
+completion_limiter_global = os.getenv('Quantum Documents_COMPLETION_LIMITER_GLOBAL', '30/second')
+completion_limiter_user = os.getenv('Quantum Documents_STATUS_LIMITER_USER', '5/second')
+completion_limiter_model = os.getenv('Quantum Documents_STATUS_LIMITER_MODEL', '1/second')
 
-audio_limiter_global = os.getenv('H2OGPT_AUDIO_LIMITER_GLOBAL', '20/second')
-audio_limiter_user = os.getenv('H2OGPT_AUDIO_LIMITER_USER', '5/second')
+audio_limiter_global = os.getenv('Quantum Documents_AUDIO_LIMITER_GLOBAL', '20/second')
+audio_limiter_user = os.getenv('Quantum Documents_AUDIO_LIMITER_USER', '5/second')
 
-image_limiter_global = os.getenv('H2OGPT_IMAGE_LIMITER_GLOBAL', '5/second')
-image_limiter_user = os.getenv('H2OGPT_IMAGE_LIMITER_USER', '1/second')
+image_limiter_global = os.getenv('Quantum Documents_IMAGE_LIMITER_GLOBAL', '5/second')
+image_limiter_user = os.getenv('Quantum Documents_IMAGE_LIMITER_USER', '1/second')
 
-embedding_limiter_global = os.getenv('H2OGPT_EMBEDDING_LIMITER_GLOBAL', '30/second')
-embedding_limiter_user = os.getenv('H2OGPT_EMBEDDING_LIMITER_USER', '1/second')
+embedding_limiter_global = os.getenv('Quantum Documents_EMBEDDING_LIMITER_GLOBAL', '30/second')
+embedding_limiter_user = os.getenv('Quantum Documents_EMBEDDING_LIMITER_USER', '1/second')
 
-file_limiter_global = os.getenv('H2OGPT_FILE_LIMITER_GLOBAL', '50/second')
-file_limiter_user = os.getenv('H2OGPT_FILE_LIMITER_USER', '20/second')
+file_limiter_global = os.getenv('Quantum Documents_FILE_LIMITER_GLOBAL', '50/second')
+file_limiter_user = os.getenv('Quantum Documents_FILE_LIMITER_USER', '20/second')
 
 
 @app.get("/health")
@@ -896,7 +896,7 @@ async def handle_audio_to_speech(request: Request):
                         if chunki == 0 and audio_request.response_format == 'wav':
                             # pretend longer than is, like OpenAI does
                             chunk = modify_wav_header(chunk)
-                        # h2oGPT sends each chunk as full object, we need rest to be raw data without header for real streaming
+                        # Quantum Documents sends each chunk as full object, we need rest to be raw data without header for real streaming
                         if chunki > 0 and audio_request.stream_strip:
                             from pydub import AudioSegment
                             chunk = AudioSegment.from_file(io.BytesIO(chunk),

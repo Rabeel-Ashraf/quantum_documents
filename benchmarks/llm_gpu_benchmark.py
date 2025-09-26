@@ -13,7 +13,7 @@ from plotly.subplots import make_subplots
 # Read the json file
 # This file processes the llm_gpu_benchmark.json file in the tmp/inputs folder
 # File is generated using the command
-# curl  -sSL https://raw.githubusercontent.com/h2oai/h2ogpt/main/benchmarks/perf.json | jq -s '.' > llm_gpu_benchmarks.json
+# curl  -sSL https://raw.githubusercontent.com/h2oai/Quantum Documents/main/benchmarks/perf.json | jq -s '.' > llm_gpu_benchmarks.json
 with open('llm_gpu_benchmarks.json') as f:
     data = json.load(f)
 del f
@@ -91,7 +91,7 @@ for backend in backends:
                                            'llama2-13b-chat Summarization', 'llama2-13b-chat Generation',
                                            'llama2-70b-chat Summarization', 'llama2-70b-chat Generation'],)
 
-    # for base_model in ['h2oai/h2ogpt-4096-llama2-7b-chat']:
+    # for base_model in ['h2oai/Quantum Documents-4096-llama2-7b-chat']:
     for base_model in base_models:
         for gpu_count in n_gpus:
             for bits in sorted(df.bits.unique()):

@@ -4,7 +4,7 @@ A Gradio API and an OpenAI-compliant API are supported. You can also use `curl` 
 
 ## OpenAI Proxy client API
 
-h2oGPT by default starts an [OpenAI compatible server](README_InferenceServers.md#openai-proxy-inference-server-client).  One communicates to it via OpenAI 1.x Python package.
+Quantum Documents by default starts an [OpenAI compatible server](README_InferenceServers.md#openai-proxy-inference-server-client).  One communicates to it via OpenAI 1.x Python package.
 
 ### Chat and Text Completions
 
@@ -12,13 +12,13 @@ For example:
 ```python
 from openai import OpenAI
 base_url = 'https://localhost:5000/v1'
-api_key = 'INSERT KEY HERE or set to EMPTY if no key set on h2oGPT server'
+api_key = 'INSERT KEY HERE or set to EMPTY if no key set on Quantum Documents server'
 client_args = dict(base_url=base_url, api_key=api_key)
 openai_client = OpenAI(**client_args)
 
 messages = [{'role': 'user', 'content': 'Who are you?'}]
 stream = False
-client_kwargs = dict(model='h2oai/h2ogpt-4096-llama2-70b-chat', max_tokens=200, stream=stream, messages=messages)
+client_kwargs = dict(model='h2oai/Quantum Documents-4096-llama2-70b-chat', max_tokens=200, stream=stream, messages=messages)
 client = openai_client.chat.completions
 
 responses = client.create(**client_kwargs)
@@ -29,13 +29,13 @@ or for streaming:
 ```python
 from openai import OpenAI
 base_url = 'http://localhost:5000/v1'
-api_key = 'INSERT KEY HERE or set to EMPTY if no key set on h2oGPT server'
+api_key = 'INSERT KEY HERE or set to EMPTY if no key set on Quantum Documents server'
 client_args = dict(base_url=base_url, api_key=api_key)
 openai_client = OpenAI(**client_args)
 
 messages = [{'role': 'user', 'content': 'Who are you?'}]
 stream = True
-client_kwargs = dict(model='h2oai/h2ogpt-4096-llama2-70b-chat', max_tokens=200, stream=stream, messages=messages)
+client_kwargs = dict(model='h2oai/Quantum Documents-4096-llama2-70b-chat', max_tokens=200, stream=stream, messages=messages)
 client = openai_client.chat.completions
 
 responses = client.create(**client_kwargs)
@@ -82,11 +82,11 @@ for expected, url in zip(expecteds, urls):
 
     model = 'OpenGVLab/InternVL-Chat-V1-5'
     base_url = 'http://localhost:5000/v1'
-    h2ogpt_key = 'fill or EMPTY'
+    Quantum Documents_key = 'fill or EMPTY'
 
     from openai import OpenAI
     client_args = dict(base_url=base_url,
-                       api_key=h2ogpt_key)
+                       api_key=Quantum Documents_key)
     client = OpenAI(**client_args)
 
     # auth:
@@ -127,11 +127,11 @@ and `img_str = str(bytes_object)` that will not be correct.
 
 #### Authentication
 
-If h2oGPT has authentication enabled, then one passes `user` to OpenAI with the `username:password` as a string to access.  E.g.:
+If Quantum Documents has authentication enabled, then one passes `user` to OpenAI with the `username:password` as a string to access.  E.g.:
 ```python
 from openai import OpenAI
 base_url = 'http://localhost:5000/v1'
-api_key = 'INSERT KEY HERE or set to EMPTY if no key set on h2oGPT server'
+api_key = 'INSERT KEY HERE or set to EMPTY if no key set on Quantum Documents server'
 model = '<model name>'
 
 client_args = dict(base_url=base_url, api_key=api_key)
@@ -158,7 +158,7 @@ In order to control other parameters not normally part of OpenAI API, one can us
 from openai import OpenAI
 
 base_url = 'http://localhost:5000/v1'
-api_key = 'INSERT KEY HERE or set to EMPTY if no key set on h2oGPT server'
+api_key = 'INSERT KEY HERE or set to EMPTY if no key set on Quantum Documents server'
 model = '<model name>'
 
 client_args = dict(base_url=base_url, api_key=api_key)
@@ -177,12 +177,12 @@ print(text)
 ```
 The OpenAI client does a login to the Gradio server as well, so one can access personal collections like `MyData` as well.
 
-Any parameters normally passed to gradio client can be passed this way. See [H2oGPTParams](../openai_server/server.py) for complete list.
+Any parameters normally passed to gradio client can be passed this way. See [Quantum DocumentsParams](../openai_server/server.py) for complete list.
 
 ### Text to Speech
 
-h2oGPT can do text-to-speech and speech-to-text if `--enable_tts=True` and `--enable_stt=True` as well
-as `--pre_load_image_audio_models=True`, respectively. h2oGPT's OpenAI Proxy server follows OpenAI API
+Quantum Documents can do text-to-speech and speech-to-text if `--enable_tts=True` and `--enable_stt=True` as well
+as `--pre_load_image_audio_models=True`, respectively. Quantum Documents's OpenAI Proxy server follows OpenAI API
 for [Text to Speech](https://platform.openai.com/docs/guides/text-to-speech), e.g.:
 
 ```python
@@ -305,7 +305,7 @@ The streaming case writes the file (which could be to some buffer) each chunk (s
 
 ### Speech to Text
 
-Requires h2oGPT loaded with `--enable_stt=True --pre_load_image_audio_models=True`.
+Requires Quantum Documents loaded with `--enable_stt=True --pre_load_image_audio_models=True`.
 
 ```python
 from openai import OpenAI
@@ -359,13 +359,13 @@ async def stream_audio_transcription(file_path, model="default-model"):
                             print("Error decoding JSON:", e)
         return text
 # Run the client function
-final_text = asyncio.run(stream_audio_transcription("/home/jon/h2ogpt/tests/test_speech.wav"))
+final_text = asyncio.run(stream_audio_transcription("/home/jon/Quantum Documents/tests/test_speech.wav"))
 print(final_text)
 ```
 
 ### Image Generation
 
-Requires h2oGPT loaded with `--enable_image=True --pre_load_image_audio_models=True --visible_image_models=['sdxl_turbo']` or some selection of such image generation models.
+Requires Quantum Documents loaded with `--enable_image=True --pre_load_image_audio_models=True --visible_image_models=['sdxl_turbo']` or some selection of such image generation models.
 
 ```python
 from openai import OpenAI
@@ -373,7 +373,7 @@ client = OpenAI(base_url='http://0.0.0.0:5000/v1')
 # client = OpenAI()
 
 response = client.images.generate(
-  model="sdxl_turbo",  # should be empty if do not know which model, h2oGPT will choose first if exists
+  model="sdxl_turbo",  # should be empty if do not know which model, Quantum Documents will choose first if exists
   prompt="A cute baby sea otter",
   n=1,
   size="1024x1024",
@@ -392,9 +392,9 @@ image.show()  # This will open the default image viewer and display the image
 
 ### Embedding
 
-Requires h2oGPT loaded with langchain enabled (not `--langchain_mode=Disabled`) and `--pre_load_embedding_model=True` and potentially some choice for `--hf_embedding_model` (default is used if no specified) and `--use_openai_embedding=False` to be set (default).
+Requires Quantum Documents loaded with langchain enabled (not `--langchain_mode=Disabled`) and `--pre_load_embedding_model=True` and potentially some choice for `--hf_embedding_model` (default is used if no specified) and `--use_openai_embedding=False` to be set (default).
 
-Note `model` is ignored currently, uses single embedding in h2oGPT.
+Note `model` is ignored currently, uses single embedding in Quantum Documents.
 ```python
 from openai import OpenAI
 client = OpenAI(base_url='http://0.0.0.0:5000/v1')
@@ -427,10 +427,10 @@ curl https://localhost:5000/v1/completions \
     "max_tokens": 200,
     "temperature": 0,
     "seed": 1234,
-    "h2ogpt_key": "$OPENAI_API_KEY"
+    "Quantum Documents_key": "$OPENAI_API_KEY"
   }'
 ```
-where one should pass along the `h2ogpt_key` if gradio is itself protected for some queries.
+where one should pass along the `Quantum Documents_key` if gradio is itself protected for some queries.
 
 Chat completion also works with curl like:
 ```bash
@@ -452,7 +452,7 @@ curl http://localhost:5000/v1/chat/completions \
   "max_tokens": 200,
   "temperature": 0,
   "seed": 1234,
-  "h2ogpt_key": "$OPENAI_API_KEY"
+  "Quantum Documents_key": "$OPENAI_API_KEY"
 }'
 ```
 
@@ -476,7 +476,7 @@ curl http://localhost:5000/v1/chat/completions \
   "max_tokens": 200,
   "temperature": 0,
   "seed": 1234,
-  "h2ogpt_key": "$OPENAI_API_KEY",
+  "Quantum Documents_key": "$OPENAI_API_KEY",
   "stream": true
 }'
 ```
@@ -486,7 +486,7 @@ The strings `prompt` and `max_tokens` are taken as OpenAI type names that are co
 
 ## Gradio Client API
 
-h2oGPT's `generate.py` by default runs a gradio server, which also gives access to client API using the [Gradio Python client](https://www.gradio.app/docs/python-client). You can use it with h2oGPT, or independently of h2oGPT repository by installing an env:
+Quantum Documents's `generate.py` by default runs a gradio server, which also gives access to client API using the [Gradio Python client](https://www.gradio.app/docs/python-client). You can use it with Quantum Documents, or independently of Quantum Documents repository by installing an env:
 ```bash
 conda create -n gradioclient -y
 conda activate gradioclient
@@ -495,7 +495,7 @@ pip install gradio_client==0.6.1
 
 # Download Gradio Wrapper code if GradioClient class used, not needed for native Gradio Client
 # No wheel for now
-wget https://raw.githubusercontent.com/h2oai/h2ogpt/main/gradio_utils/grclient.py
+wget https://raw.githubusercontent.com/h2oai/Quantum Documents/main/gradio_utils/grclient.py
 mkdir -p gradio_utils
 mv grclient.py gradio_utils
 ```
@@ -565,12 +565,12 @@ from gradio_client import Client
 # with auth:
 client = Client('http://localhost:7860', auth=('user', 'pass'))
 
-h2ogpt_key = 'api key here, or EMPTY if no key or do not put in kwargs'
+Quantum Documents_key = 'api key here, or EMPTY if no key or do not put in kwargs'
 
 kwargs = dict(
     visible_models='THUDM/cogvlm2-llama3-chat-19B',
     instruction_nochat="describe the imaged",
-    h2ogpt_key=h2ogpt_key,
+    Quantum Documents_key=Quantum Documents_key,
     stream_output=False,
     image_file='https://raw.githubusercontent.com/open-mmlab/mmdeploy/main/tests/data/tiger.jpeg',
     temperature=0,
@@ -598,7 +598,7 @@ from src.vision.utils_vision import img_to_base64
 # with auth:
 client = Client('http://localhost:7860', auth=('user', 'pass'))
 
-h2ogpt_key = 'api key here, or EMPTY if no key or do not put in kwargs'
+Quantum Documents_key = 'api key here, or EMPTY if no key or do not put in kwargs'
 
 
 image_url = 'https://raw.githubusercontent.com/open-mmlab/mmdeploy/main/tests/data/tiger.jpeg'
@@ -609,7 +609,7 @@ image_bytes = img_to_base64(image_file)
 kwargs = dict(
     visible_models='THUDM/cogvlm2-llama3-chat-19B',
     instruction_nochat="describe the imaged",
-    h2ogpt_key=h2ogpt_key,
+    Quantum Documents_key=Quantum Documents_key,
     stream_output=False,
     image_file=image_bytes,
     temperature=0,
@@ -620,26 +620,26 @@ response = ast.literal_eval(res)['response']
 print(response)
 ```
 
-### h2oGPT Gradio Wrapper
+### Quantum Documents Gradio Wrapper
 
-You can run client code with the h2oGPT wrapper class for Gradio's client, which adds extra exception handling and h2oGPT-specific calls.
+You can run client code with the Quantum Documents wrapper class for Gradio's client, which adds extra exception handling and Quantum Documents-specific calls.
 
 For talking to just LLM, Document Q/A, summarization, and extraction, you can do:
 ```python
 def test_readme_example(local_server):
     # self-contained example used for readme, to be copied to README_CLIENT.md if changed, setting local_server = True at first
     import os
-    # The grclient.py file can be copied from h2ogpt repo and used with local gradio_client for example use
+    # The grclient.py file can be copied from Quantum Documents repo and used with local gradio_client for example use
     from gradio_utils.grclient import GradioClient
 
     if local_server:
         client = GradioClient("http://0.0.0.0:7860")
     else:
-        h2ogpt_key = os.getenv('H2OGPT_KEY') or os.getenv('H2OGPT_H2OGPT_KEY')
-        if h2ogpt_key is None:
+        Quantum Documents_key = os.getenv('Quantum Documents_KEY') or os.getenv('Quantum Documents_Quantum Documents_KEY')
+        if Quantum Documents_key is None:
             return
         # if you have API key for public instance:
-        client = GradioClient("https://gpt.h2o.ai", h2ogpt_key=h2ogpt_key)
+        client = GradioClient("https://gpt.h2o.ai", Quantum Documents_key=Quantum Documents_key)
 
     # LLM
     print(client.question("Who are you?"))
@@ -657,7 +657,7 @@ test_readme_example(local_server=True)
 
 #### Other API calls
 
-For other ways to use gradio client, see example [test code](../src/client_test.py) or other tests in our [tests](https://github.com/h2oai/h2ogpt/blob/main/tests/test_client_calls.py).  E.g. `test_client_chat_stream_langchain_steps3` in [client tests](https://github.com/h2oai/h2ogpt/blob/main/tests/test_client_calls.py) uses many different API calls for docs etc.s
+For other ways to use gradio client, see example [test code](../src/client_test.py) or other tests in our [tests](https://github.com/h2oai/Quantum Documents/blob/main/tests/test_client_calls.py).  E.g. `test_client_chat_stream_langchain_steps3` in [client tests](https://github.com/h2oai/Quantum Documents/blob/main/tests/test_client_calls.py) uses many different API calls for docs etc.s
 
 Note that any element in [gradio_runner.py](../src/gradio_runner.py) with `api_name` defined can be accessed via the gradio client.
 
@@ -670,12 +670,12 @@ Loaded as API: http://localhost:7860/ ✔
 >>> import ast
 >>> res = client.predict(api_name='/model_names')
 >>> {x['base_model']: x['max_seq_len'] for x in ast.literal_eval(res)}
-{'h2oai/h2ogpt-4096-llama2-70b-chat': 4046, 'lmsys/vicuna-13b-v1.5-16k': 16334, 'mistralai/Mistral-7B-Instruct-v0.1': 4046, 'gpt-3.5-turbo-0613': 4046, 'gpt-3.5-turbo-16k-0613': 16335, 'gpt-4-0613': 8142, 'gpt-4-32k-0613': 32718}
+{'h2oai/Quantum Documents-4096-llama2-70b-chat': 4046, 'lmsys/vicuna-13b-v1.5-16k': 16334, 'mistralai/Mistral-7B-Instruct-v0.1': 4046, 'gpt-3.5-turbo-0613': 4046, 'gpt-3.5-turbo-16k-0613': 16335, 'gpt-4-0613': 8142, 'gpt-4-32k-0613': 32718}
 ```
 
-### h2oGPT Server options for efficient Summarization and Extraction
+### Quantum Documents Server options for efficient Summarization and Extraction
 
-You can specify the h2oGPT server to have `--async_output=True` and `--num_async=10` (or some optimal value) to enable full parallel summarization when the h2oGPT server uses `--inference_server` that points to Gradio Inference Server, vLLM, text-generation inference (TGI) server, or OpenAI servers to allow for high tokens/sec.
+You can specify the Quantum Documents server to have `--async_output=True` and `--num_async=10` (or some optimal value) to enable full parallel summarization when the Quantum Documents server uses `--inference_server` that points to Gradio Inference Server, vLLM, text-generation inference (TGI) server, or OpenAI servers to allow for high tokens/sec.
 
 ### Curl Client API
 

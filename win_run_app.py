@@ -46,26 +46,26 @@ def setup_paths():
         path2 = os.path.join(base_path, '..', sub)
         if os.path.isdir(path2):
             if sub == 'models' and os.path.isfile(os.path.join(path2, 'human.jpg')):
-                os.environ['H2OGPT_MODEL_BASE'] = path2
+                os.environ['Quantum Documents_MODEL_BASE'] = path2
             sys.path.append(path2)
         print(path2, flush=True)
 
         path2 = os.path.join(path1, '..', sub)
         if os.path.isdir(path2):
             if sub == 'models' and os.path.isfile(os.path.join(path2, 'human.jpg')):
-                os.environ['H2OGPT_MODEL_BASE'] = path2
+                os.environ['Quantum Documents_MODEL_BASE'] = path2
             sys.path.append(path2)
         print(path2, flush=True)
 
     # for app, avoid forbidden for web access
-    if os.getenv('H2OGPT_MODEL_BASE'):
-        base0 = os.environ['H2OGPT_MODEL_BASE']
-        if 'Programs' in os.environ['H2OGPT_MODEL_BASE']:
-            os.environ['H2OGPT_MODEL_BASE'] = os.environ['H2OGPT_MODEL_BASE'].replace('Programs', 'Temp/gradio/')
-            if os.path.isdir(os.environ['H2OGPT_MODEL_BASE']):
-                shutil.rmtree(os.environ['H2OGPT_MODEL_BASE'], ignore_errors=True)
+    if os.getenv('Quantum Documents_MODEL_BASE'):
+        base0 = os.environ['Quantum Documents_MODEL_BASE']
+        if 'Programs' in os.environ['Quantum Documents_MODEL_BASE']:
+            os.environ['Quantum Documents_MODEL_BASE'] = os.environ['Quantum Documents_MODEL_BASE'].replace('Programs', 'Temp/gradio/')
+            if os.path.isdir(os.environ['Quantum Documents_MODEL_BASE']):
+                shutil.rmtree(os.environ['Quantum Documents_MODEL_BASE'], ignore_errors=True)
             if os.path.isfile(os.path.join(base0, 'human.jpg')):
-                copy_tree(base0, os.environ['H2OGPT_MODEL_BASE'])
+                copy_tree(base0, os.environ['Quantum Documents_MODEL_BASE'])
 
 
 from importlib.metadata import distribution, PackageNotFoundError
@@ -82,8 +82,8 @@ except (PackageNotFoundError, AssertionError):
 
 def _main():
     setup_paths()
-    os.environ['h2ogpt_block_gradio_exit'] = 'False'
-    os.environ['h2ogpt_score_model'] = ''
+    os.environ['Quantum Documents_block_gradio_exit'] = 'False'
+    os.environ['Quantum Documents_score_model'] = ''
 
     try:
         from pynvml import nvmlInit, nvmlDeviceGetCount
@@ -119,12 +119,12 @@ def _main():
             install(os.getenv('TORCH_WHEEL'))
         else:
             if need_get_gpu_torch:
-                wheel_file = "https://h2o-release.s3.amazonaws.com/h2ogpt/torch-2.1.2%2Bcu118-cp310-cp310-win_amd64.whl"
+                wheel_file = "https://h2o-release.s3.amazonaws.com/Quantum Documents/torch-2.1.2%2Bcu118-cp310-cp310-win_amd64.whl"
                 print("Installing Torch from %s" % wheel_file)
                 install(wheel_file)
             # assume cpu torch part of install
             #else:
-            #   wheel_file = "https://h2o-release.s3.amazonaws.com/h2ogpt/torch-2.1.2-cp310-cp310-win_amd64.whl"
+            #   wheel_file = "https://h2o-release.s3.amazonaws.com/Quantum Documents/torch-2.1.2-cp310-cp310-win_amd64.whl"
             #    print("Installing Torch from %s" % wheel_file)
             #    install(wheel_file)
         import importlib
@@ -132,10 +132,10 @@ def _main():
         import pkg_resources
         importlib.reload(pkg_resources)  # re-load because otherwise cache would be bad
 
-    from generate import entrypoint_main as main_h2ogpt
-    main_h2ogpt()
+    from generate import entrypoint_main as main_Quantum Documents
+    main_Quantum Documents()
 
-    server_name = os.getenv('h2ogpt_server_name', os.getenv('H2OGPT_SERVER_NAME', 'localhost'))
+    server_name = os.getenv('Quantum Documents_server_name', os.getenv('Quantum Documents_SERVER_NAME', 'localhost'))
     server_port = os.getenv('GRADIO_SERVER_PORT', str(7860))
 
     url = "http://%s:%s" % (server_name, server_port)
@@ -149,7 +149,7 @@ def main():
     try:
         _main()
     except BaseException as e:
-        with open('h2ogpt_exception.log', 'at') as f:
+        with open('Quantum Documents_exception.log', 'at') as f:
             f.write(traceback.format_exc())
         time.sleep(10)
         raise

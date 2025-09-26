@@ -60,16 +60,16 @@ def call_function_server(host, port, function_name, args, kwargs, use_disk=False
             return execute_result["result"]
 
 
-def get_data_h2ogpt(file_path, verbose=False, is_url=False, **kwargs):
+def get_data_Quantum Documents(file_path, verbose=False, is_url=False, **kwargs):
     """
     Simple function for Open Web UI
     """
-    function_server_host = os.getenv('H2OGPT_FUNCTION_SERVER_HOST', '0.0.0.0')
-    function_server_port = int(os.getenv('H2OGPT_FUNCTION_SERVER_PORT', '5002'))
-    function_api_key = os.getenv('H2OGPT_FUNCTION_SERVER_API_KEY', 'EMPTY')
+    function_server_host = os.getenv('Quantum Documents_FUNCTION_SERVER_HOST', '0.0.0.0')
+    function_server_port = int(os.getenv('Quantum Documents_FUNCTION_SERVER_PORT', '5002'))
+    function_api_key = os.getenv('Quantum Documents_FUNCTION_SERVER_API_KEY', 'EMPTY')
 
     # could set other things:
-    # https://github.com/h2oai/h2ogpt/blob/d2fa3d7ce507e8fb141c78ff92a83a8e27cf8b31/src/gpt_langchain.py#L9498
+    # https://github.com/h2oai/Quantum Documents/blob/d2fa3d7ce507e8fb141c78ff92a83a8e27cf8b31/src/gpt_langchain.py#L9498
     simple_kwargs = kwargs
     if is_url:
         simple_kwargs.update(dict(filei=None, url=file_path, text=None))

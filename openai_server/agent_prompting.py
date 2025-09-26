@@ -281,10 +281,10 @@ def get_chat_doc_context(text_context_list, image_file, agent_work_dir, chat_con
             f.write(system_prompt or '')
         with open("b2imgs.txt", "wt") as f:
             f.write("\n".join(b2imgs))
-        os.environ['H2OGPT_RAG_TEXT_CONTEXT_LIST'] = os.path.abspath("text_context_list.txt")
-        os.environ['H2OGPT_RAG_CHAT_CONVERSATION'] = os.path.abspath("chat_conversation.json")
-        os.environ['H2OGPT_RAG_SYSTEM_PROMPT'] = os.path.abspath("system_prompt.txt")
-        os.environ['H2OGPT_RAG_IMAGES'] = os.path.abspath("b2imgs.txt")
+        os.environ['Quantum Documents_RAG_TEXT_CONTEXT_LIST'] = os.path.abspath("text_context_list.txt")
+        os.environ['Quantum Documents_RAG_CHAT_CONVERSATION'] = os.path.abspath("chat_conversation.json")
+        os.environ['Quantum Documents_RAG_SYSTEM_PROMPT'] = os.path.abspath("system_prompt.txt")
+        os.environ['Quantum Documents_RAG_IMAGES'] = os.path.abspath("b2imgs.txt")
 
         # setup general validation part of RAG
         meta_datas = [extract_xml_tags(x) for x in text_context_list]
@@ -387,7 +387,7 @@ def get_ask_question_about_image_helper(base_url, api_key, model):
         vision_model = None
 
     if vision_model:
-        os.environ['H2OGPT_OPENAI_VISION_MODEL'] = vision_model
+        os.environ['Quantum Documents_OPENAI_VISION_MODEL'] = vision_model
 
         cwd = os.path.abspath(os.getcwd())
         ask_question_about_image_helper = f"""\n# Ask Question About Image Helper:
@@ -549,8 +549,8 @@ def get_aider_coder_helper(base_url, api_key, model, autogen_timeout, debug=Fals
         assert model in [x.id for x in model_list], "Model must be in the list of models"
 
     # e.g. for Aider tool to know which model to use
-    os.environ['H2OGPT_AGENT_OPENAI_MODEL'] = model
-    os.environ['H2OGPT_AGENT_OPENAI_TIMEOUT'] = str(autogen_timeout)
+    os.environ['Quantum Documents_AGENT_OPENAI_MODEL'] = model
+    os.environ['Quantum Documents_AGENT_OPENAI_TIMEOUT'] = str(autogen_timeout)
 
     cwd = os.path.abspath(os.getcwd())
     aider_coder_helper = f"""\n# Get coding assistance and apply to input files:
@@ -575,8 +575,8 @@ def get_rag_helper(base_url, api_key, model, autogen_timeout, text_context_list,
         assert model in [x.id for x in model_list], "Model must be in the list of models"
 
     # e.g. for Aider tool to know which model to use
-    os.environ['H2OGPT_AGENT_OPENAI_MODEL'] = model
-    os.environ['H2OGPT_AGENT_OPENAI_TIMEOUT'] = str(autogen_timeout)
+    os.environ['Quantum Documents_AGENT_OPENAI_MODEL'] = model
+    os.environ['Quantum Documents_AGENT_OPENAI_TIMEOUT'] = str(autogen_timeout)
 
     cwd = os.path.abspath(os.getcwd())
     rag_helper = f"""\n# Get response to query with RAG (Retrieve Augmented Generation) using documents:

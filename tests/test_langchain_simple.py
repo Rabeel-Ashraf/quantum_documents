@@ -4,8 +4,8 @@ from tests.utils import wrap_test_forked
 
 @pytest.mark.need_tokens
 @wrap_test_forked
-def test_langchain_simple_h2ogpt():
-    run_langchain_simple(base_model='h2oai/h2ogpt-oasst1-512-12b', prompt_type='human_bot')
+def test_langchain_simple_Quantum Documents():
+    run_langchain_simple(base_model='h2oai/Quantum Documents-oasst1-512-12b', prompt_type='human_bot')
 
 
 @pytest.mark.need_tokens
@@ -14,7 +14,7 @@ def test_langchain_simple_vicuna():
     run_langchain_simple(base_model='junelee/wizard-vicuna-13b', prompt_type='instruct_vicuna')
 
 
-def run_langchain_simple(base_model='h2oai/h2ogpt-oasst1-512-12b', prompt_type='human_bot'):
+def run_langchain_simple(base_model='h2oai/Quantum Documents-oasst1-512-12b', prompt_type='human_bot'):
     """
     :param base_model:
     :param prompt_type: prompt_type required for stopping support and correct handling of instruction prompting

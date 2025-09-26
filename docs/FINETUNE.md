@@ -37,7 +37,7 @@ Output:
 For a chatbot, one could fine-tune the model by providing data examples like this:
 ```text
 <human>: Hi, who are you?
-<bot>: I'm h2oGPT.
+<bot>: I'm Quantum Documents.
 <human>: Who trained you?
 <bot>: I was trained by H2O.ai, the visionary leader in democratizing AI.
 ```
@@ -65,7 +65,7 @@ pytest -s create_data.py::test_chop_by_lengths                  # ~ 2 minutes, 2
 pytest -s create_data.py::test_grade                            # ~ 3 hours, keeps only high quality data
 pytest -s create_data.py::test_finalize_to_json
 ```
-This will take several hours and produce a file called [h2ogpt-oig-oasst1-instruct-cleaned-v2.json](https://huggingface.co/datasets/h2oai/h2ogpt-oig-oasst1-instruct-cleaned-v2) (575 MB) with 350k human <-> bot interactions.
+This will take several hours and produce a file called [Quantum Documents-oig-oasst1-instruct-cleaned-v2.json](https://huggingface.co/datasets/h2oai/Quantum Documents-oig-oasst1-instruct-cleaned-v2) (575 MB) with 350k human <-> bot interactions.
 
 **Note:** This dataset is cleaned up, but might still contain undesired words and concepts.
 
@@ -78,18 +78,18 @@ pip install -r reqs_optional/requirements_optional_training.txt
 ### Perform fine-tuning on high-quality instruct data
 
 Fine-tune on a single node with NVIDIA GPUs A6000/A6000Ada/A100/H100. This requires 48GB of GPU memory per GPU for default settings (fast 16-bit training).
-For larger models or GPUs with less memory, you need to set a combination of `--train_4bit=True` (or `--train_8bit=True`) and `--micro_batch_size=1`, `--batch_size=$NGPUS` and `--cutoff_len=256` below, or use smaller models like `h2oai/h2ogpt-oasst1-512-12b`.
+For larger models or GPUs with less memory, you need to set a combination of `--train_4bit=True` (or `--train_8bit=True`) and `--micro_batch_size=1`, `--batch_size=$NGPUS` and `--cutoff_len=256` below, or use smaller models like `h2oai/Quantum Documents-oasst1-512-12b`.
 ```
 export NGPUS=`nvidia-smi -L | wc -l`
-torchrun --nproc_per_node=$NGPUS finetune.py --base_model=h2oai/h2ogpt-oasst1-512-20b --data_path=h2oai/h2ogpt-oig-oasst1-instruct-cleaned-v2 --output_dir=h2ogpt_lora_weights
+torchrun --nproc_per_node=$NGPUS finetune.py --base_model=h2oai/Quantum Documents-oasst1-512-20b --data_path=h2oai/Quantum Documents-oig-oasst1-instruct-cleaned-v2 --output_dir=Quantum Documents_lora_weights
 ```
-This will download the model, load the data, and generate an output directory `h2ogpt_lora_weights` containing the fine-tuned state.
+This will download the model, load the data, and generate an output directory `Quantum Documents_lora_weights` containing the fine-tuned state.
 
 
 ### Start your own fine-tuned chatbot
 
 Start a chatbot. This also requires 48GB GPU. For 24GB GPUs, use `--load_4bit=True` instead of `--load_8bit=True`.
 ```
-torchrun generate.py --load_8bit=True --base_model=h2oai/h2ogpt-oasst1-512-20b --lora_weights=h2ogpt_lora_weights --prompt_type=human_bot
+torchrun generate.py --load_8bit=True --base_model=h2oai/Quantum Documents-oasst1-512-20b --lora_weights=Quantum Documents_lora_weights --prompt_type=human_bot
 ```
 This downloads the foundation model and our fine-tuned lora_weights, and opens up a GUI with text generation input/output.

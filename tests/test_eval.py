@@ -6,7 +6,7 @@ from src.enums import DocumentSubset, LangChainAction, docs_joiner_default
 from src.utils import remove
 
 
-@pytest.mark.parametrize("base_model", ['h2oai/h2ogpt-oig-oasst1-512-6_9b', 'junelee/wizard-vicuna-13b'])
+@pytest.mark.parametrize("base_model", ['h2oai/Quantum Documents-oig-oasst1-512-6_9b', 'junelee/wizard-vicuna-13b'])
 @pytest.mark.parametrize("bits", [4, 8, 16, 32])
 @pytest.mark.parametrize("cpu", [False, True])
 @wrap_test_forked
@@ -18,12 +18,12 @@ def test_eval1(cpu, bits, base_model):
 
 @wrap_test_forked
 def test_eval_json():
-    base_model = 'h2oai/h2ogpt-oig-oasst1-512-6_9b'
+    base_model = 'h2oai/Quantum Documents-oig-oasst1-512-6_9b'
     cpu = False
     bits = 8
 
     # make 2 rows of json
-    prompts = [dict(instruction="Who are you?", output="I'm h2oGPT"),
+    prompts = [dict(instruction="Who are you?", output="I'm Quantum Documents"),
                dict(instruction="What is 2+2?", output="4"),
                ]
     eval_filename = 'test_prompts.json'
@@ -35,11 +35,11 @@ def test_eval_json():
     eval_out_filename = run_eval1(cpu=cpu, bits=bits, base_model=base_model, eval_filename=eval_filename,
                                   eval_prompts_only_num=len(prompts))
     df = pd.read_parquet(eval_out_filename)
-    val0 = "My name is h2oGPT. I'm a large language model trained by H2O.ai. How may I assist you?"
-    val1 = """Hi! I'm h2oGPT, a large language model by H2O.ai, the visionary leader in democratizing AI. How may I assist you?"""
-    val2 = """Hi! I'm h2oGPT, a large language model by H2O.ai"""
-    val3 = """My name is h2oGPT. I'm a large language model trained by H2O.ai. How may I assist you?"""
-    val4 = """ I'm h2oGPT, a large language model by H2O.ai. How may I assist you?"""
+    val0 = "My name is Quantum Documents. I'm a large language model trained by H2O.ai. How may I assist you?"
+    val1 = """Hi! I'm Quantum Documents, a large language model by H2O.ai, the visionary leader in democratizing AI. How may I assist you?"""
+    val2 = """Hi! I'm Quantum Documents, a large language model by H2O.ai"""
+    val3 = """My name is Quantum Documents. I'm a large language model trained by H2O.ai. How may I assist you?"""
+    val4 = """ I'm Quantum Documents, a large language model by H2O.ai. How may I assist you?"""
     assert df['response'].values[0] == val0 or \
            df['response'].values[0] == ' ' + val0 or \
            df['response'].values[0] == val1 or \
@@ -51,7 +51,7 @@ def test_eval_json():
     assert df['score'].values[1] > 0.5
 
 
-def run_eval1(cpu=False, bits=None, base_model='h2oai/h2ogpt-oig-oasst1-512-6_9b', eval_filename=None,
+def run_eval1(cpu=False, bits=None, base_model='h2oai/Quantum Documents-oig-oasst1-512-6_9b', eval_filename=None,
               eval_prompts_only_num=1,
               langchain_mode='Disabled'):
     if base_model == 'junelee/wizard-vicuna-13b' and (bits != 8 or cpu):
@@ -64,7 +64,7 @@ def run_eval1(cpu=False, bits=None, base_model='h2oai/h2ogpt-oig-oasst1-512-6_9b
     sys.modules.pop('langchain', None)
 
     prompt_type = None
-    if 'h2oai/h2ogpt-' in base_model:
+    if 'h2oai/Quantum Documents-' in base_model:
         prompt_type = 'human_bot'
     if 'junelee/wizard-vicuna-13b' == base_model:
         prompt_type = 'instruct_vicuna'
@@ -163,12 +163,12 @@ def run_eval1(cpu=False, bits=None, base_model='h2oai/h2ogpt-oig-oasst1-512-6_9b
                  'image_quality': None,
                  'image_guidance_scale': None,
                  'image_num_inference_steps': None,
-                 'h2ogpt_key': None,
+                 'Quantum Documents_key': None,
                  'chat_conversation': None,
                  'text_context_list': None,
                  'docs_ordering_type': 'best_near_prompt',
                  'min_max_new_tokens': 512,
-                 'max_input_tokens': 3100 if base_model == 'h2oai/h2ogpt-oig-oasst1-512-6_9b' else -1,
+                 'max_input_tokens': 3100 if base_model == 'h2oai/Quantum Documents-oig-oasst1-512-6_9b' else -1,
                  'llava_prompt': 'auto',
                  'max_total_input_tokens': -1,
                  'docs_token_handling': 'split_or_merge',

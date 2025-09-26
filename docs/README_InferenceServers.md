@@ -1,6 +1,6 @@
 # Inference Servers
 
-One can connect to Hugging Face text generation inference server, gradio servers running h2oGPT, OpenAI, or Azure OpenAI servers.  
+One can connect to Hugging Face text generation inference server, gradio servers running Quantum Documents, OpenAI, or Azure OpenAI servers.  
 
 ## oLLaMa
 
@@ -16,7 +16,7 @@ or if you prefer to load from UI one can run:
 ```bash
 python generate.py
 ```
-then when h2oGPT UI is up, go to Models Tab and enter `llama2` into base model and enter `vllm_chat:http://localhost:11434/v1/` for server and ensure prompt_type is `plain` and click on right side panel and open context length and set `max_seq_len` to `4096.
+then when Quantum Documents UI is up, go to Models Tab and enter `llama2` into base model and enter `vllm_chat:http://localhost:11434/v1/` for server and ensure prompt_type is `plain` and click on right side panel and open context length and set `max_seq_len` to `4096.
 
 ![ollama_setup.png](ollama_setup.png)
 
@@ -67,7 +67,7 @@ cd server && make install install-flash-attention
 ```
 
 ```bash
-NCCL_SHM_DISABLE=1 CUDA_VISIBLE_DEVICES=0 text-generation-launcher --model-id h2oai/h2ogpt-oig-oasst1-512-6_9b --port 8080  --sharded false --trust-remote-code --max-stop-sequences=6
+NCCL_SHM_DISABLE=1 CUDA_VISIBLE_DEVICES=0 text-generation-launcher --model-id h2oai/Quantum Documents-oig-oasst1-512-6_9b --port 8080  --sharded false --trust-remote-code --max-stop-sequences=6
 ```
 
 ### Docker Install
@@ -107,19 +107,19 @@ in order to log in to this user.
 
 Then for falcon 7b run on GPU 0:
 ```bash
-docker run --gpus device=0 --shm-size 2g -p 6112:80 -v $HOME/.cache/huggingface/hub/:/data  ghcr.io/huggingface/text-generation-inference:latest --model-id h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v2 --max-input-length 2048 --max-total-tokens 4096 --sharded=false --disable-custom-kernels --trust-remote-code --max-stop-sequences=6
+docker run --gpus device=0 --shm-size 2g -p 6112:80 -v $HOME/.cache/huggingface/hub/:/data  ghcr.io/huggingface/text-generation-inference:latest --model-id h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-7b-v2 --max-input-length 2048 --max-total-tokens 4096 --sharded=false --disable-custom-kernels --trust-remote-code --max-stop-sequences=6
 ```
 or Pythia 12b on all GPUs:
 ```bash
-docker run --gpus all --shm-size 2g -p 6112:80 -v $HOME/.cache/huggingface/hub/:/data  ghcr.io/huggingface/text-generation-inference:latest --model-id h2oai/h2ogpt-oasst1-512-12b --max-input-length 2048 --max-total-tokens 4096 --sharded=true --num-shard=4 --disable-custom-kernels --trust-remote-code --max-stop-sequences=6
+docker run --gpus all --shm-size 2g -p 6112:80 -v $HOME/.cache/huggingface/hub/:/data  ghcr.io/huggingface/text-generation-inference:latest --model-id h2oai/Quantum Documents-oasst1-512-12b --max-input-length 2048 --max-total-tokens 4096 --sharded=true --num-shard=4 --disable-custom-kernels --trust-remote-code --max-stop-sequences=6
 ```
 or for 20B NeoX on 4 GPUs:
 ```bash
-docker run --gpus '"device=0,1,2,3"' --shm-size 2g -p 6112:80 -v $HOME/.cache/huggingface/hub/:/data  ghcr.io/huggingface/text-generation-inference:latest --model-id h2oai/h2ogpt-oasst1-512-20b --max-input-length 2048 --max-total-tokens 4096 --sharded=true --num-shard=4 --disable-custom-kernels --trust-remote-code --max-stop-sequences=6
+docker run --gpus '"device=0,1,2,3"' --shm-size 2g -p 6112:80 -v $HOME/.cache/huggingface/hub/:/data  ghcr.io/huggingface/text-generation-inference:latest --model-id h2oai/Quantum Documents-oasst1-512-20b --max-input-length 2048 --max-total-tokens 4096 --sharded=true --num-shard=4 --disable-custom-kernels --trust-remote-code --max-stop-sequences=6
 ```
 or for Falcon 40B on 2 GPUs and some HF token `$HUGGING_FACE_HUB_TOKEN`:
 ```bash
-sudo docker run --gpus '"device=0,1"' --shm-size 1g -e HUGGING_FACE_HUB_TOKEN=$HUGGING_FACE_HUB_TOKEN -p 6112:80 -v $HOME/.cache/huggingface/hub/:/data ghcr.io/huggingface/text-generation-inference:latest --model-id h2oai/h2ogpt-gm-oasst1-en-2048-falcon-40b-v2 --max-input-length 2048 --max-total-tokens 4096 --max-stop-sequences 6 --sharded true --num-shard 2
+sudo docker run --gpus '"device=0,1"' --shm-size 1g -e HUGGING_FACE_HUB_TOKEN=$HUGGING_FACE_HUB_TOKEN -p 6112:80 -v $HOME/.cache/huggingface/hub/:/data ghcr.io/huggingface/text-generation-inference:latest --model-id h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-40b-v2 --max-input-length 2048 --max-total-tokens 4096 --max-stop-sequences 6 --sharded true --num-shard 2
 ```
 Or for MosaicML Chat 30b (careful with docker GPU and TGI version, and one can increase the token counts since has 8k input context):
 ```bash
@@ -176,21 +176,21 @@ Curl Test:
 curl 127.0.0.1:6112/generate     -X POST     -d '{"inputs":"<|prompt|>What is Deep Learning?<|endoftext|><|answer|>","parameters":{"max_new_tokens": 512, "truncate": 1024, "do_sample": true, "temperature": 0.1, "repetition_penalty": 1.2}}'     -H 'Content-Type: application/json' --user "user:bhx5xmu6UVX4"
 ```
 
-### Integration with h2oGPT
+### Integration with Quantum Documents
 
 For example, server at IP `192.168.1.46` on docker for 4 GPU system running 12B model sharded across all 4 GPUs:
 ```bash
-docker run --gpus '"device=0,1,2,3"' --shm-size 2g -e -p 6112:80 -v $HOME/.cache/huggingface/hub/:/data  ghcr.io/huggingface/text-generation-inference:latest --model-id h2oai/h2ogpt-oasst1-512-12b --max-input-length 2048 --max-total-tokens 4096 --sharded=true --num-shard=4 --disable-custom-kernels --trust-remote-code --max-stop-sequences=6
+docker run --gpus '"device=0,1,2,3"' --shm-size 2g -e -p 6112:80 -v $HOME/.cache/huggingface/hub/:/data  ghcr.io/huggingface/text-generation-inference:latest --model-id h2oai/Quantum Documents-oasst1-512-12b --max-input-length 2048 --max-total-tokens 4096 --sharded=true --num-shard=4 --disable-custom-kernels --trust-remote-code --max-stop-sequences=6
 ```
-then generate in h2oGPT environment:
+then generate in Quantum Documents environment:
 ```bash
-SAVE_DIR=./save/ python generate.py --inference_server="http://192.168.1.46:6112" --base_model=h2oai/h2ogpt-oasst1-512-12b
+SAVE_DIR=./save/ python generate.py --inference_server="http://192.168.1.46:6112" --base_model=h2oai/Quantum Documents-oasst1-512-12b
 ```
 One can pass, e.g., `--max_max_new_tokens=2048 --max_new_tokens=512` to generate.py to control tokens, along with `--max-batch-prefill-tokens=2048 --max-input-length 2048 --max-total-tokens 4096 --max-stop-sequences 6 --trust-remote-code` for TGI server to match.
 
 For efficient parallel summarization with 13B LLaMa2 on single A100:
 ```bash
-python --inference_server=http://192.168.1.46:6112 --base_model=h2oai/h2ogpt-4096-llama2-13b-chat --score_model=None --save_dir=save_gpt13 --max_max_new_tokens=2048 --max_new_tokens=1024 --langchain_mode=LLM --langchain_modes="['LLM', 'UserData', 'MyData']" --captions_model=microsoft/Florence-2-large --num_async=10 --top_k_docs=-1
+python --inference_server=http://192.168.1.46:6112 --base_model=h2oai/Quantum Documents-4096-llama2-13b-chat --score_model=None --save_dir=save_gpt13 --max_max_new_tokens=2048 --max_new_tokens=1024 --langchain_mode=LLM --langchain_modes="['LLM', 'UserData', 'MyData']" --captions_model=microsoft/Florence-2-large --num_async=10 --top_k_docs=-1
 ```
 which achieves about 80 output tokens/second, using 10 simultaneous streams and all document pages/parts.  In about 2 minutes, it can handle summarization of a complete 30 page ArXiV paper using LangChain map-reduce with asyncio bugs fixed: https://github.com/langchain-ai/langchain/issues/8391 .  In UI or API calls, one should disable streaming since the threading used by streaming does not mix well with asyncio. 
 
@@ -198,12 +198,12 @@ which achieves about 80 output tokens/second, using 10 simultaneous streams and 
 
 You can use your own server for some model supported by the server's system specs, e.g.:
 ```bash
-SAVE_DIR=./save/ python generate.py --base_model=h2oai/h2ogpt-oasst1-512-12b
+SAVE_DIR=./save/ python generate.py --base_model=h2oai/Quantum Documents-oasst1-512-12b
 ```
 
-In any case, for your own server or some other server using h2oGPT gradio server, the client should specify the gradio endpoint as inference server.  E.g. if server is at `http://192.168.0.10:7680`, then
+In any case, for your own server or some other server using Quantum Documents gradio server, the client should specify the gradio endpoint as inference server.  E.g. if server is at `http://192.168.0.10:7680`, then
 ```bash
-python generate.py --inference_server="http://192.168.0.10:7680" --base_model=h2oai/h2ogpt-oasst1-falcon-40b
+python generate.py --inference_server="http://192.168.0.10:7680" --base_model=h2oai/Quantum Documents-oasst1-falcon-40b
 ```
 One can also use gradio live link like `https://6a8d4035f1c8858731.gradio.live` or some ngrok or other mapping/redirect to `https://` address.
 One must specify the model used at the endpoint so the prompt type is handled.  This assumes that base model is specified in `prompter.py::prompt_type_to_model_name`.  Otherwise, one should pass `--prompt_type` as well, like:
@@ -218,13 +218,13 @@ which is just an example for the `human_bot` prompt type.
 
 ## OpenAI Proxy Inference Server-Client
 
-Run with `--openai_server=True` (default) to run OpenAI Proxy Server to connect to h2oGPT server via openai python package.  E.g. the LLM can be on a remote inference server:
+Run with `--openai_server=True` (default) to run OpenAI Proxy Server to connect to Quantum Documents server via openai python package.  E.g. the LLM can be on a remote inference server:
 ```bash
 CUDA_VISIBLE_DEVICES=0 python generate.py --verbose=True --score_model=None --pre_load_embedding_model=False --gradio_offline_level=2 --base_model=openchat/openchat-3.5-1210 --inference_server=vllm:<ip>:<port> --max_seq_len=4096 --save_dir=duder1 --verbose --openai_server=True --concurrency_count=64
 ````
 for some `<ip>` and `<port>`.  Or the model can be local torch/llama.cpp/GPT4All model (then set `--concurrency_count=1 to avoid multi-threading issues).
 
-Then as client, h2oGPT currently supports `.chat.completions` and `.completions` for streaming and non-streaming, as well as `.models.retrieve()` and `.models.list()`.  See tests [test_openai_server.py](../openai_server/test_openai_server.py) for Python API examples.
+Then as client, Quantum Documents currently supports `.chat.completions` and `.completions` for streaming and non-streaming, as well as `.models.retrieve()` and `.models.list()`.  See tests [test_openai_server.py](../openai_server/test_openai_server.py) for Python API examples.
 
 Curl also works like one would do for OpenAI endpoint.
 
@@ -234,9 +234,9 @@ This mode is disabled when `--auth=closed` or `--allow_api=False`, because gradi
 
 However, keyed access still works, e.g.
 ```bash
-python generate.py --score_model=None --base_model=openchat/openchat-3.5-1210 --h2ogpt_api_keys=h2ogpt_api_keys.json --auth_filename=auth.json --enforce_h2ogpt_api_key=True --enforce_h2ogpt_ui_key=True --add_disk_models_to_ui=False
+python generate.py --score_model=None --base_model=openchat/openchat-3.5-1210 --Quantum Documents_api_keys=Quantum Documents_api_keys.json --auth_filename=auth.json --enforce_Quantum Documents_api_key=True --enforce_Quantum Documents_ui_key=True --add_disk_models_to_ui=False
 ```
-and OpenAI server can still communicate via Gradio API to Gradio server via the first key.  In addition, the OpenAI server will be keyed with the same key unless otherwise set using env `H2OGPT_OPENAI_API_KEY`, in which case the OpenAI key and h2oGPT key can be different.
+and OpenAI server can still communicate via Gradio API to Gradio server via the first key.  In addition, the OpenAI server will be keyed with the same key unless otherwise set using env `Quantum Documents_OPENAI_API_KEY`, in which case the OpenAI key and Quantum Documents key can be different.
 
 For completeness, an example is as follows for non-streaming chat case is as follows:
 ```python
@@ -247,14 +247,14 @@ client_args = dict(base_url=base_url, api_key='<API_KEY>')
 openai_client = OpenAI(**client_args)
 
 messages = [{'role': 'user', 'content': 'Who are you?'}]
-client_kwargs = dict(model='h2oai/h2ogpt-4096-llama2-70b-chat', max_tokens=200, stream=False, messages=messages)
+client_kwargs = dict(model='h2oai/Quantum Documents-4096-llama2-70b-chat', max_tokens=200, stream=False, messages=messages)
 client = openai_client.chat.completions
 
 responses = client.create(**client_kwargs)
 text = responses.choices[0].message.content
 print(text)
 ```
-for some IP `<IP>`, which could be the local IP and some key `<API_KEY>`. If OpenAI server was run from h2oGPT using `--openai_server=True` (default), then `api_key` is from ENV `H2OGPT_OPENAI_API_KEY` on same host as Gradio server OpenAI.  If ENV `H2OGPT_OPENAI_API_KEY` is not defined, then h2oGPT will use the first key in the `h2ogpt_api_keys` (file or CLI list) as the OpenAI API key.  If no key is at all set, the OpenAI server is "open" with key `EMPTY` as long as `--allow_api=True`.  If h2oGPT was started with `--model_lock` with multiple inference servers, use `model` to choose which model to select, like done with `--visible_models` from h2oGPT CLI.
+for some IP `<IP>`, which could be the local IP and some key `<API_KEY>`. If OpenAI server was run from Quantum Documents using `--openai_server=True` (default), then `api_key` is from ENV `Quantum Documents_OPENAI_API_KEY` on same host as Gradio server OpenAI.  If ENV `Quantum Documents_OPENAI_API_KEY` is not defined, then Quantum Documents will use the first key in the `Quantum Documents_api_keys` (file or CLI list) as the OpenAI API key.  If no key is at all set, the OpenAI server is "open" with key `EMPTY` as long as `--allow_api=True`.  If Quantum Documents was started with `--model_lock` with multiple inference servers, use `model` to choose which model to select, like done with `--visible_models` from Quantum Documents CLI.
 
 **Note:** The default OpenAI proxy port for MacOS is set to `5001`, since ports 5000 and 7000 are being used by [AirPlay in MacOS](https://developer.apple.com/forums/thread/682332).
 
@@ -307,13 +307,13 @@ Then can start in OpenAI compliant mode, e.g. for LLaMa 65B on 2*A100 GPUs:
 ```
 export NCCL_IGNORE_DISABLED_P2P=1
 export CUDA_VISIBLE_DEVICESs=0,1
-python -m vllm.entrypoints.openai.api_server --port=5000 --host=0.0.0.0 --model h2oai/h2ogpt-research-oasst1-llama-65b --tokenizer=hf-internal-testing/llama-tokenizer --tensor-parallel-size=2 --seed 1234 --max-num-batched-tokens=2048
+python -m vllm.entrypoints.openai.api_server --port=5000 --host=0.0.0.0 --model h2oai/Quantum Documents-research-oasst1-llama-65b --tokenizer=hf-internal-testing/llama-tokenizer --tensor-parallel-size=2 --seed 1234 --max-num-batched-tokens=2048
 ```
 or for LLaMa-2 70b on 4 GPUs:
 ```bash
 export NCCL_IGNORE_DISABLED_P2P=1
 export CUDA_VISIBLE_DEVICESs=0,1,2,3
-python -m vllm.entrypoints.openai.api_server --port=5000 --host=0.0.0.0 --model h2oai/h2ogpt-4096-llama2-70b-chat --tokenizer=hf-internal-testing/llama-tokenizer --tensor-parallel-size=4 --seed 1234 --max-num-batched-tokens=8192
+python -m vllm.entrypoints.openai.api_server --port=5000 --host=0.0.0.0 --model h2oai/Quantum Documents-4096-llama2-70b-chat --tokenizer=hf-internal-testing/llama-tokenizer --tensor-parallel-size=4 --seed 1234 --max-num-batched-tokens=8192
 ```
 
 For Mixtral 8*7B need newer cuda 12 toolkit and vllm build, then run:
@@ -344,12 +344,12 @@ export NCCL_IGNORE_DISABLED_P2P=1
 Then in python
 ```python
 from vllm import LLM
-llm = LLM(model='h2oai/h2ogpt-research-oasst1-llama-65b', tokenizer='hf-internal-testing/llama-tokenizer', tensor_parallel_size=2)
+llm = LLM(model='h2oai/Quantum Documents-research-oasst1-llama-65b', tokenizer='hf-internal-testing/llama-tokenizer', tensor_parallel_size=2)
 output = llm.generate("San Franciso is a")
 ```
 See [vLLM docs](https://vllm.readthedocs.io/en/latest/getting_started/quickstart.html).
 ```text
-(h2ollm) ubuntu@cloudvm:~/h2ogpt$ python -m vllm.entrypoints.openai.api_server --help
+(h2ollm) ubuntu@cloudvm:~/Quantum Documents$ python -m vllm.entrypoints.openai.api_server --help
 usage: api_server.py [-h] [--host HOST] [--port PORT] [--allow-credentials] [--allowed-origins ALLOWED_ORIGINS] [--allowed-methods ALLOWED_METHODS] [--allowed-headers ALLOWED_HEADERS] [--served-model-name SERVED_MODEL_NAME] [--model MODEL]
                      [--tokenizer TOKENIZER] [--revision REVISION] [--tokenizer-mode {auto,slow}] [--trust-remote-code] [--download-dir DOWNLOAD_DIR] [--load-format {auto,pt,safetensors,npcache,dummy}]
                      [--dtype {auto,half,float16,bfloat16,float,float32}] [--max-model-len MAX_MODEL_LEN] [--worker-use-ray] [--pipeline-parallel-size PIPELINE_PARALLEL_SIZE] [--tensor-parallel-size TENSOR_PARALLEL_SIZE] [--block-size {8,16,32}]
@@ -419,16 +419,16 @@ CURL test:
 curl http://localhost:5000/v1/completions \
 -H "Content-Type: application/json" \
 -d '{
-"model": "h2oai/h2ogpt-research-oasst1-llama-65b",
+"model": "h2oai/Quantum Documents-research-oasst1-llama-65b",
 "prompt": "San Francisco is a",
 "max_tokens": 7,
 "temperature": 0
 }'
 ```
 
-If started OpenAI-compliant server, then run h2oGPT:
+If started OpenAI-compliant server, then run Quantum Documents:
 ```bash
-python generate.py --inference_server="vllm:0.0.0.0:5000" --base_model=h2oai/h2ogpt-oasst1-falcon-40b --langchain_mode=UserData
+python generate.py --inference_server="vllm:0.0.0.0:5000" --base_model=h2oai/Quantum Documents-oasst1-falcon-40b --langchain_mode=UserData
 ```
 Note: `vllm_chat` ChatCompletion is not supported by vLLM project.  If add `https://` or `http://` as prefix to IP address for vLLM, then also need to add rest of full address with `/v1` at end
 
@@ -442,7 +442,7 @@ pip install replicate
 export REPLICATE_API_TOKEN=<key>
 python generate.py --inference_server="replicate:<replicate model string>" --base_model="<HF model name>"
 ```
-where `<key>` should be replaced by your Replicate key, `<replicate model string>` should be replaced by the model name, e.g. `model="a16z-infra/llama13b-v2-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5`.  Here we used an example for [LLaMa-V2](https://replicate.com/a16z-infra/llama13b-v2-chat), and `<HF model name>` should be replaced by equivalent HuggingFace Model Name (if this is not known or cannot match, then choose whichever HF model has most similar tokenizer.).  The `prompt_type` in h2oGPT is unused except for system prompting if chosen.
+where `<key>` should be replaced by your Replicate key, `<replicate model string>` should be replaced by the model name, e.g. `model="a16z-infra/llama13b-v2-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5`.  Here we used an example for [LLaMa-V2](https://replicate.com/a16z-infra/llama13b-v2-chat), and `<HF model name>` should be replaced by equivalent HuggingFace Model Name (if this is not known or cannot match, then choose whichever HF model has most similar tokenizer.).  The `prompt_type` in Quantum Documents is unused except for system prompting if chosen.
 
 For example, for LLaMa-2 7B:
 ```bash
@@ -462,20 +462,20 @@ If you have any other OpenAI compatible chat completion endpoint, you should use
 
 ## AWS SageMaker Endpoint
 
-h2oGPT code is based upon [LangChain Code](https://python.langchain.com/docs/integrations/llms/sagemaker) but with various fixes, handling of access keys, and handling for LLama-2 Chat type model.  See also https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html .
+Quantum Documents code is based upon [LangChain Code](https://python.langchain.com/docs/integrations/llms/sagemaker) but with various fixes, handling of access keys, and handling for LLama-2 Chat type model.  See also https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html .
 
 This presumes one has set up an [AWS SageMaker endpoint](aws_sagemaker_endpoint_setup.pdf) (from [here](https://medium.com/@mudassir.aqeel24/deploy-llama2-7b-on-aws-easiest-method-f76d71a51684)) and that you are able to view events in the AWS console to confirm things are working or debug if not.
 
 Streaming is not yet supported in LangChain version of SageMaker, see [Streaming Docs](https://aws.amazon.com/blogs/machine-learning/elevating-the-generative-ai-experience-introducing-streaming-support-in-amazon-sagemaker-hosting/).
 
-To use AWS SageMaker Chat endpoint, e.g. with LLaMa-2 Chat, pass to h2oGPT `--inference_server=sagemaker_chat:<endpointname>:<region>` for `<endpointname>` of the endpoint's name and `<region>` the region (e.g. `us-east-2`), e.g.
+To use AWS SageMaker Chat endpoint, e.g. with LLaMa-2 Chat, pass to Quantum Documents `--inference_server=sagemaker_chat:<endpointname>:<region>` for `<endpointname>` of the endpoint's name and `<region>` the region (e.g. `us-east-2`), e.g.
 ```bash
 export AWS_ACCESS_KEY_ID=<...>
 export AWS_SECRET_ACCESS_KEY=<...>
-python generate.py --inference_server=sagemaker_chat:<endpointname>:<region> --base_model=h2oai/h2ogpt-4096-llama2-7b-chat
+python generate.py --inference_server=sagemaker_chat:<endpointname>:<region> --base_model=h2oai/Quantum Documents-4096-llama2-7b-chat
 ```
 
-## h2oGPT start-up vs. in-app selection
+## Quantum Documents start-up vs. in-app selection
 
 When using `generate.py`, specifying the `--base_model` or `--inference_server` on the CLI is not required.  One can also add any model and server URL (with optional port) in the **Model** tab at the bottom:
 
@@ -491,23 +491,23 @@ One can also do model comparison by clicking the `Compare Mode` checkbox, and ad
 
 To avoid specifying model-related settings as independent options, and to disable loading new models, use `--model_lock` like:
 ```bash
-python generate.py --model_lock=[{'inference_server':'http://192.168.1.46:6112','base_model':'h2oai/h2ogpt-oasst1-512-12b'}]
+python generate.py --model_lock=[{'inference_server':'http://192.168.1.46:6112','base_model':'h2oai/Quantum Documents-oasst1-512-12b'}]
 ```
 where for this case the prompt_type for this base_model is in prompter.py, so it doesn't need to be specified.  Note that no spaces or other white space is allowed within the double quotes for model_lock due to how CLI arguments are parsed.
 For two endpoints, one uses (again with no spaces in arg)
 ```bash
-python generate.py --model_lock=[{'inference_server':'http://192.168.1.46:6112','base_model':'h2oai/h2ogpt-oasst1-512-12b'},{'inference_server':'http://192.168.1.46:6114','base_model':'h2oai/h2ogpt-oasst1-512-20b'},{'inference_server':'http://192.168.1.46:6113','base_model':'h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v2'}]
+python generate.py --model_lock=[{'inference_server':'http://192.168.1.46:6112','base_model':'h2oai/Quantum Documents-oasst1-512-12b'},{'inference_server':'http://192.168.1.46:6114','base_model':'h2oai/Quantum Documents-oasst1-512-20b'},{'inference_server':'http://192.168.1.46:6113','base_model':'h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-7b-v2'}]
 ```
 
 One can have a mix of local models, HF text-generation inference servers, Gradio generation servers, and OpenAI servers, e.g.:
 ```bash
-python generate.py --model_lock=[{'inference_server':'http://192.168.1.46:6112','base_model':'h2oai/h2ogpt-oasst1-512-12b'},{'inference_server':'http://192.168.1.46:6114','base_model':'h2oai/h2ogpt-oasst1-512-20b'},{'inference_server':'http://192.168.1.46:6113','base_model':'h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v2'},{'inference_server':'http://192.168.0.1:6000','base_model':'TheBloke/Wizard-Vicuna-13B-Uncensored-HF','prompt_type':'instruct_vicuna'},{'inference_server':'http://192.168.0.245:6000','base_model':'h2oai/h2ogpt-oasst1-falcon-40b'},{'inference_server':'http://192.168.1.46:7860','base_model':'h2oai/h2ogpt-oasst1-512-12b'},{'inference_server':'http://192.168.0.1:7000','base_model':'h2oai/h2ogpt-research-oasst1-llama-65b','prompt_type':'human_bot'},{'inference_server':'openai_chat','base_model':'gpt-3.5-turbo'}] --model_lock_columns=4
+python generate.py --model_lock=[{'inference_server':'http://192.168.1.46:6112','base_model':'h2oai/Quantum Documents-oasst1-512-12b'},{'inference_server':'http://192.168.1.46:6114','base_model':'h2oai/Quantum Documents-oasst1-512-20b'},{'inference_server':'http://192.168.1.46:6113','base_model':'h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-7b-v2'},{'inference_server':'http://192.168.0.1:6000','base_model':'TheBloke/Wizard-Vicuna-13B-Uncensored-HF','prompt_type':'instruct_vicuna'},{'inference_server':'http://192.168.0.245:6000','base_model':'h2oai/Quantum Documents-oasst1-falcon-40b'},{'inference_server':'http://192.168.1.46:7860','base_model':'h2oai/Quantum Documents-oasst1-512-12b'},{'inference_server':'http://192.168.0.1:7000','base_model':'h2oai/Quantum Documents-research-oasst1-llama-65b','prompt_type':'human_bot'},{'inference_server':'openai_chat','base_model':'gpt-3.5-turbo'}] --model_lock_columns=4
 ```
 where the lock columns of 4 makes a grid of chatbots with 4 columns.
 
 If you run in bash and need to use an authentication for the Hugging Face text generation inference server, then that can be passed:
 ```text
-{'inference_server':'https://server.h2o.ai    USER    AUTH','base_model':'h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v2'}
+{'inference_server':'https://server.h2o.ai    USER    AUTH','base_model':'h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-7b-v2'}
 ```
 i.e. 4 spaces between each IP, USER, and AUTH.  USER should be the user and AUTH be the token.
 
@@ -519,9 +519,9 @@ Note: The client API calls for chat APIs (i.e. `instruction` type for `instructi
 
 To run a gradio server and talk to it and OpenAI from another generate gradio UI, do:
 ```bash
-GRADIO_SERVER_PORT=5000 python generate.py --base_model=h2oai/h2ogpt-gm-oasst1-en-2048-open-llama-13b &
+GRADIO_SERVER_PORT=5000 python generate.py --base_model=h2oai/Quantum Documents-gm-oasst1-en-2048-open-llama-13b &
 sleep 60
-python generate.py --model_lock="[{'inference_server':'http://192.168.1.xx:5000','base_model':'h2oai/h2ogpt-gm-oasst1-en-2048-open-llama-13b'},{'inference_server':'openai_chat','base_model':'gpt-3.5-turbo'}]" --model_lock_columns=2
+python generate.py --model_lock="[{'inference_server':'http://192.168.1.xx:5000','base_model':'h2oai/Quantum Documents-gm-oasst1-en-2048-open-llama-13b'},{'inference_server':'openai_chat','base_model':'gpt-3.5-turbo'}]" --model_lock_columns=2
 ```
 where be sure to replace `192.168.1.xx` with your IP address.  Note the ampersand so the first call is in background.  The sleep gives time for the first one to come up.  The above is as if ran on single system, but you can run on any other system separate generates of any number.
 
@@ -529,7 +529,7 @@ where be sure to replace `192.168.1.xx` with your IP address.  Note the ampersan
 
 At startup, models can be selected as visible out of all those in the model lock, e.g.:
 ```
-export vis="['h2oai/h2ogpt-4096-llama2-70b-chat','h2oai/h2ogpt-4096-llama2-13b-chat','HuggingFaceH4/zephyr-7b-alpha','gpt-3.5-turbo-0613']"
+export vis="['h2oai/Quantum Documents-4096-llama2-70b-chat','h2oai/Quantum Documents-4096-llama2-13b-chat','HuggingFaceH4/zephyr-7b-alpha','gpt-3.5-turbo-0613']"
 python generate.py --save_dir=saveall_gpt --model_lock="$MODEL_LOCK" --model_lock_columns=3 --auth_filename=all_auth.json --gradio_size=small --height=400 --score_model=None --max_max_new_tokens=2048 --max_new_tokens=1024 --visible_models="$vis" &>> logs.all.gradio_chat.txt &
 ```
 

@@ -31,15 +31,15 @@ def train(
         save_code: bool = False,
         run_id: int = None,
 
-        base_model: str = 'h2oai/h2ogpt-4096-llama2-7b',
-        # base_model: str = 'h2oai/h2ogpt-4096-llama2-13b',
-        # base_model: str = 'h2oai/h2ogpt-4096-llama2-70b',
+        base_model: str = 'h2oai/Quantum Documents-4096-llama2-7b',
+        # base_model: str = 'h2oai/Quantum Documents-4096-llama2-13b',
+        # base_model: str = 'h2oai/Quantum Documents-4096-llama2-70b',
 
         # only needed if base_model is self-exported HF state without tokenizer
         tokenizer_base_model: str = None,
         # tokenizer_base_model: str = 'EleutherAI/gpt-neox-20b',
 
-        data_path: str = "h2oai/openassistant_oasst1_h2ogpt",
+        data_path: str = "h2oai/openassistant_oasst1_Quantum Documents",
         data_col_dict: dict = None,
         # data_path: str = "./dai_docs.train.json",
         prompt_type: Union[str, int] = "plain",  # "plain", "instruct", "quality", "human_bot", "dai_faq"

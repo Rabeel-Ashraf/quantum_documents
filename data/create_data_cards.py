@@ -12,94 +12,94 @@ from datasets import load_dataset
     "dataset_name, link_to_source",
     [
         (
-                "h2ogpt-oig-instruct-cleaned",
+                "Quantum Documents-oig-instruct-cleaned",
                 """
 - [Original LAION OIG Dataset](https://github.com/LAION-AI/Open-Instruction-Generalist)
-- [LAION OIG data detoxed and filtered down by scripts in h2oGPT repository](https://github.com/h2oai/h2ogpt/blob/b8f15efcc305a953c52a0ee25b8b4897ceb68c0a/scrape_dai_docs.py)
+- [LAION OIG data detoxed and filtered down by scripts in Quantum Documents repository](https://github.com/h2oai/Quantum Documents/blob/b8f15efcc305a953c52a0ee25b8b4897ceb68c0a/scrape_dai_docs.py)
 """
         ),
         (
-                "h2ogpt-oig-instruct-cleaned-v2",
+                "Quantum Documents-oig-instruct-cleaned-v2",
                 """
 - [Original LAION OIG Dataset](https://github.com/LAION-AI/Open-Instruction-Generalist)
-- [LAION OIG data detoxed and filtered down by scripts in h2oGPT repository](https://github.com/h2oai/h2ogpt/blob/40c217f610766715acec297a5535eb440ac2f2e2/create_data.py)
+- [LAION OIG data detoxed and filtered down by scripts in Quantum Documents repository](https://github.com/h2oai/Quantum Documents/blob/40c217f610766715acec297a5535eb440ac2f2e2/create_data.py)
 """
         ),
         (
-                "h2ogpt-oig-instruct-cleaned-v3",
+                "Quantum Documents-oig-instruct-cleaned-v3",
                 """
 - [Original LAION OIG Dataset](https://github.com/LAION-AI/Open-Instruction-Generalist)
-- [LAION OIG data detoxed and filtered down by scripts in h2oGPT repository](https://github.com/h2oai/h2ogpt/blob/bfc3778c8db938761ce2093351bf2bf82159291e/create_data.py)
+- [LAION OIG data detoxed and filtered down by scripts in Quantum Documents repository](https://github.com/h2oai/Quantum Documents/blob/bfc3778c8db938761ce2093351bf2bf82159291e/create_data.py)
 """
         ),
         (
                 "openassistant_oasst1",
                 """
 - [Original Open Assistant data in tree structure](https://huggingface.co/datasets/OpenAssistant/oasst1)
-- [This flattened dataset created by script in h2oGPT repository](https://github.com/h2oai/h2ogpt/blob/45e6183171fb16691ad7d3ab006fad973f971e98/create_data.py#L1253)
+- [This flattened dataset created by script in Quantum Documents repository](https://github.com/h2oai/Quantum Documents/blob/45e6183171fb16691ad7d3ab006fad973f971e98/create_data.py#L1253)
 """
         ),
         (
-                "h2ogpt-oig-oasst1-instruct-cleaned-v1",
+                "Quantum Documents-oig-oasst1-instruct-cleaned-v1",
                 """
 - [Original LAION OIG Dataset](https://github.com/LAION-AI/Open-Instruction-Generalist)
-- [LAION OIG data detoxed and filtered down by scripts in h2oGPT repository](https://github.com/h2oai/h2ogpt/blob/main/docs/FINETUNE.md#high-quality-oig-based-instruct-data)
+- [LAION OIG data detoxed and filtered down by scripts in Quantum Documents repository](https://github.com/h2oai/Quantum Documents/blob/main/docs/FINETUNE.md#high-quality-oig-based-instruct-data)
 
 - [Original Open Assistant data in tree structure](https://huggingface.co/datasets/OpenAssistant/oasst1)
-- [This flattened dataset created by script in h2oGPT repository](https://github.com/h2oai/h2ogpt/blob/5fc91911bc2bfaaf3b6c2de577c4b0ae45a07a4a/create_data.py#L1253)
+- [This flattened dataset created by script in Quantum Documents repository](https://github.com/h2oai/Quantum Documents/blob/5fc91911bc2bfaaf3b6c2de577c4b0ae45a07a4a/create_data.py#L1253)
 """
         ),
         (
-                "h2ogpt-oig-oasst1-instruct-cleaned-v2",
+                "Quantum Documents-oig-oasst1-instruct-cleaned-v2",
                 """
 - [Original LAION OIG Dataset](https://github.com/LAION-AI/Open-Instruction-Generalist)
-- [LAION OIG data detoxed and filtered down by scripts in h2oGPT repository](https://github.com/h2oai/h2ogpt/blob/main/docs/FINETUNE.md#high-quality-oig-based-instruct-data)
+- [LAION OIG data detoxed and filtered down by scripts in Quantum Documents repository](https://github.com/h2oai/Quantum Documents/blob/main/docs/FINETUNE.md#high-quality-oig-based-instruct-data)
 
 - [Original Open Assistant data in tree structure](https://huggingface.co/datasets/OpenAssistant/oasst1)
-- [This flattened dataset created by script in h2oGPT repository](https://github.com/h2oai/h2ogpt/blob/0e70c2fbb16410bd8e6992d879b4c55cd981211f/create_data.py#L1375-L1415)
+- [This flattened dataset created by script in Quantum Documents repository](https://github.com/h2oai/Quantum Documents/blob/0e70c2fbb16410bd8e6992d879b4c55cd981211f/create_data.py#L1375-L1415)
 """
         ),
         (
-                "h2ogpt-oig-oasst1-instruct-cleaned-v3",
+                "Quantum Documents-oig-oasst1-instruct-cleaned-v3",
                 """
 - [Original LAION OIG Dataset](https://github.com/LAION-AI/Open-Instruction-Generalist)
-- [LAION OIG data detoxed and filtered down by scripts in h2oGPT repository](https://github.com/h2oai/h2ogpt/blob/main/docs/FINETUNE.md#high-quality-oig-based-instruct-data)
+- [LAION OIG data detoxed and filtered down by scripts in Quantum Documents repository](https://github.com/h2oai/Quantum Documents/blob/main/docs/FINETUNE.md#high-quality-oig-based-instruct-data)
 
 - [Original Open Assistant data in tree structure](https://huggingface.co/datasets/OpenAssistant/oasst1)
-- [This flattened dataset created by script in h2oGPT repository](https://github.com/h2oai/h2ogpt/blob/6728938a262d3eb5e8db1f252bbcd7de838da452/create_data.py#L1415)
+- [This flattened dataset created by script in Quantum Documents repository](https://github.com/h2oai/Quantum Documents/blob/6728938a262d3eb5e8db1f252bbcd7de838da452/create_data.py#L1415)
 """
         ),
         (
-                "openassistant_oasst1_h2ogpt",
+                "openassistant_oasst1_Quantum Documents",
                 """
 - [Original Open Assistant data in tree structure](https://huggingface.co/datasets/OpenAssistant/oasst1)
-- [This flattened dataset created by script in h2oGPT repository](https://github.com/h2oai/h2ogpt/blob/83857fcf7d3b712aad5db32207e6db0ab0f780f9/create_data.py#L1252)
+- [This flattened dataset created by script in Quantum Documents repository](https://github.com/h2oai/Quantum Documents/blob/83857fcf7d3b712aad5db32207e6db0ab0f780f9/create_data.py#L1252)
 """
         ),
         (
-                "openassistant_oasst1_h2ogpt_graded",
+                "openassistant_oasst1_Quantum Documents_graded",
                 """
 - [Original Open Assistant data in tree structure](https://huggingface.co/datasets/OpenAssistant/oasst1)
-- [This flattened dataset created by script in h2oGPT repository](https://github.com/h2oai/h2ogpt/blob/d1f8ce975a46056d41135d126dd33de8499aa26e/create_data.py#L1259)
+- [This flattened dataset created by script in Quantum Documents repository](https://github.com/h2oai/Quantum Documents/blob/d1f8ce975a46056d41135d126dd33de8499aa26e/create_data.py#L1259)
 """
         ),
         (
-                "h2ogpt-fortune2000-personalized",
+                "Quantum Documents-fortune2000-personalized",
                 """
-- [Fortune 2000 companies from Wikipedia](https://github.com/h2oai/h2ogpt/blob/b1ea74c0088884ebff97f1ccddbfb3f393e29e44/create_data.py#L1743)
+- [Fortune 2000 companies from Wikipedia](https://github.com/h2oai/Quantum Documents/blob/b1ea74c0088884ebff97f1ccddbfb3f393e29e44/create_data.py#L1743)
 """
         ),
         (
-                "openassistant_oasst1_h2ogpt_llama2_chat",
+                "openassistant_oasst1_Quantum Documents_llama2_chat",
                 """
 - [Original Open Assistant data in tree structure](https://huggingface.co/datasets/OpenAssistant/oasst1)
-- [This flattened dataset created by script in h2oGPT repository](https://github.com/h2oai/h2ogpt/blob/0bee5f50a74f489ca3fc81486f9322078360f2cb/src/create_data.py#L1296)
+- [This flattened dataset created by script in Quantum Documents repository](https://github.com/h2oai/Quantum Documents/blob/0bee5f50a74f489ca3fc81486f9322078360f2cb/src/create_data.py#L1296)
 """
         ),
     ],
 )
 def test_create_data_cards(dataset_name, link_to_source):
-    if dataset_name != "openassistant_oasst1_h2ogpt_llama2_chat":
+    if dataset_name != "openassistant_oasst1_Quantum Documents_llama2_chat":
         return
     #
     assert os.path.exists("README-template.md"), "must be running this test from the data dir."

@@ -10,13 +10,13 @@ Supports CPU and MPS (Metal M1/M2).
 * Run Miniconda
 * Setup environment with Conda Rust:
     ```bash
-    conda create -n h2ogpt python=3.10 rust
-    conda activate h2ogpt
+    conda create -n Quantum Documents python=3.10 rust
+    conda activate Quantum Documents
     ```
 * Install dependencies:
     ```bash
-    git clone https://github.com/h2oai/h2ogpt.git
-    cd h2ogpt
+    git clone https://github.com/h2oai/Quantum Documents.git
+    cd Quantum Documents
 
     # fix any bad env
     pip uninstall -y pandoc pypandoc pypandoc-binary
@@ -63,11 +63,11 @@ Supports CPU and MPS (Metal M1/M2).
     brew install wget
     ```
 
-See [FAQ](FAQ.md#adding-models) for how to run various models.  See [CPU](README_CPU.md) and [GPU](README_GPU.md) for some other general aspects about using h2oGPT on CPU or GPU, such as which models to try.
+See [FAQ](FAQ.md#adding-models) for how to run various models.  See [CPU](README_CPU.md) and [GPU](README_GPU.md) for some other general aspects about using Quantum Documents on CPU or GPU, such as which models to try.
 
 ## Run 
 
-For information on how to run h2oGPT offline, see [Offline](README_offline.md#tldr).
+For information on how to run Quantum Documents offline, see [Offline](README_offline.md#tldr).
 
 In your terminal, run:
 ```bash
@@ -84,7 +84,7 @@ To run with latest llama 3.1 gguf model, you can run:
 ```
 python generate.py --base_model=llama --model_path_llama=https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/resolve/main/Meta-Llama-3.1-8B-Instruct-Q6_K_L.gguf?download=true --tokenizer_base_model=meta-llama/Meta-Llama-3.1-8B-Instruct --max_seq_len=8192
 ```
-For more info about llama 3 models see [FAQ](https://github.com/h2oai/h2ogpt/blob/main/docs/FAQ.md#llama-3-or-other-chat-template-based-models)
+For more info about llama 3 models see [FAQ](https://github.com/h2oai/Quantum Documents/blob/main/docs/FAQ.md#llama-3-or-other-chat-template-based-models)
 
 ---
 

@@ -13,10 +13,10 @@ def test_readme_example(local_server, persist):
 
     # self-contained example used for readme, to be copied to README_CLIENT.md if changed, setting local_server = True at first
     import os
-    # The grclient.py file can be copied from h2ogpt repo and used with local gradio_client for example use
+    # The grclient.py file can be copied from Quantum Documents repo and used with local gradio_client for example use
     from gradio_utils.grclient import GradioClient
 
-    h2ogpt_key = os.getenv('H2OGPT_KEY') or os.getenv('H2OGPT_H2OGPT_KEY')
+    Quantum Documents_key = os.getenv('Quantum Documents_KEY') or os.getenv('Quantum Documents_Quantum Documents_KEY')
 
     if local_server:
         host = "http://0.0.0.0:7860"
@@ -25,7 +25,7 @@ def test_readme_example(local_server, persist):
         host = "https://gpt.h2o.ai"
         auth = ('guest', 'guest')
 
-    client = GradioClient(host, h2ogpt_key=h2ogpt_key, persist=persist, auth=auth)
+    client = GradioClient(host, Quantum Documents_key=Quantum Documents_key, persist=persist, auth=auth)
 
     models = client.list_models()
     print(models)

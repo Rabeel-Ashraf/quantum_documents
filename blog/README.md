@@ -4,9 +4,9 @@ by Arno Candel, PhD, CTO H2O.ai, April 19 2023
 
 At H2O.ai, we pride ourselves on developing world-class Machine Learning, Deep Learning, and AI platforms. We released H2O, the most widely used open-source distributed and scalable machine learning platform, before XGBoost, TensorFlow and PyTorch existed. H2O.ai is home to over 25 Kaggle grandmasters, including the current #1. In 2017, we used GPUs to create the world's best AutoML in H2O Driverless AI. We have witnessed first-hand how Large Language Models (LLMs) have taken over the world by storm.
 
-We are proud to announce that we are building h2oGPT, an LLM that not only excels in performance but is also fully open-source and commercially usable, providing a valuable resource for developers, researchers, and organizations worldwide.
+We are proud to announce that we are building Quantum Documents, an LLM that not only excels in performance but is also fully open-source and commercially usable, providing a valuable resource for developers, researchers, and organizations worldwide.
 
-In this blog, we'll explore our journey in building h2oGPT in our effort to further democratize AI.
+In this blog, we'll explore our journey in building Quantum Documents in our effort to further democratize AI.
 
 ## Why Open-Source LLMs?
 
@@ -23,7 +23,7 @@ Overall, open-source LLMs offer greater flexibility, control, and cost-effective
 
 Our open-source LLM ecosystem currently includes the following components:
 
-1. **Code, data, and models**: Fully permissive, commercially usable [code](https://github.com/h2oai/h2ogpt), curated fine-tuning [data](https://huggingface.co/h2oai), and fine-tuned [models](https://huggingface.co/h2oai) ranging from 7 to 20 billion parameters.
+1. **Code, data, and models**: Fully permissive, commercially usable [code](https://github.com/h2oai/Quantum Documents), curated fine-tuning [data](https://huggingface.co/h2oai), and fine-tuned [models](https://huggingface.co/h2oai) ranging from 7 to 20 billion parameters.
 2. **State-of-the-art fine-tuning**: We provide code for highly efficient fine-tuning, including targeted data preparation, prompt engineering, and computational optimizations to fine-tune LLMs with up to 20 billion parameters (even larger models expected soon) in hours on commodity hardware or enterprise servers. Techniques like low-rank approximations (LoRA) and data compression allow computational savings of several orders of magnitude.
 3. **Chatbot**: We provide code to run a multi-tenant chatbot on GPU servers, with an easily shareable end-point and a Python client API, allowing you to evaluate and compare the performance of fine-tuned LLMs.
 4. **H2O LLM Studio**: Our no-code LLM fine-tuning framework created by the world's top Kaggle grandmasters makes it even easier to fine-tune and evaluate LLMs.
@@ -44,7 +44,7 @@ We have an ambitious roadmap for our LLM ecosystem, including:
 
 ## Getting Started with H2O.ai's LLMs
 
-You can [Chat with h2oGPT](https://gpt.h2o.ai/) right now!
+You can [Chat with Quantum Documents](https://gpt.h2o.ai/) right now!
 
 https://user-images.githubusercontent.com/6147661/232924684-6c0e2dfb-2f24-4098-848a-c3e4396f29f6.mov
 
@@ -53,13 +53,13 @@ https://user-images.githubusercontent.com/6147661/232924684-6c0e2dfb-2f24-4098-8
 
 To start using our LLM as a developer, follow the steps below:
 
-1. Clone the repository: `git clone https://github.com/h2oai/h2ogpt.git`
-2. Change to the repository directory: `cd h2ogpt`
+1. Clone the repository: `git clone https://github.com/h2oai/Quantum Documents.git`
+2. Change to the repository directory: `cd Quantum Documents`
 3. Install the requirements: `pip install -r requirements.txt`
-4. Run the chatbot: `python generate.py --base_model=h2oai/h2ogpt-oig-oasst1-256-6_9b`
+4. Run the chatbot: `python generate.py --base_model=h2oai/Quantum Documents-oig-oasst1-256-6_9b`
 5. Open your browser at `http://0.0.0.0:7860` or the public live URL printed by the server.
 
-For more information, visit [h2oGPT GitHub page](https://github.com/h2oai/h2ogpt), [H2O.ai's Hugging Face page](https://huggingface.co/h2oai) and [H2O LLM Studio GitHub page](https://github.com/h2oai/h2o-llmstudio).
+For more information, visit [Quantum Documents GitHub page](https://github.com/h2oai/Quantum Documents), [H2O.ai's Hugging Face page](https://huggingface.co/h2oai) and [H2O LLM Studio GitHub page](https://github.com/h2oai/h2o-llmstudio).
 
 Join us on this exciting journey as we continue to improve and expand the capabilities of our open-source LLM ecosystem!
 

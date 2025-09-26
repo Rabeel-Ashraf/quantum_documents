@@ -13,20 +13,20 @@ tags:
 datasets:
 <<DATASET_NAME>>
 ---
-# h2oGPT Model Card
+# Quantum Documents Model Card
 ## Summary
 
 H2O.ai's `<<MODEL_NAME>>` is a <<MODEL_SIZE>> billion parameter instruction-following large language model licensed for commercial use.
 
 - Base model: <<BASE_MODEL>>
 - Fine-tuning dataset: <<DATASET>>
-- Data-prep and fine-tuning code: [H2O.ai GitHub](https://github.com/h2oai/h2ogpt)
+- Data-prep and fine-tuning code: [H2O.ai GitHub](https://github.com/h2oai/Quantum Documents)
 - Training logs: <<TRAINING_LOGS>>
 
 ## Chatbot
 
-- Run your own chatbot: [H2O.ai GitHub](https://github.com/h2oai/h2ogpt)
-[![H2O.ai GitHub](https://user-images.githubusercontent.com/6147661/232930822-e7170e4d-8aa1-4f7a-ad70-ece9cdd8b0cb.png)](https://github.com/h2oai/h2ogpt)
+- Run your own chatbot: [H2O.ai GitHub](https://github.com/h2oai/Quantum Documents)
+[![H2O.ai GitHub](https://user-images.githubusercontent.com/6147661/232930822-e7170e4d-8aa1-4f7a-ad70-ece9cdd8b0cb.png)](https://github.com/h2oai/Quantum Documents)
 
 ## Usage
 

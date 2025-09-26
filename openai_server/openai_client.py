@@ -29,7 +29,7 @@ class MyReturnType(BaseModel):
         extra = "allow"
 
 
-# Local copy of minimal version from h2oGPT server
+# Local copy of minimal version from Quantum Documents server
 class LangChainAction(Enum):
     """LangChain action"""
 
@@ -357,7 +357,7 @@ def completion_with_backoff(
                         delta = chunk.choices[0].delta.content
                         if delta:
                             response += delta
-                            # ensure if h2oGPTe wants full or delta, looks like delta from gradio code, except at very end?
+                            # ensure if Quantum Documentse wants full or delta, looks like delta from gradio code, except at very end?
                             yield ReturnType(reply=delta)
                             if time_to_first_token is None:
                                 time_to_first_token = time.time() - t0
@@ -465,8 +465,8 @@ def run_openai_client(
     **query_kwargs,
 ):
     """
-    Bsed upon test in h2oGPT OSS:
-    https://github.com/h2oai/h2ogpt/blob/ee3995865c85bf74f3644a4ebd007971c809de11/openai_server/test_openai_server.py#L189-L320
+    Bsed upon test in Quantum Documents OSS:
+    https://github.com/h2oai/Quantum Documents/blob/ee3995865c85bf74f3644a4ebd007971c809de11/openai_server/test_openai_server.py#L189-L320
     """
     if ReturnType is None:
         ReturnType = MyReturnType
@@ -485,7 +485,7 @@ def run_openai_client(
     image_files = query_kwargs["image_file"]
     system_message = query_kwargs["system_prompt"]
 
-    from h2ogpte_core.backend_utils import structure_to_messages
+    from Quantum Documentse_core.backend_utils import structure_to_messages
 
     if use_agent:
         chat_conversation = None  # don't include high-level history yet
@@ -529,7 +529,7 @@ def run_openai_client(
         )
     else:
         extra_body = query_kwargs.copy()
-        from h2ogpte_core.src.evaluate_params import eval_func_param_names
+        from Quantum Documentse_core.src.evaluate_params import eval_func_param_names
 
         extra_body = {k: v for k, v in extra_body.items() if k in eval_func_param_names}
         hyper_kwargs = dict(

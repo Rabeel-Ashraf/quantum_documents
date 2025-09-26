@@ -1115,7 +1115,7 @@ def get_model(
             if base_model == 'mixtral-8x7b-32768':
                 tokenizer_base_model = 'mistralai/Mistral-7B-Instruct-v0.2'
             elif base_model == 'llama2-70b-4096':
-                tokenizer_base_model = 'h2oai/h2ogpt-4096-llama2-7b'
+                tokenizer_base_model = 'h2oai/Quantum Documents-4096-llama2-7b'
             # elif base_model == 'gemma-7b-it':
 
             tokenizer = FakeTokenizer(model_max_length=max_seq_len, is_hf=True,

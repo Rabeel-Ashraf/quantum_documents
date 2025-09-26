@@ -1,5 +1,4 @@
 import os
-
 import setuptools
 from typing import List
 from setuptools import find_packages
@@ -8,26 +7,21 @@ for_pypi = os.getenv('PYPI') is not None
 
 
 def parse_requirements(file_name: str) -> List[str]:
+    if not os.path.exists(file_name):
+        return []
     with open(file_name) as f:
         lines = f.read().splitlines()
-
-    # Filter out comments and empty lines
     lines = [line for line in lines if line.strip() and not line.strip().startswith("#")]
-
     requirements = []
     for line in lines:
         if 'chromamigdb' in line:
-            # hnsw issue
             continue
         if for_pypi:
             if 'http://' in line or 'https://' in line:
                 continue
             if 'llama-cpp-python' in line and ';' in line:
                 line = line[:line.index(';')]
-
-        # assume all requirements files are in PEP 508 format with name @ <url> or name @ git+http/git+https
         requirements.append(line)
-
     return requirements
 
 
@@ -45,22 +39,13 @@ req_files = [
 ]
 
 for req_file in req_files:
-    x = parse_requirements(req_file)
-    install_requires.extend(x)
+    install_requires.extend(parse_requirements(req_file))
 
-# faiss on cpu etc.
 install_cpu = parse_requirements('reqs_optional/requirements_optional_cpu_only.txt')
-
-# faiss on gpu etc.
 install_cuda = parse_requirements('reqs_optional/requirements_optional_gpu_only.txt')
-
-# TRAINING
 install_extra_training = parse_requirements('reqs_optional/requirements_optional_training.txt')
-
-# WIKI_EXTRA
 install_wiki_extra = parse_requirements('reqs_optional/requirements_optional_wikiprocessing.txt')
 
-# User-friendly description from README.md
 current_directory = os.path.dirname(os.path.abspath(__file__))
 with open(os.path.join(current_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
@@ -68,49 +53,54 @@ with open(os.path.join(current_directory, 'README.md'), encoding='utf-8') as f:
 with open(os.path.join(current_directory, 'version.txt'), encoding='utf-8') as f:
     version = f.read().strip()
 
-# Data to include
-packages = find_packages(include=['h2ogpt', 'h2ogpt.*'], exclude=['tests'])
+# ✅ CORRECT: Use 'quantum_docs' (the actual folder name)
+packages = find_packages(include=['quantum_docs*'], exclude=['tests*'])
 
 setuptools.setup(
-    name='h2ogpt',
+    name='quantum-documents',  # ← PyPI/human-readable name (hyphen OK)
+    version=version,
+    license='Apache-2.0',  # ← SPDX identifier
+    description='Quantum Documents: Advanced AI-powered document processing and RAG platform',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
+    author='Your Name or Organization',
+    author_email='your.email@example.com',
+    url='https://github.com/your-username/quantum-documents',
+    keywords=['LLM', 'AI', 'RAG', 'Document AI'],
     packages=packages,
     package_data={
-        # If 'h2ogpt' is your package directory and 'spkemb' is directly inside it
-        'h2ogpt': ['spkemb/*.npy'],
-        # If 'spkemb' is inside 'src' which is inside 'h2ogpt'
-        # Adjust the string according to your actual package structure
-        'h2ogpt.src': ['spkemb/*.npy'],
+        'quantum_docs': ['spkemb/*.npy'],
     },
     exclude_package_data={
-        'h2ogpt': [
+        'quantum_docs': [
             '**/__pycache__/**',
             'models/README-template.md'
         ],
     },
-    version=version,
-    license='https://opensource.org/license/apache-2-0/',
-    description='',
-    long_description=long_description,
-    long_description_content_type='text/markdown',
-    author='H2O.ai',
-    author_email='jon.mckinney@h2o.ai, arno@h2o.ai',
-    url='https://github.com/h2oai/h2ogpt',
-    download_url='',
-    keywords=['LLM', 'AI'],
     install_requires=install_requires,
     extras_require={
         'cpu': install_cpu,
         'cuda': install_cuda,
-        'TRAINING': install_extra_training,
-        'WIKI_EXTRA': install_wiki_extra,
+        'training': install_extra_training,
+        'wiki': install_wiki_extra,
         'local-inference': ['unstructured[local-inference]>=0.12.5,<0.13'],
     },
-    classifiers=[],
     python_requires='>=3.10',
     entry_points={
         'console_scripts': [
-            'h2ogpt_finetune=h2ogpt.finetune:entrypoint_main',
-            'h2ogpt_generate=h2ogpt.generate:entrypoint_main',
+            'quantum-docs-finetune=quantum_docs.finetune:entrypoint_main',
+            'quantum-docs-generate=quantum_docs.generate:entrypoint_main',
         ],
     },
+    classifiers=[
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: Apache Software License",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    ],
 )

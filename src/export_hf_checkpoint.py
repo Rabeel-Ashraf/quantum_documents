@@ -11,17 +11,17 @@ from transformers import PreTrainedModel
 
 
 def do_export():
-    BASE_MODEL = 'h2oai/h2ogpt-4096-llama2-13b-chat'
-    LORA_WEIGHTS = 'Llama-2-13b-chat-hf.h2oaiopenassistant_oasst1_h2ogpt_llama2_chat.1_epochs.b2aed9250804d815c258976c98ce968bacd88389.7'
-    OUTPUT_NAME = "h2ogpt-oasst1-4096-llama2-13b"
+    BASE_MODEL = 'h2oai/Quantum Documents-4096-llama2-13b-chat'
+    LORA_WEIGHTS = 'Llama-2-13b-chat-hf.h2oaiopenassistant_oasst1_Quantum Documents_llama2_chat.1_epochs.b2aed9250804d815c258976c98ce968bacd88389.7'
+    OUTPUT_NAME = "Quantum Documents-oasst1-4096-llama2-13b"
 
     BASE_MODEL = 'meta-llama/Llama-2-7b-chat-hf'
-    LORA_WEIGHTS = 'Llama-2-7b-chat-hf.h2oaiopenassistant_oasst1_h2ogpt_llama2_chat.1_epochs.0c6b906f73b5639fd1d53c74fecbc9cf64f0f225.8'
-    OUTPUT_NAME = "h2ogpt-oasst1-4096-llama2-7b"
+    LORA_WEIGHTS = 'Llama-2-7b-chat-hf.h2oaiopenassistant_oasst1_Quantum Documents_llama2_chat.1_epochs.0c6b906f73b5639fd1d53c74fecbc9cf64f0f225.8'
+    OUTPUT_NAME = "Quantum Documents-oasst1-4096-llama2-7b"
 
     BASE_MODEL = 'meta-llama/Llama-2-70b-chat-hf'
-    LORA_WEIGHTS = 'Llama-2-70b-chat-hf.h2oaiopenassistant_oasst1_h2ogpt_llama2_chat.1_epochs.0c6b906f73b5639fd1d53c74fecbc9cf64f0f225.6'
-    OUTPUT_NAME = "h2ogpt-oasst1-4096-llama2-70b"
+    LORA_WEIGHTS = 'Llama-2-70b-chat-hf.h2oaiopenassistant_oasst1_Quantum Documents_llama2_chat.1_epochs.0c6b906f73b5639fd1d53c74fecbc9cf64f0f225.6'
+    OUTPUT_NAME = "Quantum Documents-oasst1-4096-llama2-70b"
 
     base_model = os.getenv('BASE_MODEL')
     output = os.getenv('MODEL')
@@ -58,7 +58,7 @@ def do_export():
         layers = base_model.model.layers
         first_weight = layers[0].self_attn.q_proj.weight
     else:
-        if any([x in BASE_MODEL.lower() for x in ["pythia", "h2ogpt", "gpt-neox"]]):
+        if any([x in BASE_MODEL.lower() for x in ["pythia", "Quantum Documents", "gpt-neox"]]):
             layers = base_model.gpt_neox.base_model.layers
             first_weight = layers[0].attention.query_key_value.weight
         elif any([x in BASE_MODEL.lower() for x in ["falcon"]]):

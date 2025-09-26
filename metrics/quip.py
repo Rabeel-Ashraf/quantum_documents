@@ -136,7 +136,7 @@ class Quip(evaluate.Metric):
         return evaluate.MetricInfo(
             description=_DESCRIPTION,
             citation=_CITATION,
-            homepage="https://github.com/h2oai/h2ogpt",
+            homepage="https://github.com/h2oai/Quantum Documents",
             inputs_description=_KWARGS_DESCRIPTION,
             features=[
                 datasets.Features(
@@ -152,9 +152,9 @@ class Quip(evaluate.Metric):
                     }
                 ),
             ],
-            codebase_urls=["https://github.com/h2oai/h2ogpt"],
+            codebase_urls=["https://github.com/h2oai/Quantum Documents"],
             reference_urls=[
-                "https://github.com/h2oai/h2ogpt",
+                "https://github.com/h2oai/Quantum Documents",
             ],
         )
 

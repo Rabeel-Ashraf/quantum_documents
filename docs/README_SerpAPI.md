@@ -1,4 +1,4 @@
-## h2oGPT integration with LangChain and SerpAPI
+## Quantum Documents integration with LangChain and SerpAPI
 
 Web search augments LLM context with additional information obtained from duck duck go (can be changed in code) search results.
 
@@ -11,7 +11,7 @@ pip install -r reqs_optional/requirements_optional_agents.txt
 
 * Setup ENV that defines: `SERPAPI_API_KEY`
 
-* Start h2oGPT as normal
+* Start Quantum Documents as normal
 
 * You should see web search available in `Resources`
 

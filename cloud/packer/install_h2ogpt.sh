@@ -6,7 +6,7 @@ sudo chmod a+rwx .
 
 git config --global --add safe.directory /workspace
 git config --global advice.detachedHead false
-git clone https://github.com/h2oai/h2ogpt.git .
+git clone https://github.com/h2oai/Quantum Documents.git .
 
 if [ -z "$BRANCH_TAG" ]; then
   echo "BRANCH_TAG environment variable is not set."

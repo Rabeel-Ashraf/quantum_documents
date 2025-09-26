@@ -35,4 +35,4 @@ def test_get_models(model_name):
 
     # files are located in e.g. /home/jon/.local/share/tts/tts_models--multilingual--multi-dataset--xtts_v1.1
     # downloaded from e.g. https://coqui.gateway.scarf.sh/v0.6.1_models/tts_models--en--ljspeech--glow-tts.zip
-    # all stored in https://h2o-release.s3.amazonaws.com/h2ogpt/tts_in_.local_share_tts.tgz
+    # all stored in https://h2o-release.s3.amazonaws.com/Quantum Documents/tts_in_.local_share_tts.tgz

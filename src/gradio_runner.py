@@ -320,7 +320,7 @@ def go_gradio(**kwargs):
     allow_upload = allow_upload_to_user_data or allow_upload_to_my_data
     allow_upload_api = allow_api and allow_upload
 
-    h2ogpt_key1 = get_one_key(kwargs['h2ogpt_api_keys'], kwargs['enforce_h2ogpt_api_key'])
+    Quantum Documents_key1 = get_one_key(kwargs['Quantum Documents_api_keys'], kwargs['enforce_Quantum Documents_api_key'])
 
     kwargs.update(locals().copy())
 
@@ -337,13 +337,13 @@ def go_gradio(**kwargs):
         instruction_label_nochat = "Instruction (Shift-Enter or push Submit to send message," \
                                    " use Enter for multiple input lines)"
 
-    if kwargs['visible_h2ogpt_links']:
-        description = """<a href="https://github.com/pseudotensor/open-strawberry">🍓strawberry🍓 project: </a> <br /><a href="https://gpt-docs.h2o.ai">🎉✨ GO: OpenWebUI ✨🎉</a> <br /> <br /><a href="https://github.com/h2oai/h2ogpt">h2oGPT Code</a> <br /><a href="https://huggingface.co/h2oai">🤗 Models</a> <br /><a href="https://h2o.ai/platform/enterprise-h2ogpte/">h2oGPTe</a>"""
+    if kwargs['visible_Quantum Documents_links']:
+        description = """<a href="https://github.com/pseudotensor/open-strawberry">🍓strawberry🍓 project: </a> <br /><a href="https://gpt-docs.h2o.ai">🎉✨ GO: OpenWebUI ✨🎉</a> <br /> <br /><a href="https://github.com/h2oai/Quantum Documents">Quantum Documents Code</a> <br /><a href="https://huggingface.co/h2oai">🤗 Models</a> <br /><a href="https://h2o.ai/platform/enterprise-Quantum Documentse/">Quantum Documentse</a>"""
     else:
         description = None
-    description_bottom = "If this host is busy, try<br>[Multi-Model](https://gpt.h2o.ai)<br>[CodeLlama](https://codellama.h2o.ai)<br>[Llama2 70B](https://llama.h2o.ai)<br>[Falcon 40B](https://falcon.h2o.ai)<br>[HF Spaces1](https://huggingface.co/spaces/h2oai/h2ogpt-chatbot)<br>[HF Spaces2](https://huggingface.co/spaces/h2oai/h2ogpt-chatbot2)<br>"
+    description_bottom = "If this host is busy, try<br>[Multi-Model](https://gpt.h2o.ai)<br>[CodeLlama](https://codellama.h2o.ai)<br>[Llama2 70B](https://llama.h2o.ai)<br>[Falcon 40B](https://falcon.h2o.ai)<br>[HF Spaces1](https://huggingface.co/spaces/h2oai/Quantum Documents-chatbot)<br>[HF Spaces2](https://huggingface.co/spaces/h2oai/Quantum Documents-chatbot2)<br>"
     if is_hf:
-        description_bottom += '''<a href="https://huggingface.co/spaces/h2oai/h2ogpt-chatbot?duplicate=true"><img src="https://bit.ly/3gLdBN6" style="white-space: nowrap" alt="Duplicate Space"></a>'''
+        description_bottom += '''<a href="https://huggingface.co/spaces/h2oai/Quantum Documents-chatbot?duplicate=true"><img src="https://bit.ly/3gLdBN6" style="white-space: nowrap" alt="Duplicate Space"></a>'''
     task_info_md = ''
     css_code = get_css(kwargs, select_string='\"Select_%s\"' % kwargs['max_visible_models'] if kwargs[
         'max_visible_models'] else '\"Select_Any\"')
@@ -430,7 +430,7 @@ def go_gradio(**kwargs):
     # transcribe for gradio
     kwargs['gpu_id'] = str(kwargs['gpu_id'])
 
-    no_model_msg = 'h2oGPT [   !!! Please Load Model in Models Tab !!!   ]'
+    no_model_msg = 'Quantum Documents [   !!! Please Load Model in Models Tab !!!   ]'
     chat_name0 = get_chatbot_name(kwargs.get("base_model"),
                                   kwargs.get("display_name"),
                                   kwargs.get("llamacpp_dict", {}).get("model_path_llama"),
@@ -773,7 +773,7 @@ def go_gradio(**kwargs):
                                    chat_template=kwargs['chat_template'],
                                    visible_models=visible_models_to_model_choice(kwargs['visible_models'],
                                                                                  model_states),
-                                   h2ogpt_key=None,
+                                   Quantum Documents_key=None,
                                    # only apply at runtime when doing API call with gradio inference server
                                    )
         [model_state_default.update({k: v}) for k, v in kwargs['model_state_none'].items() if
@@ -807,10 +807,10 @@ def go_gradio(**kwargs):
         if description is None:
             description = ''
         markdown_logo = f"""
-                {get_h2o_title(page_title, description, visible_h2ogpt_qrcode=kwargs['visible_h2ogpt_qrcode'])
+                {get_h2o_title(page_title, description, visible_Quantum Documents_qrcode=kwargs['visible_Quantum Documents_qrcode'])
         if kwargs['h2ocolors'] else get_simple_title(page_title, description)}
                 """
-        if kwargs['visible_h2ogpt_logo']:
+        if kwargs['visible_Quantum Documents_logo']:
             gr.Markdown(markdown_logo)
 
         # go button visible if
@@ -1688,7 +1688,7 @@ def go_gradio(**kwargs):
                             value=kwargs['penalty_alpha'], label="penalty_alpha",
                             info='penalty_alpha>0 and top_k>1 enables contrastive search'
                         )
-                        # FIXME: https://github.com/h2oai/h2ogpt/issues/106
+                        # FIXME: https://github.com/h2oai/Quantum Documents/issues/106
                         if os.getenv('TESTINGFAIL'):
                             max_beams = 8 if not (memory_restriction_level or is_public) else 1
                         else:
@@ -1872,7 +1872,7 @@ def go_gradio(**kwargs):
                             tts_language = gr.Dropdown(visible=False)
 
                         if audio_visible:
-                            model_base = os.getenv('H2OGPT_MODEL_BASE', 'models/')
+                            model_base = os.getenv('Quantum Documents_MODEL_BASE', 'models/')
                             female_voice = os.path.join(model_base, "female.wav")
                             ref_voice_clone = gr.Audio(
                                 label="File for Clone (x resets)",
@@ -2005,7 +2005,7 @@ def go_gradio(**kwargs):
                                             label="Choose Devices [If not Checked, use all GPUs]",
                                             value=kwargs['use_gpu_id'],
                                             interactive=not is_public)
-                                        llama_multi_gpu_info = "LLaMa.cpp does not support multi-GPU GPU selection, run h2oGPT with env CUDA_VISIBLE_DEVICES set to which GPU to use, else all are used."
+                                        llama_multi_gpu_info = "LLaMa.cpp does not support multi-GPU GPU selection, run Quantum Documents with env CUDA_VISIBLE_DEVICES set to which GPU to use, else all are used."
                                         model_gpu = gr.Dropdown(n_gpus_list,
                                                                 label="GPU ID [-1 = all GPUs, if Choose is enabled]",
                                                                 info=llama_multi_gpu_info,
@@ -2404,9 +2404,9 @@ def go_gradio(**kwargs):
                                         admin_user_get_info = gr.JSON(label='User Info')
                             with gr.Accordion("System Admin", open=False, visible=True):
                                 with gr.Column():
-                                    close_btn = gr.Button(value="Shutdown h2oGPT", size='sm',
+                                    close_btn = gr.Button(value="Shutdown Quantum Documents", size='sm',
                                                           visible=kwargs['close_button'] and kwargs[
-                                                              'h2ogpt_pid'] is not None)
+                                                              'Quantum Documents_pid'] is not None)
                                     with gr.Row():
                                         system_btn = gr.Button(value='Get System Info', size='sm')
                                         system_text = gr.Textbox(label='System Info', interactive=False,
@@ -2458,10 +2458,10 @@ def go_gradio(**kwargs):
                         description += """<p><b> DISCLAIMERS: </b><ul><i><li>The model was trained on The Pile and other data, which may contain objectionable content.  Use at own risk.</i></li>"""
                         if kwargs['load_8bit']:
                             description += """<i><li> Model is loaded in 8-bit and has other restrictions on this host. UX can be worse than non-hosted version.</i></li>"""
-                        description += """<i><li>Conversations may be used to improve h2oGPT.  Do not share sensitive information.</i></li>"""
-                        if 'h2ogpt-research' in kwargs['base_model']:
+                        description += """<i><li>Conversations may be used to improve Quantum Documents.  Do not share sensitive information.</i></li>"""
+                        if 'Quantum Documents-research' in kwargs['base_model']:
                             description += """<i><li>Research demonstration only, not used for commercial purposes.</i></li>"""
-                        description += """<i><li>By using h2oGPT, you accept our <a href="https://github.com/h2oai/h2ogpt/blob/main/docs/tos.md">Terms of Service</a></i></li></ul></p>"""
+                        description += """<i><li>By using Quantum Documents, you accept our <a href="https://github.com/h2oai/Quantum Documents/blob/main/docs/tos.md">Terms of Service</a></i></li></ul></p>"""
                         gr.Markdown(value=description, show_label=False)
 
                 login_tab = gr.TabItem("Log-in/out" if kwargs['auth'] else "Login",
@@ -2482,19 +2482,19 @@ def go_gradio(**kwargs):
                     # WIP
                     if (kwargs['auth'] or kwargs['google_auth']) and is_gradio_h2oai:
                         gr.Button("Logout", link="/logout")
-                    if kwargs['enforce_h2ogpt_api_key'] and kwargs['enforce_h2ogpt_ui_key']:
-                        label_h2ogpt_key = "h2oGPT Token for API and UI access"
-                    elif kwargs['enforce_h2ogpt_api_key']:
-                        label_h2ogpt_key = "h2oGPT Token for API access"
-                    elif kwargs['enforce_h2ogpt_ui_key']:
-                        label_h2ogpt_key = "h2oGPT Token for UI access"
+                    if kwargs['enforce_Quantum Documents_api_key'] and kwargs['enforce_Quantum Documents_ui_key']:
+                        label_Quantum Documents_key = "Quantum Documents Token for API and UI access"
+                    elif kwargs['enforce_Quantum Documents_api_key']:
+                        label_Quantum Documents_key = "Quantum Documents Token for API access"
+                    elif kwargs['enforce_Quantum Documents_ui_key']:
+                        label_Quantum Documents_key = "Quantum Documents Token for UI access"
                     else:
-                        label_h2ogpt_key = 'Unused'
-                    h2ogpt_key = gr.Text(value='',
-                                         # do not use kwargs['h2ogpt_key'] here, that's only for gradio inference server
-                                         label=label_h2ogpt_key,
+                        label_Quantum Documents_key = 'Unused'
+                    Quantum Documents_key = gr.Text(value='',
+                                         # do not use kwargs['Quantum Documents_key'] here, that's only for gradio inference server
+                                         label=label_Quantum Documents_key,
                                          type='password',
-                                         visible=kwargs['enforce_h2ogpt_ui_key'],  # only show if need for UI
+                                         visible=kwargs['enforce_Quantum Documents_ui_key'],  # only show if need for UI
                                          )
 
                 hosts_visible = kwargs['visible_hosts_tab'] and is_public
@@ -2507,15 +2507,15 @@ def go_gradio(**kwargs):
                             """)
 
         def zip_data_check_key(admin_pass_textbox1,
-                               h2ogpt_key2,
+                               Quantum Documents_key2,
                                root_dirs=None,
-                               enforce_h2ogpt_api_key=None,
-                               enforce_h2ogpt_ui_key=None,
-                               h2ogpt_api_keys=None, requests_state1=None):
-            valid_key = is_valid_key(enforce_h2ogpt_api_key,
-                                     enforce_h2ogpt_ui_key,
-                                     h2ogpt_api_keys,
-                                     h2ogpt_key2,
+                               enforce_Quantum Documents_api_key=None,
+                               enforce_Quantum Documents_ui_key=None,
+                               Quantum Documents_api_keys=None, requests_state1=None):
+            valid_key = is_valid_key(enforce_Quantum Documents_api_key,
+                                     enforce_Quantum Documents_ui_key,
+                                     Quantum Documents_api_keys,
+                                     Quantum Documents_key2,
                                      requests_state1=requests_state1,
                                      )
             from_ui = is_from_ui(requests_state1)
@@ -2526,26 +2526,26 @@ def go_gradio(**kwargs):
 
         zip_data_func = functools.partial(zip_data_check_key,
                                           root_dirs=['flagged_data_points', kwargs['save_dir']],
-                                          enforce_h2ogpt_api_key=kwargs['enforce_h2ogpt_api_key'],
-                                          enforce_h2ogpt_ui_key=kwargs['enforce_h2ogpt_ui_key'],
-                                          h2ogpt_api_keys=kwargs['h2ogpt_api_keys'],
+                                          enforce_Quantum Documents_api_key=kwargs['enforce_Quantum Documents_api_key'],
+                                          enforce_Quantum Documents_ui_key=kwargs['enforce_Quantum Documents_ui_key'],
+                                          Quantum Documents_api_keys=kwargs['Quantum Documents_api_keys'],
                                           )
         # Get flagged data
         zip_data1 = functools.partial(zip_data_func)
-        zip_event = zip_btn.click(zip_data1, inputs=[admin_pass_textbox, h2ogpt_key],
+        zip_event = zip_btn.click(zip_data1, inputs=[admin_pass_textbox, Quantum Documents_key],
                                   outputs=[file_output, zip_text],
                                   **noqueue_kwargs,
                                   api_name=False,
                                   )
 
-        def s3up_check_key(zip_text, admin_pass_textbox1, h2ogpt_key1,
-                           enforce_h2ogpt_api_key=None,
-                           enforce_h2ogpt_ui_key=None,
-                           h2ogpt_api_keys=None, requests_state1=None):
-            valid_key = is_valid_key(enforce_h2ogpt_api_key,
-                                     enforce_h2ogpt_ui_key,
-                                     h2ogpt_api_keys,
-                                     h2ogpt_key1,
+        def s3up_check_key(zip_text, admin_pass_textbox1, Quantum Documents_key1,
+                           enforce_Quantum Documents_api_key=None,
+                           enforce_Quantum Documents_ui_key=None,
+                           Quantum Documents_api_keys=None, requests_state1=None):
+            valid_key = is_valid_key(enforce_Quantum Documents_api_key,
+                                     enforce_Quantum Documents_ui_key,
+                                     Quantum Documents_api_keys,
+                                     Quantum Documents_key1,
                                      requests_state1=requests_state1,
                                      )
             from_ui = is_from_ui(requests_state1)
@@ -2554,12 +2554,12 @@ def go_gradio(**kwargs):
             assert admin_pass_textbox1 == admin_pass or not admin_pass
             return s3up(zip_text)
 
-        s3up_check_key_func = functools.partial(s3up_check_key, enforce_h2ogpt_api_key=kwargs['enforce_h2ogpt_api_key'],
-                                                enforce_h2ogpt_ui_key=kwargs['enforce_h2ogpt_ui_key'],
-                                                h2ogpt_api_keys=kwargs['h2ogpt_api_keys'],
+        s3up_check_key_func = functools.partial(s3up_check_key, enforce_Quantum Documents_api_key=kwargs['enforce_Quantum Documents_api_key'],
+                                                enforce_Quantum Documents_ui_key=kwargs['enforce_Quantum Documents_ui_key'],
+                                                Quantum Documents_api_keys=kwargs['Quantum Documents_api_keys'],
                                                 )
 
-        s3up_event = s3up_btn.click(s3up_check_key_func, inputs=[zip_text, admin_pass_textbox, h2ogpt_key],
+        s3up_event = s3up_btn.click(s3up_check_key_func, inputs=[zip_text, admin_pass_textbox, Quantum Documents_key],
                                     outputs=s3up_text,
                                     **noqueue_kwargs,
                                     api_name=False,
@@ -2614,9 +2614,9 @@ def go_gradio(**kwargs):
                                            pdf_loaders_options0=pdf_loaders_options0,
                                            url_loaders_options0=url_loaders_options0,
                                            jq_schema0=jq_schema0,
-                                           enforce_h2ogpt_api_key=kwargs['enforce_h2ogpt_api_key'],
-                                           enforce_h2ogpt_ui_key=kwargs['enforce_h2ogpt_ui_key'],
-                                           h2ogpt_api_keys=kwargs['h2ogpt_api_keys'],
+                                           enforce_Quantum Documents_api_key=kwargs['enforce_Quantum Documents_api_key'],
+                                           enforce_Quantum Documents_ui_key=kwargs['enforce_Quantum Documents_ui_key'],
+                                           Quantum Documents_api_keys=kwargs['Quantum Documents_api_keys'],
                                            is_public=is_public,
                                            use_pymupdf=kwargs['use_pymupdf'],
                                            use_unstructured_pdf=kwargs['use_unstructured_pdf'],
@@ -2629,7 +2629,7 @@ def go_gradio(**kwargs):
                                            allow_upload_to_user_data=kwargs['allow_upload_to_user_data'],
                                            function_server=kwargs['function_server'],
                                            function_server_port=kwargs['function_server_port'],
-                                           function_api_key=h2ogpt_key1 if not kwargs['function_api_key'] else kwargs[
+                                           function_api_key=Quantum Documents_key1 if not kwargs['function_api_key'] else kwargs[
                                                'function_api_key'],
                                            )
         add_file_outputs = [fileup_output, langchain_mode]
@@ -2642,7 +2642,7 @@ def go_gradio(**kwargs):
                                        jq_schema,
                                        extract_frames,
                                        llava_prompt,
-                                       h2ogpt_key,
+                                       Quantum Documents_key,
                                        ],
                                outputs=add_file_outputs + [sources_text, doc_exception_text, text_file_last,
                                                            new_files_last],
@@ -2676,7 +2676,7 @@ def go_gradio(**kwargs):
                                         jq_schema,
                                         extract_frames,
                                         llava_prompt,
-                                        h2ogpt_key,
+                                        Quantum Documents_key,
                                         ],
                                 outputs=add_file_outputs + [sources_text, doc_exception_text, text_file_last,
                                                             new_files_last],
@@ -2702,7 +2702,7 @@ def go_gradio(**kwargs):
                                       jq_schema,
                                       extract_frames,
                                       llava_prompt,
-                                      h2ogpt_key,
+                                      Quantum Documents_key,
                                       ],
                               outputs=add_url_outputs + [sources_text, doc_exception_text, text_file_last,
                                                          new_files_last],
@@ -2741,7 +2741,7 @@ def go_gradio(**kwargs):
                                        jq_schema,
                                        extract_frames,
                                        llava_prompt,
-                                       h2ogpt_key,
+                                       Quantum Documents_key,
                                        ],
                                outputs=add_text_outputs + [sources_text, doc_exception_text, text_file_last,
                                                            new_files_last],
@@ -2771,9 +2771,9 @@ def go_gradio(**kwargs):
                                       verbose=verbose,
                                       get_userid_auth=get_userid_auth,
                                       n_jobs=n_jobs,
-                                      enforce_h2ogpt_api_key=kwargs['enforce_h2ogpt_api_key'],
-                                      enforce_h2ogpt_ui_key=kwargs['enforce_h2ogpt_ui_key'],
-                                      h2ogpt_api_keys=kwargs['h2ogpt_api_keys'],
+                                      enforce_Quantum Documents_api_key=kwargs['enforce_Quantum Documents_api_key'],
+                                      enforce_Quantum Documents_ui_key=kwargs['enforce_Quantum Documents_ui_key'],
+                                      Quantum Documents_api_keys=kwargs['Quantum Documents_api_keys'],
                                       )
 
         get_sources1 = functools.partial(get_sources_gr, **get_sources_fun_kwargs)
@@ -2824,7 +2824,7 @@ def go_gradio(**kwargs):
 
         get_sources_kwargs = dict(fn=get_sources1,
                                   inputs=[my_db_state, selection_docs_state, requests_state, langchain_mode,
-                                          h2ogpt_key],
+                                          Quantum Documents_key],
                                   outputs=[file_source, docs_state, text_doc_count],
                                   queue=queue)
 
@@ -2839,7 +2839,7 @@ def go_gradio(**kwargs):
 
         get_sources_api_args = dict(fn=functools.partial(get_sources1, api=True),
                                     inputs=[my_db_state, selection_docs_state, requests_state, langchain_mode,
-                                            h2ogpt_key],
+                                            Quantum Documents_key],
                                     outputs=get_sources_api_text,
                                     queue=queue)
         get_sources_api_btn.click(**get_sources_api_args,
@@ -2856,9 +2856,9 @@ def go_gradio(**kwargs):
                                         verbose=verbose,
                                         get_userid_auth=get_userid_auth,
                                         n_jobs=n_jobs,
-                                        enforce_h2ogpt_api_key=kwargs['enforce_h2ogpt_api_key'],
-                                        enforce_h2ogpt_ui_key=kwargs['enforce_h2ogpt_ui_key'],
-                                        h2ogpt_api_keys=kwargs['h2ogpt_api_keys'],
+                                        enforce_Quantum Documents_api_key=kwargs['enforce_Quantum Documents_api_key'],
+                                        enforce_Quantum Documents_ui_key=kwargs['enforce_Quantum Documents_ui_key'],
+                                        Quantum Documents_api_keys=kwargs['Quantum Documents_api_keys'],
                                         )
         show_sources1 = functools.partial(get_source_files_given_langchain_mode_gr,
                                           **show_sources1_fun_kwargs,
@@ -2870,7 +2870,7 @@ def go_gradio(**kwargs):
                                            show_progress='minimal')
         show_sources_kwargs = dict(fn=show_sources1,
                                    inputs=[my_db_state, selection_docs_state, requests_state, langchain_mode,
-                                           h2ogpt_key],
+                                           Quantum Documents_key],
                                    outputs=sources_text)
         eventdb8 = eventdb8a.then(**show_sources_kwargs,
                                   api_name='show_sources' if allow_api else False)
@@ -2888,15 +2888,15 @@ def go_gradio(**kwargs):
                                                 verbose=kwargs['verbose'],
                                                 get_userid_auth=get_userid_auth,
                                                 n_jobs=n_jobs,
-                                                enforce_h2ogpt_api_key=kwargs['enforce_h2ogpt_api_key'],
-                                                enforce_h2ogpt_ui_key=kwargs['enforce_h2ogpt_ui_key'],
-                                                h2ogpt_api_keys=kwargs['h2ogpt_api_keys'],
+                                                enforce_Quantum Documents_api_key=kwargs['enforce_Quantum Documents_api_key'],
+                                                enforce_Quantum Documents_ui_key=kwargs['enforce_Quantum Documents_ui_key'],
+                                                Quantum Documents_api_keys=kwargs['Quantum Documents_api_keys'],
                                                 )
 
         get_viewable_sources1 = functools.partial(get_sources_gr, **get_viewable_sources1_fun_kwargs)
         get_viewable_sources_args = dict(fn=get_viewable_sources1,
                                          inputs=[my_db_state, selection_docs_state, requests_state, langchain_mode,
-                                                 h2ogpt_key],
+                                                 Quantum Documents_key],
                                          outputs=[file_source, viewable_docs_state, text_viewable_doc_count],
                                          queue=queue)
         eventdb12a = get_viewable_sources_btn.click(user_state_setup,
@@ -2927,16 +2927,16 @@ def go_gradio(**kwargs):
                                           max_raw_chunks=kwargs['max_raw_chunks'],
                                           api=False,
                                           n_jobs=n_jobs,
-                                          enforce_h2ogpt_api_key=kwargs['enforce_h2ogpt_api_key'],
-                                          enforce_h2ogpt_ui_key=kwargs['enforce_h2ogpt_ui_key'],
-                                          h2ogpt_api_keys=kwargs['h2ogpt_api_keys'],
+                                          enforce_Quantum Documents_api_key=kwargs['enforce_Quantum Documents_api_key'],
+                                          enforce_Quantum Documents_ui_key=kwargs['enforce_Quantum Documents_ui_key'],
+                                          Quantum Documents_api_keys=kwargs['Quantum Documents_api_keys'],
                                           )
         # Note: Not really useful for API, so no api_name
         show_doc_kwargs = dict(fn=show_doc_func,
                                inputs=[my_db_state, selection_docs_state, requests_state, langchain_mode,
                                        view_document_choice, view_raw_text_checkbox,
                                        text_context_list, pdf_height,
-                                       h2ogpt_key],
+                                       Quantum Documents_key],
                                outputs=[doc_view, doc_view2, doc_view3, doc_view4,
                                         doc_view5, doc_view6, doc_view7, doc_view8])
         eventdb_viewa.then(**show_doc_kwargs)
@@ -2949,7 +2949,7 @@ def go_gradio(**kwargs):
                                    inputs=[my_db_state, selection_docs_state, requests_state, langchain_mode,
                                            view_document_choice, view_raw_text_checkbox,
                                            text_context_list, pdf_height,
-                                           h2ogpt_key],
+                                           Quantum Documents_key],
                                    outputs=get_document_api_text, api_name='get_document_api')
 
         # Get inputs to evaluate() and make_db()
@@ -2984,9 +2984,9 @@ def go_gradio(**kwargs):
                                              enable_pdf_ocr=kwargs['enable_pdf_ocr'],
                                              enable_pdf_doctr=kwargs['enable_pdf_doctr'],
                                              try_pdf_as_html=kwargs['try_pdf_as_html'],
-                                             enforce_h2ogpt_api_key=kwargs['enforce_h2ogpt_api_key'],
-                                             enforce_h2ogpt_ui_key=kwargs['enforce_h2ogpt_ui_key'],
-                                             h2ogpt_api_keys=kwargs['h2ogpt_api_keys'],
+                                             enforce_Quantum Documents_api_key=kwargs['enforce_Quantum Documents_api_key'],
+                                             enforce_Quantum Documents_ui_key=kwargs['enforce_Quantum Documents_ui_key'],
+                                             Quantum Documents_api_keys=kwargs['Quantum Documents_api_keys'],
                                              )
         eventdb9a = refresh_sources_btn.click(user_state_setup,
                                               inputs=[my_db_state, requests_state, guest_name,
@@ -3002,7 +3002,7 @@ def go_gradio(**kwargs):
                                           jq_schema,
                                           extract_frames,
                                           llava_prompt,
-                                          h2ogpt_key,
+                                          Quantum Documents_key,
                                           ],
                                   outputs=sources_text,
                                   api_name='refresh_sources' if allow_api else False)
@@ -3017,9 +3017,9 @@ def go_gradio(**kwargs):
                                             verbose=verbose,
                                             get_userid_auth=get_userid_auth,
                                             n_jobs=n_jobs,
-                                            enforce_h2ogpt_api_key=kwargs['enforce_h2ogpt_api_key'],
-                                            enforce_h2ogpt_ui_key=kwargs['enforce_h2ogpt_ui_key'],
-                                            h2ogpt_api_keys=kwargs['h2ogpt_api_keys'],
+                                            enforce_Quantum Documents_api_key=kwargs['enforce_Quantum Documents_api_key'],
+                                            enforce_Quantum Documents_ui_key=kwargs['enforce_Quantum Documents_ui_key'],
+                                            Quantum Documents_api_keys=kwargs['Quantum Documents_api_keys'],
                                             )
         eventdb90a = delete_sources_btn.click(user_state_setup,
                                               inputs=[my_db_state, requests_state, guest_name,
@@ -3029,7 +3029,7 @@ def go_gradio(**kwargs):
         eventdb90 = eventdb90a.then(fn=delete_sources1,
                                     inputs=[my_db_state, selection_docs_state, requests_state, document_choice,
                                             langchain_mode,
-                                            h2ogpt_key],
+                                            Quantum Documents_key],
                                     outputs=sources_text,
                                     api_name='delete_sources' if allow_api else False)
         db_events.extend([eventdb90a, eventdb90])
@@ -3054,7 +3054,7 @@ def go_gradio(**kwargs):
         def login(db1s, selection_docs_state1, requests_state1, roles_state1,
                   model_options_state1, lora_options_state1, server_options_state1,
                   chat_state1, langchain_mode1,
-                  h2ogpt_key2, visible_models1,
+                  Quantum Documents_key2, visible_models1,
 
                   side_bar_text1, doc_count_text1, submit_buttons_text1, visible_models_text1,
                   chat_tab_text1, doc_selection_tab_text1, doc_view_tab_text1, chat_history_tab_text1,
@@ -3089,7 +3089,7 @@ def go_gradio(**kwargs):
 
                 success1, text_result, text_output1, text_output21, text_outputs1, \
                     langchain_mode1, \
-                    h2ogpt_key2, visible_models1, \
+                    Quantum Documents_key2, visible_models1, \
                     side_bar_text1, doc_count_text1, submit_buttons_text1, visible_models_text1, \
                     chat_tab_text1, doc_selection_tab_text1, doc_view_tab_text1, chat_history_tab_text1, \
                     expert_tab_text1, models_tab_text1, system_tab_text1, tos_tab_text1, \
@@ -3100,7 +3100,7 @@ def go_gradio(**kwargs):
                               lora_options_state1=lora_options_state1,
                               server_options_state1=server_options_state1,
                               chat_state1=chat_state1, langchain_mode1=langchain_mode1,
-                              h2ogpt_key2=h2ogpt_key2, visible_models1=visible_models1,
+                              Quantum Documents_key2=Quantum Documents_key2, visible_models1=visible_models1,
 
                               side_bar_text1=side_bar_text1, doc_count_text1=doc_count_text1,
                               submit_buttons_text1=submit_buttons_text1, visible_models_text1=visible_models_text1,
@@ -3142,7 +3142,7 @@ def go_gradio(**kwargs):
                 gr.update(choices=list(chat_state1.keys()), value=None), \
                 gr.update(choices=get_langchain_choices(selection_docs_state1),
                           value=langchain_mode1), \
-                h2ogpt_key2, visible_models1, \
+                Quantum Documents_key2, visible_models1, \
                 gr.update(visible=True if side_bar_text1 == 'on' else False), \
                 gr.update(visible=True if doc_count_text1 == 'on' else False), \
                 gr.update(visible=True if submit_buttons_text1 == 'on' else False), \
@@ -3173,7 +3173,7 @@ def go_gradio(**kwargs):
         login_inputs = [my_db_state, selection_docs_state, requests_state, roles_state,
                         model_options_state, lora_options_state, server_options_state,
                         chat_state, langchain_mode,
-                        h2ogpt_key, visible_models,
+                        Quantum Documents_key, visible_models,
 
                         side_bar_text, doc_count_text, submit_buttons_text, visible_models_text,
                         chat_tab_text, doc_selection_tab_text, doc_view_tab_text, chat_history_tab_text,
@@ -3190,7 +3190,7 @@ def go_gradio(**kwargs):
                          langchain_mode_path_text,
                          chatbot_role,
                          radio_chats, langchain_mode,
-                         h2ogpt_key, visible_models,
+                         Quantum Documents_key, visible_models,
 
                          side_bar, row_doc_track, submit_buttons, visible_models,
                          chat_tab, doc_selection_tab, doc_view_tab, chat_history_tab,
@@ -3214,7 +3214,7 @@ def go_gradio(**kwargs):
                       lora_options_state1=None,
                       server_options_state1=None,
                       chat_state1=None, langchain_mode1=None,
-                      h2ogpt_key2=None, visible_models1=None,
+                      Quantum Documents_key2=None, visible_models1=None,
 
                       side_bar_text1=None, doc_count_text1=None, submit_buttons_text1=None, visible_models_text1=None,
                       chat_tab_text1=None, doc_selection_tab_text1=None, doc_view_tab_text1=None,
@@ -3229,7 +3229,7 @@ def go_gradio(**kwargs):
             # in-place assignment
             if not auth_filename:
                 return False, "No auth file", text_output1, text_output21, text_outputs1, \
-                    langchain_mode1, h2ogpt_key2, visible_models1, \
+                    langchain_mode1, Quantum Documents_key2, visible_models1, \
                     side_bar_text1, doc_count_text1, submit_buttons_text1, visible_models_text1, \
                     chat_tab_text1, doc_selection_tab_text1, doc_view_tab_text1, chat_history_tab_text1, \
                     expert_tab_text1, models_tab_text1, system_tab_text1, tos_tab_text1, \
@@ -3254,7 +3254,7 @@ def go_gradio(**kwargs):
                             if auth_user['password'] != password_to_check:
                                 return False, "Invalid password for user %s" % username1, \
                                     text_output1, text_output21, text_outputs1, \
-                                    langchain_mode1, h2ogpt_key2, visible_models1, \
+                                    langchain_mode1, Quantum Documents_key2, visible_models1, \
                                     side_bar_text1, doc_count_text1, submit_buttons_text1, visible_models_text1, \
                                     chat_tab_text1, doc_selection_tab_text1, doc_view_tab_text1, chat_history_tab_text1, \
                                     expert_tab_text1, models_tab_text1, system_tab_text1, tos_tab_text1, \
@@ -3296,8 +3296,8 @@ def go_gradio(**kwargs):
                             text_outputs1 = auth_user['text_outputs']
                         if 'langchain_mode' in auth_user:
                             langchain_mode1 = auth_user['langchain_mode']
-                        if 'h2ogpt_key' in auth_user:
-                            h2ogpt_key2 = auth_user['h2ogpt_key']
+                        if 'Quantum Documents_key' in auth_user:
+                            Quantum Documents_key2 = auth_user['Quantum Documents_key']
                         if 'visible_models' in auth_user:
                             visible_models1 = auth_user['visible_models']
 
@@ -3369,7 +3369,7 @@ def go_gradio(**kwargs):
                 text_outputs1 = []
 
             return success1, text_result, text_output1, text_output21, text_outputs1, \
-                langchain_mode1, h2ogpt_key2, visible_models1, \
+                langchain_mode1, Quantum Documents_key2, visible_models1, \
                 side_bar_text1, doc_count_text1, submit_buttons_text1, visible_models_text1, \
                 chat_tab_text1, doc_selection_tab_text1, doc_view_tab_text1, chat_history_tab_text1, \
                 expert_tab_text1, models_tab_text1, system_tab_text1, tos_tab_text1, \
@@ -3397,7 +3397,7 @@ def go_gradio(**kwargs):
         def save_auth(selection_docs_state1, requests_state1, roles_state1,
                       model_options_state1, lora_options_state1, server_options_state1,
                       chat_state1, langchain_mode1,
-                      h2ogpt_key1, visible_models1,
+                      Quantum Documents_key1, visible_models1,
 
                       side_bar_text1, doc_count_text1, submit_buttons_text1, visible_models_text1,
                       chat_tab_text1, doc_selection_tab_text1, doc_view_tab_text1, chat_history_tab_text1,
@@ -3454,8 +3454,8 @@ def go_gradio(**kwargs):
                             auth_user['text_outputs'] = text_outputs1
                         if langchain_mode1:
                             auth_user['langchain_mode'] = langchain_mode1
-                        if h2ogpt_key1:
-                            auth_user['h2ogpt_key'] = h2ogpt_key1
+                        if Quantum Documents_key1:
+                            auth_user['Quantum Documents_key'] = Quantum Documents_key1
                         if visible_models1:
                             auth_user['visible_models'] = visible_models1
 
@@ -3524,7 +3524,7 @@ def go_gradio(**kwargs):
                                 inputs=[selection_docs_state, requests_state, roles_state,
                                         model_options_state, lora_options_state, server_options_state,
                                         chat_state, langchain_mode,
-                                        h2ogpt_key, visible_models,
+                                        Quantum Documents_key, visible_models,
                                         side_bar_text, doc_count_text, submit_buttons_text, visible_models_text,
                                         chat_tab_text, doc_selection_tab_text, doc_view_tab_text, chat_history_tab_text,
                                         expert_tab_text, models_tab_text, system_tab_text, tos_tab_text,
@@ -3534,8 +3534,8 @@ def go_gradio(**kwargs):
         lg_change_event_auth = lg_change_event.then(**save_auth_kwargs)
         add_role_event_save_event = add_role_event.then(**save_auth_kwargs)
 
-        h2ogpt_key.blur(**save_auth_kwargs)
-        h2ogpt_key.submit(**save_auth_kwargs)
+        Quantum Documents_key.blur(**save_auth_kwargs)
+        Quantum Documents_key.submit(**save_auth_kwargs)
 
         def get_model_lock_visible_list(visible_models1, all_possible_display_names):
             visible_list = []
@@ -3576,16 +3576,16 @@ def go_gradio(**kwargs):
                               ).then(**save_auth_kwargs)
 
         def add_langchain_mode(db1s, selection_docs_state1, requests_state1, langchain_mode1, y,
-                               h2ogpt_key1,
+                               Quantum Documents_key1,
                                auth_filename=None, auth_freeze=None, guest_name=None,
-                               enforce_h2ogpt_api_key=True,
-                               enforce_h2ogpt_ui_key=True,
-                               h2ogpt_api_keys=[],
+                               enforce_Quantum Documents_api_key=True,
+                               enforce_Quantum Documents_ui_key=True,
+                               Quantum Documents_api_keys=[],
                                ):
-            valid_key = is_valid_key(enforce_h2ogpt_api_key,
-                                     enforce_h2ogpt_ui_key,
-                                     h2ogpt_api_keys,
-                                     h2ogpt_key1,
+            valid_key = is_valid_key(enforce_Quantum Documents_api_key,
+                                     enforce_Quantum Documents_ui_key,
+                                     Quantum Documents_api_keys,
+                                     Quantum Documents_key1,
                                      requests_state1=requests_state1,
                                      )
             from_ui = is_from_ui(requests_state1)
@@ -3674,11 +3674,11 @@ def go_gradio(**kwargs):
                 lora_options_state1 = None
                 server_options_state1 = None
                 text_output1, text_output21, text_outputs1 = None, None, None
-                h2ogpt_key2, visible_models2 = None, None
+                Quantum Documents_key2, visible_models2 = None, None
                 save_auth_func(selection_docs_state1, requests_state1, roles_state1,
                                model_options_state1, lora_options_state1, server_options_state1,
                                chat_state1, langchain_mode2,
-                               h2ogpt_key2, visible_models2,
+                               Quantum Documents_key2, visible_models2,
                                None, None, None, None,
                                None, None, None, None,
                                None, None, None, None,
@@ -3691,18 +3691,18 @@ def go_gradio(**kwargs):
 
         def remove_langchain_mode(db1s, selection_docs_state1, requests_state1,
                                   langchain_mode1, langchain_mode2,
-                                  h2ogpt_key2,
+                                  Quantum Documents_key2,
                                   dbsu=None, auth_filename=None, auth_freeze=None,
                                   guest_name=None,
                                   purge=False,
-                                  enforce_h2ogpt_api_key=True,
-                                  enforce_h2ogpt_ui_key=True,
-                                  h2ogpt_api_keys=[],
+                                  enforce_Quantum Documents_api_key=True,
+                                  enforce_Quantum Documents_ui_key=True,
+                                  Quantum Documents_api_keys=[],
                                   ):
-            valid_key = is_valid_key(enforce_h2ogpt_api_key,
-                                     enforce_h2ogpt_ui_key,
-                                     h2ogpt_api_keys,
-                                     h2ogpt_key2,
+            valid_key = is_valid_key(enforce_Quantum Documents_api_key,
+                                     enforce_Quantum Documents_ui_key,
+                                     Quantum Documents_api_keys,
+                                     Quantum Documents_key2,
                                      requests_state1=requests_state1,
                                      )
             from_ui = is_from_ui(requests_state1)
@@ -3792,11 +3792,11 @@ def go_gradio(**kwargs):
                 lora_options_state1 = None
                 server_options_state1 = None
                 text_output1, text_output21, text_outputs1 = None, None, None
-                h2ogpt_key2, visible_models2 = None, None
+                Quantum Documents_key2, visible_models2 = None, None
                 save_auth_func(selection_docs_state1, requests_state1, roles_state1,
                                model_options_state1, lora_options_state1, server_options_state1,
                                chat_state1, langchain_mode2,
-                               h2ogpt_key2, visible_models2,
+                               Quantum Documents_key2, visible_models2,
                                None, None, None, None,
                                None, None, None, None,
                                None, None, None, None,
@@ -3817,15 +3817,15 @@ def go_gradio(**kwargs):
                                                     auth_filename=kwargs['auth_filename'],
                                                     auth_freeze=kwargs['auth_freeze'],
                                                     guest_name=kwargs['guest_name'],
-                                                    enforce_h2ogpt_api_key=kwargs['enforce_h2ogpt_api_key'],
-                                                    enforce_h2ogpt_ui_key=kwargs['enforce_h2ogpt_ui_key'],
-                                                    h2ogpt_api_keys=kwargs['h2ogpt_api_keys'],
+                                                    enforce_Quantum Documents_api_key=kwargs['enforce_Quantum Documents_api_key'],
+                                                    enforce_Quantum Documents_ui_key=kwargs['enforce_Quantum Documents_ui_key'],
+                                                    Quantum Documents_api_keys=kwargs['Quantum Documents_api_keys'],
                                                     )
         eventdb20b = eventdb20a.then(fn=add_langchain_mode_func,
                                      inputs=[my_db_state, selection_docs_state, requests_state,
                                              langchain_mode,
                                              new_langchain_mode_text,
-                                             h2ogpt_key],
+                                             Quantum Documents_key],
                                      outputs=[my_db_state, selection_docs_state, langchain_mode,
                                               new_langchain_mode_text,
                                               langchain_mode_path_text],
@@ -3838,9 +3838,9 @@ def go_gradio(**kwargs):
                                                        auth_filename=kwargs['auth_filename'],
                                                        auth_freeze=kwargs['auth_freeze'],
                                                        guest_name=kwargs['guest_name'],
-                                                       enforce_h2ogpt_api_key=kwargs['enforce_h2ogpt_api_key'],
-                                                       enforce_h2ogpt_ui_key=kwargs['enforce_h2ogpt_ui_key'],
-                                                       h2ogpt_api_keys=kwargs['h2ogpt_api_keys'],
+                                                       enforce_Quantum Documents_api_key=kwargs['enforce_Quantum Documents_api_key'],
+                                                       enforce_Quantum Documents_ui_key=kwargs['enforce_Quantum Documents_ui_key'],
+                                                       Quantum Documents_api_keys=kwargs['Quantum Documents_api_keys'],
                                                        )
         eventdb21a = remove_langchain_mode_text.submit(user_state_setup,
                                                        inputs=[my_db_state,
@@ -3853,7 +3853,7 @@ def go_gradio(**kwargs):
                                             inputs=[my_db_state, selection_docs_state, requests_state,
                                                     langchain_mode,
                                                     remove_langchain_mode_text,
-                                                    h2ogpt_key],
+                                                    Quantum Documents_key],
                                             outputs=[my_db_state, selection_docs_state, langchain_mode,
                                                      remove_langchain_mode_text,
                                                      langchain_mode_path_text])
@@ -3874,7 +3874,7 @@ def go_gradio(**kwargs):
                                            inputs=[my_db_state, selection_docs_state, requests_state,
                                                    langchain_mode,
                                                    purge_langchain_mode_text,
-                                                   h2ogpt_key],
+                                                   Quantum Documents_key],
                                            outputs=[my_db_state, selection_docs_state, langchain_mode,
                                                     purge_langchain_mode_text,
                                                     langchain_mode_path_text])
@@ -3887,16 +3887,16 @@ def go_gradio(**kwargs):
         db_events.extend([eventdb22a, eventdb22b, eventdb22b_auth])
 
         def load_langchain_gr(db1s, selection_docs_state1, requests_state1, langchain_mode1,
-                              h2ogpt_key3,
+                              Quantum Documents_key3,
                               auth_filename=None,
-                              enforce_h2ogpt_api_key=kwargs['enforce_h2ogpt_api_key'],
-                              enforce_h2ogpt_ui_key=kwargs['enforce_h2ogpt_ui_key'],
-                              h2ogpt_api_keys=kwargs['h2ogpt_api_keys'],
+                              enforce_Quantum Documents_api_key=kwargs['enforce_Quantum Documents_api_key'],
+                              enforce_Quantum Documents_ui_key=kwargs['enforce_Quantum Documents_ui_key'],
+                              Quantum Documents_api_keys=kwargs['Quantum Documents_api_keys'],
                               ):
-            valid_key = is_valid_key(enforce_h2ogpt_api_key,
-                                     enforce_h2ogpt_ui_key,
-                                     h2ogpt_api_keys,
-                                     h2ogpt_key3,
+            valid_key = is_valid_key(enforce_Quantum Documents_api_key,
+                                     enforce_Quantum Documents_ui_key,
+                                     Quantum Documents_api_keys,
+                                     Quantum Documents_key3,
                                      requests_state1=requests_state1,
                                      )
             from_ui = is_from_ui(requests_state1)
@@ -3919,7 +3919,7 @@ def go_gradio(**kwargs):
                                                    auth_filename=kwargs['auth_filename'])
         eventdbloadlb = eventdbloadla.then(fn=load_langchain_gr_func,
                                            inputs=[my_db_state, selection_docs_state, requests_state, langchain_mode,
-                                                   h2ogpt_key],
+                                                   Quantum Documents_key],
                                            outputs=[selection_docs_state, langchain_mode, langchain_mode_path_text],
                                            api_name='load_langchain' if allow_api and allow_upload_to_user_data else False)
 
@@ -4504,7 +4504,7 @@ def go_gradio(**kwargs):
             db1s = None
             requests_state1 = None
             valid_key = False
-            h2ogpt_key1 = ''
+            Quantum Documents_key1 = ''
             sources_all = []
             exceptions = []
             save_dicts = []
@@ -4530,7 +4530,7 @@ def go_gradio(**kwargs):
                     # with model_state1 at -3, my_db_state1 at -2, and history(chatbot) at -1
                     # langchain_mode1 and my_db_state1 and requests_state1 should be same for every bot
                     history, fun1, langchain_mode1, db1s, requests_state1, \
-                        valid_key, h2ogpt_key1, \
+                        valid_key, Quantum Documents_key1, \
                         max_time1, stream_output1, \
                         chatbot_role1, speaker1, tts_language1, roles_state1, tts_speed1, \
                         langchain_action1, \
@@ -4722,7 +4722,7 @@ def go_gradio(**kwargs):
                 save_dict['sources'] = sources
                 save_dict['which_api'] = 'all_bot_%s' % model_name
                 save_dict['valid_key'] = valid_key
-                save_dict['h2ogpt_key'] = h2ogpt_key1
+                save_dict['Quantum Documents_key'] = Quantum Documents_key1
                 save_dict['save_dir'] = kwargs['save_dir']
                 save_generate_output(**save_dict)
 
@@ -5090,11 +5090,11 @@ def go_gradio(**kwargs):
             text_output1 = chat_list[0]
             text_output21 = chat_list[1]
             text_outputs1 = chat_list[2:]
-            h2ogpt_key2, visible_models2 = None, None
+            Quantum Documents_key2, visible_models2 = None, None
             save_auth_func(selection_docs_state1, requests_state1, roles_state1,
                            model_options_state1, lora_options_state1, server_options_state1,
                            chat_state1, langchain_mode2,
-                           h2ogpt_key2, visible_models2,
+                           Quantum Documents_key2, visible_models2,
                            None, None, None, None,
                            None, None, None, None,
                            None, None, None, None,
@@ -5185,11 +5185,11 @@ def go_gradio(**kwargs):
             lora_options_state1 = None
             server_options_state1 = None
             text_output1, text_output21, text_outputs1 = None, None, None
-            h2ogpt_key2, visible_models2 = None, None
+            Quantum Documents_key2, visible_models2 = None, None
             save_auth_func(selection_docs_state1, requests_state1, roles_state1,
                            model_options_state1, lora_options_state1, server_options_state1,
                            chat_state1, langchain_mode2,
-                           h2ogpt_key2, visible_models2,
+                           Quantum Documents_key2, visible_models2,
                            None, None, None, None,
                            None, None, None, None,
                            None, None, None, None,
@@ -5470,8 +5470,8 @@ def go_gradio(**kwargs):
                                    tokenizer_base_model=tokenizer_base_model,
                                    lora_weights=lora_weights, inference_server=server_name,
                                    prompt_type=prompt_type1, prompt_dict=prompt_dict1,
-                                   # FIXME: not typically required, unless want to expose adding h2ogpt endpoint in UI
-                                   visible_models=None, h2ogpt_key=None,
+                                   # FIXME: not typically required, unless want to expose adding Quantum Documents endpoint in UI
+                                   visible_models=None, Quantum Documents_key=None,
                                    )
             [model_state_new.update({k: v}) for k, v in kwargs['model_state_none'].items() if k not in model_state_new]
             max_seq_len1new = get_model_max_length_from_tokenizer(tokenizer1)
@@ -5751,11 +5751,11 @@ def go_gradio(**kwargs):
                                         api_name='system_info' if kwargs['system_api_open'] else False,
                                         **noqueue_kwargs)
 
-        def shutdown_func(admin_pass_textbox1, h2ogpt_pid):
+        def shutdown_func(admin_pass_textbox1, Quantum Documents_pid):
             assert admin_pass_textbox1 == admin_pass or not admin_pass
             if kwargs['close_button']:
                 import psutil
-                parent = psutil.Process(h2ogpt_pid)
+                parent = psutil.Process(Quantum Documents_pid)
                 for child in parent.children(recursive=True):
                     child.kill()
                 parent.kill()
@@ -5763,8 +5763,8 @@ def go_gradio(**kwargs):
         api_name_shutdown = 'shutdown' if kwargs['shutdown_via_api'] and \
                                           allow_api and \
                                           not is_public and \
-                                          kwargs['h2ogpt_pid'] is not None else False
-        shutdown_event = close_btn.click(functools.partial(shutdown_func, h2ogpt_pid=kwargs['h2ogpt_pid']),
+                                          kwargs['Quantum Documents_pid'] is not None else False
+        shutdown_event = close_btn.click(functools.partial(shutdown_func, Quantum Documents_pid=kwargs['Quantum Documents_pid']),
                                          inputs=[admin_pass_textbox], outputs=None,
                                          api_name=api_name_shutdown,
                                          **noqueue_kwargs)
@@ -6070,12 +6070,12 @@ def go_gradio(**kwargs):
                                                                 sr=sr1)
 
         def wrap_pred_func_api(chatbot_role1, speaker1, tts_language1, tts_speed1,
-                               response, stream_output1, h2ogpt_key1, roles_state1, requests_state1):
+                               response, stream_output1, Quantum Documents_key1, roles_state1, requests_state1):
             # check key
-            valid_key = is_valid_key(kwargs['enforce_h2ogpt_api_key'],
-                                     kwargs['enforce_h2ogpt_ui_key'],
-                                     kwargs['h2ogpt_api_keys'],
-                                     h2ogpt_key1,
+            valid_key = is_valid_key(kwargs['enforce_Quantum Documents_api_key'],
+                                     kwargs['enforce_Quantum Documents_ui_key'],
+                                     kwargs['Quantum Documents_api_keys'],
+                                     Quantum Documents_key1,
                                      requests_state1=requests_state1)
             kwargs['from_ui'] = is_from_ui(requests_state1)
             if not valid_key:
@@ -6103,7 +6103,7 @@ def go_gradio(**kwargs):
             args_dict['roles_state'] = roles_state.value.copy()
 
             input_args_list_speak = ['chatbot_role', 'speaker', 'tts_language', 'tts_speed',
-                                     'prompt', 'stream_output', 'h2ogpt_key',
+                                     'prompt', 'stream_output', 'Quantum Documents_key',
                                      'roles_state', 'requests_state']
             assert len(args_dict) == len(input_args_list_speak)
 
@@ -6126,7 +6126,7 @@ def go_gradio(**kwargs):
         speak_text_api_event1 = speak_text_api_button.click(**user_state_kwargs)
         speak_text_api_event = speak_text_api_event1.then(wrap_pred_func_api,
                                                           inputs=[chatbot_role, speaker, tts_language, tts_speed,
-                                                                  text_speech, stream_output, h2ogpt_key,
+                                                                  text_speech, stream_output, Quantum Documents_key,
                                                                   roles_state, requests_state],
                                                           outputs=text_speech_out,
                                                           api_name='speak_text_api' if allow_api else False,
@@ -6201,7 +6201,7 @@ def go_gradio(**kwargs):
                 get_sources_kwargs_login = dict(fn=get_sources1_login,
                                                 inputs=[my_db_state, selection_docs_state, requests_state,
                                                         langchain_mode,
-                                                        h2ogpt_key],
+                                                        Quantum Documents_key],
                                                 outputs=[file_source, docs_state, text_doc_count],
                                                 queue=queue)
                 load_event3 = load_event2.then(**get_sources_kwargs_login)
@@ -6214,7 +6214,7 @@ def go_gradio(**kwargs):
                 show_sources_kwargs_login = dict(fn=show_sources1_login,
                                                  inputs=[my_db_state, selection_docs_state, requests_state,
                                                          langchain_mode,
-                                                         h2ogpt_key],
+                                                         Quantum Documents_key],
                                                  outputs=sources_text)
                 load_event5 = load_event4.then(**show_sources_kwargs_login)
 
@@ -6225,7 +6225,7 @@ def go_gradio(**kwargs):
                 get_viewable_sources_args_login = dict(fn=get_viewable_sources1_login,
                                                        inputs=[my_db_state, selection_docs_state, requests_state,
                                                                langchain_mode,
-                                                               h2ogpt_key],
+                                                               Quantum Documents_key],
                                                        outputs=[file_source, viewable_docs_state,
                                                                 text_viewable_doc_count],
                                                        queue=queue)
@@ -6233,12 +6233,12 @@ def go_gradio(**kwargs):
                 load_event6 = load_event5.then(**get_viewable_sources_args_login)
                 load_event7 = load_event6.then(**viewable_kwargs)
 
-        def wrap_transcribe_func_api(audio_obj1, stream_output1, h2ogpt_key1, requests_state1):
+        def wrap_transcribe_func_api(audio_obj1, stream_output1, Quantum Documents_key1, requests_state1):
             # check key
-            valid_key = is_valid_key(kwargs['enforce_h2ogpt_api_key'],
-                                     kwargs['enforce_h2ogpt_ui_key'],
-                                     kwargs['h2ogpt_api_keys'],
-                                     h2ogpt_key1,
+            valid_key = is_valid_key(kwargs['enforce_Quantum Documents_api_key'],
+                                     kwargs['enforce_Quantum Documents_ui_key'],
+                                     kwargs['Quantum Documents_api_keys'],
+                                     Quantum Documents_key1,
                                      requests_state1=requests_state1)
             kwargs['from_ui'] = is_from_ui(requests_state1)
             if not valid_key:
@@ -6253,17 +6253,17 @@ def go_gradio(**kwargs):
         audio_api_input = gr.Textbox(value='', visible=False)
         audio_api_btn = gr.Button(visible=False)
         audio_api_btn.click(fn=wrap_transcribe_func_api,
-                            inputs=[audio_api_input, stream_output, h2ogpt_key, requests_state],
+                            inputs=[audio_api_input, stream_output, Quantum Documents_key, requests_state],
                             outputs=[audio_api_output],
                             api_name='transcribe_audio_api',
                             show_progress='hidden')
 
-        def wrap_embedding_func_api(text, h2ogpt_key1, is_list1, requests_state1):
+        def wrap_embedding_func_api(text, Quantum Documents_key1, is_list1, requests_state1):
             # check key
-            valid_key = is_valid_key(kwargs['enforce_h2ogpt_api_key'],
-                                     kwargs['enforce_h2ogpt_ui_key'],
-                                     kwargs['h2ogpt_api_keys'],
-                                     h2ogpt_key1,
+            valid_key = is_valid_key(kwargs['enforce_Quantum Documents_api_key'],
+                                     kwargs['enforce_Quantum Documents_ui_key'],
+                                     kwargs['Quantum Documents_api_keys'],
+                                     Quantum Documents_key1,
                                      requests_state1=requests_state1)
             kwargs['from_ui'] = is_from_ui(requests_state1)
             if not valid_key:
@@ -6283,7 +6283,7 @@ def go_gradio(**kwargs):
         embed_api_btn = gr.Button(visible=False)
         is_list = gr.Textbox(value='False', visible=False)
         embed_api_btn.click(fn=wrap_embedding_func_api,
-                            inputs=[embed_api_input, h2ogpt_key, is_list, requests_state],
+                            inputs=[embed_api_input, Quantum Documents_key, is_list, requests_state],
                             outputs=[embed_api_output],
                             api_name='embed_api',
                             show_progress='hidden')
@@ -6360,7 +6360,7 @@ def go_gradio(**kwargs):
         )
         app = get_app(demo,
                       markdown_logo=markdown_logo,
-                      visible_h2ogpt_logo=kwargs['visible_h2ogpt_logo'],
+                      visible_Quantum Documents_logo=kwargs['visible_Quantum Documents_logo'],
                       page_title=page_title,
                       )
         uvicorn.run(app,
@@ -6437,7 +6437,7 @@ def go_gradio(**kwargs):
                           gradio_prefix=gradio_prefix,
                           gradio_host=gradio_host,
                           gradio_port=gradio_port,
-                          h2ogpt_key=h2ogpt_key1,
+                          Quantum Documents_key=Quantum Documents_key1,
                           auth=kwargs['auth'],
                           auth_access=kwargs['auth_access'],
                           guest_name=kwargs['guest_name'],
@@ -6465,7 +6465,7 @@ def go_gradio(**kwargs):
             if verbose:
                 print("Starting up Function server")
             if kwargs['function_server_workers'] == 1:
-                os.environ['H2OGPT_MAIN_KWARGS'] = run_kwargs['main_kwargs']
+                os.environ['Quantum Documents_MAIN_KWARGS'] = run_kwargs['main_kwargs']
                 from openai_server.function_server import app as function_app
             else:
                 function_app = 'function_server:app'
@@ -6498,7 +6498,7 @@ def show_doc(db1s, selection_docs_state1, requests_state1,
              view_raw_text_checkbox1,
              text_context_list1,
              pdf_height,
-             h2ogpt_key1,
+             Quantum Documents_key1,
              dbs1=None,
              load_db_if_exists1=None,
              db_type1=None,
@@ -6510,14 +6510,14 @@ def show_doc(db1s, selection_docs_state1, requests_state1,
              max_raw_chunks=1000000,
              api=False,
              n_jobs=-1,
-             enforce_h2ogpt_api_key=True,
-             enforce_h2ogpt_ui_key=True,
-             h2ogpt_api_keys=[],
+             enforce_Quantum Documents_api_key=True,
+             enforce_Quantum Documents_ui_key=True,
+             Quantum Documents_api_keys=[],
              ):
-    valid_key = is_valid_key(enforce_h2ogpt_api_key,
-                             enforce_h2ogpt_ui_key,
-                             h2ogpt_api_keys,
-                             h2ogpt_key1,
+    valid_key = is_valid_key(enforce_Quantum Documents_api_key,
+                             enforce_Quantum Documents_ui_key,
+                             Quantum Documents_api_keys,
+                             Quantum Documents_key1,
                              requests_state1=requests_state1)
     from_ui = is_from_ui(requests_state1)
     if not valid_key:
@@ -6772,7 +6772,7 @@ def update_user_db_gr(file, db1s, selection_docs_state1, requests_state1,
                       jq_schema,
                       extract_frames,
                       llava_prompt,
-                      h2ogpt_key,
+                      Quantum Documents_key,
 
                       captions_model=None,
                       caption_loader=None,
@@ -6784,10 +6784,10 @@ def update_user_db_gr(file, db1s, selection_docs_state1, requests_state1,
                       dbs=None,
                       get_userid_auth=None,
                       **kwargs):
-    valid_key = is_valid_key(kwargs.pop('enforce_h2ogpt_api_key', None),
-                             kwargs.pop('enforce_h2ogpt_ui_key', None),
-                             kwargs.pop('h2ogpt_api_keys', []),
-                             h2ogpt_key,
+    valid_key = is_valid_key(kwargs.pop('enforce_Quantum Documents_api_key', None),
+                             kwargs.pop('enforce_Quantum Documents_ui_key', None),
+                             kwargs.pop('Quantum Documents_api_keys', []),
+                             Quantum Documents_key,
                              requests_state1=requests_state1)
     kwargs['from_ui'] = is_from_ui(requests_state1)
     if not valid_key:
@@ -6834,7 +6834,7 @@ def update_user_db_gr(file, db1s, selection_docs_state1, requests_state1,
                           **kwargs)
 
 
-def get_sources_gr(db1s, selection_docs_state1, requests_state1, langchain_mode, h2ogpt_key1,
+def get_sources_gr(db1s, selection_docs_state1, requests_state1, langchain_mode, Quantum Documents_key1,
                    dbs=None, docs_state0=None,
                    load_db_if_exists=None,
                    db_type=None,
@@ -6845,15 +6845,15 @@ def get_sources_gr(db1s, selection_docs_state1, requests_state1, langchain_mode,
                    get_userid_auth=None,
                    api=False,
                    n_jobs=-1,
-                   enforce_h2ogpt_api_key=True,
-                   enforce_h2ogpt_ui_key=True,
-                   h2ogpt_api_keys=[],
+                   enforce_Quantum Documents_api_key=True,
+                   enforce_Quantum Documents_ui_key=True,
+                   Quantum Documents_api_keys=[],
                    for_login=False,
                    ):
-    valid_key = is_valid_key(enforce_h2ogpt_api_key,
-                             enforce_h2ogpt_ui_key,
-                             h2ogpt_api_keys,
-                             h2ogpt_key1,
+    valid_key = is_valid_key(enforce_Quantum Documents_api_key,
+                             enforce_Quantum Documents_ui_key,
+                             Quantum Documents_api_keys,
+                             Quantum Documents_key1,
                              requests_state1=requests_state1,
                              )
     from_ui = is_from_ui(requests_state1)
@@ -6889,7 +6889,7 @@ def get_sources_gr(db1s, selection_docs_state1, requests_state1, langchain_mode,
 
 def get_source_files_given_langchain_mode_gr(db1s, selection_docs_state1, requests_state1,
                                              langchain_mode,
-                                             h2ogpt_key,
+                                             Quantum Documents_key,
                                              dbs=None,
                                              load_db_if_exists=None,
                                              db_type=None,
@@ -6899,15 +6899,15 @@ def get_source_files_given_langchain_mode_gr(db1s, selection_docs_state1, reques
                                              verbose=False,
                                              get_userid_auth=None,
                                              n_jobs=-1,
-                                             enforce_h2ogpt_api_key=True,
-                                             enforce_h2ogpt_ui_key=True,
-                                             h2ogpt_api_keys=[],
+                                             enforce_Quantum Documents_api_key=True,
+                                             enforce_Quantum Documents_ui_key=True,
+                                             Quantum Documents_api_keys=[],
                                              for_login=False,
                                              ):
-    valid_key = is_valid_key(enforce_h2ogpt_api_key,
-                             enforce_h2ogpt_ui_key,
-                             h2ogpt_api_keys,
-                             h2ogpt_key,
+    valid_key = is_valid_key(enforce_Quantum Documents_api_key,
+                             enforce_Quantum Documents_ui_key,
+                             Quantum Documents_api_keys,
+                             Quantum Documents_key,
                              requests_state1=requests_state1,
                              )
     from_ui = is_from_ui(requests_state1)
@@ -6934,7 +6934,7 @@ def get_source_files_given_langchain_mode_gr(db1s, selection_docs_state1, reques
 
 def del_source_files_given_langchain_mode_gr(db1s, selection_docs_state1, requests_state1, document_choice1,
                                              langchain_mode,
-                                             h2ogpt_key1,
+                                             Quantum Documents_key1,
                                              dbs=None,
                                              load_db_if_exists=None,
                                              db_type=None,
@@ -6944,14 +6944,14 @@ def del_source_files_given_langchain_mode_gr(db1s, selection_docs_state1, reques
                                              verbose=False,
                                              get_userid_auth=None,
                                              n_jobs=-1,
-                                             enforce_h2ogpt_api_key=True,
-                                             enforce_h2ogpt_ui_key=True,
-                                             h2ogpt_api_keys=[],
+                                             enforce_Quantum Documents_api_key=True,
+                                             enforce_Quantum Documents_ui_key=True,
+                                             Quantum Documents_api_keys=[],
                                              ):
-    valid_key = is_valid_key(enforce_h2ogpt_api_key,
-                             enforce_h2ogpt_ui_key,
-                             h2ogpt_api_keys,
-                             h2ogpt_key1,
+    valid_key = is_valid_key(enforce_Quantum Documents_api_key,
+                             enforce_Quantum Documents_ui_key,
+                             Quantum Documents_api_keys,
+                             Quantum Documents_key1,
                              requests_state1=requests_state1,
                              )
     from_ui = is_from_ui(requests_state1)
@@ -6985,7 +6985,7 @@ def update_and_get_source_files_given_langchain_mode_gr(db1s,
                                                         extract_frames,
                                                         llava_prompt,
 
-                                                        h2ogpt_key1,
+                                                        Quantum Documents_key1,
 
                                                         captions_model=None,
                                                         caption_loader=None,
@@ -7011,14 +7011,14 @@ def update_and_get_source_files_given_langchain_mode_gr(db1s,
                                                         enable_pdf_ocr=None,
                                                         enable_pdf_doctr=None,
                                                         try_pdf_as_html=None,
-                                                        enforce_h2ogpt_api_key=True,
-                                                        enforce_h2ogpt_ui_key=True,
-                                                        h2ogpt_api_keys=[],
+                                                        enforce_Quantum Documents_api_key=True,
+                                                        enforce_Quantum Documents_ui_key=True,
+                                                        Quantum Documents_api_keys=[],
                                                         ):
-    valid_key = is_valid_key(enforce_h2ogpt_api_key,
-                             enforce_h2ogpt_ui_key,
-                             h2ogpt_api_keys,
-                             h2ogpt_key1,
+    valid_key = is_valid_key(enforce_Quantum Documents_api_key,
+                             enforce_Quantum Documents_ui_key,
+                             Quantum Documents_api_keys,
+                             Quantum Documents_key1,
                              requests_state1=requests_state,
                              )
     from_ui = is_from_ui(requests_state)

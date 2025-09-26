@@ -10,9 +10,9 @@ fi
 # Remove old Tesseract and poppler deps
 rm -rf ./Tesseract-OCR poppler
 
-conda env remove -n h2ogpt-mac
-conda create -n h2ogpt-mac python=3.10 rust -y
-conda activate h2ogpt-mac
+conda env remove -n Quantum Documents-mac
+conda create -n Quantum Documents-mac python=3.10 rust -y
+conda activate Quantum Documents-mac
 
 pip install --upgrade pip
 python -m pip install --upgrade setuptools
@@ -57,15 +57,15 @@ pip install PyInstaller
 cp -R /opt/homebrew/Cellar/poppler/24.02.0/ ./poppler
 cp -R /opt/homebrew/Cellar/tesseract/5.3.4_1/ ./Tesseract-OCR
 
-# Build and install h2ogpt
+# Build and install Quantum Documents
 make clean dist
-pip install ./dist/h2ogpt*.whl
+pip install ./dist/Quantum Documents*.whl
 
 # Build Mac Installer
 # below command is used to build current .spec file from project root, replace it whenever use new configs
-#pyi-makespec mac_run_app.py -F --name=h2ogpt-osx-m1-cpu \
-#  --hidden-import=h2ogpt \
-#  --collect-all=h2ogpt \
+#pyi-makespec mac_run_app.py -F --name=Quantum Documents-osx-m1-cpu \
+#  --hidden-import=Quantum Documents \
+#  --collect-all=Quantum Documents \
 #  --recursive-copy-metadata=transformers \
 #  --collect-data=langchain \
 #  --collect-data=gradio_client \
@@ -77,7 +77,7 @@ pip install ./dist/h2ogpt*.whl
 #  --add-data=../../Tesseract-OCR:Tesseract-OCR \
 #  --add-data=../../poppler:poppler
 
-# add below argument to Analysis() call in h2ogpt-osx-m1-cpu.spec file
+# add below argument to Analysis() call in Quantum Documents-osx-m1-cpu.spec file
 #module_collection_mode={
 #    'gradio' : 'py',
 #    'gradio_pdf' : 'py',
@@ -85,8 +85,8 @@ pip install ./dist/h2ogpt*.whl
 if [ "$BUILD_MPS" = "1" ]
 then
     echo "BUILD_MPS is set to 1, building one click installer for MPS..."
-    pyinstaller ./dev_installers/mac/h2ogpt-osx-m1-gpu.spec
+    pyinstaller ./dev_installers/mac/Quantum Documents-osx-m1-gpu.spec
 else
     echo "BUILD_MPS is set to 0 or not set, building one click installer for CPU..."
-    pyinstaller ./dev_installers/mac/h2ogpt-osx-m1-cpu.spec
+    pyinstaller ./dev_installers/mac/Quantum Documents-osx-m1-cpu.spec
 fi

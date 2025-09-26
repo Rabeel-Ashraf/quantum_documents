@@ -135,8 +135,8 @@ def evaluate_nochat(*args1, default_kwargs1=None, str_api=False, plain_api=False
         # the None case is never really directly useful
         user_kwargs['visible_vision_models'] = 'auto'
 
-    if 'h2ogpt_key' not in user_kwargs:
-        user_kwargs['h2ogpt_key'] = None
+    if 'Quantum Documents_key' not in user_kwargs:
+        user_kwargs['Quantum Documents_key'] = None
     if 'system_prompt' in user_kwargs and user_kwargs['system_prompt'] is None:
         # avoid worrying about below default_kwargs -> args_list that checks if None
         user_kwargs['system_prompt'] = 'None'
@@ -188,7 +188,7 @@ def evaluate_nochat(*args1, default_kwargs1=None, str_api=False, plain_api=False
             model_state1['tokenizer'].model_max_length - buffer)
 
     ###########################################
-    # override overall visible_models and h2ogpt_key if have model_specific one
+    # override overall visible_models and Quantum Documents_key if have model_specific one
     # NOTE: only applicable if len(model_states) > 1 at moment
     # else controlled by evaluate()
     if 'visible_models' in model_state1 and model_state1['visible_models'] is not None:
@@ -199,11 +199,11 @@ def evaluate_nochat(*args1, default_kwargs1=None, str_api=False, plain_api=False
         assert isinstance(model_state1['visible_vision_models'], (int, str, list, tuple))
         which_model = visible_models_to_model_choice(model_state1['visible_vision_models'], model_states)
         args_list[eval_func_param_names.index('visible_vision_models')] = which_model
-    if 'h2ogpt_key' in model_state1 and model_state1['h2ogpt_key'] is not None:
+    if 'Quantum Documents_key' in model_state1 and model_state1['Quantum Documents_key'] is not None:
         # remote server key if present
         # i.e. may be '' and used to override overall local key
-        assert isinstance(model_state1['h2ogpt_key'], str)
-        args_list[eval_func_param_names.index('h2ogpt_key')] = model_state1['h2ogpt_key']
+        assert isinstance(model_state1['Quantum Documents_key'], str)
+        args_list[eval_func_param_names.index('Quantum Documents_key')] = model_state1['Quantum Documents_key']
 
     ###########################################
     # final full bot() like input for prep_bot etc.
@@ -220,7 +220,7 @@ def evaluate_nochat(*args1, default_kwargs1=None, str_api=False, plain_api=False
 
     # at this point like bot() as input
     history, fun1, langchain_mode1, db1, requests_state1, \
-        valid_key, h2ogpt_key1, \
+        valid_key, Quantum Documents_key1, \
         max_time1, stream_output1, \
         chatbot_role1, speaker1, tts_language1, roles_state1, tts_speed1, langchain_action1, \
         image_files_to_delete = \
@@ -263,7 +263,7 @@ def evaluate_nochat(*args1, default_kwargs1=None, str_api=False, plain_api=False
             save_dict['error'] = error
             save_dict['sources'] = sources
             save_dict['valid_key'] = valid_key
-            save_dict['h2ogpt_key'] = h2ogpt_key1
+            save_dict['Quantum Documents_key'] = Quantum Documents_key1
 
             # below works for both list and string for any reasonable string of image that's been byte encoded with b' to start or as file name
             image_file_check = args_list[eval_func_param_names.index('image_file')]
@@ -1017,11 +1017,11 @@ def prep_bot(*args, retry=False, which_model=0, kwargs_eval={}, plain_api=False,
     langchain_mode1 = args_list[eval_func_param_names.index('langchain_mode')]
     langchain_action1 = args_list[eval_func_param_names.index('langchain_action')]
     document_subset1 = args_list[eval_func_param_names.index('document_subset')]
-    h2ogpt_key1 = args_list[eval_func_param_names.index('h2ogpt_key')]
+    Quantum Documents_key1 = args_list[eval_func_param_names.index('Quantum Documents_key')]
     chat_conversation1 = args_list[eval_func_param_names.index('chat_conversation')]
-    valid_key = is_valid_key(kwargs['enforce_h2ogpt_api_key'],
-                             kwargs['enforce_h2ogpt_ui_key'],
-                             kwargs['h2ogpt_api_keys'], h2ogpt_key1,
+    valid_key = is_valid_key(kwargs['enforce_Quantum Documents_api_key'],
+                             kwargs['enforce_Quantum Documents_ui_key'],
+                             kwargs['Quantum Documents_api_keys'], Quantum Documents_key1,
                              requests_state1=requests_state1)
     chatbot_role1 = args_list[eval_func_param_names.index('chatbot_role')]
     speaker1 = args_list[eval_func_param_names.index('speaker')]
@@ -1029,7 +1029,7 @@ def prep_bot(*args, retry=False, which_model=0, kwargs_eval={}, plain_api=False,
     tts_speed1 = args_list[eval_func_param_names.index('tts_speed')]
 
     dummy_return = history, None, langchain_mode1, my_db_state1, requests_state1, \
-        valid_key, h2ogpt_key1, \
+        valid_key, Quantum Documents_key1, \
         max_time1, stream_output1, chatbot_role1, speaker1, tts_language1, roles_state1, tts_speed1, \
         langchain_action1, []
 
@@ -1080,14 +1080,14 @@ def prep_bot(*args, retry=False, which_model=0, kwargs_eval={}, plain_api=False,
     if 'visible_vision_models' in model_state1 and model_state1['visible_vision_models'] is not None:
         assert isinstance(model_state1['visible_vision_models'], (int, str))
         args_list[eval_func_param_names.index('visible_vision_models')] = model_state1['visible_vision_models']
-    if 'h2ogpt_key' in model_state1 and model_state1['h2ogpt_key'] is not None:
+    if 'Quantum Documents_key' in model_state1 and model_state1['Quantum Documents_key'] is not None:
         # i.e. may be '' and used to override overall local key
-        assert isinstance(model_state1['h2ogpt_key'], str)
-        args_list[eval_func_param_names.index('h2ogpt_key')] = model_state1['h2ogpt_key']
-    elif not args_list[eval_func_param_names.index('h2ogpt_key')]:
+        assert isinstance(model_state1['Quantum Documents_key'], str)
+        args_list[eval_func_param_names.index('Quantum Documents_key')] = model_state1['Quantum Documents_key']
+    elif not args_list[eval_func_param_names.index('Quantum Documents_key')]:
         # now that checked if key was valid or not, now can inject default key in case gradio inference server
         # only do if key not already set by user
-        args_list[eval_func_param_names.index('h2ogpt_key')] = kwargs['h2ogpt_key']
+        args_list[eval_func_param_names.index('Quantum Documents_key')] = kwargs['Quantum Documents_key']
 
     ###########################################
     # deal with image files
@@ -1178,7 +1178,7 @@ def prep_bot(*args, retry=False, which_model=0, kwargs_eval={}, plain_api=False,
     fun1 = functools.partial(evaluate_local, *eval_args, *tuple(args_list), **kwargs_eval)
 
     return history, fun1, langchain_mode1, my_db_state1, requests_state1, \
-        valid_key, h2ogpt_key1, \
+        valid_key, Quantum Documents_key1, \
         max_time1, stream_output1, \
         chatbot_role1, speaker1, tts_language1, roles_state1, tts_speed1, \
         langchain_action1, image_files_to_delete
@@ -1194,7 +1194,7 @@ def choose_exc(x, is_public=True):
 
 def bot(*args, retry=False, kwargs_evaluate={}, kwargs={}, db_type=None, dbs=None, verbose=False):
     history, fun1, langchain_mode1, db1, requests_state1, \
-        valid_key, h2ogpt_key1, \
+        valid_key, Quantum Documents_key1, \
         max_time1, stream_output1, \
         chatbot_role1, speaker1, tts_language1, roles_state1, tts_speed1, \
         image_files_to_delete, \
@@ -1293,7 +1293,7 @@ def bot(*args, retry=False, kwargs_evaluate={}, kwargs={}, db_type=None, dbs=Non
     if 'extra_dict' not in save_dict:
         save_dict['extra_dict'] = {}
     save_dict['valid_key'] = valid_key
-    save_dict['h2ogpt_key'] = h2ogpt_key1
+    save_dict['Quantum Documents_key'] = Quantum Documents_key1
     if requests_state1:
         save_dict['extra_dict'].update(requests_state1)
     else:
@@ -1309,41 +1309,41 @@ def is_from_ui(requests_state1):
     return isinstance(requests_state1, dict) and 'username' in requests_state1 and requests_state1['username']
 
 
-def is_valid_key(enforce_h2ogpt_api_key, enforce_h2ogpt_ui_key, h2ogpt_api_keys, h2ogpt_key1, requests_state1=None):
+def is_valid_key(enforce_Quantum Documents_api_key, enforce_Quantum Documents_ui_key, Quantum Documents_api_keys, Quantum Documents_key1, requests_state1=None):
     from_ui = is_from_ui(requests_state1)
 
-    if from_ui and not enforce_h2ogpt_ui_key:
+    if from_ui and not enforce_Quantum Documents_ui_key:
         # no token barrier
         return 'not enforced'
-    elif not from_ui and not enforce_h2ogpt_api_key:
+    elif not from_ui and not enforce_Quantum Documents_api_key:
         # no token barrier
         return 'not enforced'
     else:
         valid_key = False
-        if isinstance(h2ogpt_api_keys, list) and h2ogpt_key1 in h2ogpt_api_keys:
+        if isinstance(Quantum Documents_api_keys, list) and Quantum Documents_key1 in Quantum Documents_api_keys:
             # passed token barrier
             valid_key = True
-        elif isinstance(h2ogpt_api_keys, str) and os.path.isfile(h2ogpt_api_keys):
-            with filelock.FileLock(h2ogpt_api_keys + '.lock'):
-                with open(h2ogpt_api_keys, 'rt') as f:
-                    h2ogpt_api_keys = json.load(f)
-                if h2ogpt_key1 in h2ogpt_api_keys:
+        elif isinstance(Quantum Documents_api_keys, str) and os.path.isfile(Quantum Documents_api_keys):
+            with filelock.FileLock(Quantum Documents_api_keys + '.lock'):
+                with open(Quantum Documents_api_keys, 'rt') as f:
+                    Quantum Documents_api_keys = json.load(f)
+                if Quantum Documents_key1 in Quantum Documents_api_keys:
                     valid_key = True
         return valid_key
 
 
-def get_one_key(h2ogpt_api_keys, enforce_h2ogpt_api_key):
-    if not enforce_h2ogpt_api_key:
-        # return None so OpenAI server has no keyed access if not enforcing API key on h2oGPT regardless if keys passed
+def get_one_key(Quantum Documents_api_keys, enforce_Quantum Documents_api_key):
+    if not enforce_Quantum Documents_api_key:
+        # return None so OpenAI server has no keyed access if not enforcing API key on Quantum Documents regardless if keys passed
         return None
-    if isinstance(h2ogpt_api_keys, list) and h2ogpt_api_keys:
-        return h2ogpt_api_keys[0]
-    elif isinstance(h2ogpt_api_keys, str) and os.path.isfile(h2ogpt_api_keys):
-        with filelock.FileLock(h2ogpt_api_keys + '.lock'):
-            with open(h2ogpt_api_keys, 'rt') as f:
-                h2ogpt_api_keys = json.load(f)
-            if h2ogpt_api_keys:
-                return h2ogpt_api_keys[0]
+    if isinstance(Quantum Documents_api_keys, list) and Quantum Documents_api_keys:
+        return Quantum Documents_api_keys[0]
+    elif isinstance(Quantum Documents_api_keys, str) and os.path.isfile(Quantum Documents_api_keys):
+        with filelock.FileLock(Quantum Documents_api_keys + '.lock'):
+            with open(Quantum Documents_api_keys, 'rt') as f:
+                Quantum Documents_api_keys = json.load(f)
+            if Quantum Documents_api_keys:
+                return Quantum Documents_api_keys[0]
 
 
 def get_model_max_length(model_state1, model_state0):

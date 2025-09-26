@@ -43,9 +43,9 @@ def get_avatars(base_model, model_path_llama, inference_server=''):
     if inference_server is None:
         inference_server = ''
 
-    model_base = os.getenv('H2OGPT_MODEL_BASE', 'models/')
+    model_base = os.getenv('Quantum Documents_MODEL_BASE', 'models/')
     human_avatar = "human.jpg"
-    if 'h2ogpt-gm'.lower() in base_model.lower():
+    if 'Quantum Documents-gm'.lower() in base_model.lower():
         bot_avatar = "h2oai.png"
     elif 'llava-' in base_model.lower():
         bot_avatar = "llava.png"

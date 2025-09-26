@@ -34,15 +34,15 @@ Choose key:
 export api_key='EMPTY'
 ```
 
-Run h2oGPT somehow with OpenAI server active (as is default).
+Run Quantum Documents somehow with OpenAI server active (as is default).
 ```bash
 python generate.py --save_dir=savegpt3internal --base_model=meta-llama/Meta-Llama-3-8B-Instruct --score_model=None --top_k_docs=-1 --add_disk_models_to_ui=False --enable_tts=True --enable_stt=True --enable_image=True --visible_image_models=['sdxl_turbo'] --pre_load_embedding_model=True
 ```
-You can use ` --openai_port=14365` like default for ollama if desired, then avoid passing `OLLAMA_HOST` below.  One can choose any other [image generation models](#image-generation) or [TTS models](#speech-to-text-stt-and-text-to_speech-tts) as well.  Use `--enforce_h2ogpt_api_key=True` or `--enforce_h2ogpt_ui_key=True` to enforce the API key as required for API or UI, respectively.
+You can use ` --openai_port=14365` like default for ollama if desired, then avoid passing `OLLAMA_HOST` below.  One can choose any other [image generation models](#image-generation) or [TTS models](#speech-to-text-stt-and-text-to_speech-tts) as well.  Use `--enforce_Quantum Documents_api_key=True` or `--enforce_Quantum Documents_ui_key=True` to enforce the API key as required for API or UI, respectively.
 
-Then run the Open Web UI docker command (no h2oGPT file handling, but rest of h2oGPT features):
+Then run the Open Web UI docker command (no Quantum Documents file handling, but rest of Quantum Documents features):
 ```bash
-docker run -d -p 3000:8080 -e WEBUI_NAME='h2oGPT' \
+docker run -d -p 3000:8080 -e WEBUI_NAME='Quantum Documents' \
 -e DEFAULT_MODELS=meta-llama/Meta-Llama-3-8B-Instruct \
 -e OPENAI_API_BASE_URL=http://0.0.0.0:5000/v1 \
 -e OPENAI_API_KEY=$api_key \
@@ -73,13 +73,13 @@ docker run -d -p 3000:8080 -e WEBUI_NAME='h2oGPT' \
 Then go to `http://0.0.0.0:8080/` to see the UI (`--network host` changed port from 3000 -> 8080).  To remove the container do `docker stop <hash> ; docker remove <hash>` for the container ID `<hash>`.
 
 
-If you want to choose a specific model, that is not currently possible through h2oGPT, which uses its fixed single embedding model.  But this may be allowed in future and then one would set:
+If you want to choose a specific model, that is not currently possible through Quantum Documents, which uses its fixed single embedding model.  But this may be allowed in future and then one would set:
 ```bash
 -e RAG_EMBEDDING_MODEL='BAAI/bge-large-en-v1.5' \
 -e RAG_EMBEDDING_MODEL_TRUST_REMOTE_CODE=True \
 ```
 
-To enable h2oGPT backend for document ingestion (much more advanced than OpenWebUI), run h2oGPT with these extra arguments:
+To enable Quantum Documents backend for document ingestion (much more advanced than OpenWebUI), run Quantum Documents with these extra arguments:
 ```bash
 --function_server=True --function_server_port=5002 --function_api_key=$api_key
 ```
@@ -90,15 +90,15 @@ conda create -n open-webui-run -y
 conda activate open-webui-run
 conda install -y python=3.11
 # pip install open-webui  # for Open Web UI's RAG and file ingestion
-# pip install git+https://github.com/h2oai/open-webui.git  # for h2oGPT file ingestion
-pip install https://h2o-release.s3.amazonaws.com/h2ogpt/open_webui-0.3.32-py3-none-any.whl  # for latest release
+# pip install git+https://github.com/h2oai/open-webui.git  # for Quantum Documents file ingestion
+pip install https://h2o-release.s3.amazonaws.com/Quantum Documents/open_webui-0.3.32-py3-none-any.whl  # for latest release
 pip install alembic uvicorn[standard]
 #
-export H2OGPT_LOADERS=1  # for h2oGPT file ingestion
+export Quantum Documents_LOADERS=1  # for Quantum Documents file ingestion
 # ensure certain things not set
 unset OPENAI_API_BASE_URLS
 # bash ENVs
-export WEBUI_NAME='h2oGPT'
+export WEBUI_NAME='Quantum Documents'
 export DEFAULT_MODELS=meta-llama/Meta-Llama-3-8B-Instruct
 export OPENAI_API_BASE_URL='http://0.0.0.0:5000/v1'
 export GLOBAL_LOG_LEVEL=INFO
@@ -106,7 +106,7 @@ export OPENAI_API_KEY=$api_key
 export ENABLE_IMAGE_GENERATION=True
 export IMAGE_GENERATION_ENGINE='openai'
 export IMAGES_OPENAI_API_BASE_URL='http://0.0.0.0:5000/v1'
-# choose sd3 for Stable Diffusion 3 etc. and launch h2oGPT to match
+# choose sd3 for Stable Diffusion 3 etc. and launch Quantum Documents to match
 export IMAGE_GENERATION_MODEL='sdxl_turbo'
 export IMAGES_OPENAI_API_KEY=$api_key
 export AUDIO_STT_ENGINE='openai'
@@ -118,7 +118,7 @@ export AUDIO_TTS_OPENAI_API_KEY=$api_key
 # can use "Female AI Assistant" for Coqui TTS
 # export AUDIO_TTS_OPENAI_API_VOICE='Female AI Assistant'
 export AUDIO_TTS_OPENAI_API_VOICE='SLT (female)'
-# can use  for Coqui TTS, but just need to launch h2oGPT with it and h2oGPT will divert to correct TTS
+# can use  for Coqui TTS, but just need to launch Quantum Documents with it and Quantum Documents will divert to correct TTS
 # export AUDIO_TTS_OPENAI_API_MODEL='tts_models/multilingual/multi-dataset/xtts_v2'
 export AUDIO_TTS_OPENAI_API_MODEL='microsoft/speecht5_tts'
 export RAG_EMBEDDING_ENGINE='openai'
@@ -131,9 +131,9 @@ export ENABLE_OLLAMA_API=False
 export ENABLE_OPENAI_API=True
 export SERPER_API_KEY=''  # fill me
 
-export H2OGPT_FUNCTION_SERVER_HOST=0.0.0.0
-export H2OGPT_FUNCTION_SERVER_PORT=5002  # match with --function_server_port
-export H2OGPT_FUNCTION_SERVER_API_KEY=$api_key
+export Quantum Documents_FUNCTION_SERVER_HOST=0.0.0.0
+export Quantum Documents_FUNCTION_SERVER_PORT=5002  # match with --function_server_port
+export Quantum Documents_FUNCTION_SERVER_API_KEY=$api_key
 
 # choose:
 export ADMIN_EMAIL=admin@domain
@@ -159,13 +159,13 @@ disown %1
 
 Note: The first time you log in to Open Web UI, that user will be the admin user who can set defaults for various admin settings, access the admin panel to control user behavior and settings, etc. Additional users will take the role set by the admin (by default, pending, which can be changed to user for anyone to log in).
 
-For TTS, if we detect a native OpenAI voice, we translate that into defaults for H2oGPT.  To choose a specific voice, one can go to settings and change Audio -> TTS -> OpenAI and Set Voice to `SLT (female)` (if using Microsoft TTS) or `Female AI Assistant` (if using Coqui TTS).  ENVs do not yet exist to control default voice, but the h2oai version of open-webui chooses OpenAI as default for STT and TTS so can use h2oGPT by default.
+For TTS, if we detect a native OpenAI voice, we translate that into defaults for Quantum Documents.  To choose a specific voice, one can go to settings and change Audio -> TTS -> OpenAI and Set Voice to `SLT (female)` (if using Microsoft TTS) or `Female AI Assistant` (if using Coqui TTS).  ENVs do not yet exist to control default voice, but the h2oai version of open-webui chooses OpenAI as default for STT and TTS so can use Quantum Documents by default.
 
-See https://github.com/open-webui/open-webui/issues/2312.  The `OPENAI_API_USER` is not currently required since not using user-specific files at moment, but would be required if the Gradio server had authentication setup if h2oGPT was allowing access to files by Open Web UI.
+See https://github.com/open-webui/open-webui/issues/2312.  The `OPENAI_API_USER` is not currently required since not using user-specific files at moment, but would be required if the Gradio server had authentication setup if Quantum Documents was allowing access to files by Open Web UI.
 
 Flaws with Open Web UI:
 * Chat history is not used if any document is in the chat history.
-* To change hyperparameters, go to settings -> general -> advanced parameters.  In h2oGPT branch the temp=0 (0.8 normally), max_tokens=1024 (128 normally), context=4096 (2048 normally) and there is no way to control at startup time.
+* To change hyperparameters, go to settings -> general -> advanced parameters.  In Quantum Documents branch the temp=0 (0.8 normally), max_tokens=1024 (128 normally), context=4096 (2048 normally) and there is no way to control at startup time.
 * You have to choose max_tokens to be reasonable for the model, e.g. less than 4096 for many models.  But it has no per-model settings.
 
 See for more [help](https://docs.openwebui.com/troubleshooting/).
@@ -189,9 +189,9 @@ LLaMa-3 and other newer models use a HuggingFace chat template to ensure accurat
 ```bash
 python generate.py --base_model=meta-llama/Meta-Llama-3-8B-Instruct
 ```
-and h2oGPT will interpret this as an "unknown" prompt_type and use the chat template.
+and Quantum Documents will interpret this as an "unknown" prompt_type and use the chat template.
 
-To ensure accurate prompting for GGUF etc. type models, you can pass the tokenizer from HF to h2oGPT via `tokenizer_base_model` as follows:
+To ensure accurate prompting for GGUF etc. type models, you can pass the tokenizer from HF to Quantum Documents via `tokenizer_base_model` as follows:
 ```bash
 python generate.py --base_model=llama --model_path_llama=https://huggingface.co/QuantFactory/Meta-Llama-3-8B-Instruct-GGUF/resolve/main/Meta-Llama-3-8B-Instruct.Q5_K_M.gguf?download=true --tokenizer_base_model=meta-llama/Meta-Llama-3-8B-Instruct --max_seq_len=8192
 ```
@@ -231,9 +231,9 @@ For 8x22b, we recommend https://huggingface.co/mistral-community/Mixtral-8x22B-v
 - [x] Handle old vLLM and other models that do not have json mode by using `json_code` mode effectively.
 - [x] When making JSON without guided_json schema, handle MistralAI and OpenAI directly using their JSON mode.
 
-h2oGPT in general uses `guided_json` as defined below to tell LLM the schema as part of prompt, unless vLLM >= 0.4.0 when this is provided directly to vLLM.  Schemas like `guided_json` are not required for JSON mode, but to follow some schema it is required, and only vLLM >= 0.4.0 will strictly follow the schema due to guided generation using outlines package.
+Quantum Documents in general uses `guided_json` as defined below to tell LLM the schema as part of prompt, unless vLLM >= 0.4.0 when this is provided directly to vLLM.  Schemas like `guided_json` are not required for JSON mode, but to follow some schema it is required, and only vLLM >= 0.4.0 will strictly follow the schema due to guided generation using outlines package.
 
-Example `guided_json`, `guided_regex`, `guided_choice` schemas to be passed in as string to h2oGPT.
+Example `guided_json`, `guided_regex`, `guided_choice` schemas to be passed in as string to Quantum Documents.
 ```
 guided_json = {
     "type": "object",
@@ -299,9 +299,9 @@ although `CohereForAI/aya-101` is auto-detected as T5 Conditional already.
 
 ![aya.png](aya.png)
 
-### Running oLLaMa vs. h2oGPT as inference server
+### Running oLLaMa vs. Quantum Documents as inference server
 
-* Run oLLaMa as server for h2oGPT frontend.
+* Run oLLaMa as server for Quantum Documents frontend.
 
     Shut down ollama and re-run on whichever GPUs wanted:
     ```bash
@@ -315,7 +315,7 @@ although `CohereForAI/aya-101` is auto-detected as T5 Conditional already.
     ```bash
     python generate.py --base_model=mistral:v0.3 --inference_server=vllm_chat:http://localhost:11434/v1/ --prompt_type=openai_chat --max_seq_len=8094
     ```
-    where `--max_seq_len=8094` can be chosen up to 32k for mistral.  Ignore any errors related to the name when h2oGPT attempts to try getting data from HF.
+    where `--max_seq_len=8094` can be chosen up to 32k for mistral.  Ignore any errors related to the name when Quantum Documents attempts to try getting data from HF.
 
     For more accurate tokenization specify the tokenizer and hf token (because mistralai is gated on HF):
     ```bash
@@ -334,7 +334,7 @@ although `CohereForAI/aya-101` is auto-detected as T5 Conditional already.
     ollama create me -f Modelfile
     ollama run me
     ```
-    Then in another terminal, run h2oGPT and use oLLaMa endpoint as vllm_chat API:
+    Then in another terminal, run Quantum Documents and use oLLaMa endpoint as vllm_chat API:
     ```bash
     python generate.py --base_model=me --inference_server=vllm_chat:http://localhost:11434/v1/ --save_dir=saveollama --prompt_type=openai_chat --max_seq_len=4096
     ```
@@ -344,7 +344,7 @@ although `CohereForAI/aya-101` is auto-detected as T5 Conditional already.
 
   If ollama seems slow, check ollama.log if hit `cudaMalloc failed: out of memory` and check if GPU is being used by another process.
 
-* Run h2oGPT as both server and frontend:
+* Run Quantum Documents as both server and frontend:
   
   In one terminal run:
   ```bash
@@ -367,7 +367,7 @@ although `CohereForAI/aya-101` is auto-detected as T5 Conditional already.
 Examples of what to put into "server" in UI or for `<server>` when using `--inference_server=<server>` with CLI include:
 * oLLaMa: `vllm_chat:http://localhost:11434/v1/`
 * vLLM: `vllm:111.111.111.111:5005`
-   * For llama-13b, e.g. `--model_lock="[{'inference_server':'vllm:111.11.111.111:5001', 'base_model':'h2oai/h2ogpt-4096-llama2-13b-chat'}`
+   * For llama-13b, e.g. `--model_lock="[{'inference_server':'vllm:111.11.111.111:5001', 'base_model':'h2oai/Quantum Documents-4096-llama2-13b-chat'}`
 * vLLM Chat API: `vllm_chat`
   * E.g. `vllm_chat:https://gpt.h2o.ai:5000/v1` (only for no auth setup)
   * E.g. `vllm_chat:https://vllm.h2o.ai:None:/1b1219f7-4bb4-43e9-881f-fa8fa9fe6e04/v1:1234ABCD` (keyed access)
@@ -382,7 +382,7 @@ Examples of what to put into "server" in UI or for `<server>` when using `--infe
 * OpenAI Text API: `openai`
   * Ensure ENV `OPENAI_API_KEY` set
 * Anthropic: `anthropic`
-  * In added to UI, this adds models h2oGPT has in `src/enums/anthropic_mapping` not pulled from Anthropic as they have no such API
+  * In added to UI, this adds models Quantum Documents has in `src/enums/anthropic_mapping` not pulled from Anthropic as they have no such API
   * Ensure ENV `ANTHROPIC_API_KEY` is set to the API key
   * E.g. for CLI: `--model_lock="[{'inference_server':'anthropic', 'base_model':'claude-3-opus-20240229'}]"`
   * Others for Anthropic include `claude-3-sonnet-20240229` and `claude-3-haiku-20240307`.
@@ -390,7 +390,7 @@ Examples of what to put into "server" in UI or for `<server>` when using `--infe
   * Ensure ENV `GROQ_API_KEY` is set to the API key
   * E.g. for CLI: `--model_lock="[{'inference_server':'groq', 'base_model':'mixtral-8x7b-32768'}]"`
 * Gradio: `https://gradio.h2o.ai` (only for no auth setup)
-  * Ensure `h2ogpt_key` is in model_lock for each model if server has keyed access
+  * Ensure `Quantum Documents_key` is in model_lock for each model if server has keyed access
 
 See [gen.py doc strings](../src/gen.py) for more details and examples for other inference endpoints (replicate, sagemaker, etc.)
 
@@ -417,7 +417,7 @@ pkill -f "$SAVE_DIR" --signal 9
 sleep 5
 
 
-export MODEL=h2oai/h2ogpt-4096-llama2-70b-chat
+export MODEL=h2oai/Quantum Documents-4096-llama2-70b-chat
 export MODEL_NAME=`echo $MODEL | sed 's@/@_@g'`
 export MODEL_LOCK="["
 export MODEL_LOCK=$MODEL_LOCK"{'inference_server':'vllm:xxx.xxx.xxx.12:5000', 'base_model':'$MODEL'}"
@@ -428,7 +428,7 @@ export MODEL_LOCK=$MODEL_LOCK",{'inference_server':'openai_azure_chat:deployment
 export MODEL_LOCK=$MODEL_LOCK",{'inference_server':'vllm:xxx.xxx.xxx.28:5005', 'base_model':'openchat/openchat-3.5-1210'}"
 export MODEL_LOCK=$MODEL_LOCK",{'inference_server':'vllm:xxx.xxx.xxx.12:5004', 'base_model':'mistralai/Mistral-7B-Instruct-v0.2'}"
 
-export MODEL_LOCK=$MODEL_LOCK",{'inference_server': 'vllm:xxx.xxx.xxx.12:5003', 'base_model': 'h2oai/h2ogpt-32k-codellama-34b-instruct'}"
+export MODEL_LOCK=$MODEL_LOCK",{'inference_server': 'vllm:xxx.xxx.xxx.12:5003', 'base_model': 'h2oai/Quantum Documents-32k-codellama-34b-instruct'}"
 export MODEL_LOCK=$MODEL_LOCK",{'inference_server':'vllm:xxx.xxx.xxx.22:5000', 'base_model':'NousResearch/Nous-Capybara-34B'}"
 
 if [ "$visionmodels" -eq "1" ]
@@ -443,7 +443,7 @@ export MODEL_LOCK=$MODEL_LOCK",{'inference_server':'vllm:xxx.xxx.xxx.144:5016', 
 export MODEL_LOCK=$MODEL_LOCK"]"
 echo $MODEL_LOCK
 
-export vis="['h2oai/h2ogpt-4096-llama2-70b-chat','mistralai/Mixtral-8x7B-Instruct-v0.1','HuggingFaceH4/zephyr-7b-beta','gpt-3.5-turbo-0613']"
+export vis="['h2oai/Quantum Documents-4096-llama2-70b-chat','mistralai/Mixtral-8x7B-Instruct-v0.1','HuggingFaceH4/zephyr-7b-beta','gpt-3.5-turbo-0613']"
 python generate.py --save_dir=$SAVE_DIR --model_lock="$MODEL_LOCK" \
                    --hf_embedding_model=$hf_embedding_model --cut_distance=$cut_distance \
                    --pre_load_embedding_model=True --pre_load_image_audio_models=True \
@@ -466,7 +466,7 @@ python generate.py --save_dir=$SAVE_DIR --model_lock="$MODEL_LOCK" \
 		               --top_k_docs=$top_k_docs --visible_models="$vis" \
 			       --score_model=None \
 			       --verbose=True \
-                   --share=False --enforce_h2ogpt_api_key=True --enforce_h2ogpt_ui_key=$enforce_h2ogpt_ui_key \
+                   --share=False --enforce_Quantum Documents_api_key=True --enforce_Quantum Documents_ui_key=$enforce_Quantum Documents_ui_key \
                    --max_max_new_tokens=$max_max_new_tokens --max_new_tokens=$max_new_tokens \
                    --max_input_tokens=$max_input_tokens --max_total_input_tokens=$max_total_input_tokens \
                    --heap_app_id=1090178399 &>> logs.$SAVE_DIR.gradio_chat.txt &
@@ -492,7 +492,7 @@ export model_lock_columns=2
 export othermore=0
 export gptmore=0
 export visionmodels=1
-export enforce_h2ogpt_ui_key=False
+export enforce_Quantum Documents_ui_key=False
 export top_k_docs=10
 export asr_model="distil-whisper/distil-large-v3"   #"openai/whisper-large-v3"
 export tts_model='microsoft/speecht5_tts'
@@ -527,20 +527,20 @@ echo "done $SAVE_DIR"
 ```
 and the gradio port is redacted as xxxxx.
 
-The file `gr_exports.sh` contains any required envs for API keys or h2oGPT envs with keys if required, e.g. `gr_exports.sh` can contain:
+The file `gr_exports.sh` contains any required envs for API keys or Quantum Documents envs with keys if required, e.g. `gr_exports.sh` can contain:
 ```bash
 export GPT_H2O_AI=1
 export ADMIN_PASS=<fill me>
 export CONCURRENCY_COUNT=100
 export ALLOW_API=1
 export HUGGING_FACE_HUB_TOKEN=<fill me>  # for Gemma for example
-export H2OGPT_H2OGPT_API_KEYS="/secret_location/h2ogpt_api_keys.json"  # add file and fill in as described in docs
+export Quantum Documents_Quantum Documents_API_KEYS="/secret_location/Quantum Documents_api_keys.json"  # add file and fill in as described in docs
 export SERPAPI_API_KEY=<fill me>
 ulimit -n 1048576
 
-export H2OGPT_LLAVA_MODEL=http://xxx.xxx.xxx.144:7860/
+export Quantum Documents_LLAVA_MODEL=http://xxx.xxx.xxx.144:7860/
 ```
-Exercise caution with gradio and secret files.  h2oGPT sets `allowed_paths` to include `.`, unless public instance when `GPT_H2O_AI=1` is set.  So if you put your key file in `.` and didn't set to be public instance, it'll be possible to access your key file even if have a soft link to secret location.
+Exercise caution with gradio and secret files.  Quantum Documents sets `allowed_paths` to include `.`, unless public instance when `GPT_H2O_AI=1` is set.  So if you put your key file in `.` and didn't set to be public instance, it'll be possible to access your key file even if have a soft link to secret location.
 
 Then running:
 ```
@@ -562,7 +562,7 @@ export model_lock_columns=2
 export othermore=1
 export gptmore=0
 export visionmodels=1
-export enforce_h2ogpt_ui_key=False
+export enforce_Quantum Documents_ui_key=False
 export top_k_docs=-1
 #export asr_model="distil-whisper/distil-large-v3" #"openai/whisper-large-v3"
 export asr_model="openai/whisper-large-v3"
@@ -582,7 +582,7 @@ export openai_port=5001
 export llava_model=http://localhost:7860:llava-v1.6-vicuna-13b
 export hf_embedding_model=tei:http://localhost:5555
 export cut_distance=10000
-export H2OGPT_SERVER_NAME=0.0.0.0
+export Quantum Documents_SERVER_NAME=0.0.0.0
 export auth_filename=all_alt_auth.json  # different auth
 export USERS_BASE_DIR=gpt_user_base_dir  # different base
 export max_input_tokens=None
@@ -628,7 +628,7 @@ docker run -d \
     vllm/vllm-openai:latest \
         --port=5000 \
         --host=0.0.0.0 \
-        --model=h2oai/h2ogpt-4096-llama2-70b-chat \
+        --model=h2oai/Quantum Documents-4096-llama2-70b-chat \
         --tokenizer=hf-internal-testing/llama-tokenizer \
         --tensor-parallel-size=4 \
         --seed 1234 \
@@ -691,7 +691,7 @@ docker run -d \
     vllm/vllm-openai:latest \
         --port=5001 \
         --host=0.0.0.0 \
-        --model=h2oai/h2ogpt-4096-llama2-13b-chat \
+        --model=h2oai/Quantum Documents-4096-llama2-13b-chat \
         --tokenizer=hf-internal-testing/llama-tokenizer \
         --seed 1234 \
         --trust-remote-code \
@@ -722,7 +722,7 @@ docker run -d \
     vllm/vllm-openai:latest \
         --port=5003 \
         --host=0.0.0.0 \
-        --model=h2oai/h2ogpt-32k-codellama-34b-instruct \
+        --model=h2oai/Quantum Documents-32k-codellama-34b-instruct \
         --tokenizer=hf-internal-testing/llama-tokenizer \
         --seed 1234 \
         --tensor-parallel-size=2 \
@@ -764,7 +764,7 @@ and run `bash ./go_VLLM.12.sh` on that machine.
 
 On another 4*A100 80GB, `go_VLLM.28.sh` has:
 ```bash
-docker pull gcr.io/vorvan/h2oai/h2ogpt-runtime:0.2.1
+docker pull gcr.io/vorvan/h2oai/Quantum Documents-runtime:0.2.1
 mkdir -p $HOME/.cache/huggingface/hub
 mkdir -p $HOME/.cache/huggingface/modules/
 
@@ -1005,7 +1005,7 @@ Use [different tags](https://github.com/huggingface/text-embeddings-inference?ta
 
 Adjust `--max-batch-tokens` to smaller for smaller GPUs (e.g. back to default of 16384).  Note that client batch size times 512 must be smaller or equal to max batch tokens.
 
-Then for h2oGPT ensure pass:
+Then for Quantum Documents ensure pass:
 ```bash
 python generate.py --hf_embedding_model=tei:http://localhost:5555 --cut_distance=10000 ...
 ```
@@ -1057,11 +1057,11 @@ if __name__ == '__main__':
 
 ### Gradio clean-up of states
 
-While Streamlit handles [callbacks to state clean-up)[https://github.com/streamlit/streamlit/issues/6166], Gradio does [not](https://github.com/gradio-app/gradio/issues/4016) without h2oGPT-driven changes.  So if you want browser/tab closure to trigger clean-up, `https://h2o-release.s3.amazonaws.com/h2ogpt/gradio-4.19.2-py3-none-any.whl` is required instead of PyPi version.  This also helps if have many users using your app and want to ensure databases are cleaned up. By default h2oGPT uses this version of Gradio, but go to normal gradio if web sockets are an issue for your network/platform.
+While Streamlit handles [callbacks to state clean-up)[https://github.com/streamlit/streamlit/issues/6166], Gradio does [not](https://github.com/gradio-app/gradio/issues/4016) without Quantum Documents-driven changes.  So if you want browser/tab closure to trigger clean-up, `https://h2o-release.s3.amazonaws.com/Quantum Documents/gradio-4.19.2-py3-none-any.whl` is required instead of PyPi version.  This also helps if have many users using your app and want to ensure databases are cleaned up. By default Quantum Documents uses this version of Gradio, but go to normal gradio if web sockets are an issue for your network/platform.
 
 This will clean up model states if use UI to load/unload models when not using `--base_model` on CLI like in windows, so don't have to worry about memory leaks when browser tab is closed.  It will also clean up Chroma database states.
 
-### Use h2oGPT just for LLM control
+### Use Quantum Documents just for LLM control
 
 For just LLM control and any document QA via `text_context_list` that does not use any embedding or database, you can launch with the following command:
 ```bash
@@ -1073,7 +1073,7 @@ CUDA_VISIBLE_DEVICES= python generate.py --score_model=None --enable_tts=False -
 ```
 Or if in docker, specify `docker run --gpus none <options> <image>`.
 
-This is useful when using h2oGPT as pass-through for some other top-level document QA system like [h2oGPTe](https://docs.h2o.ai/h2ogpte-docs/) (Enterprise h2oGPT), while h2oGPT (OSS) manages all LLM related tasks like how many chunks can fit, while preserving original order.  h2oGPT will handle truncation of tokens per LLM and async summarization, multiple LLMs, etc.
+This is useful when using Quantum Documents as pass-through for some other top-level document QA system like [Quantum Documentse](https://docs.h2o.ai/Quantum Documentse-docs/) (Enterprise Quantum Documents), while Quantum Documents (OSS) manages all LLM related tasks like how many chunks can fit, while preserving original order.  Quantum Documents will handle truncation of tokens per LLM and async summarization, multiple LLMs, etc.
 
 ### Control location of files
 
@@ -1131,7 +1131,7 @@ HOST=0.0.0.0 PORT=30030 CUDA_VISIBLE_DEVICES=7 python openai_server/cogvlm2_serv
 disown %1
 ```
 
-For h2oGPT, run:
+For Quantum Documents, run:
 ```bash
 python generate.py --base_model=THUDM/cogvlm2-llama3-chat-19B --inference_server='vllm_chat:http://0.0.0.0:30030/v1'
 ```
@@ -1196,7 +1196,7 @@ response = client.chat.completions.create(
 print(response)
 ```
 
-For h2oGPT, run:
+For Quantum Documents, run:
 ```bash
 python generate.py --base_model=OpenGVLab/InternVL-Chat-V1-5 --inference_server='vllm_chat:http://0.0.0.0:23333/v1'
 ```
@@ -1221,7 +1221,7 @@ Example models:
 * Model: https://huggingface.co/lmms-lab/llava-next-72b Tokenizer: https://huggingface.co/lmms-lab/llavanext-qwen-tokenizer Usage: https://github.com/sgl-project/sglang/blob/main/examples/usage/llava/http_qwen_llava_test.py
 * Model: https://huggingface.co/lmms-lab/llama3-llava-next-8b Tokenizer: https://huggingface.co/lmms-lab/llama3-llava-next-8b-tokenizer Usage: https://github.com/sgl-project/sglang/blob/main/examples/usage/llava/http_llama3_llava_test.py
 
-To setup, in a separate env to h2oGPT:
+To setup, in a separate env to Quantum Documents:
 ```bash
 conda create -n sglang python=3.10 -y
 conda activate sglang
@@ -1241,7 +1241,7 @@ To use the API, include the header X-API-Key, e.g. with curl:
 curl http://0.0.0.0:30000/get_model_info -H 'X-API-Key: XXXXXXXXX' -v
 ```
 
-For h2oGPT run:
+For Quantum Documents run:
 ```bash
 python generate.py --trust-remote-code --inference_server=sglang:conv_llava_llama_3:http://0.0.0.0:30000 --base_model=lmms-lab/llama3-llava-next-8b --prompt_type=llama3 &> 8b.log &
 disown %1
@@ -1254,7 +1254,7 @@ export CUDA_VISIBLE_DEVICES="0,1"
 python -m sglang.launch_server --model-path liuhaotian/llava-v1.6-34b --tokenizer-path liuhaotian/llava-v1.6-34b-tokenizer --port=30020 --host="0.0.0.0" --tp-size=1 --random-seed=1234 --context-length=4096 &> 34b.log &
 disown %1
 ```
-and for h2oGPT:
+and for Quantum Documents:
 ```bash
 python --trust-remote-code --inference_server=sglang:conv_chatml_direct:http://0.0.0.0:30000 --base_model=liuhaotian/llava-v1.6-34b --prompt_type=yi
 ```
@@ -1265,7 +1265,7 @@ export CUDA_VISIBLE_DEVICES="0,1,2,3"
 python -m sglang.launch_server --model-path lmms-lab/llava-next-72b --tokenizer-path lmms-lab/llavanext-qwen-tokenizer --port=30010 --host="0.0.0.0" --tp-size=4 --random-seed=1234 --context-length=32768 &> 72b.log &
 disown %1
 ```
-and for h2oGPT:
+and for Quantum Documents:
 ```bash
 python --trust-remote-code --inference_server=sglang:conv_qwen:http://0.0.0.0:30000 --base_model=lmms-lab/llava-next-72b --prompt_type=qwen
 ```
@@ -1276,18 +1276,18 @@ export CUDA_VISIBLE_DEVICES="0,1,2,3,4,5,6,7"
 python -m sglang.launch_server --model-path lmms-lab/llava-next-110b --tokenizer-path lmms-lab/llavanext-qwen-tokenizer --port=30010 --host="0.0.0.0" --tp-size=4 --random-seed=1234 --context-length=32768 &> 110b.log &
 disown %1
 ```
-and for h2oGPT:
+and for Quantum Documents:
 ```bash
 python --trust-remote-code --inference_server=sglang:conv_qwen:http://0.0.0.0:30000 --base_model=lmms-lab/llava-next-110b --prompt_type=qwen
 ```
 
-For text, SGLang supports [OpenAI API](https://github.com/sgl-project/sglang?tab=readme-ov-file#using-openai-models) which is what the `--prompt_type` above is used for.  Otherwise h2oGPT uses http requests to talk to the SGLang server.
+For text, SGLang supports [OpenAI API](https://github.com/sgl-project/sglang?tab=readme-ov-file#using-openai-models) which is what the `--prompt_type` above is used for.  Otherwise Quantum Documents uses http requests to talk to the SGLang server.
 
-For h2oGPT, the llava wheel was built like:
+For Quantum Documents, the llava wheel was built like:
 ```bash
 pip wheel git+https://github.com/LLaVA-VL/LLaVA-NeXT.git
 ```
-producing `llava-1.7.0.dev0-py3-none-any.whl`, and this package is required for h2oGPT to use SGLang LLaVa-Next vision models.
+producing `llava-1.7.0.dev0-py3-none-any.whl`, and this package is required for Quantum Documents to use SGLang LLaVa-Next vision models.
 
 
 ### LLaVa Vision Models
@@ -1354,7 +1354,7 @@ export GRADIO_SERVER_PORT=7861
 python -m llava.serve.gradio_web_server --controller http://localhost:$server_port --model-list-mode once
 ```
 
-Run h2oGPT with LLaVa and image (normal and high-quality) generation:
+Run Quantum Documents with LLaVa and image (normal and high-quality) generation:
 ```bash
 export GRADIO_SERVER_PORT=7860
 python --base_model=HuggingFaceH4/zephyr-7b-beta --score_model=None \
@@ -1362,9 +1362,9 @@ python --base_model=HuggingFaceH4/zephyr-7b-beta --score_model=None \
            --visible_image_models="['sdxl_turbo', 'playv2']" \
            --image_gpu_ids="[0,1]"
 ```
-e.g. `--llava_model=<IP:port:model_name>=http://192.168.1.46:7861:llava-v1.6-vicuna-13b`.  The `:model_name` is not required, h2oGPT will use first model if any.
+e.g. `--llava_model=<IP:port:model_name>=http://192.168.1.46:7861:llava-v1.6-vicuna-13b`.  The `:model_name` is not required, Quantum Documents will use first model if any.
 
-Run h2oGPT with LLaVa and image (normal and high-quality) generation and run LLaVa model as normal LLM model:
+Run Quantum Documents with LLaVa and image (normal and high-quality) generation and run LLaVa model as normal LLM model:
 ```bash
 export GRADIO_SERVER_PORT=7860
 python --score_model=None \
@@ -1406,7 +1406,7 @@ ghcr.io/huggingface/text-generation-inference:2.0.3 \
 --num-shard 1
 ```
 
-then run h2oGPT:
+then run Quantum Documents:
 ```bash
 python generate.py --inference_server=http://IP:port --base_model=HuggingFaceM4/idefics2-8b-chatty --score_model=None --top_k_docs=-1 --add_disk_models_to_ui=False
 ```
@@ -1418,7 +1418,7 @@ To disable STT and TTS, pass `--enable_tts=False --enable_stt=False` to `generat
 
 For basic STT and TTS, `--enable_tts=True --enable_stt=True` to `generate.py`.  Then in the UI, select `Speech Style` under Chats in left sidebar, since not speaking by default.
 
-To make h2oGPT speak by default, choose a default `chatbot_role` and `speaker`, e.g. run instead something like:
+To make Quantum Documents speak by default, choose a default `chatbot_role` and `speaker`, e.g. run instead something like:
 ```bash
 python generate.py --base_model=llama \
                    --chatbot_role="Female AI Assistant" \
@@ -1475,7 +1475,7 @@ NOTE: Action/Stop voice control over assistant is **experimental**, so disabled 
 
 There is currently no TTS for CLI.
 
-In the expert panel you can replay any h2oGPT generation or speak instruction generation.
+In the expert panel you can replay any Quantum Documents generation or speak instruction generation.
 
 If you want to stop generation of speech, click "Stop" in top-right to stop generation of text and speech, or click "Stop/Clear Speak" to stop speech when having clicked on "Speak Instruction" and "Speak Response".
 
@@ -1526,7 +1526,7 @@ inputs = dict(chatbot_role="Female AI Assistant",
               tts_speed=1.0,
               prompt=prompt,
               stream_output=True,
-              h2ogpt_key='',  # set if required, else leave as empty string.  Always needs to be passed
+              Quantum Documents_key='',  # set if required, else leave as empty string.  Always needs to be passed
               )
 job = client.submit(*tuple(list(inputs.values())), api_name='/speak_text_api')
 
@@ -1557,15 +1557,15 @@ while True:
 ```
 or via curlable endpoint:
 ```bash
-curl 127.0.0.1:7860/api/speak_text_plain_api -X POST -d '{"data": ["{\"chatbot_role\": \"Female AI Assistant\", \"speaker\": \"SLT (female)\", \"tts_language\": \"autodetect\", \"tts_speed\": 1.0, \"prompt\": \"Say cheese.\", \"stream_output\": \"False\", \"h2ogpt_key\": \"foodoo\"}"]}' -H 'Content-Type: application/json'
+curl 127.0.0.1:7860/api/speak_text_plain_api -X POST -d '{"data": ["{\"chatbot_role\": \"Female AI Assistant\", \"speaker\": \"SLT (female)\", \"tts_language\": \"autodetect\", \"tts_speed\": 1.0, \"prompt\": \"Say cheese.\", \"stream_output\": \"False\", \"Quantum Documents_key\": \"foodoo\"}"]}' -H 'Content-Type: application/json'
 ```
-for h2oGPT key `foodoo`.
+for Quantum Documents key `foodoo`.
 
 ### Automatic Speech Recognition (ASR)
 
 ASR is handled with whisper type models for ingesting YouTube videos or other videos.
 
-For Twitter, one can right-click on Twitter video, copy video address, then paste into [TwitterVideoDownloader.com](https://twitter.com/i/status/1732448989336006826) and download the video, right-click on that video and click save as, then upload to h2oGPT.
+For Twitter, one can right-click on Twitter video, copy video address, then paste into [TwitterVideoDownloader.com](https://twitter.com/i/status/1732448989336006826) and download the video, right-click on that video and click save as, then upload to Quantum Documents.
 
 ### Faster ASR
 
@@ -1617,7 +1617,7 @@ docker run \
       -u `id -u`:`id -g` \
       -v "${HOME}"/.cache:/workspace/.cache \
       -v "${HOME}"/save:/workspace/save \
-      gcr.io/vorvan/h2oai/h2ogpt-runtime:0.2.1 /workspace/generate.py \
+      gcr.io/vorvan/h2oai/Quantum Documents-runtime:0.2.1 /workspace/generate.py \
          --base_model=HuggingFaceH4/zephyr-7b-beta \
          --use_safetensors=True \
          --prompt_type=zephyr \
@@ -1637,7 +1637,7 @@ docker run \
 
 Even better [Chinese model](https://huggingface.co/BAAI/AquilaChat2-34B) can be used with `--prompt_type=aquila`, including [with quantization](https://huggingface.co/TheBloke/AquilaChat2-34B-16K-AWQ). that can fit on single A100 40GB.
 
-One can also run such models in vLLM and have h2oGPT use `--inference_server` to connect to the vLLM endpoint for good concurrency, then you can pass also `--concurrency_count=64`.
+One can also run such models in vLLM and have Quantum Documents use `--inference_server` to connect to the vLLM endpoint for good concurrency, then you can pass also `--concurrency_count=64`.
 
 In some cases LLaMa-2 or other chat models do ok on some languages, but others have been fine-tuned that are probably better:
 * Mistral-based [German](https://huggingface.co/LeoLM/leo-mistral-hessianai-7b-chat) or bilingual LLaMa-2 based [German](https://huggingface.co/LeoLM/leo-hessianai-13b-chat-bilingual)
@@ -1656,11 +1656,11 @@ In some cases more language boosting can be done by adding not just a system pro
 
 ### Controlling Quality and Speed of Parsing
 
-h2oGPT has certain defaults for speed and quality, but one may require faster processing or higher quality.
+Quantum Documents has certain defaults for speed and quality, but one may require faster processing or higher quality.
 
 For URLs, we use unstructured (`--use_unstructured=True`) and others are disabled (`--use_playwright=False` and `use_selenium=False`) unless unstructured fails, then we try the others.  But quality of parsing may be higher if all 3 are used.  However, then there may be redundant pages in database, which cannot easily be removed, but they will waste context space in the LLM.
 
-For PDFs, h2oGPT uses PyMuPDF by default, but others are used if that fails. In addition, because PyMuPDF does not handle images in PDFs well, we use DocTR for PDFs if there are less than 100 pages or other PDF parsers failed.  We also use unstructured in auto mode if less than 2 pages or other PDF parsers failed.  CLI can control these via:
+For PDFs, Quantum Documents uses PyMuPDF by default, but others are used if that fails. In addition, because PyMuPDF does not handle images in PDFs well, we use DocTR for PDFs if there are less than 100 pages or other PDF parsers failed.  We also use unstructured in auto mode if less than 2 pages or other PDF parsers failed.  CLI can control these via:
 * use_unstructured_pdf='auto'
 * use_pypdf='auto'
 * enable_pdf_ocr='auto'
@@ -1693,7 +1693,7 @@ python generate.py --pre_load_embedding_model=True --embedding_gpu_id=0 --hf_emb
 
 By default, `--top_k_docs=3`.  A query action uses `chunk_size=512` character chunks, while summarization/extraction actions do not use those "query/embedding" chunks but use raw parser result (e.g. pages for PDFs).
 
-An optimal quality choice is `--top_k_docs=-1`, because then h2oGPT will figure out how to autofill the context.  If that leads to too slow behavior, a good balance might be `top_k_docs=10`, but for summarization/extraction that may be too limiting.
+An optimal quality choice is `--top_k_docs=-1`, because then Quantum Documents will figure out how to autofill the context.  If that leads to too slow behavior, a good balance might be `top_k_docs=10`, but for summarization/extraction that may be too limiting.
 
 In any case, we will manage things in any case to reduce the count to not exceed the context of the LLM in the `get_limited_prompt()` function.
 
@@ -1701,30 +1701,30 @@ If one sets `top_k_docs=-1`, one can also set `max_input_tokens` to limit tokens
 
 ### API key access
 
-h2oGPT API key access for API and UI and persistence of state via login (auth enabled or not)
+Quantum Documents API key access for API and UI and persistence of state via login (auth enabled or not)
 
 ```bash
-python generate.py --base_model=h2oai/h2ogpt-4096-llama2-70b-chat --auth_filename=auth.json --enforce_h2ogpt_api_key=True --enforce_h2ogpt_ui_key=True --h2ogpt_api_keys="['<API_KEY>']"
+python generate.py --base_model=h2oai/Quantum Documents-4096-llama2-70b-chat --auth_filename=auth.json --enforce_Quantum Documents_api_key=True --enforce_Quantum Documents_ui_key=True --Quantum Documents_api_keys="['<API_KEY>']"
 ```
-for some API key `<API_KEY>` and some auth file `auth.json` where h2oGPT will store login and persistence information.  This enforces keyed access for both API and UI, and one can choose any.  For public cases (Hugging Face or GPT_H2O_AI env set), enforce of API is default.
+for some API key `<API_KEY>` and some auth file `auth.json` where Quantum Documents will store login and persistence information.  This enforces keyed access for both API and UI, and one can choose any.  For public cases (Hugging Face or GPT_H2O_AI env set), enforce of API is default.
 
 One can also use a json key file:
 ```bash
-python generate.py --base_model=h2oai/h2ogpt-4096-llama2-70b-chat --auth_filename=auth.json --enforce_h2ogpt_api_key=True --enforce_h2ogpt_ui_key=True --h2ogpt_api_keys="h2ogpt_api_keys.json"
+python generate.py --base_model=h2oai/Quantum Documents-4096-llama2-70b-chat --auth_filename=auth.json --enforce_Quantum Documents_api_key=True --enforce_Quantum Documents_ui_key=True --Quantum Documents_api_keys="Quantum Documents_api_keys.json"
 ```
-for some file `h2ogpt_api_keys.json` which is a JSON file that is a list of strings of keys allowed.
+for some file `Quantum Documents_api_keys.json` which is a JSON file that is a list of strings of keys allowed.
 
 If UI keyed access is enabled, one has to enter the key in the UI in Login tab before accessing LLMs or upload of files.
 
 If API keyed access is enabled, one has to pass the API key along with other arguments to access LLm or upload of files.
 
 See `src/gen.py` file for details:
-*    :param enforce_h2ogpt_api_key: Whether to enforce h2oGPT token usage for API
-*    :param enforce_h2ogpt_ui_key: Whether to enforce h2oGPT token usage for UI (same keys as API assumed)
-*    :param h2ogpt_api_keys: list of tokens allowed for API access or file accessed on demand for json of list of keys
-*    :param h2ogpt_key: E.g. can be set when accessing gradio h2oGPT server from local gradio h2oGPT server that acts as client to that inference server
+*    :param enforce_Quantum Documents_api_key: Whether to enforce Quantum Documents token usage for API
+*    :param enforce_Quantum Documents_ui_key: Whether to enforce Quantum Documents token usage for UI (same keys as API assumed)
+*    :param Quantum Documents_api_keys: list of tokens allowed for API access or file accessed on demand for json of list of keys
+*    :param Quantum Documents_key: E.g. can be set when accessing gradio Quantum Documents server from local gradio Quantum Documents server that acts as client to that inference server
 
-As with any option, one can set the environment variable `H2OGPT_x` for an upper-case main() argument to control the above.
+As with any option, one can set the environment variable `Quantum Documents_x` for an upper-case main() argument to control the above.
 
 ### Auth Access
 
@@ -1776,7 +1776,7 @@ The file format for `auth.json` in basic form is:
   },
 }
 ```
-while more generally it is updated by h2oGPT to contain other entries, for example for single user `username`:
+while more generally it is updated by Quantum Documents to contain other entries, for example for single user `username`:
 ```json
   "username": {
     "password": "username",
@@ -1793,7 +1793,7 @@ while more generally it is updated by h2oGPT to contain other entries, for examp
       },
       "langchain_mode_types": {
         "UserData": "shared",
-        "github h2oGPT": "shared",
+        "github Quantum Documents": "shared",
         "DriverlessAI docs": "shared",
         "wiki": "shared",
         "wiki_full": "",
@@ -1838,21 +1838,21 @@ If both auth and key is enabled, then do:
 ```python
 from gradio_client import Client
 client = Client('http://localhost:7860', auth=('username', 'password'))
-res = client.predict(str(dict(instruction="Who are you?", h2ogpt_key='<h2ogpt_key')), api_name='/submit_nochat_plain_api')
+res = client.predict(str(dict(instruction="Who are you?", Quantum Documents_key='<Quantum Documents_key')), api_name='/submit_nochat_plain_api')
 print(res)
 ```
 or other API endpoints.
 
 ### OpenAI Auth access
 
-When auth access is enabled on a Gradio server, it is also enabled for OpenAI proxy server.  In that case, if access is closed (`--auth_access=closed`), then you must set the env `H2OGPT_OPENAI_USER` before launching h2oGPT so that it can know which user and password to use.  For open access, a guest or random uuid is used.  The `H2OGPT_OPENAI_USER` should be a string with `user:password` form, similar to what is required when accessing the OpenAI proxy server with OpenAI client.
+When auth access is enabled on a Gradio server, it is also enabled for OpenAI proxy server.  In that case, if access is closed (`--auth_access=closed`), then you must set the env `Quantum Documents_OPENAI_USER` before launching Quantum Documents so that it can know which user and password to use.  For open access, a guest or random uuid is used.  The `Quantum Documents_OPENAI_USER` should be a string with `user:password` form, similar to what is required when accessing the OpenAI proxy server with OpenAI client.
 
-For OpenAI client access, one uses the `user` parameter and fills it with the `user:password` string for the user and password that is valid for h2oGPT server access. The following is an example client call for guided json call with authentication:
+For OpenAI client access, one uses the `user` parameter and fills it with the `user:password` string for the user and password that is valid for Quantum Documents server access. The following is an example client call for guided json call with authentication:
 ```python
 from openai import OpenAI
 
 base_url = 'http://127.0.0.1:5000/v1'
-api_key = '<fill me if API access set for client calls in h2oGPT server>'
+api_key = '<fill me if API access set for client calls in Quantum Documents server>'
 
 client_args = dict(base_url=base_url, api_key=api_key)
 openai_client = OpenAI(**client_args)
@@ -1913,7 +1913,7 @@ print(text)
 
 ### Google Auth Access
 
-* Go to [Google Console](https://console.cloud.google.com/) and make a project, e.g. h2ogpt
+* Go to [Google Console](https://console.cloud.google.com/) and make a project, e.g. Quantum Documents
 * In API & Services, go to Credentials:
   * Choose Web client, not OAuth client
   * Make and copy credentials for client ID and Client secret
@@ -1951,7 +1951,7 @@ async def login(request: Request):
 ```
 from `gradio_utils/google_auth.py`.
 
-Run h2oGPT with:
+Run Quantum Documents with:
 ```bash
 export GOOGLE_CLIENT_ID="<fill me>"
 export GOOGLE_CLIENT_SECRET="<fill me>"
@@ -1967,10 +1967,10 @@ For details about this feature, see https://github.com/gradio-app/gradio/issues/
 
 Have files `private_key.pem` and `cert.pem` from your own SSL, or if do not have such files, generate by doing:
 ```bash
-openssl req -x509 -newkey rsa:4096 -keyout private_key.pem -out cert.pem -days 3650 -nodes -subj '/O=H2OGPT'
+openssl req -x509 -newkey rsa:4096 -keyout private_key.pem -out cert.pem -days 3650 -nodes -subj '/O=Quantum Documents'
 ```
 
-Consider the server (not h2oGPT but gradio based) for end-to-end example:
+Consider the server (not Quantum Documents but gradio based) for end-to-end example:
 ```python
 import gradio as gr
 import random
@@ -2051,7 +2051,7 @@ Loaded as API: https://localhost:7860/ ✔
 ('', [['foo', 'doo'], ['Hello', 'I love you']])
 ```
 
-For h2oGPT, run the server as `python generate.py --ssl_verify=False --ssl_keyfile=<KEYFILE> --ssl_certfile=<CERTFILE> --share=False` for key file `<KEYFILE>` and cert file `<CERTFILE>`, then use gradio client code with context manager as above but use the gradio client endpoints as [documented in readme or test code](README_CLIENT.md).
+For Quantum Documents, run the server as `python generate.py --ssl_verify=False --ssl_keyfile=<KEYFILE> --ssl_certfile=<CERTFILE> --share=False` for key file `<KEYFILE>` and cert file `<CERTFILE>`, then use gradio client code with context manager as above but use the gradio client endpoints as [documented in readme or test code](README_CLIENT.md).
 
 ### RoPE scaling and Long Context Models
 
@@ -2086,7 +2086,7 @@ We take care of this for distilgpt2, but other similar models might fail in same
 
 ### Adding Models
 
-You can choose any Hugging Face model or quantized GGUF model file in h2oGPT.  Hugging Face models are automatically downloaded to the Hugging Face `.cache` folder (in home folder).
+You can choose any Hugging Face model or quantized GGUF model file in Quantum Documents.  Hugging Face models are automatically downloaded to the Hugging Face `.cache` folder (in home folder).
 
 #### Hugging Face
 
@@ -2094,9 +2094,9 @@ Hugging Face models are passed via `--base_model` in all cases, with fine-contro
 
 #### TheBloke
 
-For models by [TheBloke](https://huggingface.co/TheBloke), h2oGPT tries to automatically handle all types of models (AWQ, GGUF, GGML, and GPTQ, with or without [safetensors](https://huggingface.co/docs/safetensors/index#safetensors)). These models can all be passed using only the `--base_model` option (CLI or UI both).  For example, the following models can all be passed with just the `--base_model` option without any additional model options:
+For models by [TheBloke](https://huggingface.co/TheBloke), Quantum Documents tries to automatically handle all types of models (AWQ, GGUF, GGML, and GPTQ, with or without [safetensors](https://huggingface.co/docs/safetensors/index#safetensors)). These models can all be passed using only the `--base_model` option (CLI or UI both).  For example, the following models can all be passed with just the `--base_model` option without any additional model options:
 ```text
-python generate.py --base_model=h2oai/h2ogpt-oig-oasst1-512-6_9b
+python generate.py --base_model=h2oai/Quantum Documents-oig-oasst1-512-6_9b
 python generate.py --base_model=TheBloke/Xwin-LM-13B-V0.1-GPTQ
 python generate.py --base_model=TheBloke/Llama-2-7B-Chat-GGUF
 python generate.py --base_model=HuggingFaceH4/zephyr-7b-beta
@@ -2105,9 +2105,9 @@ python generate.py --base_model=TheBloke/zephyr-7B-beta-AWQ
 python generate.py --base_model=zephyr-7b-beta.Q5_K_M.gguf --prompt_type=zephyr
 python generate.py --base_model=https://huggingface.co/TheBloke/Llama-2-7b-Chat-GGUF/resolve/main/llama-2-7b-chat.Q6_K.gguf?download=true
 ```
-Some are these are non-quantized models with HF links, and some are specific files on local disk ending in `.gguf`.  Given `TheBloke` HF names, if it is a quantized model, h2oGPT pulls the recommended model from his repository.  You can also provide a resolved web link directly, or a file.
+Some are these are non-quantized models with HF links, and some are specific files on local disk ending in `.gguf`.  Given `TheBloke` HF names, if it is a quantized model, Quantum Documents pulls the recommended model from his repository.  You can also provide a resolved web link directly, or a file.
 
-Watch out for typos.  h2oGPT broadly detects if the URL is valid, but Hugging Face just returns a redirect for resolved links, leading to a page containing `Entry not found` if there is a mistake in the file name, e.g. `https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/resolve/main/llama-2-7b-chat.Q6_K.gguffoo`.
+Watch out for typos.  Quantum Documents broadly detects if the URL is valid, but Hugging Face just returns a redirect for resolved links, leading to a page containing `Entry not found` if there is a mistake in the file name, e.g. `https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/resolve/main/llama-2-7b-chat.Q6_K.gguffoo`.
 
 For AWQ, GPTQ, we try the required safe tensors or other options, and by default use transformers' GPTQ unless one specifies `--use_autogptq=True`.
 
@@ -2132,7 +2132,7 @@ python generate.py --base_model=TheBloke/Mixtral-8x7B-Instruct-v0.1-GPTQ --promp
 ```
 NOTE: After quantization report, it takes about 4 minutes on fast system to fully load for whatever reason, without any change to GPU or CPU memory usage.
 
-For AutoGPTQ and other models, h2oGPT tries to automatically handle models needing certain exllama options.
+For AutoGPTQ and other models, Quantum Documents tries to automatically handle models needing certain exllama options.
 
 ##### AWQ
 
@@ -2159,7 +2159,7 @@ GGUF using Mixtral:
 ```bash
 python generate.py --base_model=TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF --prompt_type=mistral --max_seq_len=4096 --score_model=None
 ```
-Also note that Mixtral GGUF has max context of 4k if allowed to auto-detect in h2oGPT.  One can try larger up to 32k with `--max_seq_len`.  But higher uses significant amounts of GPU memory and is slow but for document QA is probably not helpful (e.g. `--top_k_docs=-1` with 32k actually hurts RAG performance, better to limit RAG to 4k, summarization can use more though).  This can be controlled per-query with `max_input_tokens` in API/UI.
+Also note that Mixtral GGUF has max context of 4k if allowed to auto-detect in Quantum Documents.  One can try larger up to 32k with `--max_seq_len`.  But higher uses significant amounts of GPU memory and is slow but for document QA is probably not helpful (e.g. `--top_k_docs=-1` with 32k actually hurts RAG performance, better to limit RAG to 4k, summarization can use more though).  This can be controlled per-query with `max_input_tokens` in API/UI.
 
 Also, with `--top_k_docs=-1` or too large positive value, context-filling of the 4k leads to very slow results for GGUF Mixtral compared to vLLM FP16 performance.
 
@@ -2230,7 +2230,7 @@ However, in some cases, you need to add a new prompt structure because the model
     humanstr
     botstr
     ```
-    i.e. see how consumed:  https://github.com/h2oai/h2ogpt/blob/a51576cd174e9fda61f00c3889a26888a604172c/src/prompter.py#L130-L142
+    i.e. see how consumed:  https://github.com/h2oai/Quantum Documents/blob/a51576cd174e9fda61f00c3889a26888a604172c/src/prompter.py#L130-L142
 
     The following are the most crucial items:
     ```
@@ -2241,7 +2241,7 @@ However, in some cases, you need to add a new prompt structure because the model
     ```
     Note that it is often the case that `humanstr` equals `PreInstruct` and `botstr` equals `PreResponse`. If this is the case, then you only have to set two keys.
 
-For example, suppose one did not have the `open_chat` prompt yet in h2oGPT, then one would run:
+For example, suppose one did not have the `open_chat` prompt yet in Quantum Documents, then one would run:
 ```bash
 python generate.py --base_model=TheBloke/openchat_3.5-GGUF --prompt_type=custom --prompt_dict="{'promptA': '', 'promptB': '', 'PreInstruct': 'GPT4 User: ', 'PreInput': None, 'PreResponse': 'GPT4 Assistant:', 'terminate_response': ['GPT4 Assistant:', '<|end_of_turn|>'], 'chat_sep': '<|end_of_turn|>', 'chat_turn_sep': '<|end_of_turn|>', 'humanstr': 'GPT4 User: ', 'botstr': 'GPT4 Assistant:', 'generates_leading_space': False, 'system_prompt': ''}"
 ```
@@ -2302,7 +2302,7 @@ Pick duckdb, pick from persistent directory, then choose the directory like `db_
 * Copy the `db_dir_UserData/embed_info` to new directory.
 * Remove or move away old directory (`db_dir_UserData`).
 * Use `mv db_dir_UserData_mig db_dir_UserData`
-* Run h2oGPT as before
+* Run Quantum Documents as before
 
 
 ### Add new Embedding Model
@@ -2318,7 +2318,7 @@ This section describes how to add a new embedding model.
 - The option `--cut_distance` as float specifies the distance above which to avoid using document sources.  The default is 1.64, tuned for  Mini and instructor-large. You can pass `--cut_distance=100000` to avoid any filter. For example:
 
   ```bash
-  python generate.py --base_model=h2oai/h2ogpt-4096-llama2-13b-chat  --score_model=None --langchain_mode='UserData' --user_path=user_path --use_auth_token=True --hf_embedding_model=BAAI/bge-large-en --cut_distance=1000000
+  python generate.py --base_model=h2oai/Quantum Documents-4096-llama2-13b-chat  --score_model=None --langchain_mode='UserData' --user_path=user_path --use_auth_token=True --hf_embedding_model=BAAI/bge-large-en --cut_distance=1000000
   ```
 
 To run the embedding model on the CPU, use options like:
@@ -2345,9 +2345,9 @@ In some cases, longer system prompts help, but it may also hurt for some models.
 
 ### In-Context learning via Prompt Engineering
 
-For arbitrary tasks, using uncensored models like [Falcon 40 GM](https://huggingface.co/h2oai/h2ogpt-gm-oasst1-en-2048-falcon-40b-v2) is recommended. If censored is ok, then [LLama-2 Chat](https://huggingface.co/h2oai/h2ogpt-4096-llama2-70b-chat) are ok. Choose model size according to your system specs.
+For arbitrary tasks, using uncensored models like [Falcon 40 GM](https://huggingface.co/h2oai/Quantum Documents-gm-oasst1-en-2048-falcon-40b-v2) is recommended. If censored is ok, then [LLama-2 Chat](https://huggingface.co/h2oai/Quantum Documents-4096-llama2-70b-chat) are ok. Choose model size according to your system specs.
 
-For the UI, CLI, or EVAL, this means editing the `System Pre-Context` text box in expert settings.  When starting h2oGPT, you can pass `--system_prompt` to give a model a system prompt if it supports that, `--context` to pre-append some raw context, `--chat_conversation` to pre-append a conversation for instruct/chat models, `--text_context_list` to fill context up to possible allowed `max_seq_len` with strings, with first most relevant to appear near prompt, or `--iinput` for a default input (to instruction for pure instruct models) choice.
+For the UI, CLI, or EVAL, this means editing the `System Pre-Context` text box in expert settings.  When starting Quantum Documents, you can pass `--system_prompt` to give a model a system prompt if it supports that, `--context` to pre-append some raw context, `--chat_conversation` to pre-append a conversation for instruct/chat models, `--text_context_list` to fill context up to possible allowed `max_seq_len` with strings, with first most relevant to appear near prompt, or `--iinput` for a default input (to instruction for pure instruct models) choice.
 
 Or for API, you can pass the `context` variable. This can be filled with arbitrary things, including actual conversations to prime the model, although if a conversation then you need to put in prompts as follows:
 ```python
@@ -2370,11 +2370,11 @@ res = client.predict(str(dict(kwargs)), api_name='/submit_nochat_api')
 response = ast.literal_eval(res)['response']
 print(response)
 ```
-For example, see: https://github.com/h2oai/h2ogpt/blob/d3334233ca6de6a778707feadcadfef4249240ad/tests/test_prompter.py#L47 .
+For example, see: https://github.com/h2oai/Quantum Documents/blob/d3334233ca6de6a778707feadcadfef4249240ad/tests/test_prompter.py#L47 .
 
 Note that even if the prompting is not perfect or matches the model, smarter models will still do quite well, as long as you give their answers as part of context.
 
-If you just want to pre-append a conversation, then use `chat_conversation` instead and h2oGPT will generate the context for the given instruct/chat model:
+If you just want to pre-append a conversation, then use `chat_conversation` instead and Quantum Documents will generate the context for the given instruct/chat model:
 ```python
 from gradio_client import Client
 import ast
@@ -2402,7 +2402,7 @@ Related to transformers.  There are two independent ways to do this (choose one)
     ```
     export HUGGING_FACE_HUB_TOKEN=<token goes here>
     ```
-    token starts with `hf_` usually.  Then start h2oGPT like normal.
+    token starts with `hf_` usually.  Then start Quantum Documents like normal.
   See [Hugging Face ENV documentation](https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables) for other environment variables.
 * Use cli tool:
     ```bash
@@ -2586,12 +2586,12 @@ then pass run like (assumes version 3 quantization):
 ```bash
 python generate.py --base_model=llama --model_path_llama=./models/7B/ggml-model-q4_0.bin
 ```
-or wherever you placed the model with the path pointing to wherever the files are located (e.g. link from h2oGPT repo to llama.cpp repo folder), e.g.
+or wherever you placed the model with the path pointing to wherever the files are located (e.g. link from Quantum Documents repo to llama.cpp repo folder), e.g.
 ```bash
-cd ~/h2ogpt/
+cd ~/Quantum Documents/
 ln -s ~/llama.cpp/models/* .
 ```
-then run h2oGPT like:
+then run Quantum Documents like:
 ```bash
 python generate.py --base_model='llama' --langchain_mode=UserData --user_path=user_path
 ```
@@ -2633,7 +2633,7 @@ assuming that file is from version 2 quantization.
     WARNING: failed to allocate 258.00 MB of pinned memory: out of memory
     Traceback (most recent call last):
     ```
-    then you have insufficient pinned memory on your GPU.  You can disable pinning by setting this env before launching h2oGPT:
+    then you have insufficient pinned memory on your GPU.  You can disable pinning by setting this env before launching Quantum Documents:
 * Linux:
     ```
     export GGML_CUDA_NO_PINNED=1
@@ -2648,7 +2648,7 @@ assuming that file is from version 2 quantization.
 
 This warning can be safely ignored.
 
-### What ENVs can I pass to control h2oGPT?
+### What ENVs can I pass to control Quantum Documents?
 
    - `SAVE_DIR`: Local directory to save logs to,
    - `ADMIN_PASS`: Password to access system info, logs, or push to aws s3 bucket,
@@ -2670,11 +2670,11 @@ This warning can be safely ignored.
    - `ALLOW_API`: Whether to allow API access,
    - `CUDA_VISIBLE_DEVICES`: Standard list of CUDA devices to make visible.
    - `PING_GPU`: ping GPU every few minutes for full GPU memory usage by torch, useful for debugging OOMs or memory leaks
-   - `H2OGPT_BASE_PATH`: Choose base folder for all files except personal/scratch files
+   - `Quantum Documents_BASE_PATH`: Choose base folder for all files except personal/scratch files
    - `LLAMACPP_PATH`: Choose directory where url downloads for llama models are kept.
 These can be useful on HuggingFace spaces, where one sets secret tokens because CLI options cannot be used.
 
-> **_NOTE:_**  Scripts can accept different environment variables to control query arguments. For instance, if a Python script takes an argument like `--load_8bit=True`, the corresponding ENV variable would follow this format: `H2OGPT_LOAD_8BIT=True` (regardless of capitalization). It is important to ensure that the environment variable is assigned the exact value that would have been used for the script's query argument.
+> **_NOTE:_**  Scripts can accept different environment variables to control query arguments. For instance, if a Python script takes an argument like `--load_8bit=True`, the corresponding ENV variable would follow this format: `Quantum Documents_LOAD_8BIT=True` (regardless of capitalization). It is important to ensure that the environment variable is assigned the exact value that would have been used for the script's query argument.
 
 ### How to run functions in src from Python interpreter
 
@@ -2688,7 +2688,7 @@ print(non_image_types)
 print(image_types)
 for x in image_types:
     print('   - `.%s` : %s Image (optional),' % (x.lower(), x.upper()))
-# unused in h2oGPT:
+# unused in Quantum Documents:
 print(video_types)
 ```
 
@@ -2717,7 +2717,7 @@ gptj_model_load: model size =  3609.38 MB / num tensors = 285
 >>>
 ```
 Also, the model tends to not do well when input has new lines, spaces or `<br>` work better.
-This does not seem to be an issue with h2oGPT.
+This does not seem to be an issue with Quantum Documents.
 
 ### Commercial viability
 
@@ -2725,7 +2725,7 @@ Open-source means the models are not proprietary and are available to download. 
 
 We post models and license and data origin details on our huggingface page: https://huggingface.co/h2oai (all models, except research ones, are fully permissive).  The foundational models we fine-tuned on, e.g. Pythia 6.9B, Pythia 12B, NeoX 20B, or Open-LLaMa checkpoints are fully commercially viable.  These foundational models are also listed on the huggingface page for each fine-tuned model.  Full training logs, source data, etc. are all provided for all models.  [GPT4All](https://github.com/nomic-ai/gpt4all) GPT_J is commercially viable, but other models may not be.  Any Meta based [LLaMa](https://github.com/facebookresearch/llama) based models are not commercially viable.
 
-Data used to fine-tune are provided on the huggingface pages for each model.  Data for foundational models are provided on their huggingface pages.  Any models trained on GPT3.5 data like ShareGPT, Vicuna, Alpaca, etc. are not commercially viable due to ToS violations w.r.t. building competitive models.  Any research-based h2oGPT models based upon Meta's weights for LLaMa are not commercially viable.
+Data used to fine-tune are provided on the huggingface pages for each model.  Data for foundational models are provided on their huggingface pages.  Any models trained on GPT3.5 data like ShareGPT, Vicuna, Alpaca, etc. are not commercially viable due to ToS violations w.r.t. building competitive models.  Any research-based Quantum Documents models based upon Meta's weights for LLaMa are not commercially viable.
 
 Overall, we have done a significant amount of due diligence regarding data and model licenses to carefully select only fully permissive data and models for our models we license as Apache V2.  Outside our models, some "open-source" models like Vicuna, Koala, WizardLM, etc. are based upon Meta's weights for LLaMa, which is not commercially usable due to ToS violations w.r.t. non-competitive clauses well as research-only clauses.  Such models tend to also use data from GPT3.5 (ChatGPT), which is also not commercially usable due to ToS violations w.r.t. non-competitive clauses.  E.g. Alpaca data, ShareGPT data, WizardLM data, etc. all fall under that category. All open-source foundational models consume data from the internet, including the Pile or C4 (web crawl) that may contain objectionable material.  Future licenses w.r.t. new web crawls may change, but it is our understanding that existing data crawls would not be affected by any new licenses.  However, some web crawl data may contain pirated books.
 
@@ -2737,7 +2737,7 @@ Untested AMD support: Download and install [bitsandbytes on AMD](https://github.
 
 Disclaimers and a ToS link are displayed to protect the app creators.
 
-### What are the different prompt types? How does prompt engineering work for h2oGPT?
+### What are the different prompt types? How does prompt engineering work for Quantum Documents?
 
 In general, all LLMs use strings as inputs for training/fine-tuning and generation/inference.
 To manage a variety of possible language task types, we divide any such string into the following three parts:
@@ -2791,7 +2791,7 @@ The following are examples of training records in `JSON` format.
 ```json
 {
   "input": "Who are you?",
-  "output": "My name is h2oGPT.",
+  "output": "My name is Quantum Documents.",
   "prompt_type": "human_bot"
 }
 ```
@@ -2799,7 +2799,7 @@ The following are examples of training records in `JSON` format.
 - `plain` version of `human_bot`, useful for longer conversations
 ```json
 {
-  "input": "<human>: Who are you?\n<bot>: My name is h2oGPT.\n<human>: Can you write a poem about horses?\n<bot>: Yes, of course. Here it goes...",
+  "input": "<human>: Who are you?\n<bot>: My name is Quantum Documents.\n<human>: Can you write a poem about horses?\n<bot>: Yes, of course. Here it goes...",
   "prompt_type": "plain"
 }
 ```
@@ -2820,7 +2820,7 @@ Note that the total length of the text (that is, the input and output) the LLM c
 A context length of 2048 means that for an input of, for example, 1900 tokens, the model will be able to create no more than 148 new tokens as part of the output.
 
 For fine-tuning, if the average length of inputs is less than the context length, one can provide a `cutoff_len` of less than the context length to truncate inputs to this amount of tokens. For most instruction-type datasets, a cutoff length of 512 seems reasonable and provides nice memory and time savings.
-For example, the `h2oai/h2ogpt-oasst1-512-20b` model was trained with a cutoff length of 512.
+For example, the `h2oai/Quantum Documents-oasst1-512-20b` model was trained with a cutoff length of 512.
 
 ### Tokens
 
@@ -2843,7 +2843,7 @@ The following are some example tokens (from a total of ~50k), each of which is a
 The model is trained with these specific numbers, so the tokenizer must be kept the same for training and inference/generation.
 The input format doesn't change whether the model is in pretraining, fine-tuning, or inference mode, but the text itself can change slightly for better results, and that's called prompt engineering.
 
-### Is h2oGPT multilingual?
+### Is Quantum Documents multilingual?
 
 Yes. Try it in your preferred language.
 
@@ -2854,7 +2854,7 @@ The number `512` in the model names indicates the cutoff lengths (in tokens) use
 ### Throttle GPUs in case of reset/reboot
 
 ```bash
-(h2ogpt) jon@gpu:~$ sudo nvidia-smi -pl 250
+(Quantum Documents) jon@gpu:~$ sudo nvidia-smi -pl 250
 Power limit for GPU 00000000:3B:00.0 was set to 250.00 W from 300.00 W.
 Power limit for GPU 00000000:5E:00.0 was set to 250.00 W from 300.00 W.
 Power limit for GPU 00000000:86:00.0 was set to 250.00 W from 300.00 W.
@@ -2939,11 +2939,11 @@ CUDA error: an illegal memory access was encountered
 
 With upgrade to llama_cpp_python 0.2.76 for faster performance and other bug fixes, thread safety is worse.  So cannot do audio streaming + GGUF streaming at same time.  See: https://github.com/ggerganov/llama.cpp/issues/3960.
 
-A temporary workaround is present in h2oGPT, whereby the XTTS model (not the Microsoft TTS model) and llama.cpp models are not used at the same time. This leads to more delays in streaming for text + audio, but not too bad a result.
+A temporary workaround is present in Quantum Documents, whereby the XTTS model (not the Microsoft TTS model) and llama.cpp models are not used at the same time. This leads to more delays in streaming for text + audio, but not too bad a result.
 
 Other workarounds:
 
-* Workaround 1: Use inference server like oLLaMa, vLLM, gradio inference server, etc.  as described [below](FAQ.md#running-ollama-vs-h2ogpt-as-inference-server).
+* Workaround 1: Use inference server like oLLaMa, vLLM, gradio inference server, etc.  as described [below](FAQ.md#running-ollama-vs-Quantum Documents-as-inference-server).
 
 * Workaround 2: Follow normal directions for installation, but replace 0.2.76 with 0.2.26, e.g. for CUDA with Linux:
     ```bash

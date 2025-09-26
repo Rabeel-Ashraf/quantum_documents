@@ -11,7 +11,7 @@ def pytest_sessionstart(session):
     if not os.getenv("USE_WHEEL", None):
         return
     try:
-        for location in importlib.util.find_spec("h2ogpt").submodule_search_locations:
+        for location in importlib.util.find_spec("Quantum Documents").submodule_search_locations:
             sys.path.append(location)
     except AttributeError:
         pass

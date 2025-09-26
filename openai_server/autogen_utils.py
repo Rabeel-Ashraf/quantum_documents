@@ -200,11 +200,11 @@ class H2OLocalCommandLineCodeExecutor(LocalCommandLineCodeExecutor):
         }
 
         # patterns can always block if appear in code
-        any_patterns = ['H2OGPT_MODEL_LOCK', 'H2OGPT_MAIN_KWARGS', 'H2OGPT_FUNCTION_API_KEY',
-                        'H2OGPT_FUNCTION_PORT', 'H2OGPT_SSL_KEYFILE_PASSWORD', 'H2OGPT_AUTH', 'H2OGPT_AUTH_FILENAME',
-                        'H2OGPT_ENFORCE_H2OGPT_API_KEY', 'H2OGPT_ENFORCE_H2OGPT_UI_KEY',
-                        'H2OGPT_H2OGPT_API_KEYS', 'H2OGPT_KEY', 'GRADIO_H2OGPT_H2OGPT_KEY',
-                        'H2OGPT_H2OGPT_KEY',
+        any_patterns = ['Quantum Documents_MODEL_LOCK', 'Quantum Documents_MAIN_KWARGS', 'Quantum Documents_FUNCTION_API_KEY',
+                        'Quantum Documents_FUNCTION_PORT', 'Quantum Documents_SSL_KEYFILE_PASSWORD', 'Quantum Documents_AUTH', 'Quantum Documents_AUTH_FILENAME',
+                        'Quantum Documents_ENFORCE_Quantum Documents_API_KEY', 'Quantum Documents_ENFORCE_Quantum Documents_UI_KEY',
+                        'Quantum Documents_Quantum Documents_API_KEYS', 'Quantum Documents_KEY', 'GRADIO_Quantum Documents_Quantum Documents_KEY',
+                        'Quantum Documents_Quantum Documents_KEY',
                         ]
 
         if os.getenv('STRICT_KEY_USAGE', '0') == '1':
@@ -219,7 +219,7 @@ class H2OLocalCommandLineCodeExecutor(LocalCommandLineCodeExecutor):
                              ]
         # Do NOT include these as just patterns, since used by tools:
         # just shown for reference to avoid being added later:
-        used_by_tools = ['H2OGPT_OPENAI_API_KEY', 'S2_API_KEY,' 'NEWS_API_KEY', 'SERPAPI_API_KEY',
+        used_by_tools = ['Quantum Documents_OPENAI_API_KEY', 'S2_API_KEY,' 'NEWS_API_KEY', 'SERPAPI_API_KEY',
                          'WOLFRAM_ALPHA_APPID', 'STT_OPENAI_API_KEY', 'IMAGEGEN_OPENAI_API_KEY']
         assert used_by_tools
 
@@ -535,17 +535,17 @@ Warning: You have used the agent tool "{k}" more than {v} times in this conversa
         # List of API key environment variable names to check
         api_key_names = ['OPENAI_AZURE_KEY', 'OPENAI_AZURE_API_BASE',
                          'TWILIO_AUTH_TOKEN', 'NEWS_API_KEY', 'OPENAI_API_KEY_JON',
-                         'H2OGPT_H2OGPT_KEY', 'TWITTER_API_KEY', 'FACEBOOK_ACCESS_TOKEN', 'API_KEY', 'LINKEDIN_API_KEY',
+                         'Quantum Documents_Quantum Documents_KEY', 'TWITTER_API_KEY', 'FACEBOOK_ACCESS_TOKEN', 'API_KEY', 'LINKEDIN_API_KEY',
                          'STRIPE_API_KEY', 'ADMIN_PASS', 'S2_API_KEY', 'ANTHROPIC_API_KEY', 'AUTH_TOKEN',
                          'AWS_SERVER_PUBLIC_KEY', 'OPENAI_API_KEY', 'HUGGING_FACE_HUB_TOKEN', 'AWS_ACCESS_KEY_ID',
                          'SERPAPI_API_KEY', 'WOLFRAM_ALPHA_APPID', 'AWS_SECRET_ACCESS_KEY', 'ACCESS_TOKEN',
                          'SLACK_API_TOKEN', 'MISTRAL_API_KEY', 'TOGETHERAI_API_TOKEN', 'GITHUB_TOKEN', 'SECRET_KEY',
                          'GOOGLE_API_KEY', 'REPLICATE_API_TOKEN', 'GOOGLE_CLIENT_SECRET', 'GROQ_API_KEY',
-                         'AWS_SERVER_SECRET_KEY', 'H2OGPT_OPENAI_BASE_URL', 'H2OGPT_OPENAI_API_KEY',
-                         'GRADIO_H2OGPT_H2OGPT_KEY', 'IMAGEGEN_OPENAI_BASE_URL',
+                         'AWS_SERVER_SECRET_KEY', 'Quantum Documents_OPENAI_BASE_URL', 'Quantum Documents_OPENAI_API_KEY',
+                         'GRADIO_Quantum Documents_Quantum Documents_KEY', 'IMAGEGEN_OPENAI_BASE_URL',
                          'IMAGEGEN_OPENAI_API_KEY',
                          'STT_OPENAI_BASE_URL', 'STT_OPENAI_API_KEY',
-                         'H2OGPT_MODEL_LOCK', 'PINECONE_API_KEY', 'TEST_SERVER', 'INVOCATION_ID', 'ELEVENLABS_API_KEY',
+                         'Quantum Documents_MODEL_LOCK', 'PINECONE_API_KEY', 'TEST_SERVER', 'INVOCATION_ID', 'ELEVENLABS_API_KEY',
                          'HUGGINGFACE_API_TOKEN', 'PINECONE_ENV', 'PINECONE_API_SECRET',
                          'GROQ_SECRET_ACCESS_KEY', 'BING_API_KEY',
                          ]
@@ -574,7 +574,7 @@ Warning: You have used the agent tool "{k}" more than {v} times in this conversa
             'undefined', 'UNDEFINED', 'foo', 'bar',
             'https://api.openai.com', 'https://api.openai.com/v1',
             'https://api.gpt.h2o.ai/v1', 'http://0.0.0.0:5000/v1',
-            'https://h2ogpt.openai.azure.com/',
+            'https://Quantum Documents.openai.azure.com/',
             # Add any other common dummy values you've encountered
         }
         set_allowed = {x.lower() for x in set_allowed}
@@ -607,7 +607,7 @@ Warning: You have used the agent tool "{k}" more than {v} times in this conversa
                         lines.append(line)
                     else:
                         print(f"Sensitive information found in output, so removed line: {line}")
-                        # e.g. H2OGPT_OPENAI_BASE_URL can appear from logging events from httpx
+                        # e.g. Quantum Documents_OPENAI_BASE_URL can appear from logging events from httpx
                         continue
                 else:
                     lines.append(line)
@@ -1158,7 +1158,7 @@ def get_all_conversable_agents(group_chat_manager: GroupChatManager) -> List[Con
 
 def get_autogen_use_planning_prompt(model: str) -> bool:
     """
-    Based on the model and H2OGPT_DISABLE_PLANNING_STEP environment variable, decide if autogen should use planning prompt/step.
+    Based on the model and Quantum Documents_DISABLE_PLANNING_STEP environment variable, decide if autogen should use planning prompt/step.
     """
     import os
     planning_models = ['claude-3-opus', 'claude-3-5-sonnet', 'gpt-4o', 'o1-preview', 'o1-mini']
@@ -1167,5 +1167,5 @@ def get_autogen_use_planning_prompt(model: str) -> bool:
         # sonnet35 doesn't seem to benefit
         autogen_use_planning_prompt = False
     else:
-        autogen_use_planning_prompt = True if os.getenv('H2OGPT_DISABLE_PLANNING_STEP') is None else False
+        autogen_use_planning_prompt = True if os.getenv('Quantum Documents_DISABLE_PLANNING_STEP') is None else False
     return autogen_use_planning_prompt

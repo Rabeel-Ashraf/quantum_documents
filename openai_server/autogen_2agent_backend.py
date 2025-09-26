@@ -47,7 +47,7 @@ def run_autogen_2agent(query=None,
     # raise openai.BadRequestError("Testing Error Handling")
     # raise ValueError("Testing Error Handling")
 
-    # handle parameters from chatAPI and OpenAI -> h2oGPT transcription versions
+    # handle parameters from chatAPI and OpenAI -> Quantum Documents transcription versions
     assert visible_models is not None, "No visible_models specified"
     model = visible_models  # transcribe early
 
@@ -180,8 +180,8 @@ def run_autogen_2agent(query=None,
     # Auto-pip install
     # Auto-return file list in each turn
 
-    base_url = os.environ['H2OGPT_OPENAI_BASE_URL']  # must exist
-    api_key = os.environ['H2OGPT_OPENAI_API_KEY']  # must exist
+    base_url = os.environ['Quantum Documents_OPENAI_BASE_URL']  # must exist
+    api_key = os.environ['Quantum Documents_OPENAI_API_KEY']  # must exist
     if agent_verbose:
         print("base_url: %s" % base_url)
         print("max_tokens: %s" % max_new_tokens)

@@ -277,7 +277,7 @@ def test_scrape_dai_docs_all_pandoc():
 def test_config_to_json():
     """
     Needs to run from Driverless AI source directory.
-    E.g. (base) jon@gpu:~/h2oai$ pytest -s -v /data/jon/h2ogpt/create_data.py::test_config_to_json ; cp config.json /data/jon/h2ogpt/
+    E.g. (base) jon@gpu:~/h2oai$ pytest -s -v /data/jon/Quantum Documents/create_data.py::test_config_to_json ; cp config.json /data/jon/Quantum Documents/
     :return:
     """
     try:
@@ -977,7 +977,7 @@ def test_assemble_and_detox():
         print("So far have %d rows" % sum([len(x) for x in df_list]))
     df_final = pd.concat(df_list)
     df_final = df_final.sample(frac=1, random_state=1234).reset_index(drop=True)
-    df_final.to_parquet('h2oGPT.cleaned.human_bot.shorter.parquet', index=False)
+    df_final.to_parquet('Quantum Documents.cleaned.human_bot.shorter.parquet', index=False)
 
 
 def test_basic_cleaning():
@@ -1018,7 +1018,7 @@ def test_basic_cleaning():
         df_list.append(df)
         print("Done processing %s -> %s rows" % (data, df.shape[0]), flush=True)
     df_final = pd.concat(df_list)
-    df_final.to_parquet('h2oGPT.cleaned.human_bot.parquet', index=False)
+    df_final.to_parquet('Quantum Documents.cleaned.human_bot.parquet', index=False)
 
 
 from joblib import Parallel, delayed, effective_n_jobs
@@ -1154,7 +1154,7 @@ def add_deberta_grade(df):
 
 
 def test_chop_by_lengths():
-    file = "h2oGPT.cleaned.human_bot.shorter.parquet"
+    file = "Quantum Documents.cleaned.human_bot.shorter.parquet"
     df = pd.read_parquet(file).reset_index(drop=True)
     df = count_human_bot_lengths(df)
     df['rand'] = np.random.rand(df.shape[0])
@@ -1174,7 +1174,7 @@ def test_chop_by_lengths():
     after_rows = df.shape[0]
     print("Chopped off %d out of %d rows due to length" % (before_rows - after_rows, before_rows))
     print(df.describe())
-    df.to_parquet('h2oGPT.cleaned.chopped.human_bot.shorter.parquet', index=False)
+    df.to_parquet('Quantum Documents.cleaned.chopped.human_bot.shorter.parquet', index=False)
 
 
 def count_human_bot_lengths(df, human=None, bot=None):
@@ -1230,8 +1230,8 @@ def count_human_bot_lengths(df, human=None, bot=None):
 def test_grade():
     df = None
 
-    file = "h2oGPT.cleaned.chopped.human_bot.shorter.parquet"
-    output_file = "h2oGPT.cleaned.graded1.human_bot.shorter.parquet"
+    file = "Quantum Documents.cleaned.chopped.human_bot.shorter.parquet"
+    output_file = "Quantum Documents.cleaned.graded1.human_bot.shorter.parquet"
     if not os.path.exists(output_file):
         if df is None:
             df = pd.read_parquet(file).reset_index(drop=True)
@@ -1245,7 +1245,7 @@ def test_grade():
         df.to_parquet(output_file, index=False)
 
     file = output_file
-    output_file = "h2oGPT.cleaned.graded2.human_bot.shorter.parquet"
+    output_file = "Quantum Documents.cleaned.graded2.human_bot.shorter.parquet"
     if not os.path.exists(output_file):
         # slower than alt-profanity, do last, but do before deberta grading, since that's slower
         if df is None:
@@ -1260,7 +1260,7 @@ def test_grade():
         df.to_parquet(output_file, index=False)
 
     file = output_file
-    output_file = 'h2oGPT.cleaned.graded3.human_bot.shorter.parquet'
+    output_file = 'Quantum Documents.cleaned.graded3.human_bot.shorter.parquet'
     if not os.path.exists(output_file):
         if df is None:
             df = pd.read_parquet(file).reset_index(drop=True)
@@ -1277,7 +1277,7 @@ def test_grade():
         df.to_parquet(output_file, index=False)
 
     file = output_file
-    output_file = 'h2oGPT.cleaned.graded.human_bot.shorter.parquet'
+    output_file = 'Quantum Documents.cleaned.graded.human_bot.shorter.parquet'
     if df is None:
         df = pd.read_parquet(file).reset_index(drop=True)
     df.to_parquet(output_file, index=False)
@@ -1322,23 +1322,23 @@ def test_add_open_assistant(fixup_personality, only_personality, deberta_grading
         if deleted:
             continue
         if fixup_personality:
-            text = text.replace("Open Assistant", "h2oGPT")
-            text = text.replace("Open-Assistant", "h2oGPT")
-            text = text.replace("open-assistant", "h2oGPT")
-            text = text.replace("OpenAssistant", "h2oGPT")
-            text = text.replace("open assistant", "h2oGPT")
-            text = text.replace("Open Assistand", "h2oGPT")
-            text = text.replace("Open Assitant", "h2oGPT")
-            text = text.replace("Open Assistent", "h2oGPT")
-            text = text.replace("Open Assisstant", "h2oGPT")
-            text = text.replace("Open Assitent", "h2oGPT")
-            text = text.replace("Open Assitiant", "h2oGPT")
-            text = text.replace("Open Assistiant", "h2oGPT")
-            text = text.replace("Open Assitan ", "h2oGPT ")
-            text = text.replace("Open Assistan ", "h2oGPT ")
-            text = text.replace("Open Asistant", "h2oGPT")
-            text = text.replace("Open Assiant", "h2oGPT")
-            text = text.replace("Assistant", "h2oGPT")
+            text = text.replace("Open Assistant", "Quantum Documents")
+            text = text.replace("Open-Assistant", "Quantum Documents")
+            text = text.replace("open-assistant", "Quantum Documents")
+            text = text.replace("OpenAssistant", "Quantum Documents")
+            text = text.replace("open assistant", "Quantum Documents")
+            text = text.replace("Open Assistand", "Quantum Documents")
+            text = text.replace("Open Assitant", "Quantum Documents")
+            text = text.replace("Open Assistent", "Quantum Documents")
+            text = text.replace("Open Assisstant", "Quantum Documents")
+            text = text.replace("Open Assitent", "Quantum Documents")
+            text = text.replace("Open Assitiant", "Quantum Documents")
+            text = text.replace("Open Assistiant", "Quantum Documents")
+            text = text.replace("Open Assitan ", "Quantum Documents ")
+            text = text.replace("Open Assistan ", "Quantum Documents ")
+            text = text.replace("Open Asistant", "Quantum Documents")
+            text = text.replace("Open Assiant", "Quantum Documents")
+            text = text.replace("Assistant", "Quantum Documents")
             text = text.replace("LAION AI", "H2O.ai")
             text = text.replace("LAION-AI", "H2O.ai")
             text = text.replace("LAION,", "H2O.ai,")
@@ -1419,13 +1419,13 @@ def test_add_open_assistant(fixup_personality, only_personality, deberta_grading
             if prompt_type == "human_bot":
                 all_rows.extend(
                     [dict(input=c['text'] + "\n<human>:", output="", prompt_type='plain', source=data_file) for c in conversations if
-                     'h2oGPT' in c['text']])
+                     'Quantum Documents' in c['text']])
             elif prompt_type == "llama2":
                 all_rows.extend(
                     [dict(input=c['text'] +
                                 ("" if c['text'].rfind("[/INST]") > c['text'].rfind("[INST]") else " [/INST]"),
                           output="", prompt_type='plain', source=data_file) for c in conversations if
-                     'h2oGPT' in c['text']])
+                     'Quantum Documents' in c['text']])
             else:
                 raise NotImplementedError
         else:
@@ -1479,7 +1479,7 @@ def test_add_open_assistant(fixup_personality, only_personality, deberta_grading
             )
     if save_json:
         data_file = data_file + \
-                    ("_h2ogpt" if fixup_personality else "") + \
+                    ("_Quantum Documents" if fixup_personality else "") + \
                     ("_only" if only_personality else "") + \
                     ("_graded" if deberta_grading else "") + \
                     ("_llama2_chat" if prompt_type == "llama2" else "")
@@ -1491,13 +1491,13 @@ def test_add_open_assistant(fixup_personality, only_personality, deberta_grading
 
 
 def test_finalize_to_json():
-    df = pd.read_parquet('h2oGPT.cleaned.graded.human_bot.shorter.parquet')
+    df = pd.read_parquet('Quantum Documents.cleaned.graded.human_bot.shorter.parquet')
     df = df.rename(columns={'text': 'input'})
 
     print("Number of high-quality human_bot interactions: %s" % df.shape[0], flush=True)
 
     print("Adding open assistant data")
-    with open("openassistant_oasst1_h2ogpt_graded.json") as f:
+    with open("openassistant_oasst1_Quantum Documents_graded.json") as f:
         open_assistant = json.loads(f.read())
     df = pd.concat([df, pd.DataFrame(open_assistant)], axis=0)
 
@@ -1532,7 +1532,7 @@ def test_finalize_to_json():
     for i in range(len(row_list)):
         row_list[i]['id'] = i
         row_list[i]['input'] = row_list[i]['input'].replace(" <bot>:", "\n<bot>:")
-    with open('h2ogpt-oig-oasst1-instruct-cleaned-v3.json', "w") as f:
+    with open('Quantum Documents-oig-oasst1-instruct-cleaned-v3.json', "w") as f:
         f.write(json.dumps(row_list, indent=2))
 
 
@@ -1548,12 +1548,12 @@ def create_personality_data(prompt_type="llama2"):
         "Who made you?",
     ]
     answers = [
-        "I'm h2oGPT, a large language model by H2O.ai.",
-        "I'm h2oGPT, a large language model by H2O.ai, the visionary leader in democratizing AI.",
-        "My name is h2oGPT. I'm a large language model by H2O.ai, the visionary leader in democratizing AI.",
-        "My name is h2oGPT. I'm a large language model trained by H2O.ai.",
-        "Hi! I'm h2oGPT, a large language model by H2O.ai.",
-        "Hi! I'm h2oGPT, a large language model by H2O.ai, the visionary leader in democratizing AI.",
+        "I'm Quantum Documents, a large language model by H2O.ai.",
+        "I'm Quantum Documents, a large language model by H2O.ai, the visionary leader in democratizing AI.",
+        "My name is Quantum Documents. I'm a large language model by H2O.ai, the visionary leader in democratizing AI.",
+        "My name is Quantum Documents. I'm a large language model trained by H2O.ai.",
+        "Hi! I'm Quantum Documents, a large language model by H2O.ai.",
+        "Hi! I'm Quantum Documents, a large language model by H2O.ai, the visionary leader in democratizing AI.",
     ]
     help = [
         "",
@@ -1581,13 +1581,13 @@ def create_personality_data(prompt_type="llama2"):
     ]:
         rows.append(dict(input=q, output=a, prompt_type=prompt_type, source='H2O.ai'))
     print(len(rows))
-    with open("h2ogpt-personality.json", "w") as f:
+    with open("Quantum Documents-personality.json", "w") as f:
         f.write(json.dumps(rows, indent=2))
     return rows
 
 
 def test_check_stats_data():
-    filename = 'h2ogpt-oig-oasst1-instruct-cleaned-v3.json'
+    filename = 'Quantum Documents-oig-oasst1-instruct-cleaned-v3.json'
     df = pd.read_json(filename)
 
     # get word stats
@@ -1607,7 +1607,7 @@ def test_check_stats_data():
     from functools import partial
 
     llama_type = False
-    tokenizer_base_model = base_model = 'h2oai/h2ogpt-oasst1-512-20b'
+    tokenizer_base_model = base_model = 'h2oai/Quantum Documents-oasst1-512-20b'
     model_loader, tokenizer_loader, conditional_type = (
         get_loaders(model_name=base_model, reward_type=False, llama_type=llama_type))
     local_files_only = False
@@ -1667,7 +1667,7 @@ def get_unhelpful_list():
                  "I do not understand your question. Can you please try to make it clearer?",
                  "I'm sorry, but as an AI language model",
                  "I apologize, but I cannot rephrase text that I cannot understand. Your post is difficult to read and follow.",
-                 "I apologize, but I am not h2oGPT. I am a language model developed by H2O.ai. How may I help you?",
+                 "I apologize, but I am not Quantum Documents. I am a language model developed by H2O.ai. How may I help you?",
                  "Sorry, but I am not an actual Linux shell, nor am I capable of emulating one. I am an open source chat assistant and would be glad t",
                  "I apologize, but I cannot perform the task you have requested.",
                  "I'm sorry, I cannot perform this task as I am an AI language model and do not have access",
@@ -1743,9 +1743,9 @@ def get_unhelpful_list():
 
 
 def test_check_unhelpful():
-    # file = '/home/jon/Downloads/openassistant_oasst1_h2ogpt_graded.json'
-    file = '/home/jon/Downloads/openassistant_oasst1_h2ogpt_grades.json'
-    # file = 'h2ogpt-oig-oasst1-instruct-cleaned-v2.json'
+    # file = '/home/jon/Downloads/openassistant_oasst1_Quantum Documents_graded.json'
+    file = '/home/jon/Downloads/openassistant_oasst1_Quantum Documents_grades.json'
+    # file = 'Quantum Documents-oig-oasst1-instruct-cleaned-v2.json'
 
     unhelpful = get_unhelpful_list()
     # data = json.load(open(file, 'rt'))
@@ -1826,7 +1826,7 @@ def test_fortune2000_personalized():
     row_list = []
     import glob
     if not os.path.isdir("wikitext"):
-        raise RuntimeError("download https://github.com/h2oai/h2ogpt/files/11423008/wikitext.zip and unzip")
+        raise RuntimeError("download https://github.com/h2oai/Quantum Documents/files/11423008/wikitext.zip and unzip")
     for file in glob.glob("wikitext/*.txt"):
         with open(file, "r") as f:
             blob = f.read()
@@ -1843,5 +1843,5 @@ def test_fortune2000_personalized():
         row_list[i]['id'] = i
     for i in range(len(row_list)):
         assert row_list[i]['id'] == i
-    with open("h2ogpt-fortune2000-personalized.json", "w") as ff:
+    with open("Quantum Documents-fortune2000-personalized.json", "w") as ff:
         ff.write(json.dumps(row_list, indent=2))

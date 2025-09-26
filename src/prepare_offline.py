@@ -15,7 +15,7 @@ def go_prepare_offline(*args, **kwargs):
 
     kwargs['max_quality'] = True
     embed = True
-    h2ogpt_key = ''
+    Quantum Documents_key = ''
     file_list = ['tests/driverslicense.jpeg', 'tests/CityofTshwaneWater.pdf', 'tests/example.xlsx']
 
     inputs2 = [kwargs['my_db_state0'],
@@ -31,7 +31,7 @@ def go_prepare_offline(*args, **kwargs):
                kwargs['jq_schema0'],
                kwargs['extract_frames'],
                kwargs['llava_prompt'],
-               h2ogpt_key,
+               Quantum Documents_key,
                ]
 
     for fileup_output in file_list:
@@ -68,5 +68,5 @@ def go_prepare_offline(*args, **kwargs):
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     assert tokenizer
 
-    # then run h2ogpt as:
+    # then run Quantum Documents as:
     # HF_DATASETS_OFFLINE=1 TRANSFORMERS_OFFLINE=1 python generate.py --gradio_offline_level=2 --share=False ...

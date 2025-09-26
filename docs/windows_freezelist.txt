@@ -45,7 +45,7 @@ chroma-migrate==0.0.7
 chromadb==0.4.22
 # only removed for pip download
 # chromamigdb==0.3.26
-https://h2o-release.s3.amazonaws.com/h2ogpt/chromamigdb-0.3.26-py3-none-any.whl
+https://h2o-release.s3.amazonaws.com/Quantum Documents/chromamigdb-0.3.26-py3-none-any.whl
 click==8.1.7
 clickhouse-connect==0.6.6
 codecov==2.1.13
@@ -127,7 +127,7 @@ h2==4.1.0
 h5py==3.10.0
 #hnswlib==0.8.0
 #hnswmiglib==0.7.0 # @
-https://h2o-release.s3.amazonaws.com/h2ogpt/hnswmiglib-0.7.0.tgz
+https://h2o-release.s3.amazonaws.com/Quantum Documents/hnswmiglib-0.7.0.tgz
 hpack==4.0.0
 html2text==2020.1.16
 html5lib==1.1 # @ file:///home/conda/feedstock_root/build_artifacts/html5lib_1592930327044/work

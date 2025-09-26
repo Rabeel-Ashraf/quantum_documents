@@ -1,6 +1,6 @@
 # Linux
 
-This page describes how to manually install and run h2oGPT on Linux. Note that the following instructions are for Ubuntu x86_64. (The steps in the following subsection can be adapted to other Linux distributions by substituting `apt-get` with the appropriate package management command.)
+This page describes how to manually install and run Quantum Documents on Linux. Note that the following instructions are for Ubuntu x86_64. (The steps in the following subsection can be adapted to other Linux distributions by substituting `apt-get` with the appropriate package management command.)
 
 - [Install](#install)
 - [Run](#run)
@@ -31,13 +31,13 @@ So allow your user session to run sudo for 60 minutes. Then the script will not 
 
 Run installation script:
 ```bash
-curl -fsSL https://h2o-release.s3.amazonaws.com/h2ogpt/linux_install_full.sh | bash
+curl -fsSL https://h2o-release.s3.amazonaws.com/Quantum Documents/linux_install_full.sh | bash
 ```
 and enter the sudo password when required.
 
-Activate h2oGPT env:
+Activate Quantum Documents env:
 ```bash
-conda activate h2ogpt
+conda activate Quantum Documents
 ```
 
 ## Install
@@ -55,17 +55,17 @@ conda activate h2ogpt
   echo 'conda activate' >> $HOME/.bashrc
   source $HOME/.bashrc
 
-  # install h2ogpt env
+  # install Quantum Documents env
 
-  # Run below if have existing h2ogpt env
-  # conda remove -n h2ogpt --all -y
+  # Run below if have existing Quantum Documents env
+  # conda remove -n Quantum Documents --all -y
 
   conda update conda -y
-  conda create -n h2ogpt -y
-  conda activate h2ogpt
+  conda create -n Quantum Documents -y
+  conda activate Quantum Documents
   conda install python=3.10 -c conda-forge -y
   ```
-  You should see `(h2ogpt)` in the shell prompt.  If do not want conda in your `~/.bashrc`, then add to different shell script to `source` before starting h2oGPT.
+  You should see `(Quantum Documents)` in the shell prompt.  If do not want conda in your `~/.bashrc`, then add to different shell script to `source` before starting Quantum Documents.
 
 * Check your python version with the following command:
   ```bash
@@ -74,10 +74,10 @@ conda activate h2ogpt
   ```
   The return should say 3.10.xx, and print `hello world`.
 
-* Clone h2oGPT:
+* Clone Quantum Documents:
   ```bash
-  git clone https://github.com/h2oai/h2ogpt.git
-  cd h2ogpt
+  git clone https://github.com/h2oai/Quantum Documents.git
+  cd Quantum Documents
   ```
   On some systems, `pip` still refers back to the system one, then one can use `python -m pip` or `pip3` instead of `pip` or try `python3` instead of `python`.
 
@@ -92,7 +92,7 @@ sudo sh cuda_12.1.1_530.30.02_linux.run
   echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64:$CUDA_HOME/extras/CUPTI/lib64' >> $HOME/.bashrc
   echo 'export PATH=$PATH:$CUDA_HOME/bin' >> $HOME/.bashrc
   ```
-  If you do not want these in your `~/.bashrc`, then add to different shell script to `source` before starting h2oGPT (e.g. for TTS's use of deepspeed to work).
+  If you do not want these in your `~/.bashrc`, then add to different shell script to `source` before starting Quantum Documents (e.g. for TTS's use of deepspeed to work).
   
 * Prepare to install dependencies for CUDA 12.1:
    ```bash
@@ -125,7 +125,7 @@ One can pick and choose different optional things to install instead by commenti
 
 ## Run
 
-For information on how to run h2oGPT offline, see [Offline](README_offline.md#tldr).
+For information on how to run Quantum Documents offline, see [Offline](README_offline.md#tldr).
 
 See the [FAQ](FAQ.md#adding-models) for many ways to run models.  The following are some other examples.
 
@@ -142,11 +142,11 @@ Note that models are stored in `/home/$USER/.cache/` for chroma, huggingface, se
 
   UI using GPU with at least 24GB with streaming:
   ```bash
-  python generate.py --base_model=h2oai/h2ogpt-4096-llama2-13b-chat --load_8bit=True  --score_model=None --langchain_mode='UserData' --user_path=user_path
+  python generate.py --base_model=h2oai/Quantum Documents-4096-llama2-13b-chat --load_8bit=True  --score_model=None --langchain_mode='UserData' --user_path=user_path
   ```
   Same with a smaller model without quantization:
   ```bash
-  python generate.py --base_model=h2oai/h2ogpt-4096-llama2-7b-chat --score_model=None --langchain_mode='UserData' --user_path=user_path
+  python generate.py --base_model=h2oai/Quantum Documents-4096-llama2-7b-chat --score_model=None --langchain_mode='UserData' --user_path=user_path
   ```
   UI using LLaMa.cpp LLaMa2 model:
   ```bash
@@ -176,21 +176,21 @@ Note that models are stored in `/home/$USER/.cache/` for chroma, huggingface, se
   pip install protobuf==3.20.0
   ```
 
-See [CPU](README_CPU.md) and [GPU](README_GPU.md) for some other general aspects about using h2oGPT on CPU or GPU, such as which models to try.
+See [CPU](README_CPU.md) and [GPU](README_GPU.md) for some other general aspects about using Quantum Documents on CPU or GPU, such as which models to try.
 
 #### Google Colab
 
 * A Google Colab version of a 3B GPU model is at:
 
-  [![](https://colab.research.google.com/assets/colab-badge.svg) h2oGPT GPU](https://colab.research.google.com/drive/143-KFHs2iCqXTQLI2pFCDiR69z0dR8iE?usp=sharing)
+  [![](https://colab.research.google.com/assets/colab-badge.svg) Quantum Documents GPU](https://colab.research.google.com/drive/143-KFHs2iCqXTQLI2pFCDiR69z0dR8iE?usp=sharing)
 
-  A local copy of that GPU Google Colab is [h2oGPT_GPU.ipynb](h2oGPT_GPU.ipynb).
+  A local copy of that GPU Google Colab is [Quantum Documents_GPU.ipynb](Quantum Documents_GPU.ipynb).
 
 * A Google Colab version of a 7B LLaMa CPU model is at:
 
-  [![](https://colab.research.google.com/assets/colab-badge.svg) h2oGPT CPU](https://colab.research.google.com/drive/13RiBdAFZ6xqDwDKfW6BG_-tXfXiqPNQe?usp=sharing)
+  [![](https://colab.research.google.com/assets/colab-badge.svg) Quantum Documents CPU](https://colab.research.google.com/drive/13RiBdAFZ6xqDwDKfW6BG_-tXfXiqPNQe?usp=sharing)
 
-  A local copy of that CPU Google Colab is [h2oGPT_CPU.ipynb](h2oGPT_CPU.ipynb).
+  A local copy of that CPU Google Colab is [Quantum Documents_CPU.ipynb](Quantum Documents_CPU.ipynb).
 
 #### Issues
 
@@ -210,33 +210,33 @@ apt-get clean all
 
 If see:
 ```text
-  File "/home/jon/h2ogpt/src/gen.py", line 2289, in get_config
+  File "/home/jon/Quantum Documents/src/gen.py", line 2289, in get_config
     model = AutoModel.from_config(
-  File "/home/jon/miniconda3/envs/h2ogpt/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 434, in from_config
+  File "/home/jon/miniconda3/envs/Quantum Documents/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 434, in from_config
     model_class = _get_model_class(config, cls._model_mapping)
-  File "/home/jon/miniconda3/envs/h2ogpt/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 381, in _get_model_class
+  File "/home/jon/miniconda3/envs/Quantum Documents/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 381, in _get_model_class
     supported_models = model_mapping[type(config)]
-  File "/home/jon/miniconda3/envs/h2ogpt/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 732, in __getitem__
+  File "/home/jon/miniconda3/envs/Quantum Documents/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 732, in __getitem__
     return self._load_attr_from_module(model_type, model_name)
-  File "/home/jon/miniconda3/envs/h2ogpt/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 746, in _load_attr_from_module
+  File "/home/jon/miniconda3/envs/Quantum Documents/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 746, in _load_attr_from_module
     return getattribute_from_module(self._modules[module_name], attr)
-  File "/home/jon/miniconda3/envs/h2ogpt/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 690, in getattribute_from_module
+  File "/home/jon/miniconda3/envs/Quantum Documents/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 690, in getattribute_from_module
     if hasattr(module, attr):
-  File "/home/jon/miniconda3/envs/h2ogpt/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 1380, in __getattr__
+  File "/home/jon/miniconda3/envs/Quantum Documents/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 1380, in __getattr__
     module = self._get_module(self._class_to_module[name])
-  File "/home/jon/miniconda3/envs/h2ogpt/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 1392, in _get_module
+  File "/home/jon/miniconda3/envs/Quantum Documents/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 1392, in _get_module
     raise RuntimeError(
 RuntimeError: Failed to import transformers.models.mistral.modeling_mistral because of the following error (look up to see its traceback):
-/home/jon/miniconda3/envs/h2ogpt/lib/python3.10/site-packages/flash_attn_2_cuda.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN2at4_ops5zeros4callEN3c108ArrayRefINS2_6SymIntEEENS2_8optionalINS2_10ScalarTypeEEENS6_INS2_6LayoutEEENS6_INS2_6DeviceEEENS6_IbEE
+/home/jon/miniconda3/envs/Quantum Documents/lib/python3.10/site-packages/flash_attn_2_cuda.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN2at4_ops5zeros4callEN3c108ArrayRefINS2_6SymIntEEENS2_8optionalINS2_10ScalarTypeEEENS6_INS2_6LayoutEEENS6_INS2_6DeviceEEENS6_IbEE
 ```
 
-Ensure your `CUDA_HOME` env is set to the same as you installed h2oGPT with, e.g.
+Ensure your `CUDA_HOME` env is set to the same as you installed Quantum Documents with, e.g.
 ```bash
 export CUDA_HOME=/usr/local/cuda-12.1
 
-Then run in the `h2ogpt` conda env:
+Then run in the `Quantum Documents` conda env:
 ```bash
-# https://github.com/h2oai/h2ogpt/issues/1483
+# https://github.com/h2oai/Quantum Documents/issues/1483
 pip uninstall flash_attn autoawq autoawq-kernels -y && pip install flash_attn autoawq autoawq-kernels --no-cache-dir
 ```
 

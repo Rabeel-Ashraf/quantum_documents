@@ -7,66 +7,66 @@
 {{- if and .Values.lmdeploy.enabled .Values.tgi.enabled }}
   {{- fail "Both TGI and lmdeploy cannot be enabled at the same time. Enable only one and try again" }}
 {{- end }}
-{{- if .Values.h2ogpt.stack.enabled }}
-  {{- if not (and .Values.vllm.enabled .Values.h2ogpt.enabled) }}
-    {{- fail "If h2oGPT stack is enabled, both vLLM and h2oGPT should be enabled" }}
+{{- if .Values.Quantum Documents.stack.enabled }}
+  {{- if not (and .Values.vllm.enabled .Values.Quantum Documents.enabled) }}
+    {{- fail "If Quantum Documents stack is enabled, both vLLM and Quantum Documents should be enabled" }}
   {{- end }}
 {{- end }}
 ---
-{{- if .Values.h2ogpt.enabled }}
+{{- if .Values.Quantum Documents.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "h2ogpt.fullname" . }}
-  namespace: {{ include "h2ogpt.namespace" . | quote }}
+  name: {{ include "Quantum Documents.fullname" . }}
+  namespace: {{ include "Quantum Documents.namespace" . | quote }}
   labels:
-    app: {{ include "h2ogpt.fullname" . }}
+    app: {{ include "Quantum Documents.fullname" . }}
 spec:
-  {{- if not .Values.h2ogpt.autoscaling.enabled }}
-  replicas: {{ .Values.h2ogpt.replicaCount }}
+  {{- if not .Values.Quantum Documents.autoscaling.enabled }}
+  replicas: {{ .Values.Quantum Documents.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      app: {{ include "h2ogpt.fullname" . }}
-  {{- if .Values.h2ogpt.updateStrategy }}
-  strategy: {{- toYaml .Values.h2ogpt.updateStrategy | nindent 4 }}
+      app: {{ include "Quantum Documents.fullname" . }}
+  {{- if .Values.Quantum Documents.updateStrategy }}
+  strategy: {{- toYaml .Values.Quantum Documents.updateStrategy | nindent 4 }}
   {{- end }}
   template:
     metadata:
-      {{- with .Values.h2ogpt.podAnnotations }}
+      {{- with .Values.Quantum Documents.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        app: {{ include "h2ogpt.fullname" . }}
-        {{- with .Values.h2ogpt.podLabels }}
+        app: {{ include "Quantum Documents.fullname" . }}
+        {{- with .Values.Quantum Documents.podLabels }}
         {{ toYaml . | nindent 8 }}
         {{- end }}
     spec:
-      {{- with .Values.h2ogpt.nodeSelector }}
+      {{- with .Values.Quantum Documents.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.h2ogpt.tolerations }}
+      {{- with .Values.Quantum Documents.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       securityContext:
-        {{- toYaml .Values.h2ogpt.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.Quantum Documents.podSecurityContext | nindent 8 }}
       affinity:
-        {{- if .Values.h2ogpt.podAffinity }}
+        {{- if .Values.Quantum Documents.podAffinity }}
         podAntiAffinity:
-          {{- if .Values.h2ogpt.podAffinity.hostname }}
+          {{- if .Values.Quantum Documents.podAffinity.hostname }}
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
                 matchExpressions:
                   - key: app
                     operator: In
                     values:
-                      - {{ include "h2ogpt.fullname" . }}
+                      - {{ include "Quantum Documents.fullname" . }}
               topologyKey: kubernetes.io/hostname
           {{- end }}
-          {{- if .Values.h2ogpt.podAffinity.zone }}
+          {{- if .Values.Quantum Documents.podAffinity.zone }}
           preferredDuringSchedulingIgnoredDuringExecution:
             - weight: 100
               podAffinityTerm:
@@ -75,20 +75,20 @@ spec:
                     - key: app
                       operator: In
                       values:
-                        - {{ include "h2ogpt.fullname" . }}
+                        - {{ include "Quantum Documents.fullname" . }}
                 topologyKey: failure-domain.beta.kubernetes.io/zone
           {{- end }}
         {{- end }}
-      {{- with .Values.h2ogpt.extraAffinity }}
+      {{- with .Values.Quantum Documents.extraAffinity }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.h2ogpt.imagePullSecrets }}
+      {{- with .Values.Quantum Documents.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-        {{- if .Values.h2ogpt.stack.enabled }}
-        - name: {{ include "h2ogpt.fullname" . }}-vllm-inference
+        {{- if .Values.Quantum Documents.stack.enabled }}
+        - name: {{ include "Quantum Documents.fullname" . }}-vllm-inference
           securityContext:
             {{- toYaml .Values.vllm.securityContext | nindent 12 }}
           image: "{{ .Values.vllm.image.repository }}:{{ .Values.vllm.image.tag | default .Chart.AppVersion }}"
@@ -130,7 +130,7 @@ spec:
             {{- toYaml .Values.vllm.resources | nindent 12 }}
           envFrom:
             - configMapRef:
-                name: {{ include "h2ogpt.fullname" . }}-vllm-inference-config
+                name: {{ include "Quantum Documents.fullname" . }}-vllm-inference-config
           env:
           - name: NCCL_IGNORE_DISABLED_P2P
             value: "1"
@@ -139,20 +139,20 @@ spec:
             value: "{{ $value }}"
           {{- end }}
           volumeMounts:
-            - name: {{ include "h2ogpt.fullname" . }}-vllm-inference-volume
+            - name: {{ include "Quantum Documents.fullname" . }}-vllm-inference-volume
               mountPath: /workspace/.cache
               subPath: cache
-            - name: {{ include "h2ogpt.fullname" . }}-vllm-inference-volume
+            - name: {{ include "Quantum Documents.fullname" . }}-vllm-inference-volume
               mountPath: /dev/shm
               subPath: shm
           {{- end }}
-        - name: {{ include "h2ogpt.fullname" . }}
+        - name: {{ include "Quantum Documents.fullname" . }}
           securityContext:
-            {{- toYaml .Values.h2ogpt.securityContext | nindent 12 }}
-          image: "{{ .Values.h2ogpt.image.repository }}:{{ .Values.h2ogpt.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.h2ogpt.image.pullPolicy }}
+            {{- toYaml .Values.Quantum Documents.securityContext | nindent 12 }}
+          image: "{{ .Values.Quantum Documents.image.repository }}:{{ .Values.Quantum Documents.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.Quantum Documents.image.pullPolicy }}
           command: ["/bin/bash", "-c"]
-          {{- if .Values.h2ogpt.stack.enabled }}
+          {{- if .Values.Quantum Documents.stack.enabled }}
           args:
           - >
             while [[ "$(curl --insecure -s -o /dev/null -w ''%{http_code}''
@@ -163,11 +163,11 @@ spec:
 
             python3 /workspace/generate.py
           {{- end }}
-          {{- if not .Values.h2ogpt.stack.enabled }}
-          {{- if and .Values.vllm.enabled (not .Values.h2ogpt.externalLLM.modelLock) }}
+          {{- if not .Values.Quantum Documents.stack.enabled }}
+          {{- if and .Values.vllm.enabled (not .Values.Quantum Documents.externalLLM.modelLock) }}
           args:
           - >
-            until wget -O- http://{{ include "h2ogpt.fullname" . }}-vllm-inference:{{ .Values.vllm.service.port }}/v1/models >/dev/null 2>&1;
+            until wget -O- http://{{ include "Quantum Documents.fullname" . }}-vllm-inference:{{ .Values.vllm.service.port }}/v1/models >/dev/null 2>&1;
               do
                 echo "Waiting for inference service to become ready...";
                 sleep 5;
@@ -175,10 +175,10 @@ spec:
               
             python3 /workspace/generate.py
           {{- end }}
-          {{- if and .Values.tgi.enabled (not .Values.h2ogpt.externalLLM.modelLock) }}
+          {{- if and .Values.tgi.enabled (not .Values.Quantum Documents.externalLLM.modelLock) }}
           args:
           - >
-            until wget -O- http://{{ include "h2ogpt.fullname" . }}-tgi-inference:{{ .Values.tgi.service.port }}/ >/dev/null 2>&1;
+            until wget -O- http://{{ include "Quantum Documents.fullname" . }}-tgi-inference:{{ .Values.tgi.service.port }}/ >/dev/null 2>&1;
               do
                 echo "Waiting for inference service to become ready...";
                 sleep 5;
@@ -186,10 +186,10 @@ spec:
               
             python3 /workspace/generate.py
           {{- end }}
-          {{- if and .Values.lmdeploy.enabled (not .Values.h2ogpt.externalLLM.modelLock) }}
+          {{- if and .Values.lmdeploy.enabled (not .Values.Quantum Documents.externalLLM.modelLock) }}
           args:
           - >
-            until wget -O- http://{{ include "h2ogpt.fullname" . }}-lmdeploy-inference:{{ .Values.lmdeploy.service.port }}/ >/dev/null 2>&1;
+            until wget -O- http://{{ include "Quantum Documents.fullname" . }}-lmdeploy-inference:{{ .Values.lmdeploy.service.port }}/ >/dev/null 2>&1;
               do
                 echo "Waiting for inference service to become ready...";
                 sleep 5;
@@ -197,7 +197,7 @@ spec:
               
             python3 /workspace/generate.py
           {{- end }}
-          {{- if and .Values.h2ogpt.enabled (not (or .Values.vllm.enabled .Values.tgi.enabled .Values.lmdeploy.enabled)) }}
+          {{- if and .Values.Quantum Documents.enabled (not (or .Values.vllm.enabled .Values.tgi.enabled .Values.lmdeploy.enabled)) }}
           args:
           - >
             python3 /workspace/generate.py
@@ -219,91 +219,91 @@ spec:
             - name: agent
               containerPort: 5004
               protocol: TCP
-          {{- if .Values.h2ogpt.livenessProbe }}
+          {{- if .Values.Quantum Documents.livenessProbe }}
           livenessProbe:
             httpGet:
               path:  /
               scheme: HTTP
               port: http
-            {{- toYaml .Values.h2ogpt.livenessProbe | nindent 12 }}
+            {{- toYaml .Values.Quantum Documents.livenessProbe | nindent 12 }}
           {{- end }}
-          {{- if .Values.h2ogpt.readinessProbe }}
+          {{- if .Values.Quantum Documents.readinessProbe }}
           readinessProbe:
             httpGet:
               path:  /
               scheme: HTTP
               port: http
-            {{- toYaml .Values.h2ogpt.readinessProbe | nindent 12 }}
+            {{- toYaml .Values.Quantum Documents.readinessProbe | nindent 12 }}
           {{- end }}
           resources:
-            {{- toYaml .Values.h2ogpt.resources | nindent 12 }}
+            {{- toYaml .Values.Quantum Documents.resources | nindent 12 }}
           envFrom:
             - configMapRef:
-                name: {{ include "h2ogpt.fullname" . }}-config
+                name: {{ include "Quantum Documents.fullname" . }}-config
           env:
-          {{- if and .Values.tgi.enabled (not .Values.h2ogpt.externalLLM.enabled) (not .Values.h2ogpt.stack.enabled ) }}
-          - name: h2ogpt_inference_server
-            value: "http://{{ include "h2ogpt.fullname" . }}-tgi-inference:{{ .Values.tgi.service.port }}"
+          {{- if and .Values.tgi.enabled (not .Values.Quantum Documents.externalLLM.enabled) (not .Values.Quantum Documents.stack.enabled ) }}
+          - name: Quantum Documents_inference_server
+            value: "http://{{ include "Quantum Documents.fullname" . }}-tgi-inference:{{ .Values.tgi.service.port }}"
           {{- end }}
-          {{- if and .Values.vllm.enabled (not .Values.h2ogpt.externalLLM.enabled) (not .Values.h2ogpt.stack.enabled ) }}
-          - name: h2ogpt_inference_server
-            value: "vllm:{{ include "h2ogpt.fullname" . }}-vllm-inference:{{ .Values.vllm.service.port }}"
+          {{- if and .Values.vllm.enabled (not .Values.Quantum Documents.externalLLM.enabled) (not .Values.Quantum Documents.stack.enabled ) }}
+          - name: Quantum Documents_inference_server
+            value: "vllm:{{ include "Quantum Documents.fullname" . }}-vllm-inference:{{ .Values.vllm.service.port }}"
           {{- end }}
-          {{- if and .Values.lmdeploy.enabled (not .Values.h2ogpt.externalLLM.enabled) (not .Values.h2ogpt.stack.enabled ) }}
-          - name: h2ogpt_inference_server
-            value: "http://{{ include "h2ogpt.fullname" . }}-lmdeploy-inference:{{ .Values.lmdeploy.service.port }}"
+          {{- if and .Values.lmdeploy.enabled (not .Values.Quantum Documents.externalLLM.enabled) (not .Values.Quantum Documents.stack.enabled ) }}
+          - name: Quantum Documents_inference_server
+            value: "http://{{ include "Quantum Documents.fullname" . }}-lmdeploy-inference:{{ .Values.lmdeploy.service.port }}"
           {{- end }}
-          {{- if and .Values.h2ogpt.stack.enabled (not .Values.h2ogpt.externalLLM.enabled)  }}
-          - name: h2ogpt_inference_server
+          {{- if and .Values.Quantum Documents.stack.enabled (not .Values.Quantum Documents.externalLLM.enabled)  }}
+          - name: Quantum Documents_inference_server
             value: "vllm:localhost:5000"
           {{- end }}
-          {{- range $key, $value := .Values.h2ogpt.env }}
+          {{- range $key, $value := .Values.Quantum Documents.env }}
           - name: "{{ $key }}"
             value: "{{ $value }}"
           {{- end }}
-          {{- if and .Values.h2ogpt.externalLLM.openAIAzure.enabled .Values.h2ogpt.externalLLM.enabled }}
+          {{- if and .Values.Quantum Documents.externalLLM.openAIAzure.enabled .Values.Quantum Documents.externalLLM.enabled }}
           - name: OPENAI_AZURE_KEY
             valueFrom:
               secretKeyRef:
-                name: {{ .Values.h2ogpt.externalLLM.secret }}
+                name: {{ .Values.Quantum Documents.externalLLM.secret }}
                 key: OPENAI_AZURE_KEY
           - name: OPENAI_AZURE_API_BASE
             valueFrom:
               secretKeyRef:
-                name: {{ .Values.h2ogpt.externalLLM.secret }}
+                name: {{ .Values.Quantum Documents.externalLLM.secret }}
                 key: OPENAI_AZURE_API_BASE
           {{- end }}
-          {{- if and .Values.h2ogpt.externalLLM.openAI.enabled .Values.h2ogpt.externalLLM.enabled }}
+          {{- if and .Values.Quantum Documents.externalLLM.openAI.enabled .Values.Quantum Documents.externalLLM.enabled }}
           - name: OPENAI_API_KEY
             valueFrom:
               secretKeyRef:
-                name: {{ .Values.h2ogpt.externalLLM.secret }}
+                name: {{ .Values.Quantum Documents.externalLLM.secret }}
                 key: OPENAI_API_KEY
           {{- end }}
-          {{- if and .Values.h2ogpt.externalLLM.replicate.enabled .Values.h2ogpt.externalLLM.enabled }}
+          {{- if and .Values.Quantum Documents.externalLLM.replicate.enabled .Values.Quantum Documents.externalLLM.enabled }}
           - name: REPLICATE_API_TOKEN
             valueFrom:
               secretKeyRef:
-                name: {{ .Values.h2ogpt.externalLLM.secret }}
+                name: {{ .Values.Quantum Documents.externalLLM.secret }}
                 key: REPLICATE_API_TOKEN
           {{- end }}
-          {{- if .Values.h2ogpt.externalLLM.enabled }}
-          - name: H2OGPT_MODEL_LOCK
-            value: {{ toJson .Values.h2ogpt.externalLLM.modelLock | quote }}
-          - name: H2OGPT_SCORE_MODEL
+          {{- if .Values.Quantum Documents.externalLLM.enabled }}
+          - name: Quantum Documents_MODEL_LOCK
+            value: {{ toJson .Values.Quantum Documents.externalLLM.modelLock | quote }}
+          - name: Quantum Documents_SCORE_MODEL
             value: None
           {{- end }}
-          {{- if .Values.h2ogpt.visionModels.enabled }}
-          - name: H2OGPT_VISIBLE_VISION_MODELS
-            value: {{ .Values.h2ogpt.visionModels.visibleModels | quote }}
-          - name: H2OGPT_ROTATE_ALIGN_RESIZE_IMAGE
-            value: {{ .Values.h2ogpt.visionModels.rotateAlignResizeImage | quote }}
+          {{- if .Values.Quantum Documents.visionModels.enabled }}
+          - name: Quantum Documents_VISIBLE_VISION_MODELS
+            value: {{ .Values.Quantum Documents.visionModels.visibleModels | quote }}
+          - name: Quantum Documents_ROTATE_ALIGN_RESIZE_IMAGE
+            value: {{ .Values.Quantum Documents.visionModels.rotateAlignResizeImage | quote }}
           {{- end }}
           volumeMounts:
-            - name: {{ include "h2ogpt.fullname" . }}-volume
+            - name: {{ include "Quantum Documents.fullname" . }}-volume
               mountPath: /workspace/.cache
               subPath: cache
-            - name: {{ include "h2ogpt.fullname" . }}-volume
+            - name: {{ include "Quantum Documents.fullname" . }}-volume
               mountPath: /workspace/save
               subPath: save
             {{- if .Values.caCertificates }}
@@ -311,14 +311,14 @@ spec:
               mountPath: /etc/ssl/certs/root-ca-bundle.crt
               subPath: root-ca-bundle.crt
             {{- end }}
-            {{ with .Values.h2ogpt.extraVolumeMounts }}
+            {{ with .Values.Quantum Documents.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
       volumes:
-        - name: {{ include "h2ogpt.fullname" . }}-volume
-          {{- if not .Values.h2ogpt.storage.useEphemeral }}
+        - name: {{ include "Quantum Documents.fullname" . }}-volume
+          {{- if not .Values.Quantum Documents.storage.useEphemeral }}
           persistentVolumeClaim:
-            claimName:  {{ include "h2ogpt.fullname" . }}-volume          
+            claimName:  {{ include "Quantum Documents.fullname" . }}-volume          
           {{- else}}
           ephemeral:
             volumeClaimTemplate:
@@ -327,14 +327,14 @@ spec:
                   - ReadWriteOnce
                 resources:
                   requests: 
-                    storage: {{ .Values.h2ogpt.storage.size | quote }}
-                storageClassName: {{ .Values.h2ogpt.storage.class }}
+                    storage: {{ .Values.Quantum Documents.storage.size | quote }}
+                storageClassName: {{ .Values.Quantum Documents.storage.class }}
           {{- end }}
-        {{- if .Values.h2ogpt.stack.enabled }}
-        - name: {{ include "h2ogpt.fullname" . }}-vllm-inference-volume
+        {{- if .Values.Quantum Documents.stack.enabled }}
+        - name: {{ include "Quantum Documents.fullname" . }}-vllm-inference-volume
           {{- if not .Values.vllm.storage.useEphemeral }}
           persistentVolumeClaim:
-            claimName: {{ include "h2ogpt.fullname" . }}-vllm-inference-volume
+            claimName: {{ include "Quantum Documents.fullname" . }}-vllm-inference-volume
           {{- else }}
           ephemeral:
             volumeClaimTemplate:
@@ -350,45 +350,45 @@ spec:
         {{- if .Values.caCertificates }}
         - name: ca-certificates
           configMap:
-            name: {{ include "h2ogpt.fullname" . }}-ca-certificates
+            name: {{ include "Quantum Documents.fullname" . }}-ca-certificates
         {{- end }}
-        {{- with .Values.h2ogpt.extraVolumes }}
+        {{- with .Values.Quantum Documents.extraVolumes }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
 {{- end }}
 ---
-{{- if and (.Values.h2ogpt.enabled) (not .Values.h2ogpt.storage.useEphemeral) }}
+{{- if and (.Values.Quantum Documents.enabled) (not .Values.Quantum Documents.storage.useEphemeral) }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "h2ogpt.fullname" . }}-volume
-  namespace: {{ include "h2ogpt.namespace" . | quote }}
+  name: {{ include "Quantum Documents.fullname" . }}-volume
+  namespace: {{ include "Quantum Documents.namespace" . | quote }}
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: {{ .Values.h2ogpt.storage.class | quote }}
-  storageClassName: {{ .Values.h2ogpt.storage.class }}
+  # storageClassName: {{ .Values.Quantum Documents.storage.class | quote }}
+  storageClassName: {{ .Values.Quantum Documents.storage.class }}
   resources:
     requests:
-      storage: {{ .Values.h2ogpt.storage.size | quote }}
+      storage: {{ .Values.Quantum Documents.storage.size | quote }}
 {{- end }}
 
 ---
-{{- if and (.Values.tgi.enabled) (not .Values.h2ogpt.stack.enabled ) }}
+{{- if and (.Values.tgi.enabled) (not .Values.Quantum Documents.stack.enabled ) }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "h2ogpt.fullname" . }}-tgi-inference
-  namespace: {{ include "h2ogpt.namespace" . | quote }}
+  name: {{ include "Quantum Documents.fullname" . }}-tgi-inference
+  namespace: {{ include "Quantum Documents.namespace" . | quote }}
   labels:
-    app: {{ include "h2ogpt.fullname" . }}-tgi-inference
+    app: {{ include "Quantum Documents.fullname" . }}-tgi-inference
 spec:
   {{- if not .Values.tgi.autoscaling.enabled }}
   replicas: {{ .Values.tgi.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      app: {{ include "h2ogpt.fullname" . }}-tgi-inference
+      app: {{ include "Quantum Documents.fullname" . }}-tgi-inference
   {{- if .Values.tgi.updateStrategy }}
   strategy: {{- toYaml .Values.tgi.updateStrategy | nindent 4 }}
   {{- end }}
@@ -399,7 +399,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        app: {{ include "h2ogpt.fullname" . }}-tgi-inference
+        app: {{ include "Quantum Documents.fullname" . }}-tgi-inference
         {{- with .Values.tgi.podLabels }}
         {{ toYaml . | nindent 6 }}
         {{- end }}
@@ -424,7 +424,7 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - {{ include "h2ogpt.fullname" . }}
+                      - {{ include "Quantum Documents.fullname" . }}
               topologyKey: kubernetes.io/hostname
           {{- end }}
           {{- if .Values.tgi.podAffinity.zone }}
@@ -436,7 +436,7 @@ spec:
                     - key: app
                       operator: In
                       values:
-                        - {{ include "h2ogpt.fullname" . }}
+                        - {{ include "Quantum Documents.fullname" . }}
                 topologyKey: failure-domain.beta.kubernetes.io/zone
           {{- end }}
         {{- end }}
@@ -448,7 +448,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-        - name: {{ include "h2ogpt.fullname" . }}-tgi-inference
+        - name: {{ include "Quantum Documents.fullname" . }}-tgi-inference
           securityContext:
             {{- toYaml .Values.tgi.securityContext | nindent 12 }}
           image: "{{ .Values.tgi.image.repository }}:{{ .Values.tgi.image.tag }}"
@@ -487,25 +487,25 @@ spec:
           {{- end }}
           envFrom:
             - configMapRef:
-                name: {{ include "h2ogpt.fullname" . }}-tgi-inference-config
+                name: {{ include "Quantum Documents.fullname" . }}-tgi-inference-config
             - secretRef:
                 name: {{ .Values.tgi.hfSecret }}
           volumeMounts:
-            - name: {{ include "h2ogpt.fullname" . }}-tgi-inference-volume
+            - name: {{ include "Quantum Documents.fullname" . }}-tgi-inference-volume
               mountPath: /app/cache
               subPath: cache
-            - name: {{ include "h2ogpt.fullname" . }}-tgi-inference-volume
+            - name: {{ include "Quantum Documents.fullname" . }}-tgi-inference-volume
               mountPath: /data
               subPath: data
-            - name: {{ include "h2ogpt.fullname" . }}-tgi-inference-volume
+            - name: {{ include "Quantum Documents.fullname" . }}-tgi-inference-volume
               mountPath: /dev/shm
               subPath: shm
       volumes:
-        {{- if .Values.h2ogpt.stack.enabled }}
-        - name: {{ include "h2ogpt.fullname" . }}-vllm-inference-volume
+        {{- if .Values.Quantum Documents.stack.enabled }}
+        - name: {{ include "Quantum Documents.fullname" . }}-vllm-inference-volume
           {{- if not .Values.vllm.storage.useEphemeral }}
           persistentVolumeClaim:
-            claimName: {{ include "h2ogpt.fullname" . }}-vllm-inference-volume
+            claimName: {{ include "Quantum Documents.fullname" . }}-vllm-inference-volume
           {{- else }}
           ephemeral:
             volumeClaimTemplate:
@@ -518,10 +518,10 @@ spec:
                 storageClassName: {{ .Values.vllm.storage.class }}
           {{- end }}
         {{- end }}
-        - name: {{ include "h2ogpt.fullname" . }}-tgi-inference-volume
+        - name: {{ include "Quantum Documents.fullname" . }}-tgi-inference-volume
         {{- if not .Values.tgi.storage.useEphemeral}}
           persistentVolumeClaim:
-            claimName:  {{ include "h2ogpt.fullname" . }}-tgi-inference-volume      
+            claimName:  {{ include "Quantum Documents.fullname" . }}-tgi-inference-volume      
           {{- else}}
           ephemeral:
             volumeClaimTemplate:
@@ -539,33 +539,33 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "h2ogpt.fullname" . }}-tgi-inference-volume
-  namespace: {{ include "h2ogpt.namespace" . | quote }}
+  name: {{ include "Quantum Documents.fullname" . }}-tgi-inference-volume
+  namespace: {{ include "Quantum Documents.namespace" . | quote }}
 spec:
   accessModes:
     - ReadWriteOnce
-  # storageClassName: {{ .Values.h2ogpt.storage.class | quote }}
+  # storageClassName: {{ .Values.Quantum Documents.storage.class | quote }}
   storageClassName: {{ .Values.tgi.storage.class }}
   resources:
     requests:
       storage: {{ .Values.tgi.storage.size | quote }}
 {{- end }}
 ---
-{{- if and (.Values.vllm.enabled) (not .Values.h2ogpt.stack.enabled )}}
+{{- if and (.Values.vllm.enabled) (not .Values.Quantum Documents.stack.enabled )}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "h2ogpt.fullname" . }}-vllm-inference
-  namespace: {{ include "h2ogpt.namespace" . | quote }}
+  name: {{ include "Quantum Documents.fullname" . }}-vllm-inference
+  namespace: {{ include "Quantum Documents.namespace" . | quote }}
   labels:
-    app: {{ include "h2ogpt.fullname" . }}-vllm-inference
+    app: {{ include "Quantum Documents.fullname" . }}-vllm-inference
 spec:
   {{- if not .Values.vllm.autoscaling.enabled }}
   replicas: {{ .Values.vllm.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      app: {{ include "h2ogpt.fullname" . }}-vllm-inference
+      app: {{ include "Quantum Documents.fullname" . }}-vllm-inference
   {{- if .Values.vllm.updateStrategy }}
   strategy: {{- toYaml .Values.vllm.updateStrategy | nindent 4 }}
   {{- end }}
@@ -576,7 +576,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        app: {{ include "h2ogpt.fullname" . }}-vllm-inference
+        app: {{ include "Quantum Documents.fullname" . }}-vllm-inference
         {{- with .Values.vllm.podLabels }}
         {{ toYaml . | nindent 8 }}
         {{- end }}
@@ -601,7 +601,7 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - {{ include "h2ogpt.fullname" . }}
+                      - {{ include "Quantum Documents.fullname" . }}
               topologyKey: kubernetes.io/hostname
           {{- end }}
           {{- if .Values.vllm.podAffinity.zone }}
@@ -613,7 +613,7 @@ spec:
                     - key: app
                       operator: In
                       values:
-                        - {{ include "h2ogpt.fullname" . }}
+                        - {{ include "Quantum Documents.fullname" . }}
                 topologyKey: failure-domain.beta.kubernetes.io/zone
           {{- end }}
         {{- end }}
@@ -625,7 +625,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-        - name: {{ include "h2ogpt.fullname" . }}-vllm-inference
+        - name: {{ include "Quantum Documents.fullname" . }}-vllm-inference
           securityContext:
             {{- toYaml .Values.vllm.securityContext | nindent 12 }}
           image: "{{ .Values.vllm.image.repository }}:{{ .Values.vllm.image.tag | default .Chart.AppVersion }}"
@@ -667,7 +667,7 @@ spec:
             {{- toYaml .Values.vllm.resources | nindent 12 }}
           envFrom:
             - configMapRef:
-                name: {{ include "h2ogpt.fullname" . }}-vllm-inference-config
+                name: {{ include "Quantum Documents.fullname" . }}-vllm-inference-config
           env:
           - name: NCCL_IGNORE_DISABLED_P2P
             value: "1"
@@ -676,16 +676,16 @@ spec:
             value: "{{ $value }}"
           {{- end }}
           volumeMounts:
-            - name: {{ include "h2ogpt.fullname" . }}-vllm-inference-volume
+            - name: {{ include "Quantum Documents.fullname" . }}-vllm-inference-volume
               mountPath: /workspace/.cache
               subPath: cache
             - name: shm
               mountPath: /dev/shm
       volumes:
-        - name: {{ include "h2ogpt.fullname" . }}-vllm-inference-volume
+        - name: {{ include "Quantum Documents.fullname" . }}-vllm-inference-volume
           {{- if not .Values.vllm.storage.useEphemeral }}
           persistentVolumeClaim:
-            claimName: {{ include "h2ogpt.fullname" . }}-vllm-inference-volume
+            claimName: {{ include "Quantum Documents.fullname" . }}-vllm-inference-volume
           {{- else }}
           ephemeral:
             volumeClaimTemplate:
@@ -707,8 +707,8 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "h2ogpt.fullname" . }}-vllm-inference-volume
-  namespace: {{ include "h2ogpt.namespace" . | quote }}
+  name: {{ include "Quantum Documents.fullname" . }}-vllm-inference-volume
+  namespace: {{ include "Quantum Documents.namespace" . | quote }}
 spec:
   accessModes:
     - ReadWriteOnce
@@ -719,21 +719,21 @@ spec:
       storage: {{ .Values.vllm.storage.size | quote }}
 {{- end }}
 ---
-{{- if and (.Values.lmdeploy.enabled) (not .Values.h2ogpt.stack.enabled )}}
+{{- if and (.Values.lmdeploy.enabled) (not .Values.Quantum Documents.stack.enabled )}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "h2ogpt.fullname" . }}-lmdeploy-inference
-  namespace: {{ include "h2ogpt.namespace" . | quote }}
+  name: {{ include "Quantum Documents.fullname" . }}-lmdeploy-inference
+  namespace: {{ include "Quantum Documents.namespace" . | quote }}
   labels:
-    app: {{ include "h2ogpt.fullname" . }}-lmdeploy-inference
+    app: {{ include "Quantum Documents.fullname" . }}-lmdeploy-inference
 spec:
   {{- if not .Values.lmdeploy.autoscaling.enabled }}
   replicas: {{ .Values.lmdeploy.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      app: {{ include "h2ogpt.fullname" . }}-lmdeploy-inference
+      app: {{ include "Quantum Documents.fullname" . }}-lmdeploy-inference
   {{- if .Values.lmdeploy.updateStrategy }}
   strategy: {{- toYaml .Values.lmdeploy.updateStrategy | nindent 4 }}
   {{- end }}
@@ -744,7 +744,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        app: {{ include "h2ogpt.fullname" . }}-lmdeploy-inference
+        app: {{ include "Quantum Documents.fullname" . }}-lmdeploy-inference
         {{- with .Values.lmdeploy.podLabels }}
         {{ toYaml . | nindent 8 }}
         {{- end }}
@@ -769,7 +769,7 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - {{ include "h2ogpt.fullname" . }}
+                      - {{ include "Quantum Documents.fullname" . }}
               topologyKey: kubernetes.io/hostname
           {{- end }}
           {{- if .Values.lmdeploy.podAffinity.zone }}
@@ -781,7 +781,7 @@ spec:
                     - key: app
                       operator: In
                       values:
-                        - {{ include "h2ogpt.fullname" . }}
+                        - {{ include "Quantum Documents.fullname" . }}
                 topologyKey: failure-domain.beta.kubernetes.io/zone
           {{- end }}
         {{- end }}
@@ -793,7 +793,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-        - name: {{ include "h2ogpt.fullname" . }}-lmdeploy-inference
+        - name: {{ include "Quantum Documents.fullname" . }}-lmdeploy-inference
           securityContext:
             {{- toYaml .Values.lmdeploy.securityContext | nindent 12 }}
           image: "{{ .Values.lmdeploy.image.repository }}:{{ .Values.lmdeploy.image.tag | default .Chart.AppVersion }}"
@@ -829,7 +829,7 @@ spec:
             {{- toYaml .Values.lmdeploy.resources | nindent 12 }}
           envFrom:
             - configMapRef:
-                name: {{ include "h2ogpt.fullname" . }}-lmdeploy-inference-config
+                name: {{ include "Quantum Documents.fullname" . }}-lmdeploy-inference-config
           env:
           - name: NCCL_IGNORE_DISABLED_P2P
             value: "1"
@@ -840,16 +840,16 @@ spec:
             value: "{{ $value }}"
           {{- end }}
           volumeMounts:
-            - name: {{ include "h2ogpt.fullname" . }}-lmdeploy-inference-volume
+            - name: {{ include "Quantum Documents.fullname" . }}-lmdeploy-inference-volume
               mountPath: /workspace/.cache
               subPath: cache
             - name: shm
               mountPath: /dev/shm
       volumes:
-        - name: {{ include "h2ogpt.fullname" . }}-lmdeploy-inference-volume
+        - name: {{ include "Quantum Documents.fullname" . }}-lmdeploy-inference-volume
           {{- if not .Values.lmdeploy.storage.useEphemeral }}
           persistentVolumeClaim:
-            claimName: {{ include "h2ogpt.fullname" . }}-lmdeploy-inference-volume
+            claimName: {{ include "Quantum Documents.fullname" . }}-lmdeploy-inference-volume
           {{- else }}
           ephemeral:
             volumeClaimTemplate:
@@ -871,8 +871,8 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "h2ogpt.fullname" . }}-lmdeploy-inference-volume
-  namespace: {{ include "h2ogpt.namespace" . | quote }}
+  name: {{ include "Quantum Documents.fullname" . }}-lmdeploy-inference-volume
+  namespace: {{ include "Quantum Documents.namespace" . | quote }}
 spec:
   accessModes:
     - ReadWriteOnce

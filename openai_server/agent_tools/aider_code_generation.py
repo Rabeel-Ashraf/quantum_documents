@@ -30,7 +30,7 @@ def main():
     from aider.models import Model
     from aider.io import InputOutput
 
-    default_max_time = int(os.getenv('H2OGPT_AGENT_OPENAI_TIMEOUT', "120"))
+    default_max_time = int(os.getenv('Quantum Documents_AGENT_OPENAI_TIMEOUT', "120"))
 
     parser = argparse.ArgumentParser(description="Aider Coding Tool")
     parser.add_argument("--model", type=str, help="Model to use for coding assistance")
@@ -45,9 +45,9 @@ def main():
     os.makedirs(args.output_dir, exist_ok=True)
 
     # Set up OpenAI-like client
-    base_url = os.getenv('H2OGPT_OPENAI_BASE_URL')
-    assert base_url is not None, "H2OGPT_OPENAI_BASE_URL environment variable is not set"
-    server_api_key = os.getenv('H2OGPT_OPENAI_API_KEY', 'EMPTY')
+    base_url = os.getenv('Quantum Documents_OPENAI_BASE_URL')
+    assert base_url is not None, "Quantum Documents_OPENAI_BASE_URL environment variable is not set"
+    server_api_key = os.getenv('Quantum Documents_OPENAI_API_KEY', 'EMPTY')
     from openai import OpenAI
     client = OpenAI(base_url=base_url, api_key=server_api_key, timeout=args.max_time)
 
@@ -65,8 +65,8 @@ def main():
     # Determine which model to use
     if args.model:
         selected_model = args.model
-    elif os.getenv('H2OGPT_AGENT_OPENAI_MODEL'):
-        selected_model = os.getenv('H2OGPT_AGENT_OPENAI_MODEL')
+    elif os.getenv('Quantum Documents_AGENT_OPENAI_MODEL'):
+        selected_model = os.getenv('Quantum Documents_AGENT_OPENAI_MODEL')
     else:
         # Only fetch the model list if we need to use the default
         model_list = client.models.list()

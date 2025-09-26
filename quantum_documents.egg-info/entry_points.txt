@@ -1,0 +1,3 @@
+[console_scripts]
+quantum-docs-finetune = quantum_docs.finetune:entrypoint_main
+quantum-docs-generate = quantum_docs.generate:entrypoint_main

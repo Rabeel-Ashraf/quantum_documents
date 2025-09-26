@@ -43,4 +43,4 @@ sudo rm -rf "*.deb"
 
 sudo echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-11.8/lib64/" >> ~/.bashrc
 sudo echo "export CUDA_HOME=/usr/local/cuda-11.8" >> ~/.bashrc
-sudo echo "export PATH=$PATH:/h2ogpt_conda/bin:/usr/local/cuda-11.8/bin/" >> ~/.bashrc
+sudo echo "export PATH=$PATH:/Quantum Documents_conda/bin:/usr/local/cuda-11.8/bin/" >> ~/.bashrc

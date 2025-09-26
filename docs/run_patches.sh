@@ -19,7 +19,7 @@ sed -i  's/with HiddenPrints():/if True:/g' $sp/langchain_community/utilities/se
 #sed -i 's/pytube>=15/pytube>=6/g' $sp/fiftyone/utils/youtube.py
 #sed -i 's/pytube/pytubefix/g' $sp/fiftyone/utils/youtube.py
 
-# diff -Naru /home/jon/miniconda3/envs/h2ogpt/lib/python3.10/site-packages/pytubefix/extract.py ~/extract.py > docs/pytubefix.patch
+# diff -Naru /home/jon/miniconda3/envs/Quantum Documents/lib/python3.10/site-packages/pytubefix/extract.py ~/extract.py > docs/pytubefix.patch
 #patch $sp/pytubefix/extract.py docs/pytubefix.patch
 
 # fix asyncio same way websockets was fixed, else keep hitting errors in async calls
@@ -32,22 +32,22 @@ sed -i 's/while True:/while True:\n            time.sleep(0.001)\n/g' $sp/gradio
 # diff -Naru $sp/transformers/modeling_utils.py modeling_utils.py > docs/trans.patch
 patch $sp/transformers/modeling_utils.py docs/trans.patch
 
-# diff -Naru /home/jon/miniconda3/envs/h2ogpt/lib/python3.10/site-packages/TTS/tts/layers/xtts/stream_generator.py new.py > docs/xtt.patch
+# diff -Naru /home/jon/miniconda3/envs/Quantum Documents/lib/python3.10/site-packages/TTS/tts/layers/xtts/stream_generator.py new.py > docs/xtt.patch
 patch $sp/TTS/tts/layers/xtts/stream_generator.py docs/xtt.patch
 
-# diff -Naru /home/jon/miniconda3/envs/h2ogpt/lib/python3.10/site-packages/transformers/generation/utils.py ~/utils.py  > docs/trans2.patch
+# diff -Naru /home/jon/miniconda3/envs/Quantum Documents/lib/python3.10/site-packages/transformers/generation/utils.py ~/utils.py  > docs/trans2.patch
 patch $sp/transformers/generation/utils.py docs/trans2.patch
 
-# diff -Naru /home/jon/miniconda3/envs/h2ogpt/lib/python3.10/site-packages/langchain_google_genai/chat_models.py ~/chat_models.py > docs/google.patch
+# diff -Naru /home/jon/miniconda3/envs/Quantum Documents/lib/python3.10/site-packages/langchain_google_genai/chat_models.py ~/chat_models.py > docs/google.patch
 patch $sp/langchain_google_genai/chat_models.py docs/google.patch
 
-# diff -Naru /home/jon/miniconda3/envs/h2ogpt/lib/python3.10/site-packages/autogen/token_count_utils.py ~/token_count_utils.py > docs/autogen.patch
+# diff -Naru /home/jon/miniconda3/envs/Quantum Documents/lib/python3.10/site-packages/autogen/token_count_utils.py ~/token_count_utils.py > docs/autogen.patch
 patch $sp/autogen/token_count_utils.py docs/autogen.patch
 
-# diff -Naru /home/jon/miniconda3/envs/h2ogpt/lib/python3.10/site-packages/autogen/agentchat/conversable_agent.py ~/conversable_agent.py > docs/autogen2.patch
+# diff -Naru /home/jon/miniconda3/envs/Quantum Documents/lib/python3.10/site-packages/autogen/agentchat/conversable_agent.py ~/conversable_agent.py > docs/autogen2.patch
 patch $sp/autogen/agentchat/conversable_agent.py docs/autogen2.patch
 
-# diff -Naru /home/jon/miniconda3/envs/h2ogpt/lib/python3.10/site-packages/openai/_streaming.py ~/_streaming.py > docs/openai.patch
+# diff -Naru /home/jon/miniconda3/envs/Quantum Documents/lib/python3.10/site-packages/openai/_streaming.py ~/_streaming.py > docs/openai.patch
 patch $sp/openai/_streaming.py docs/openai.patch
 
 find $sp/flaml/ -type f -name '*.py' -exec sed -i 's/^except ImportError:/except (ModuleNotFoundError, ImportError):/g' {} +

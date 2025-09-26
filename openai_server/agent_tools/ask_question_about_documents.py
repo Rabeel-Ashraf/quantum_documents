@@ -31,9 +31,9 @@ def get_rag_answer(prompt,
                    guided_json=None,
                    response_format='text',
                    max_time=120):
-    base_url = os.getenv('H2OGPT_OPENAI_BASE_URL')
-    assert base_url is not None, "H2OGPT_OPENAI_BASE_URL environment variable is not set"
-    server_api_key = os.getenv('H2OGPT_OPENAI_API_KEY', 'EMPTY')
+    base_url = os.getenv('Quantum Documents_OPENAI_BASE_URL')
+    assert base_url is not None, "Quantum Documents_OPENAI_BASE_URL environment variable is not set"
+    server_api_key = os.getenv('Quantum Documents_OPENAI_API_KEY', 'EMPTY')
 
     from openai import OpenAI
     client = OpenAI(base_url=base_url, api_key=server_api_key, timeout=max_time)
@@ -97,11 +97,11 @@ def get_rag_answer(prompt,
 
 
 def ask_question_about_documents():
-    default_max_time = int(os.getenv('H2OGPT_AGENT_OPENAI_TIMEOUT', "120"))
-    text_context_list_file = os.getenv('H2OGPT_RAG_TEXT_CONTEXT_LIST')
-    chat_conversation_file = os.getenv('H2OGPT_RAG_CHAT_CONVERSATION')
-    system_prompt_file = os.getenv('H2OGPT_RAG_SYSTEM_PROMPT')
-    b2imgs_file = os.getenv('H2OGPT_RAG_IMAGES')
+    default_max_time = int(os.getenv('Quantum Documents_AGENT_OPENAI_TIMEOUT', "120"))
+    text_context_list_file = os.getenv('Quantum Documents_RAG_TEXT_CONTEXT_LIST')
+    chat_conversation_file = os.getenv('Quantum Documents_RAG_CHAT_CONVERSATION')
+    system_prompt_file = os.getenv('Quantum Documents_RAG_SYSTEM_PROMPT')
+    b2imgs_file = os.getenv('Quantum Documents_RAG_IMAGES')
 
     if text_context_list_file:
         with open(text_context_list_file, "rt") as f:
@@ -148,9 +148,9 @@ def ask_question_about_documents():
     args = parser.parse_args()
 
     if not args.model:
-        args.model = os.getenv('H2OGPT_AGENT_OPENAI_MODEL')
+        args.model = os.getenv('Quantum Documents_AGENT_OPENAI_MODEL')
     if not args.model:
-        raise ValueError("Model name must be provided via --model or H2OGPT_AGENT_OPENAI_MODEL environment variable")
+        raise ValueError("Model name must be provided via --model or Quantum Documents_AGENT_OPENAI_MODEL environment variable")
 
     if args.chat_conversation_file:
         with open(args.chat_conversation_file, "rt") as f:
@@ -268,7 +268,7 @@ if __name__ == "__main__":
 Examples:
 
 wget https://aiindex.stanford.edu/wp-content/uploads/2024/04/HAI_2024_AI-Index-Report.pdf
-H2OGPT_AGENT_OPENAI_MODEL=claude-3-5-sonnet-20240620 H2OGPT_OPENAI_BASE_URL=http://0.0.0.0:5000/v1 H2OGPT_OPENAI_API_KEY=EMPTY python /home/jon/h2ogpt/openai_server/agent_tools/ask_question_about_documents.py --prompt "Extract AI-related data for Singapore, Israel, Qatar, UAE, Denmark, and Finland from the HAI_2024_AI-Index-Report.pdf. Focus on metrics related to AI implementation, investment, and innovation. Provide a summary of the data in a format suitable for creating a plot." --files HAI_2024_AI-Index-Report.pdf
-H2OGPT_AGENT_OPENAI_MODEL=claude-3-5-sonnet-20240620 H2OGPT_OPENAI_BASE_URL=http://0.0.0.0:5000/v1 H2OGPT_OPENAI_API_KEY=EMPTY python /home/jon/h2ogpt/openai_server/agent_tools/ask_question_about_documents.py --prompt "Give bullet list of top 10 stories." --urls www.cnn.com
-H2OGPT_AGENT_OPENAI_MODEL=claude-3-5-sonnet-20240620 H2OGPT_OPENAI_BASE_URL=http://0.0.0.0:5000/v1 H2OGPT_OPENAI_API_KEY=EMPTY python /home/jon/h2ogpt/openai_server/agent_tools/ask_question_about_documents.py --prompt "Extract AI-related data for Singapore, Israel, Qatar, UAE, Denmark, and Finland from the HAI_2024_AI-Index-Report.pdf. Focus on metrics related to AI implementation, investment, and innovation. Provide a summary of the data in a format suitable for creating a plot." --urls https://aiindex.stanford.edu/wp-content/uploads/2024/04/HAI_2024_AI-Index-Report.pdf
+Quantum Documents_AGENT_OPENAI_MODEL=claude-3-5-sonnet-20240620 Quantum Documents_OPENAI_BASE_URL=http://0.0.0.0:5000/v1 Quantum Documents_OPENAI_API_KEY=EMPTY python /home/jon/Quantum Documents/openai_server/agent_tools/ask_question_about_documents.py --prompt "Extract AI-related data for Singapore, Israel, Qatar, UAE, Denmark, and Finland from the HAI_2024_AI-Index-Report.pdf. Focus on metrics related to AI implementation, investment, and innovation. Provide a summary of the data in a format suitable for creating a plot." --files HAI_2024_AI-Index-Report.pdf
+Quantum Documents_AGENT_OPENAI_MODEL=claude-3-5-sonnet-20240620 Quantum Documents_OPENAI_BASE_URL=http://0.0.0.0:5000/v1 Quantum Documents_OPENAI_API_KEY=EMPTY python /home/jon/Quantum Documents/openai_server/agent_tools/ask_question_about_documents.py --prompt "Give bullet list of top 10 stories." --urls www.cnn.com
+Quantum Documents_AGENT_OPENAI_MODEL=claude-3-5-sonnet-20240620 Quantum Documents_OPENAI_BASE_URL=http://0.0.0.0:5000/v1 Quantum Documents_OPENAI_API_KEY=EMPTY python /home/jon/Quantum Documents/openai_server/agent_tools/ask_question_about_documents.py --prompt "Extract AI-related data for Singapore, Israel, Qatar, UAE, Denmark, and Finland from the HAI_2024_AI-Index-Report.pdf. Focus on metrics related to AI implementation, investment, and innovation. Provide a summary of the data in a format suitable for creating a plot." --urls https://aiindex.stanford.edu/wp-content/uploads/2024/04/HAI_2024_AI-Index-Report.pdf
 """

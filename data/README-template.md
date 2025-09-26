@@ -9,7 +9,7 @@ tags:
 - large language model
 - open-source
 ---
-# h2oGPT Data Card
+# Quantum Documents Data Card
 ## Summary
 
 H2O.ai's `<<DATASET_NAME>>` is an open-source instruct-type dataset for fine-tuning of large language models, licensed for commercial use.

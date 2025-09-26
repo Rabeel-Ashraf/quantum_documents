@@ -153,7 +153,7 @@ class H2OTextGenerationPipeline(TextGenerationPipeline):
         num_prompt_tokens = None
         if model_max_length is not None:
             # can't wait for "hole" if not plain prompt_type, since would lose prefix like <human>:
-            # For https://github.com/h2oai/h2ogpt/issues/192
+            # For https://github.com/h2oai/Quantum Documents/issues/192
             for trial in range(0, 5):
                 if prompt_text:
                     num_prompt_tokens = H2OTextGenerationPipeline.get_token_count(prompt_text, tokenizer)
@@ -377,7 +377,7 @@ class H2OTextGenerationPipeline(TextGenerationPipeline):
         return self.__forward(model_inputs, **generate_kwargs)
 
     # FIXME: Copy-paste of original _forward, but removed copy.deepcopy()
-    # FIXME: https://github.com/h2oai/h2ogpt/issues/172
+    # FIXME: https://github.com/h2oai/Quantum Documents/issues/172
     def __forward(self, model_inputs, **generate_kwargs):
         input_ids = model_inputs["input_ids"]
         attention_mask = model_inputs.get("attention_mask", None)

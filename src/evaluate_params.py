@@ -12,7 +12,7 @@ no_default_param_names = [
     "context",
     "instruction_nochat",
     "iinput_nochat",
-    "h2ogpt_key",
+    "Quantum Documents_key",
     "model_lock",
 ]
 
@@ -88,7 +88,7 @@ eval_func_param_names = (
             "image_quality",
             "image_guidance_scale",
             "image_num_inference_steps",
-            "h2ogpt_key",
+            "Quantum Documents_key",
             "add_search_to_context",
             "chat_conversation",
             "text_context_list",
@@ -145,7 +145,7 @@ eval_extra_columns = ["prompt", "response", "score", "sources"]
 key_overrides = ["prompt_type", "prompt_dict", "chat_template"]
 
 in_model_state_and_evaluate = ['prompt_type', 'prompt_dict', 'chat_template',
-                               'visible_models', 'h2ogpt_key', 'images_num_max',
+                               'visible_models', 'Quantum Documents_key', 'images_num_max',
                                'image_resolution',
                                'image_format', 'video_frame_period', 'visible_vision_models']
 

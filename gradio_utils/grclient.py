@@ -79,7 +79,7 @@ def check_job(job, timeout=0.0, raise_exception=True, verbose=False):
             return e
 
 
-# Local copy of minimal version from h2oGPT server
+# Local copy of minimal version from Quantum Documents server
 class LangChainAction(Enum):
     """LangChain action"""
 
@@ -287,7 +287,7 @@ class CommonClient:
             print_warning=print,
             bad_error_string=None,
             sanitize_llm=None,
-            h2ogpt_key: str = None,
+            Quantum Documents_key: str = None,
             instruction: str = "",
             text: list[str] | str | None = None,
             file: list[str] | str | None = None,
@@ -406,7 +406,7 @@ class CommonClient:
             do_lock: bool = False,
     ) -> Generator[ReturnType, None, None]:
         """
-        Query or Summarize or Extract using h2oGPT
+        Query or Summarize or Extract using Quantum Documents
         Args:
             instruction: Query for LLM chat.  Used for similarity search
 
@@ -449,10 +449,10 @@ class CommonClient:
             :param pre_prompt_query: Prompt that comes before document part
             :param prompt_query: Prompt that comes after document part
             :param pre_prompt_summary: Prompt that comes before document part
-               None makes h2oGPT internally use its defaults
+               None makes Quantum Documents internally use its defaults
                E.g. "In order to write a concise single-paragraph or bulleted list summary, pay attention to the following text"
             :param prompt_summary: Prompt that comes after document part
-              None makes h2oGPT internally use its defaults
+              None makes Quantum Documents internally use its defaults
               E.g. "Using only the text above, write a condensed and concise summary of key results (preferably as bullet points):\n"
             i.e. for some internal document part fstring, the template looks like:
                 template = "%s
@@ -475,11 +475,11 @@ class CommonClient:
             :param json_code_post_prompt_reminder: json code w/ schema reminder about JSON
             :param json_code2_post_prompt_reminder: json code wo/ schema reminder about JSON
 
-            :param h2ogpt_key: Access Key to h2oGPT server (if not already set in client at init time)
-            :param model: base_model name or integer index of model_lock on h2oGPT server
+            :param Quantum Documents_key: Access Key to Quantum Documents server (if not already set in client at init time)
+            :param model: base_model name or integer index of model_lock on Quantum Documents server
                             None results in use of first (0th index) model in server
                    to get list of models do client.list_models()
-            :param model_lock: dict of states or single state, with dict of things like inference server, to use when using dynamic LLM (not from existing model lock on h2oGPT)
+            :param model_lock: dict of states or single state, with dict of things like inference server, to use when using dynamic LLM (not from existing model lock on Quantum Documents)
             :param pre_prompt_extraction: Same as pre_prompt_summary but for when doing extraction
             :param prompt_extraction: Same as prompt_summary but for when doing extraction
             :param do_sample: see src/gen.py
@@ -564,8 +564,8 @@ class CommonClient:
             :param add_chat_history_to_context: Include chat context when performing action
                    Not supported when using CLI mode
 
-            :param chatbot_role: Default role for coqui models.  If 'None', then don't by default speak when launching h2oGPT for coqui model choice.
-            :param speaker: Default speaker for microsoft models  If 'None', then don't by default speak when launching h2oGPT for microsoft model choice.
+            :param chatbot_role: Default role for coqui models.  If 'None', then don't by default speak when launching Quantum Documents for coqui model choice.
+            :param speaker: Default speaker for microsoft models  If 'None', then don't by default speak when launching Quantum Documents for microsoft model choice.
             :param tts_language: Default language for coqui models
             :param tts_speed: Default speed of TTS, < 1.0 (needs rubberband) for slower than normal, > 1.0 for faster.  Tries to keep fixed pitch.
 
@@ -580,7 +580,7 @@ class CommonClient:
                    For nochat API, this is single item within a list for model by name or by index in model_lock
                                         If None, then just use first model in model_lock list
                                         If model_lock not set, use model selected by CLI --base_model etc.
-                   Note that unlike h2ogpt_key, this visible_models only applies to this running h2oGPT server,
+                   Note that unlike Quantum Documents_key, this visible_models only applies to this running Quantum Documents server,
                       and the value is not used to access the inference server.
                       If need a visible_models for an inference server, then use --model_lock and group together.
             :param client_metadata:
@@ -596,8 +596,8 @@ class CommonClient:
         else:
             client = self.clone()
         try:
-            h2ogpt_key = h2ogpt_key or self.h2ogpt_key
-            client.h2ogpt_key = h2ogpt_key
+            Quantum Documents_key = Quantum Documents_key or self.Quantum Documents_key
+            client.Quantum Documents_key = Quantum Documents_key
 
             if model is not None and visible_models is None:
                 visible_models = model
@@ -624,7 +624,7 @@ class CommonClient:
             if text:
                 t0 = time.time()
                 res = client.predict(
-                    text, *doc_options, *loaders, h2ogpt_key, api_name="/add_text"
+                    text, *doc_options, *loaders, Quantum Documents_key, api_name="/add_text"
                 )
                 t1 = time.time()
                 print_info("upload text: %s" % str(timedelta(seconds=t1 - t0)))
@@ -639,7 +639,7 @@ class CommonClient:
                 _, file = client.predict(file, api_name="/upload_api")
 
                 res = client.predict(
-                    file, *doc_options, *loaders, h2ogpt_key, api_name="/add_file_api"
+                    file, *doc_options, *loaders, Quantum Documents_key, api_name="/add_file_api"
                 )
                 if asserts:
                     assert res[0] is None
@@ -648,7 +648,7 @@ class CommonClient:
                     assert res[3] == ""
             if url:
                 res = client.predict(
-                    url, *doc_options, *loaders, h2ogpt_key, api_name="/add_url"
+                    url, *doc_options, *loaders, Quantum Documents_key, api_name="/add_url"
                 )
                 if asserts:
                     assert res[0] is None
@@ -831,7 +831,7 @@ class CommonClient:
                                 check_job(job, timeout=timeout, raise_exception=True)
                             except (
                                     Exception
-                            ) as e:  # FIXME - except TimeoutError once h2ogpt raises that.
+                            ) as e:  # FIXME - except TimeoutError once Quantum Documents raises that.
                                 if "Abrupt termination of communication" in str(e):
                                     t_taken = "%.4f" % (time.time() - t0)
                                     raise TimeoutError(
@@ -947,7 +947,7 @@ class CommonClient:
                     else:
                         trial += 1
                     print_error(
-                        "h2oGPT predict failed: %s %s"
+                        "Quantum Documents predict failed: %s %s"
                         % (str(e), "".join(traceback.format_tb(e.__traceback__))),
                     )
                     if "invalid model" in str(e).lower():
@@ -961,7 +961,7 @@ class CommonClient:
                         )
                         raise
                     else:
-                        # both Anthopic and openai gives this kind of error, but h2oGPT only has retries for OpenAI
+                        # both Anthopic and openai gives this kind of error, but Quantum Documents only has retries for OpenAI
                         if "Overloaded" in str(traceback.format_tb(e.__traceback__)):
                             sleep_time = 30 + 2 ** (trial + 1)
                         else:
@@ -1391,7 +1391,7 @@ class H2OGradioClient(CommonClient, Client):
             _skip_components: bool = True,
             # internal parameter to skip values certain components (e.g. State) that do not need to be displayed to users.
             ssl_verify: bool = True,
-            h2ogpt_key: str = None,
+            Quantum Documents_key: str = None,
             persist: bool = False,
             check_hash: bool = True,
             check_model_name: bool = False,
@@ -1401,7 +1401,7 @@ class H2OGradioClient(CommonClient, Client):
         Parameters:
             Base Class parameters
             +
-            h2ogpt_key: h2oGPT key to gain access to the server
+            Quantum Documents_key: Quantum Documents key to gain access to the server
             persist: whether to persist the state, so repeated calls are aware of the prior user session
                      This allows the scratch MyData to be reused, etc.
                      This also maintains the chat_conversation history
@@ -1410,7 +1410,7 @@ class H2OGradioClient(CommonClient, Client):
         """
         if serialize is None:
             # else converts inputs arbitrarily and outputs mutate
-            # False keeps as-is and is normal for h2oGPT
+            # False keeps as-is and is normal for Quantum Documents
             serialize = False
         self.args = tuple([src])
         self.kwargs = dict(
@@ -1419,7 +1419,7 @@ class H2OGradioClient(CommonClient, Client):
             serialize=serialize,
             output_dir=output_dir,
             verbose=verbose,
-            h2ogpt_key=h2ogpt_key,
+            Quantum Documents_key=Quantum Documents_key,
             persist=persist,
             check_hash=check_hash,
             check_model_name=check_model_name,
@@ -1466,7 +1466,7 @@ class H2OGradioClient(CommonClient, Client):
         self.headers = headers
 
         self.config = None
-        self.h2ogpt_key = h2ogpt_key
+        self.Quantum Documents_key = Quantum Documents_key
         self.persist = persist
         self.check_hash = check_hash
         self.check_model_name = check_model_name
@@ -1682,7 +1682,7 @@ class H2OGradioClient(CommonClient, Client):
             self.setup()
 
         kwargs = self.kwargs.copy()
-        kwargs.pop("h2ogpt_key", None)
+        kwargs.pop("Quantum Documents_key", None)
         kwargs.pop("persist", None)
         kwargs.pop("check_hash", None)
         kwargs.pop("check_model_name", None)

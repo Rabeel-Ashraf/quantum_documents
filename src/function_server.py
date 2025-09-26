@@ -29,7 +29,7 @@ if os.path.dirname('src') not in sys.path:
 
 # similar to openai_server/server.py
 def verify_api_key(authorization: str = Header(None)) -> None:
-    server_api_key = os.getenv('H2OGPT_OPENAI_API_KEY', 'EMPTY')
+    server_api_key = os.getenv('Quantum Documents_OPENAI_API_KEY', 'EMPTY')
     # print("server_api_key: %s %s" % (server_api_key, authorization))
     if server_api_key == 'EMPTY':
         # dummy case since '' cannot be handled
@@ -87,7 +87,7 @@ def initialize_gen_kwargs():
     global gen_kwargs
     with gen_kwargs_lock:  # not strictly required if in global scope
         if not gen_kwargs:
-            main_kwargs = json.loads(os.environ['H2OGPT_MAIN_KWARGS'])  # required
+            main_kwargs = json.loads(os.environ['Quantum Documents_MAIN_KWARGS'])  # required
 
             # don't double up LLMs, in pure "document ingest" mode
             main_kwargs['model_lock'] = []
@@ -117,10 +117,10 @@ def initialize_gen_kwargs():
 
 
 # Call the initialization function at startup, but not during import
-if 'H2OGPT_MAIN_KWARGS' in os.environ:
+if 'Quantum Documents_MAIN_KWARGS' in os.environ:
     initialize_gen_kwargs()
 else:
-    print("H2OGPT_MAIN_KWARGS not found in os.environ")
+    print("Quantum Documents_MAIN_KWARGS not found in os.environ")
 
 
 @app.post("/execute_function/", dependencies=check_key)

@@ -18,12 +18,12 @@ pypdfium2>=4.24.0
 
 # for HF embeddings
 sentence_transformers>=3.0.1
-# https://github.com/h2oai/instructor-embedding/tree/h2ogpt
+# https://github.com/h2oai/instructor-embedding/tree/Quantum Documents
 # pip wheel .
-InstructorEmbedding @ https://h2o-release.s3.amazonaws.com/h2ogpt/InstructorEmbedding-1.0.1-py3-none-any.whl
-# https://github.com/h2oai/sentence-transformers/tree/h2ogpt
+InstructorEmbedding==1.0.1
+# https://github.com/h2oai/sentence-transformers/tree/Quantum Documents
 # pip wheel .
-sentence_transformers_old @ https://h2o-release.s3.amazonaws.com/h2ogpt/sentence_transformers_old-2.2.2-py3-none-any.whl
+sentence-transformers>=2.2.2
 
 # optional: for OpenAI endpoint or embeddings (requires key)
 replicate>=0.26.0
@@ -38,7 +38,7 @@ google-ai-generativelanguage>=0.6.6
 # pydantic version conflict
 #mistral_common==1.3.3
 
-llava @ https://h2o-release.s3.amazonaws.com/h2ogpt/llava-1.7.0.dev0-py3-none-any.whl
+# llava @ https://github.com/haotian-liu/LLaVA (install separately if needed)
 
 #langchain_mistralai==0.1.2  # tokenizers<0.16.0, but transformers requires >=0.19
 httpx>=0.25.2

@@ -7,7 +7,7 @@ pytestmark = pytest.mark.skipif(os.getenv('SKIP_MANUAL_TESTS', None) is not None
 
 @wrap_test_forked
 def test_chat_conversation():
-    # on h2oai/h2ogpt-oasst1-512-20b
+    # on h2oai/Quantum Documents-oasst1-512-20b
     instruction = """Rephrase in 5 different ways: “Apple a day keeps the doctor away.”"""
     expected_response = """1. “A apple every day will keep you healthy.”
 2. “An Apple A Day Keeps The Doctor Away”
@@ -38,7 +38,7 @@ def test_upload_multiple_file():
 @wrap_test_forked
 def test_upload_url():
     raise NotImplementedError(
-        "MANUAL TEST FOR NOW -- put in URL box https://github.com/h2oai/h2ogpt/ (and ask what is h2ogpt?). Ensure can go to source links")
+        "MANUAL TEST FOR NOW -- put in URL box https://github.com/h2oai/Quantum Documents/ (and ask what is Quantum Documents?). Ensure can go to source links")
 
 
 @wrap_test_forked
@@ -60,7 +60,7 @@ def test_upload_pasted_text():
 @wrap_test_forked
 def test_no_db_dirs():
     raise NotImplementedError("""MANUAL TEST FOR NOW -- Remove db_dirs, ensure can still start up and use in MyData Mode.
-    python generate.py --base_model=h2oai/h2ogpt-oig-oasst1-512-6_9b --langchain_mode=MyData
+    python generate.py --base_model=h2oai/Quantum Documents-oig-oasst1-512-6_9b --langchain_mode=MyData
     """)
 
 

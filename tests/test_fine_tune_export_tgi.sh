@@ -1,4 +1,4 @@
-export DATA=h2oai/openassistant_oasst1_h2ogpt
+export DATA=h2oai/openassistant_oasst1_Quantum Documents
 
 export BASE_MODEL=tiiuae/falcon-7b  # confirmed working with 0.9.2
 # export BASE_MODEL=openlm-research/open_llama_3b  # fails with OOM on 48GB card??

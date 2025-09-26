@@ -8,7 +8,7 @@ from tests.utils import wrap_test_forked
 @wrap_test_forked
 def test_llava_client2():
     file = "models/wizard.jpg"
-    llava_model = os.getenv('H2OGPT_LLAVA_MODEL', 'http://192.168.1.46:7861')
+    llava_model = os.getenv('Quantum Documents_LLAVA_MODEL', 'http://192.168.1.46:7861')
     from src.vision.utils_vision import get_llava_response
     res, llava_prompt = get_llava_response(file, llava_model, allow_prompt_auto=True)
     print(res)
@@ -19,7 +19,7 @@ def test_llava_client2():
 @wrap_test_forked
 def test_llava_client_stream():
     file = "models/wizard.jpg"
-    llava_model = os.getenv('H2OGPT_LLAVA_MODEL', 'http://192.168.1.46:7861')
+    llava_model = os.getenv('Quantum Documents_LLAVA_MODEL', 'http://192.168.1.46:7861')
     from src.vision.utils_vision import get_llava_stream
     text = ''
     for res in get_llava_stream(file, llava_model, allow_prompt_auto=True):

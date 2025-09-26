@@ -22,18 +22,18 @@ print('NLTK_DATA: ', os.getenv('NLTK_DATA'), end='\n', flush=True)
 print('PATH: ', os.environ['PATH'], end='\n', flush=True)
 
 for sub in ['src', 'iterators', 'gradio_utils', 'metrics', 'models', '.']:
-    path2 = os.path.join(path1, 'h2ogpt', sub)
+    path2 = os.path.join(path1, 'Quantum Documents', sub)
     sys.path.append(path2)
     print('Path_3: ', path2, end='\n', flush=True)
 
 
 def main():
-    from generate import entrypoint_main as main_h2ogpt
-    os.environ['h2ogpt_block_gradio_exit'] = 'False'
-    os.environ['h2ogpt_score_model'] = ''
-    main_h2ogpt()
+    from generate import entrypoint_main as main_Quantum Documents
+    os.environ['Quantum Documents_block_gradio_exit'] = 'False'
+    os.environ['Quantum Documents_score_model'] = ''
+    main_Quantum Documents()
 
-    server_name = os.getenv('h2ogpt_server_name', os.getenv('H2OGPT_SERVER_NAME', 'localhost'))
+    server_name = os.getenv('Quantum Documents_server_name', os.getenv('Quantum Documents_SERVER_NAME', 'localhost'))
     server_port = os.getenv('GRADIO_SERVER_PORT', str(7860))
 
     url = "http://%s:%s" % (server_name, server_port)

@@ -70,7 +70,7 @@ Collections (defaults to value set by `--langchain_mode=` and visible items set 
 * MyData: Private and non-persistent.  Writable if `--allow_upload_to_my_data=True`
 * ... Other collections can be added via code, but not currently addable from UI
 
-* Chat History Checkbox: If selected, h2oGPT passes the chat history to the LLM (for LLM and document collections) 
+* Chat History Checkbox: If selected, Quantum Documents passes the chat history to the LLM (for LLM and document collections) 
 
 Choose a collection, and uploaded docs go there.  Or choose a collection to query it.  To ignore any docs, select "LLM".  If you add document to, e.g., MyData, if you want to query that document, ensure to select collection MyData before submitting the query.
 
@@ -228,18 +228,18 @@ Requires admin password if in public mode (i.e. env HUGGINGFACE_SPACES=1 or GPT_
 
 The sidebar and submit buttons can be toggled in UI or CLI.  The tabs can be controlled by CLI options.  If one only wants to see the chat view, do:
 ```bash
-python generate.py --base_model=h2oai/h2ogpt-4096-llama2-13b-chat --visible_submit_buttons=False --visible_side_bar=False --visible_submit_buttons=False --visible_side_bar=False --visible_chat_tab=False --visible_doc_selection_tab=False --visible_doc_view_tab=False --visible_chat_history_tab=False --visible_expert_tab=False --visible_models_tab=False --visible_system_tab=False --visible_tos_tab=False --visible_hosts_tab=False --chat_tabless=True --visible_login_tab=False --visible_langchain_action_radio=False --allow_upload_to_user_data=False --allow_upload_to_my_data=False --langchain_mode=UserData
+python generate.py --base_model=h2oai/Quantum Documents-4096-llama2-13b-chat --visible_submit_buttons=False --visible_side_bar=False --visible_submit_buttons=False --visible_side_bar=False --visible_chat_tab=False --visible_doc_selection_tab=False --visible_doc_view_tab=False --visible_chat_history_tab=False --visible_expert_tab=False --visible_models_tab=False --visible_system_tab=False --visible_tos_tab=False --visible_hosts_tab=False --chat_tabless=True --visible_login_tab=False --visible_langchain_action_radio=False --allow_upload_to_user_data=False --allow_upload_to_my_data=False --langchain_mode=UserData
 ```
 where one can still at least hit enter to submit queries. This looks like:
 ![chat_tabless.png](chat_tabless.png)
 
-One can add `--visible_h2ogpt_logo=False --visible_h2ogpt_links=False --visible_h2ogpt_qrcode=False` to remove the h2oGPT header, which looks like:
+One can add `--visible_Quantum Documents_logo=False --visible_Quantum Documents_links=False --visible_Quantum Documents_qrcode=False` to remove the Quantum Documents header, which looks like:
 ![chat_headerless.png](chat_headerless.png)
 
 
 For Windows, one can show only the chat view by doing:
 ```winbatch
-"C:\Program Files\h2oGPT\Python\pythonw.exe" "C:\Program Files\h2oGPT\h2oGPT.launch.pyw" --base_model='llama' --prompt_type=llama2 --visible_side_bar=False --visible_chat_tab=True --visible_doc_selection_tab=False --visible_doc_view_tab=False --visible_chat_history_tab=False --visible_expert_tab=False --visible_models_tab=False --visible_system_tab=False --visible_tos_tab=False --visible_hosts_tab=False --visible_h2ogpt_links=False --visible_login_tab=False
+"C:\Program Files\Quantum Documents\Python\pythonw.exe" "C:\Program Files\Quantum Documents\Quantum Documents.launch.pyw" --base_model='llama' --prompt_type=llama2 --visible_side_bar=False --visible_chat_tab=True --visible_doc_selection_tab=False --visible_doc_view_tab=False --visible_chat_history_tab=False --visible_expert_tab=False --visible_models_tab=False --visible_system_tab=False --visible_tos_tab=False --visible_hosts_tab=False --visible_Quantum Documents_links=False --visible_login_tab=False
 ```
 
 which looks like:
@@ -248,7 +248,7 @@ which looks like:
 
 ## Login Tab
 
-![image](https://github.com/h2oai/h2ogpt/assets/15376332/973199b4-6769-4ad3-84c1-a61f81f0ed3d)
+![image](https://github.com/h2oai/Quantum Documents/assets/15376332/973199b4-6769-4ad3-84c1-a61f81f0ed3d)
 
 To remove the login tab, you can add `--visible_login_tab=False`.
 

@@ -74,7 +74,7 @@ def run_cli(  # for local function:
         metadata_in_context0=None,
         llava_prompt=None,
         visible_models=None,
-        h2ogpt_key=None,
+        Quantum Documents_key=None,
         add_search_to_context=None,
         chat_conversation=None,
         text_context_list=None,

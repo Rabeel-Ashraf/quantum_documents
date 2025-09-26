@@ -5,7 +5,7 @@ import time
 
 import pytest
 
-from tests.test_inference_servers import run_h2ogpt_docker
+from tests.test_inference_servers import run_Quantum Documents_docker
 from tests.utils import wrap_test_forked, get_inf_server, get_inf_port
 from src.utils import download_simple
 
@@ -19,9 +19,9 @@ results_file = "./benchmarks/perf.json"
     'text-generation-inference-',
 ])
 @pytest.mark.parametrize("base_model", [
-    'h2oai/h2ogpt-4096-llama2-7b-chat',
-    'h2oai/h2ogpt-4096-llama2-13b-chat',
-    'h2oai/h2ogpt-4096-llama2-70b-chat',
+    'h2oai/Quantum Documents-4096-llama2-7b-chat',
+    'h2oai/Quantum Documents-4096-llama2-13b-chat',
+    'h2oai/Quantum Documents-4096-llama2-70b-chat',
 ])
 @pytest.mark.parametrize("task", [
     # 'summary',
@@ -92,7 +92,7 @@ def test_perf_benchmarks(backend, base_model, task, bits, ngpus):
     docker_hash2 = None
     max_new_tokens = 4096
     try:
-        h2ogpt_args = dict(base_model=base_model,
+        Quantum Documents_args = dict(base_model=base_model,
              chat=True, gradio=True, num_beams=1, block_gradio_exit=False, verbose=True,
              load_half=bits == 16 and n_gpus,
              load_8bit=bits == 8,
@@ -106,7 +106,7 @@ def test_perf_benchmarks(backend, base_model, task, bits, ngpus):
              )
         if backend == 'transformers':
             from src.gen import main
-            main(**h2ogpt_args)
+            main(**Quantum Documents_args)
         elif backend == 'text-generation-inference':
             if bits != 16:
                 return
@@ -118,8 +118,8 @@ def test_perf_benchmarks(backend, base_model, task, bits, ngpus):
             docker_hash1 = run_docker(inf_port, base_model, low_mem_mode=False)  # don't do low-mem, since need tokens for summary
             os.system('docker logs %s | tail -10' % docker_hash1)
 
-            # h2oGPT server
-            docker_hash2 = run_h2ogpt_docker(gradio_port, base_model, inference_server=inference_server, max_new_tokens=max_new_tokens)
+            # Quantum Documents server
+            docker_hash2 = run_Quantum Documents_docker(gradio_port, base_model, inference_server=inference_server, max_new_tokens=max_new_tokens)
             time.sleep(30)  # assumes image already downloaded, else need more time
             os.system('docker logs %s | tail -10' % docker_hash2)
         elif backend == 'text-generation-inference-':
@@ -132,7 +132,7 @@ def test_perf_benchmarks(backend, base_model, task, bits, ngpus):
             inference_server = 'http://127.0.0.1:%s' % inf_port
             docker_hash1 = run_docker(inf_port, base_model, low_mem_mode=False)  # don't do low-mem, since need tokens for summary
             from src.gen import main
-            main(**h2ogpt_args)
+            main(**Quantum Documents_args)
         else:
             raise NotImplementedError("backend %s not implemented" % backend)
 
@@ -157,13 +157,13 @@ def test_perf_benchmarks(backend, base_model, task, bits, ngpus):
             loaders = tuple([None, None, None, None, None])
             extract_frames = 1
             llava_prompt = ''
-            h2ogpt_key = ''
+            Quantum Documents_key = ''
             res = client.predict(test_file_server,
                                  chunk, chunk_size, langchain_mode, embed,
                                  *loaders,
                                  extract_frames,
                                  llava_prompt,
-                                 h2ogpt_key,
+                                 Quantum Documents_key,
                                  api_name='/add_file_api')
             assert res[0] is None
             assert res[1] == langchain_mode

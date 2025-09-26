@@ -1,15 +1,15 @@
 #!/bin/sh
 
-# NOTE: start in h2ogpt repo base directory
+# NOTE: start in Quantum Documents repo base directory
 # i.e. can run below to update both spaces (assumes repos already existed, else will have to login HF for each)
-# (h2ollm) jon@pseudotensor:~/h2ogpt$ ./spaces/chatbot/repo_to_spaces.sh h2ogpt-chatbot ; ./spaces/chatbot/repo_to_spaces.sh h2ogpt-chatbot2
+# (h2ollm) jon@pseudotensor:~/Quantum Documents$ ./spaces/chatbot/repo_to_spaces.sh Quantum Documents-chatbot ; ./spaces/chatbot/repo_to_spaces.sh Quantum Documents-chatbot2
 
-spacename=${1:-h2ogpt-chatbot}
+spacename=${1:-Quantum Documents-chatbot}
 echo "Space name: $spacename"
 
-# NOTE: start in h2ogpt repo base directory
+# NOTE: start in Quantum Documents repo base directory
 
-h2ogpt_hash="$(git rev-parse HEAD)"
+Quantum Documents_hash="$(git rev-parse HEAD)"
 
 ln -sr generate.py spaces/chatbot/
 mkdir -p spaces/chatbot/src/
@@ -22,7 +22,7 @@ cd "${spacename}"
 git reset --hard origin/main
 git pull --rebase
 rm -rf app.py generate.py src
-cd ../h2ogpt/spaces/chatbot/
+cd ../Quantum Documents/spaces/chatbot/
 cp -rL generate.py  ../../../"${spacename}"/
 mkdir -p ../../../"${spacename}"/src/
 cp -rL src/*  ../../../"${spacename}"/src/
@@ -38,7 +38,7 @@ cat requirements.txt.001 reqs_optional/requirements_optional_langchain.txt reqs_
 rm -rf requirements.txt.001
 
 git add app.py generate.py src/*
-git commit -m "Update with h2oGPT hash ${h2ogpt_hash}"
+git commit -m "Update with Quantum Documents hash ${Quantum Documents_hash}"
 # ensure write token used and login with git control: huggingface-cli login --token <HUGGING_FACE_HUB_TOKEN> --add-to-git-credential
 git push
 

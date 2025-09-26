@@ -16,7 +16,7 @@ def test_export_copy():
 
     prompt_type = 'human_bot'
     prompt_dict = {}
-    model_name = 'h2oai/h2ogpt-oig-oasst1-512-6_9b'
+    model_name = 'h2oai/Quantum Documents-oig-oasst1-512-6_9b'
     load_in_8bit = True
     import torch
     n_gpus = torch.cuda.device_count() if torch.cuda.is_available() else 0
@@ -55,7 +55,7 @@ def test_pipeline1():
     from transformers import AutoModelForCausalLM, AutoTokenizer
     import textwrap as tr
 
-    model_name = "h2oai/h2ogpt-oasst1-512-12b"
+    model_name = "h2oai/Quantum Documents-oasst1-512-12b"
     tokenizer = AutoTokenizer.from_pretrained(model_name, padding_side="left")
 
     # 8-bit will use much less memory, so set to True if
@@ -91,7 +91,7 @@ def test_pipeline2():
     from src.h2oai_pipeline import H2OTextGenerationPipeline
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
-    model_name = "h2oai/h2ogpt-oig-oasst1-512-6_9b"
+    model_name = "h2oai/Quantum Documents-oig-oasst1-512-6_9b"
     load_in_8bit = False
     device_map = {"": 0}
 
@@ -117,7 +117,7 @@ def test_pipeline3():
     from transformers import pipeline
 
     model_kwargs = dict(load_in_8bit=False)
-    generate_text = pipeline(model="h2oai/h2ogpt-oig-oasst1-512-6_9b", torch_dtype=torch.bfloat16,
+    generate_text = pipeline(model="h2oai/Quantum Documents-oig-oasst1-512-6_9b", torch_dtype=torch.bfloat16,
                              trust_remote_code=True, device_map="auto", prompt_type='human_bot',
                              model_kwargs=model_kwargs)
 

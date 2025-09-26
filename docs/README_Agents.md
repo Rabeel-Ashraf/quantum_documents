@@ -1,4 +1,4 @@
-## h2oGPT integration with LangChain Agents
+## Quantum Documents integration with LangChain Agents
 
 Various agents from LangChain are included:
 * Search -- Works sometimes with non-OpenAI models after improvements beyond LangChain

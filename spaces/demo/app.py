@@ -15,7 +15,7 @@ auth_token = os.environ.get("SECRET_TOKEN") or True
 
 from h2oai_pipeline import H2OTextGenerationPipeline
 
-model_name = "h2oai/h2ogpt-oig-oasst1-512-6_9b"
+model_name = "h2oai/Quantum Documents-oig-oasst1-512-6_9b"
 tokenizer = AutoTokenizer.from_pretrained(model_name, padding_side="left", trust_remote_code=True, use_auth_token=auth_token)
 model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.bfloat16, device_map="auto", trust_remote_code=True, use_auth_token=auth_token)
 
@@ -46,7 +46,7 @@ css = ".generating {visibility: hidden}"
 
 with gr.Blocks(theme=theme) as demo:
     gr.Markdown(
-        """<h1><center>h2oGPT</center></h1>
+        """<h1><center>Quantum Documents</center></h1>
 """
     )
     with gr.Row():
@@ -59,7 +59,7 @@ with gr.Blocks(theme=theme) as demo:
     with gr.Row():
         with gr.Column():
             with gr.Box():
-                gr.Markdown("**h2oGPT**")
+                gr.Markdown("**Quantum Documents**")
                 output = gr.Markdown()
     with gr.Row():
         gr.Examples(

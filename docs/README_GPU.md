@@ -4,13 +4,13 @@ Hugging Face type models and [LLaMa.cpp models](https://github.com/ggerganov/lla
 
 To run in ChatBot mode using bitsandbytes in 8-bit, run the following command:
 ```bash
-python generate.py --base_model=h2oai/h2ogpt-oig-oasst1-512-6_9b --load_8bit=True
+python generate.py --base_model=h2oai/Quantum Documents-oig-oasst1-512-6_9b --load_8bit=True
 ```
 Then point your browser at http://0.0.0.0:7860 (linux) or http://localhost:7860 (windows/mac) or the public live URL printed by the server (disable shared link with `--share=False`). Note that for 4-bit or 8-bit support, older GPUs may require older bitsandbytes installed as `pip uninstall bitsandbytes -y ; pip install bitsandbytes==0.38.1`.  For production uses, we recommend at least the 12B model, ran as:
 ```bash
 python generate.py --base_model=HuggingFaceH4/zephyr-7b-beta --load_8bit=True
 ```
-and one can use `--h2ocolors=False` to get soft blue-gray colors instead of H2O.ai colors.  [Here](FAQ.md#what-envs-can-i-pass-to-control-h2ogpt) is a list of environment variables that can control some things in `generate.py`.
+and one can use `--h2ocolors=False` to get soft blue-gray colors instead of H2O.ai colors.  [Here](FAQ.md#what-envs-can-i-pass-to-control-Quantum Documents) is a list of environment variables that can control some things in `generate.py`.
 
 Note that if you download the model yourself and point `--base_model` to that location, you'll also need to specify the `prompt_type` by running:
 ```bash
@@ -20,13 +20,13 @@ for some user path `<user path>`. The `prompt_type` must match the model or a ne
 
 For quickly using a private document collection for Q/A, place documents (PDFs, text, etc.) into a folder called `user_path` and run the following command:
 ```bash
-python generate.py --base_model=h2oai/h2ogpt-oig-oasst1-512-6_9b  --load_8bit=True --langchain_mode=UserData --user_path=user_path
+python generate.py --base_model=h2oai/Quantum Documents-oig-oasst1-512-6_9b  --load_8bit=True --langchain_mode=UserData --user_path=user_path
 ```
 For more details about document Q/A, see the [LangChain Readme](README_LangChain.md).
 
 For 4-bit support when running `generate.py`, pass `--load_4bit=True`, which is only supported for certain [architectures](https://github.com/huggingface/peft#models-support-matrix) like GPT-NeoX-20B, GPT-J, LLaMa, etc.
 
-Any other instruct-tuned base models can be used, including non-h2oGPT ones. Note that [larger models require more GPU memory](FAQ.md#larger-models-require-more-gpu-memory).
+Any other instruct-tuned base models can be used, including non-Quantum Documents ones. Note that [larger models require more GPU memory](FAQ.md#larger-models-require-more-gpu-memory).
 
 ##### AutoGPTQ
 
@@ -78,12 +78,12 @@ CUDA_VISIBLE_DEVICES=2,3 python generate.py --base_model=TheBloke/Llama-2-70B-ch
 
 See [for more details](https://github.com/casper-hansen/AutoAWQ).
 
-To run vLLM with 70B on 2 A100's using h2oGPT, follow the [vLLM install instructions](README_InferenceServers.md#vllm-inference-server-client) and then do:
+To run vLLM with 70B on 2 A100's using Quantum Documents, follow the [vLLM install instructions](README_InferenceServers.md#vllm-inference-server-client) and then do:
 ```
 python -m vllm.entrypoints.openai.api_server \
         --port=5000 \
         --host=0.0.0.0 \
-        --model=h2oai/h2ogpt-4096-llama2-70b-chat-4bit \
+        --model=h2oai/Quantum Documents-4096-llama2-70b-chat-4bit \
         --tensor-parallel-size=2 \
         --seed 1234 \
         --trust-remote-code \
@@ -116,7 +116,7 @@ docker run -d \
     vllm/vllm-openai:latest \
         --port=5000 \
         --host=0.0.0.0 \
-        --model=h2oai/h2ogpt-4096-llama2-70b-chat-4bit \
+        --model=h2oai/Quantum Documents-4096-llama2-70b-chat-4bit \
         --tensor-parallel-size=2 \
         --seed 1234 \
         --trust-remote-code \
@@ -158,11 +158,11 @@ python generate.py --base_model=HuggingFaceH4/zephyr-7b-beta --prompt_type=zephy
 and ensure that the output shows that one or more GPUs is in use by looking at the logs.
 
 * By default, we set `n_gpu_layers` to large value, so llama.cpp offloads all layers for maximum GPU performance.  You can control this by passing `--llamacpp_dict="{'n_gpu_layers':20}"` for value 20, or setting in UI.  For highest performance, offload *all* layers.
-    That is, one gets maximum performance if one sees in startup of h2oGPT all layers offloaded:
+    That is, one gets maximum performance if one sees in startup of Quantum Documents all layers offloaded:
     ```text
     llama_model_load_internal: offloaded 35/35 layers to GPU
     ```
     but this requires sufficient GPU memory.  Reduce if you have low memory GPU, say 15.
 * Pass to `generate.py` the option `--max_seq_len=2048` or some other number if you want model have controlled smaller context, else default (relatively large) value is used that will be slower on CPU.
 * If one sees `/usr/bin/nvcc` mentioned in errors, that file needs to be removed as would likely conflict with version installed for conda.
-* Note that once `llama-cpp-python` is compiled to support CUDA, it no longer works for CPU mode, so one would have to reinstall it without the above options to recovers CPU mode or have a separate h2oGPT env for CPU mode.
+* Note that once `llama-cpp-python` is compiled to support CUDA, it no longer works for CPU mode, so one would have to reinstall it without the above options to recovers CPU mode or have a separate Quantum Documents env for CPU mode.

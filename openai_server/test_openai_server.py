@@ -20,7 +20,7 @@ def launch_openai_server():
 
 
 def test_openai_server():
-    # for manual separate OpenAI server on existing h2oGPT, run (choose vllm:ip:port and/or base_model):
+    # for manual separate OpenAI server on existing Quantum Documents, run (choose vllm:ip:port and/or base_model):
     # Shell 1: CUDA_VISIBLE_DEVICES=0 python generate.py --verbose=True --score_model=None --pre_load_embedding_model=False --gradio_offline_level=2 --base_model=h2oai/h2o-danube2-1.8b-chat --inference_server=vllm:ip:port --max_seq_len=4096 --save_dir=duder1 --verbose --concurrency_count=64 --openai_server=False --add_disk_models_to_ui=False
     # Shell 2: pytest -s -v openai_server/test_openai_server.py::test_openai_server  # once client done, hit CTRL-C, should pass
     # Shell 3: pytest -s -v openai_server/test_openai_server.py::test_openai_client_test2  # should pass
@@ -41,10 +41,10 @@ repeat0 = 1
 def test_openai_client_test2(stream_output, chat, local_server):
     prompt = "Who are you?"
     api_key = 'EMPTY'
-    enforce_h2ogpt_api_key = False
+    enforce_Quantum Documents_api_key = False
     repeat = 1
     openai_workers = 1
-    run_openai_client(stream_output, chat, local_server, openai_workers, prompt, api_key, enforce_h2ogpt_api_key,
+    run_openai_client(stream_output, chat, local_server, openai_workers, prompt, api_key, enforce_Quantum Documents_api_key,
                       repeat)
 
 
@@ -54,17 +54,17 @@ def test_openai_client_test2(stream_output, chat, local_server):
 @pytest.mark.parametrize("local_server", [True])  # choose False if start local server
 @pytest.mark.parametrize("openai_workers", [1, 0])  # choose 0 to test multi-worker case
 @pytest.mark.parametrize("prompt", ["Who are you?", "Tell a very long kid's story about birds."])
-@pytest.mark.parametrize("api_key", [None, "EMPTY", os.environ.get('H2OGPT_H2OGPT_KEY', 'EMPTY')])
-@pytest.mark.parametrize("enforce_h2ogpt_api_key", [False, True])
+@pytest.mark.parametrize("api_key", [None, "EMPTY", os.environ.get('Quantum Documents_Quantum Documents_KEY', 'EMPTY')])
+@pytest.mark.parametrize("enforce_Quantum Documents_api_key", [False, True])
 @pytest.mark.parametrize("repeat", list(range(0, repeat0)))
 @wrap_test_forked
-def test_openai_client(stream_output, chat, local_server, openai_workers, prompt, api_key, enforce_h2ogpt_api_key,
+def test_openai_client(stream_output, chat, local_server, openai_workers, prompt, api_key, enforce_Quantum Documents_api_key,
                        repeat):
-    run_openai_client(stream_output, chat, local_server, openai_workers, prompt, api_key, enforce_h2ogpt_api_key,
+    run_openai_client(stream_output, chat, local_server, openai_workers, prompt, api_key, enforce_Quantum Documents_api_key,
                       repeat)
 
 
-def run_openai_client(stream_output, chat, local_server, openai_workers, prompt, api_key, enforce_h2ogpt_api_key,
+def run_openai_client(stream_output, chat, local_server, openai_workers, prompt, api_key, enforce_Quantum Documents_api_key,
                       repeat):
     base_model = 'h2oai/h2o-danube2-1.8b-chat'
     # base_model = 'gemini-pro'
@@ -80,9 +80,9 @@ def run_openai_client(stream_output, chat, local_server, openai_workers, prompt,
              add_disk_models_to_ui=False,
              enable_tts=False,
              enable_stt=False,
-             enforce_h2ogpt_api_key=enforce_h2ogpt_api_key,
-             # or use file with h2ogpt_api_keys=h2ogpt_api_keys.json
-             h2ogpt_api_keys=[api_key] if api_key else None,
+             enforce_Quantum Documents_api_key=enforce_Quantum Documents_api_key,
+             # or use file with Quantum Documents_api_keys=Quantum Documents_api_keys.json
+             Quantum Documents_api_keys=[api_key] if api_key else None,
              openai_workers=openai_workers,
              )
         time.sleep(10)
@@ -92,8 +92,8 @@ def run_openai_client(stream_output, chat, local_server, openai_workers, prompt,
         pass
 
     # api_key = "EMPTY"  # if gradio/openai server not keyed.  Can't pass '' itself, leads to httpcore.LocalProtocolError: Illegal header value b'Bearer '
-    # Setting H2OGPT_H2OGPT_KEY does not key h2oGPT, just passes along key to gradio inference server, so empty key is valid test regardless of the H2OGPT_H2OGPT_KEY value
-    # api_key = os.environ.get('H2OGPT_H2OGPT_KEY', 'EMPTY')  # if keyed and have this in env with same key
+    # Setting Quantum Documents_Quantum Documents_KEY does not key Quantum Documents, just passes along key to gradio inference server, so empty key is valid test regardless of the Quantum Documents_Quantum Documents_KEY value
+    # api_key = os.environ.get('Quantum Documents_Quantum Documents_KEY', 'EMPTY')  # if keyed and have this in env with same key
     print('api_key: %s' % api_key)
     # below should be consistent with server prefix, host, and port
     base_url = 'http://localhost:5000/v1'
@@ -115,7 +115,7 @@ def run_openai_client(stream_output, chat, local_server, openai_workers, prompt,
         run_test_chat(chat, openai_client, async_client, system_prompt, chat_conversation, add_chat_history_to_context,
                       prompt, client_kwargs, stream_output, verbose, base_model)
     except AssertionError as e:
-        if enforce_h2ogpt_api_key and api_key is None:
+        if enforce_Quantum Documents_api_key and api_key is None:
             print("Expected to fail since no key but enforcing.")
         else:
             raise AssertionError(str(e))
@@ -129,7 +129,7 @@ def run_openai_client(stream_output, chat, local_server, openai_workers, prompt,
     assert base_model in [x.id for x in model_list.data]
 
     os.system('pkill -f server_start.py --signal 9')
-    os.system('pkill -f "h2ogpt/bin/python -c from multiprocessing" --signal 9')
+    os.system('pkill -f "Quantum Documents/bin/python -c from multiprocessing" --signal 9')
 
 
 def run_test_chat(chat, openai_client, async_client, system_prompt, chat_conversation, add_chat_history_to_context,
@@ -337,7 +337,7 @@ def test_autogen():
 
 @pytest.fixture(scope="module")
 def text_file():
-    base_path = os.getenv('H2OGPT_OPENAI_BASE_FILE_PATH', './openai_files/')
+    base_path = os.getenv('Quantum Documents_OPENAI_BASE_FILE_PATH', './openai_files/')
     if base_path and base_path != './' and base_path != '.' and base_path != '/':
         shutil.rmtree(base_path)
 
@@ -352,7 +352,7 @@ def text_file():
 
 @pytest.fixture(scope="module")
 def pdf_file():
-    base_path = os.getenv('H2OGPT_OPENAI_BASE_FILE_PATH', './openai_files/')
+    base_path = os.getenv('Quantum Documents_OPENAI_BASE_FILE_PATH', './openai_files/')
     if base_path and base_path != './' and base_path != '.' and base_path != '/':
         shutil.rmtree(base_path)
 
@@ -365,7 +365,7 @@ def pdf_file():
 
 @pytest.fixture(scope="module")
 def image_file():
-    base_path = os.getenv('H2OGPT_OPENAI_BASE_FILE_PATH', './openai_files/')
+    base_path = os.getenv('Quantum Documents_OPENAI_BASE_FILE_PATH', './openai_files/')
     if base_path and base_path != './' and base_path != '.' and base_path != '/':
         shutil.rmtree(base_path)
 
@@ -378,7 +378,7 @@ def image_file():
 
 @pytest.fixture(scope="module")
 def python_file():
-    base_path = os.getenv('H2OGPT_OPENAI_BASE_FILE_PATH', './openai_files/')
+    base_path = os.getenv('Quantum Documents_OPENAI_BASE_FILE_PATH', './openai_files/')
     if base_path and base_path != './' and base_path != '.' and base_path != '/':
         shutil.rmtree(base_path)
 
@@ -390,7 +390,7 @@ def python_file():
 
 @pytest.fixture(scope="module")
 def video_file():
-    base_path = os.getenv('H2OGPT_OPENAI_BASE_FILE_PATH', './openai_files/')
+    base_path = os.getenv('Quantum Documents_OPENAI_BASE_FILE_PATH', './openai_files/')
     if base_path and base_path != './' and base_path != '.' and base_path != '/':
         shutil.rmtree(base_path)
 

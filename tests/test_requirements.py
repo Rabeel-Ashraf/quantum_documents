@@ -170,4 +170,4 @@ def test_make_packages():
                 os.system('cd packages && pip wheel %s==%s --no-deps' % (name, version))
             else:
                 os.system('cd packages && pip wheel %s --no-deps' % name)
-    # then do on host with server: (pypiserver) ubuntu@ip-10-10-0-245:~/packages$ scp jon@pseudotensor.hopto.org:h2ogpt/packages/* .
+    # then do on host with server: (pypiserver) ubuntu@ip-10-10-0-245:~/packages$ scp jon@pseudotensor.hopto.org:Quantum Documents/packages/* .

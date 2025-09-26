@@ -53,7 +53,7 @@ reulimit()
 
 
 def H2O_Fire(component=None):
-    config_prefix = "H2OGPT_"
+    config_prefix = "Quantum Documents_"
 
     args = sys.argv[1:]
     query_args = [arg.split("=")[0].split(" ")[0].lstrip("-") for arg in args]
@@ -64,7 +64,7 @@ def H2O_Fire(component=None):
                 (key.startswith(config_prefix) or key.startswith(config_prefix.lower()))
                 and len(key) > len(config_prefix)
         ):
-            continue  # ignore as non H2OGPT argument
+            continue  # ignore as non Quantum Documents argument
 
         new_key = key[len(config_prefix):].lower()
 
@@ -72,7 +72,7 @@ def H2O_Fire(component=None):
             continue  # ignore as already passed as script argument
 
         if new_key not in fn_spec.args:
-            continue  # ignore as not a valid H2OGPT argument
+            continue  # ignore as not a valid Quantum Documents argument
 
         args.append(f"--{new_key}={value}")
 
@@ -303,13 +303,13 @@ def _tar_data(root_dirs=None, tar_file=None, base_dir='./'):
 
 def save_generate_output(prompt=None, output=None, base_model=None, save_dir=None, where_from='unknown where from',
                          extra_dict={}, error='', sources=[], which_api='', valid_key=None,
-                         h2ogpt_key='', return_dict=False, **kwargs_extra):
+                         Quantum Documents_key='', return_dict=False, **kwargs_extra):
     if not save_dir:
         return
     try:
         return _save_generate_output(prompt=prompt, output=output, base_model=base_model, save_dir=save_dir,
                                      where_from=where_from, extra_dict=extra_dict, error=error, sources=sources,
-                                     which_api=which_api, valid_key=valid_key, h2ogpt_key=h2ogpt_key,
+                                     which_api=which_api, valid_key=valid_key, Quantum Documents_key=Quantum Documents_key,
                                      return_dict=return_dict, **kwargs_extra)
     except Exception as e:
         traceback.print_exc()
@@ -328,7 +328,7 @@ def _save_generate_tokens(response_no_refs, extra_dict):
 
 def _save_generate_output(prompt=None, output=None, base_model=None, save_dir=None, where_from='unknown where from',
                           extra_dict={}, error='', sources=[], which_api='',
-                          valid_key=None, h2ogpt_key='',
+                          valid_key=None, Quantum Documents_key='',
                           return_dict=False, **kwargs_extra):
     """
     Save conversation to .json, row by row.
@@ -347,7 +347,7 @@ def _save_generate_output(prompt=None, output=None, base_model=None, save_dir=No
                         sources=sources,
                         which_api=which_api,
                         valid_key=valid_key,
-                        h2ogpt_key=h2ogpt_key,
+                        Quantum Documents_key=Quantum Documents_key,
                         )
     dict_to_save.update(extra_dict)
     dict_to_save.update(kwargs_extra)
@@ -619,11 +619,11 @@ def makedirs(path, exist_ok=True, tmp_ok=False, use_base=False):
         if os.path.normpath(path) == os.path.normpath(os.path.abspath(path)):
             pass
         else:
-            if os.getenv('H2OGPT_BASE_PATH') is not None:
-                base_dir = os.path.normpath(os.getenv('H2OGPT_BASE_PATH'))
+            if os.getenv('Quantum Documents_BASE_PATH') is not None:
+                base_dir = os.path.normpath(os.getenv('Quantum Documents_BASE_PATH'))
                 path = os.path.normpath(path)
                 if not path.startswith(base_dir):
-                    path = os.path.join(os.getenv('H2OGPT_BASE_PATH', ''), path)
+                    path = os.path.join(os.getenv('Quantum Documents_BASE_PATH', ''), path)
                     path = os.path.normpath(path)
 
     if os.path.isdir(path) and os.path.exists(path):

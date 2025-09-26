@@ -41,7 +41,7 @@ def run_autogen_multi_agent(query=None,
     # raise openai.BadRequestError("Testing Error Handling")
     # raise ValueError("Testing Error Handling")
 
-    # handle parameters from chatAPI and OpenAI -> h2oGPT transcription versions
+    # handle parameters from chatAPI and OpenAI -> Quantum Documents transcription versions
     assert visible_models is not None, "No visible_models specified"
     model = visible_models  # transcribe early
 
@@ -71,8 +71,8 @@ def run_autogen_multi_agent(query=None,
     if agent_verbose:
         print("AutoGen using model=%s." % model, flush=True)
 
-    base_url = os.environ['H2OGPT_OPENAI_BASE_URL']  # must exist
-    api_key = os.environ['H2OGPT_OPENAI_API_KEY']  # must exist
+    base_url = os.environ['Quantum Documents_OPENAI_BASE_URL']  # must exist
+    api_key = os.environ['Quantum Documents_OPENAI_API_KEY']  # must exist
     agent_work_dir = tempfile.mkdtemp()
     from openai_server.autogen_utils import get_code_executor
     from openai_server.autogen_agents import (
@@ -147,7 +147,7 @@ def run_autogen_multi_agent(query=None,
         main_group_chat_manager,
         message=query,
         # summary_method="last_msg", # TODO: is summary really working for group chat? Doesnt include code group messages in it, why?
-        # summary_args=dict(summary_role="user"), # System by default, but in chat histort it comes last and drops user message in h2ogpt/convert_messages_to_structure method
+        # summary_args=dict(summary_role="user"), # System by default, but in chat histort it comes last and drops user message in Quantum Documents/convert_messages_to_structure method
         max_turns=1,
     )
     # It seems chat_result.chat_history doesnt contain code group messages, so I'm manually merging them here. #TODO: research why so?
